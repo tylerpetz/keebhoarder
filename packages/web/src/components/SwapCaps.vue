@@ -9,7 +9,7 @@ export default {
   },
   data () {
     return {
-      themes: ['8008', '9009', 'dolch', 'wavez']
+      themes: ['8008', '9009', 'bento', 'dolch', 'laser', 'milkshake', 'oblivion', 'wavez']
     }
   }
 }

@@ -116,8 +116,7 @@ export default {
   --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
   --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
   --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
-}
-      `
+}`
     }
   }
 }

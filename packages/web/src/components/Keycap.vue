@@ -2,6 +2,10 @@
 export default {
   name: 'Keycap',
   props: {
+    size: {
+      type: String,
+      default: 'small'
+    },
     theme: {
       type: String,
       default: 'alpha'
@@ -24,10 +28,10 @@ export default {
 </script>
 
 <template>
-  <button class="keycap relative mx-2">
+  <button class="keycap relative mx-2" :class="`keycap--${size}`">
     <span
-      :class="faceClasses"
-      class="relative z-10 block rounded px-3 leading-relaxed font-bold text-sm"
+      :class="[faceClasses, size === 'small' ? 'text-sm' : 'text-2xl']"
+      class="keycap-face relative z-10 block rounded px-3 leading-relaxed font-bold"
     >
       <slot />
     </span>
@@ -42,9 +46,8 @@ export default {
   transition: transform 100ms ease, filter 150ms ease;
 }
 
-.keycap-face {
-  padding-bottom: 2px;
-  padding-top: 3px;
+.keycap:active .keycap-face {
+  top: 2px;
 }
 
 .keycap-side {
@@ -53,5 +56,13 @@ export default {
   width: calc(100% + 2px);
   height: calc(100% + 4px);
   transform: perspective(8px) rotateX(1deg) translateY(2px);
+}
+
+.keycap--large .keycap-side {
+  top: 0px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  transform: perspective(10px) rotateX(1deg) translateY(2px);
 }
 </style>

@@ -29,7 +29,12 @@ export default {
       // purgeable css classes
       if (this.theme === '8008') return 'theme-8008'
       if (this.theme === '9009') return 'theme-9009'
-      if (this.theme === '8008') return 'theme-dolch'
+      if (this.theme === 'dolch') return 'theme-dolch'
+      if (this.theme === 'milkshake') return 'theme-milkshake'
+      if (this.theme === 'oblivion') return 'theme-oblivion'
+      if (this.theme === 'laser') return 'theme-laser'
+      if (this.theme === 'bento') return 'theme-bento'
+
       return 'theme-wavez'
     }
   },
@@ -68,7 +73,7 @@ export default {
       <div v-else>
         dashboard
       </div>
-      <CreateCapSet />
+      <CreateCapSet v-if="false === true" />
     </section>
     <footer class="absolute w-full bottom-0 right-0 left-0 p-4 pb-6 flex justify-between items-end z-10">
       <Keycap theme="accent" @click.native="activeModal = 'theme'">Swap Caps</Keycap>
