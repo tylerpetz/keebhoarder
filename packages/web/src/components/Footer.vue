@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <footer class="absolute w-full bottom-0 right-0 left-0 p-4 pb-6 flex justify-between items-end z-10">
+  <footer class="w-full p-4 pb-6 flex justify-between items-end z-10">
     <Shortcut :hotkeys="swapCaps" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</Shortcut>
   </footer>
 </template>

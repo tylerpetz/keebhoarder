@@ -9,6 +9,21 @@ const routes = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/inventory',
+    name: 'Inventory',
+    component: () => import(/* webpackChunkName: "inventory" */ '../views/Inventory.vue')
+  },
+  {
+    path: '/builds',
+    name: 'Builds',
+    component: () => import(/* webpackChunkName: "builds" */ '../views/Builds.vue')
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import(/* webpackChunkName: "settings" */ '../views/Settings.vue')
   }
 ]
 

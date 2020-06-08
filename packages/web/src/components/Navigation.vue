@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <header class="w-full absolute top-0 left-0 right-0 p-4 flex flex-row items-start justify-between z-30">
+  <header class="w-full p-4 flex flex-row items-start justify-between z-30">
     <h1>
       <Keycap theme="accent" type="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
     </h1>
