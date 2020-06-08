@@ -27,9 +27,9 @@ export default {
     },
     capSize () {
       if (this.type === 'large') return ['w-10', 'h-10']
-      if (this.type === 'mod') return ['w-10', 'h-7']
-      if (this.type === 'auto') return ['w-auto', 'h-7', 'pr-4']
-      return ['w-7', 'h-7']
+      if (this.type === 'mod') return ['w-10', 'h-8']
+      if (this.type === 'auto') return ['w-auto', 'h-8', 'pr-4']
+      return ['w-8', 'h-8']
     }
   }
 }
@@ -39,7 +39,7 @@ export default {
   <button class="keycap relative mx-2">
     <span
       :class="[faceClasses, capSize, type === 'large' ? 'text-lg' : 'text-xs']"
-      class="keycap-face relative z-10 flex rounded px-1 leading-relaxed font-bold items-center justify-start"
+      class="keycap-face relative z-10 flex rounded px-1 leading-relaxed font-bold items-center justify-start pb-1"
     >
       <slot />
     </span>
@@ -58,15 +58,12 @@ export default {
   top: 2px;
 }
 
-.keycap-face:before {
-  box-shadow: inset 3px 0px 6px rgba(0,0,0,.25), inset -3px 0px 6px rgba(0,0,0,.25), inset 0px -1px 1px rgba(255,255,255,.15);
-}
-
 .keycap-side {
   top: 0px;
   left: -1px;
   width: calc(100% + 2px);
   height: calc(100% + 4px);
   transform: perspective(8px) rotateX(1deg) translateY(2px);
+  box-shadow: inset 0px -1px 5px 0px rgba(0,0,0,.55);
 }
 </style>

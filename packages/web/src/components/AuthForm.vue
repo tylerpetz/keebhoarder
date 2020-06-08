@@ -43,8 +43,8 @@ export default {
         :hotkeys="forgotPassword">
         Forgot Password?
       </Shortcut>
-      <Shortcut v-else :hotkeys="['Alt', 'L']">Log In</Shortcut>
-      <Shortcut :hotkeys="['&crarr; Enter']">Submit</Shortcut>
+      <Shortcut v-else :hotkeys="['Alt', 'L']" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Shortcut>
+      <Shortcut :hotkeys="[{text: '&crarr; Enter', theme: 'accent', type: 'auto' }]" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Submit</Shortcut>
     </div>
   </div>
 </template>

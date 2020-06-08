@@ -123,31 +123,36 @@ export default {
 </script>
 
 <template>
-  <div class="flex mt-8 bg-theme-bg-alt p-8 flex-col mx-auto">
-    <input class="mb-6" type="text" v-model="themeName" placeholder="theme name" />
+  <div class="w-3/4 relative">
+    <div class="flex mt-8 bg-theme-bg-alt p-8 flex-col mx-auto">
+      <input class="mb-6" type="text" v-model="themeName" placeholder="theme name" />
 
-    <div class="flex flex-row justify-between mb-6">
-      <input type="text" v-model="colors.themeBackground" placeholder="theme bg" />
-      <input type="text" v-model="colors.themeText" placeholder="theme text" />
-      <input type="text" v-model="colors.themeLink" placeholder="theme link" />
-      <!-- <input type="text" v-model="colors.themeBorder" placeholder="theme border" /> -->
+      <div class="flex flex-row justify-between mb-6">
+        <input type="text" v-model="colors.themeBackground" placeholder="theme bg" />
+        <input type="text" v-model="colors.themeText" placeholder="theme text" />
+        <input type="text" v-model="colors.themeLink" placeholder="theme link" />
+        <!-- <input type="text" v-model="colors.themeBorder" placeholder="theme border" /> -->
+      </div>
+
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col">
+          <input class="mb-6" type="text" v-model="colors.alphaCaps" placeholder="alpha caps" />
+          <input type="text" v-model="colors.alphaLegends" placeholder="alpha legends" />
+        </div>
+        <div class="flex flex-col">
+          <input class="mb-6" type="text" v-model="colors.modCaps" placeholder="mod caps" />
+          <input type="text" v-model="colors.modLegends" placeholder="mod legends" />
+        </div>
+        <div class="flex flex-col">
+          <input class="mb-6" type="text" v-model="colors.accentCaps" placeholder="accent caps" />
+          <input type="text" v-model="colors.accentLegends" placeholder="accent legends" />
+        </div>
+      </div>
+
+      <textarea v-model="generatedTheme" readonly class="mt-8" rows="20" />
     </div>
-
-    <div class="flex flex-row justify-between">
-      <div class="flex flex-col">
-        <input class="mb-6" type="text" v-model="colors.alphaCaps" placeholder="alpha caps" />
-        <input type="text" v-model="colors.alphaLegends" placeholder="alpha legends" />
-      </div>
-      <div class="flex flex-col">
-        <input class="mb-6" type="text" v-model="colors.modCaps" placeholder="mod caps" />
-        <input type="text" v-model="colors.modLegends" placeholder="mod legends" />
-      </div>
-      <div class="flex flex-col">
-        <input class="mb-6" type="text" v-model="colors.accentCaps" placeholder="accent caps" />
-        <input type="text" v-model="colors.accentLegends" placeholder="accent legends" />
-      </div>
+    <div class="flex flex-row justify-between mt-6">
+      <Shortcut :hotkeys="close" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Close</Shortcut>
     </div>
-
-    <textarea v-model="generatedTheme" readonly class="mt-8" rows="20" />
   </div>
 </template>

@@ -1,7 +1,5 @@
 <script>
 import Navigation from '@/components/Navigation.vue'
-import WelcomeScreen from '@/components/WelcomeScreen.vue'
-import CreateCapSet from '@/components/CreateCapSet.vue'
 import Footer from '@/components/Footer.vue'
 import Modals from '@/components/Modals.vue'
 
@@ -9,8 +7,6 @@ export default {
   name: 'App',
   components: {
     Navigation,
-    WelcomeScreen,
-    CreateCapSet,
     Footer,
     Modals
   },
@@ -85,9 +81,7 @@ export default {
   >
     <Navigation @change="changeNavigation" :loggedIn="loggedIn" />
     <section class="relative z-10 w-full px-8">
-      <WelcomeScreen v-if="!loggedIn" />
-      <router-view v-else />
-      <CreateCapSet v-if="false === true" />
+      <router-view />
     </section>
     <Footer />
     <Modals />
