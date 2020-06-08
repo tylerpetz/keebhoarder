@@ -17,7 +17,13 @@ export default {
         themeText: '',
         themeLink: ''
         // themeBorder: ''
-      }
+      },
+      close: [
+        {
+          text: 'Esc',
+          theme: 'accent'
+        }
+      ]
     }
   },
   computed: {

@@ -38,12 +38,12 @@ export default {
     </div>
     <div class="flex flex-row justify-between mt-6">
       <Shortcut :hotkeys="close" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Close</Shortcut>
-      <Shortcut
+      <!-- <Shortcut
         v-if="authType === 'login'"
         :hotkeys="forgotPassword">
         Forgot Password?
       </Shortcut>
-      <Shortcut v-else :hotkeys="['Alt', 'L']" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Shortcut>
+      <Shortcut v-else :hotkeys="['Alt', 'L']" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Shortcut> -->
       <Shortcut :hotkeys="[{text: '&crarr; Enter', theme: 'accent', type: 'auto' }]" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Submit</Shortcut>
     </div>
   </div>

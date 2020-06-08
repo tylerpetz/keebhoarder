@@ -38,7 +38,7 @@ export default {
 <template>
   <button class="keycap relative mx-2">
     <span
-      :class="[faceClasses, capSize, type === 'large' ? 'text-lg' : 'text-xs']"
+      :class="[faceClasses, capSize, type === 'large' || type === 'xl' ? 'text-lg' : 'text-xs']"
       class="keycap-face relative z-10 flex rounded px-1 leading-relaxed font-bold items-center justify-start pb-1"
     >
       <slot />

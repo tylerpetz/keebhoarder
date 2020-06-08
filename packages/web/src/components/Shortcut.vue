@@ -18,9 +18,9 @@ export default {
 <template>
   <button class="text-theme-text hover:text-theme-text-alt cursor-pointer flex items-center">
     <span class="text-xs"><slot /></span>
-    <template v-for="(hotkey, index) in hotkeys">
-      <Keycap :key="hotkey.text" :type="hotkey.type || undefined" :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></Keycap>
-      <span :key="hotkey.text" v-if="showCombo(index)" class="text-xs">+</span>
-    </template>
+    <div v-for="(hotkey, index) in hotkeys" :key="`${hotkey.text}-${_uid}`">
+      <Keycap :type="hotkey.type || undefined" :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></Keycap>
+      <span v-if="showCombo(index)" class="text-xs">+</span>
+    </div>
   </button>
 </template>

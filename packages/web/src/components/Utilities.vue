@@ -4,7 +4,7 @@ import SwapCaps from '@/components/SwapCaps.vue'
 import CreateCapSet from '@/components/CreateCapSet.vue'
 
 export default {
-  name: 'Modals',
+  name: 'Utilities',
   components: {
     AuthForm,
     SwapCaps,
