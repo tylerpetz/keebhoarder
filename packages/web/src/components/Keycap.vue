@@ -2,13 +2,15 @@
 export default {
   name: 'Keycap',
   props: {
-    size: {
-      type: String,
-      default: 'small'
-    },
     theme: {
       type: String,
-      default: 'alpha'
+      default: 'alpha',
+      description: 'alpha, mod, accent'
+    },
+    type: {
+      type: String,
+      default: 'single',
+      description: 'single, mod, auto, logo'
     }
   },
   computed: {
@@ -22,16 +24,22 @@ export default {
       if (this.theme === 'mod') return ['bg-mod-cap-side']
       if (this.theme === 'accent') return ['bg-accent-cap-side']
       return ['bg-alpha-cap-side']
+    },
+    capSize () {
+      if (this.type === 'large') return ['w-10', 'h-10']
+      if (this.type === 'mod') return ['w-10', 'h-7']
+      if (this.type === 'auto') return ['w-auto', 'h-7', 'pr-4']
+      return ['w-7', 'h-7']
     }
   }
 }
 </script>
 
 <template>
-  <button class="keycap relative mx-2" :class="`keycap--${size}`">
+  <button class="keycap relative mx-2">
     <span
-      :class="[faceClasses, size === 'small' ? 'text-sm' : 'text-2xl']"
-      class="keycap-face relative z-10 block rounded px-3 leading-relaxed font-bold"
+      :class="[faceClasses, capSize, type === 'large' ? 'text-lg' : 'text-xs']"
+      class="keycap-face relative z-10 flex rounded px-1 leading-relaxed font-bold items-center justify-start"
     >
       <slot />
     </span>
@@ -50,19 +58,15 @@ export default {
   top: 2px;
 }
 
+.keycap-face:before {
+  box-shadow: inset 3px 0px 6px rgba(0,0,0,.25), inset -3px 0px 6px rgba(0,0,0,.25), inset 0px -1px 1px rgba(255,255,255,.15);
+}
+
 .keycap-side {
   top: 0px;
   left: -1px;
   width: calc(100% + 2px);
   height: calc(100% + 4px);
   transform: perspective(8px) rotateX(1deg) translateY(2px);
-}
-
-.keycap--large .keycap-side {
-  top: 0px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  transform: perspective(10px) rotateX(1deg) translateY(2px);
 }
 </style>

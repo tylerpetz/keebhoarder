@@ -4,7 +4,7 @@ module.exports = {
     content: [
       './index.html',
       './App.vue',
-      './components/**/*.vue',
+      '@/components/**/*.vue',
       './main.js'
     ]
   },
@@ -13,6 +13,9 @@ module.exports = {
       body: ['Nunito', 'sans-serif']
     },
     extend: {
+      spacing: {
+        7: '1.75rem'
+      },
       colors: {
         theme: {
           bg: 'var(--theme-bg)',

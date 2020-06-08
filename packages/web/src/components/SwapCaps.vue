@@ -25,9 +25,9 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">{{ theme }}</span>
           <div class="flex flex-row">
-            <Keycap>Base</Keycap>
-            <Keycap theme="mod">Modifiers</Keycap>
-            <Keycap theme="accent">Accents</Keycap>
+            <Keycap>G</Keycap>
+            <Keycap theme="mod" type="mod">Ctrl</Keycap>
+            <Keycap theme="accent">Esc</Keycap>
           </div>
         </div>
       </div>

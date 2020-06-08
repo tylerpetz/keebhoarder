@@ -6,6 +6,22 @@ export default {
       type: String,
       default: ''
     }
+  },
+  data () {
+    return {
+      forgotPassword: [
+        {
+          text: 'Alt',
+          type: 'mod'
+        }
+      ],
+      close: [
+        {
+          text: 'Esc',
+          theme: 'accent'
+        }
+      ]
+    }
   }
 }
 </script>
@@ -21,18 +37,14 @@ export default {
       </template>
     </div>
     <div class="flex flex-row justify-between mt-6">
-      <button class="text-theme-text hover:text-theme-text-alt cursor-pointer text-xs flex items-center" @click="$emit('close')">
-        Close <Keycap theme="mod">Esc</Keycap>
-      </button>
-      <button v-if="authType === 'login'" class="text-theme-text hover:text-theme-text-alt cursor-pointer text-xs flex items-center" @click="$emit('close')">
-        Forgot Password <Keycap class="mr-1">Alt</Keycap> + <Keycap class="ml-1">F</Keycap>
-      </button>
-      <button v-else class="text-theme-text hover:text-theme-text-alt cursor-pointer text-xs flex items-center" @click="$emit('close')">
-        Log In <Keycap class="mr-1">Alt</Keycap>+<Keycap class="ml-1">L</Keycap>
-      </button>
-      <button class="text-theme-text hover:text-theme-text-alt cursor-pointer text-xs flex items-center" @click="$emit('close')">
-        Submit <Keycap theme="accent">&crarr;</Keycap>
-      </button>
+      <Shortcut :hotkeys="close" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Close</Shortcut>
+      <Shortcut
+        v-if="authType === 'login'"
+        :hotkeys="forgotPassword">
+        Forgot Password?
+      </Shortcut>
+      <Shortcut v-else :hotkeys="['Alt', 'L']">Log In</Shortcut>
+      <Shortcut :hotkeys="['&crarr; Enter']">Submit</Shortcut>
     </div>
   </div>
 </template>
