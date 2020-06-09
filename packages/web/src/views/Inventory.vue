@@ -2,12 +2,19 @@
 
 export default {
   name: 'Inventory',
-  components: {
-    // Vuetable
-  },
   data () {
     return {
-      loading: false
+      loading: false,
+      itemTypes: ['Keyboards', 'Keycap Sets', 'Artisans', 'Switches', 'Cases', 'Plates', 'PCBs/Controllers', 'Other']
+    }
+  },
+  computed: {
+    localData () {
+      return [
+        {
+          name: 'sup'
+        }
+      ]
     }
   }
 }
