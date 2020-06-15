@@ -8,6 +8,7 @@ export default {
   <div class="flex justify-center items-center flex-col h-full">
     <h1 class="text-theme-text text-4xl font-extrabold">Keebhoarder<span class="blink font-normal">|</span></h1>
     <h2 class="text-theme-text-alt text-lg font-semibold">securely manage your keyboard habit</h2>
+    <h3 class="text-theme-text mt-8 font-semibold">Coming Soon</h3>
   </div>
 </template>
 
