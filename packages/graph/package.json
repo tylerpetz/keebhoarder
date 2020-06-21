@@ -27,6 +27,7 @@
     "mime": "^2.4.4",
     "netlify-lambda": "^1.6.3",
     "nodemon": "^1.19.4",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.2",
     "sqlite3": "^4.1.1",
     "uuid": "^3.3.3"
