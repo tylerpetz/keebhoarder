@@ -3,15 +3,15 @@ require('dotenv').config();
 const { ApolloServer } = require('apollo-server');
 const isEmail = require('isemail');
 
-const typeDefs = require('./schema');
-const {mocks} = require('./mocks');
-const resolvers = require('./resolvers');
-const { createStore } = require('./utils');
+const typeDefs = require('../schema');
+const {mocks} = require('../mocks');
+const resolvers = require('../resolvers');
+const { createStore } = require('../utils');
 
-const TrackerAPI = require('./datasources/tracker');
-const UserAPI = require('./datasources/user');
+const TrackerAPI = require('../datasources/tracker');
+const UserAPI = require('../datasources/user');
 
-const internalEngineDemo = require('./engine-demo');
+const internalEngineDemo = require('../engine-demo');
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
@@ -44,7 +44,6 @@ const server = new ApolloServer({
   dataSources,
   context,
   mocks:mocks,
-  introspection: true,
   playground: true,
   engine: {
     apiKey: process.env.ENGINE_API_KEY,
