@@ -1,17 +1,17 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const { ApolloServer } = require('apollo-server');
-const isEmail = require('isemail');
+const { ApolloServer } = require("apollo-server-lambda");
+const isEmail = require("isemail");
 
-const typeDefs = require('../schema');
-const {mocks} = require('../mocks');
-const resolvers = require('../resolvers');
-const { createStore } = require('../utils');
+const typeDefs = require("../schema");
+const { mocks } = require("../mocks");
+const resolvers = require("../resolvers");
+const { createStore } = require("../utils");
 
-const TrackerAPI = require('../datasources/tracker');
-const UserAPI = require('../datasources/user');
+const TrackerAPI = require("../datasources/tracker");
+const UserAPI = require("../datasources/user");
 
-const internalEngineDemo = require('../engine-demo');
+const internalEngineDemo = require("../engine-demo");
 
 // creates a sequelize connection once. NOT for every request
 const store = createStore();
@@ -25,8 +25,8 @@ const dataSources = () => ({
 // the function that sets up the global context for each resolver, using the req
 const context = async ({ req }) => {
   // simple auth check on every request
-  const auth = (req.headers && req.headers.authorization) || '';
-  const email = new Buffer.from(auth, 'base64').toString('ascii');
+  const auth = (req.headers && req.headers.authorization) || "";
+  const email = new Buffer.from(auth, "base64").toString("ascii");
 
   // if the email isn't formatted validly, return null for user
   if (!isEmail.validate(email)) return { user: null };
@@ -43,8 +43,10 @@ const server = new ApolloServer({
   resolvers,
   dataSources,
   context,
-  mocks:mocks,
-  playground: true,
+  mocks: mocks,
+  playground: {
+    endpoint: "/dev/graphql",
+  },
   engine: {
     apiKey: process.env.ENGINE_API_KEY,
     ...internalEngineDemo,
@@ -53,12 +55,10 @@ const server = new ApolloServer({
 
 // Start our server if we're not in a test env.
 // if we're in a test env, we'll manually start it in a test
-if (process.env.NODE_ENV !== 'test') {
-  server
-    .listen({ port: process.env.PORT || 4000 })
-    .then(({ url }) => {
-      console.log(`🚀 app running at ${url}`)
-    });
+if (process.env.NODE_ENV !== "test") {
+  server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+    console.log(`🚀 app running at ${url}`);
+  });
 }
 
 // export all the important pieces for integration/e2e tests to use
@@ -73,3 +73,9 @@ module.exports = {
   store,
   server,
 };
+exports.graphqlHandler = server.createHandler({
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
+});

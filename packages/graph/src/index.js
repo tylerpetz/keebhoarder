@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-lambda');
 const isEmail = require('isemail');
 
 const typeDefs = require('./schema');
@@ -73,3 +73,4 @@ module.exports = {
   store,
   server,
 };
+exports.graphqlHandler = server.createHandler();

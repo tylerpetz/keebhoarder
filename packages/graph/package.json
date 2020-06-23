@@ -8,7 +8,7 @@
     "start": "nodemon src/index.js",
     "start:ci": "node src/index.js",
     "start:lambda": "netlify-lambda serve src/lambda",
-    "build:lambda": "netlify-lambda build src/lambda"
+    "build:lambda": "NODE_ENV=development && netlify-lambda build src/lambda"
   },
   "author": "",
   "license": "ISC",
