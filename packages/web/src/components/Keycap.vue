@@ -27,9 +27,9 @@ export default {
     },
     capSize () {
       if (this.type === 'large') return ['w-10', 'h-10']
-      if (this.type === 'mod') return ['w-10', 'h-8']
-      if (this.type === 'auto') return ['w-auto', 'h-8', 'pr-4']
-      return ['w-8', 'h-8']
+      if (this.type === 'mod') return ['w-8', 'h-6']
+      if (this.type === 'auto') return ['w-auto', 'h-6', 'pr-4']
+      return ['w-6', 'h-6']
     }
   }
 }
