@@ -7,10 +7,15 @@ export default {
       default: 'alpha',
       description: 'alpha, mod, accent'
     },
-    type: {
+    textSize: {
       type: String,
-      default: 'single',
-      description: 'single, mod, auto, logo'
+      default: 'small',
+      description: 'small, large'
+    },
+    capStyle: {
+      type: String,
+      default: 'small',
+      description: 'small, large'
     }
   },
   computed: {
@@ -24,46 +29,35 @@ export default {
       if (this.theme === 'mod') return ['bg-mod-cap-side']
       if (this.theme === 'accent') return ['bg-accent-cap-side']
       return ['bg-alpha-cap-side']
-    },
-    capSize () {
-      if (this.type === 'large') return ['w-10', 'h-10']
-      if (this.type === 'mod') return ['w-8', 'h-6']
-      if (this.type === 'auto') return ['w-auto', 'h-6', 'pr-4']
-      return ['w-6', 'h-6']
     }
   }
 }
 </script>
 
 <template>
-  <button class="keycap relative mx-2">
+  <button class="keycap relative mx-2 px-2 rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
     <span
-      :class="[faceClasses, capSize, type === 'large' || type === 'xl' ? 'text-lg' : 'text-xs']"
-      class="keycap-face relative z-10 flex rounded px-1 leading-relaxed font-bold items-center justify-start pb-1"
+      :class="[faceClasses, textSize === 'large' ? 'text-base pb-3' : 'text-xs pb-1', capStyle === 'large' ? 'w-12' : '']"
+      class="keycap-face px-1 z-10 flex rounded text-xs leading-relaxed font-extrabold items-center justify-start relative"
     >
       <slot />
     </span>
-    <span
-      :class="sideClasses"
-      class="keycap-side absolute rounded" />
   </button>
 </template>
 
 <style lang="css" scoped>
-.keycap, .keycap * {
-  transition: transform 100ms ease, filter 150ms ease;
+.keycap {
+  box-shadow: inset 10px -3px 5px -7px rgba(0,0,0,0.2), inset -10px -3px 5px -7px rgba(0,0,0,0.2);
+}
+
+.keycap-face {
+  transform: translateX(0px);
+  min-width: 32px;
+  height: 38px;
+  box-shadow: inset 8px 0px 12px -4px rgba(255,255,255,0.05), inset -8px 0px 12px -4px rgba(255,255,255,0.05);
 }
 
 .keycap:active .keycap-face {
-  top: 2px;
-}
-
-.keycap-side {
-  top: 0px;
-  left: -1px;
-  width: calc(100% + 2px);
-  height: calc(100% + 4px);
-  transform: perspective(8px) rotateX(1deg) translateY(2px);
-  box-shadow: inset 0px -1px 5px 0px rgba(0,0,0,.55);
+  transform: translateY(3px);
 }
 </style>

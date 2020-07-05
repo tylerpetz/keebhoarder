@@ -6,11 +6,12 @@ export default {
       swapCaps: [
         {
           text: 'Alt',
-          type: 'mod',
+          capStyle: 'large',
           theme: 'mod'
         },
         {
-          text: 'K'
+          text: 'K',
+          textSize: 'large'
         }
       ]
     }

@@ -16,10 +16,10 @@ export default {
 </script>
 
 <template>
-  <button class="text-theme-text hover:text-theme-text-alt cursor-pointer flex items-center">
+  <button class="text-theme-text hover:text-theme-text-alt cursor-pointer flex flex-row items-center">
     <span class="text-xs mr-1"><slot /></span>
     <div v-for="(hotkey, index) in hotkeys" :key="`${hotkey.text}-${_uid}`">
-      <Keycap :type="hotkey.type || undefined" :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></Keycap>
+      <Keycap :capStyle="hotkey.capStyle || undefined" :textSize="hotkey.textSize || undefined"  :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></Keycap>
       <span v-if="showCombo(index)" class="text-xs">+</span>
     </div>
   </button>

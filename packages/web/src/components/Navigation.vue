@@ -7,7 +7,7 @@ export default {
 <template>
   <header class="w-full p-4 flex flex-row items-start justify-between z-30">
     <h1>
-      <Keycap theme="accent" type="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
+      <Keycap theme="accent" textSize="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
     </h1>
     <div class="flex flex-row">
       <!-- <template v-if="!$store.getters.loggedIn">
