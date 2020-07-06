@@ -21,6 +21,6 @@ export default {
 
 <template>
   <footer class="w-full p-4 pb-6 flex justify-between items-end z-10">
-    <Shortcut :hotkeys="swapCaps" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</Shortcut>
+    <Keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</Keycap>
   </footer>
 </template>

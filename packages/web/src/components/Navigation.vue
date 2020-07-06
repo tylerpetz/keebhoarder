@@ -10,13 +10,13 @@ export default {
       <Keycap theme="accent" textSize="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
     </h1>
     <div class="flex flex-row">
-      <!-- <template v-if="!$store.getters.loggedIn">
-        <Keycap theme="base" type="auto" @click.native="$store.commit('SET_ACTIVE_MODAL', 'register')">Register</Keycap>
-        <Keycap theme="accent" type="auto" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Keycap>
+      <template v-if="!$store.getters.loggedIn">
+        <Keycap theme="base" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'register')">Register</Keycap>
+        <Keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Keycap>
       </template>
       <template v-else>
         <Keycap theme="mod" type="auto" @click.native="$store.commit('LOG_OUT')">Log Out</Keycap>
-      </template> -->
+      </template>
     </div>
   </header>
 </template>

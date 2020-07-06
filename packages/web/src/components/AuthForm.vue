@@ -27,8 +27,8 @@ export default {
 </script>
 
 <template>
-  <div class="w-1/4 min-w-64 relative">
-    <div class="h-auto bg-theme-bg-alt flex flex-col justify-center p-6 rounded">
+  <Modal @close="$emit('close')">
+    <div class="flex flex-col flex-wrap justify-center items-center h-64">
       <input class="mb-6 bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded" type="text" placeholder="username" />
       <input class="bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded" placeholder="email" />
       <template v-if="authType === 'register'">
@@ -36,15 +36,9 @@ export default {
         <input class="bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded" placeholder="type password again" />
       </template>
     </div>
-    <div class="flex flex-row justify-between mt-6">
-      <Shortcut :hotkeys="close" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Close</Shortcut>
-      <!-- <Shortcut
-        v-if="authType === 'login'"
-        :hotkeys="forgotPassword">
-        Forgot Password?
-      </Shortcut>
-      <Shortcut v-else :hotkeys="['Alt', 'L']" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</Shortcut> -->
-      <Shortcut :hotkeys="[{text: '&crarr; Enter', theme: 'accent', type: 'auto' }]" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Submit</Shortcut>
-    </div>
-  </div>
+    <footer class="p-2 flex justify-between" slot="footer">
+      <Keycap theme="base" capStyle="large" @click.native="$emit('close')" class="ml-0">Forgot Password?</Keycap>
+      <Keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="mr-0">&crarr; Log In</Keycap>
+    </footer>
+  </Modal>
 </template>

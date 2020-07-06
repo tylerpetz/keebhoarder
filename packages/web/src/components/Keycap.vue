@@ -35,9 +35,9 @@ export default {
 </script>
 
 <template>
-  <button class="keycap relative mx-2 px-2 rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
+  <button class="keycap relative mx-2 rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
     <span
-      :class="[faceClasses, textSize === 'large' ? 'text-base pb-3' : 'text-xs pb-1', capStyle === 'large' ? 'w-12' : '']"
+      :class="[faceClasses, textSize === 'large' ? 'text-base pb-3' : 'text-xs pb-1', capStyle === 'large' ? 'w-auto pr-3' : '']"
       class="keycap-face px-1 z-10 flex rounded text-xs leading-relaxed font-extrabold items-center justify-start relative"
     >
       <slot />
@@ -48,6 +48,7 @@ export default {
 <style lang="css" scoped>
 .keycap {
   box-shadow: inset 10px -3px 5px -7px rgba(0,0,0,0.2), inset -10px -3px 5px -7px rgba(0,0,0,0.2);
+  padding: 0 6px;
 }
 
 .keycap-face {
