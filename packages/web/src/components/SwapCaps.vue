@@ -3,14 +3,14 @@ export default {
   name: 'SwapCaps',
   data () {
     return {
-      themes: ['8008', '9009', 'bento', 'dolch', 'laser', 'milkshake', 'oblivion', 'wavez']
+      themes: ['8008', '9009', 'bento', 'dolch', 'laser', 'metropolis', 'milkshake', 'oblivion', 'wavez']
     }
   }
 }
 </script>
 
 <template>
-  <Modal>
+  <Modal @close="$emit('close')">
     <div class="flex flex-row flex-wrap p-1">
       <div v-for="theme in themes" :key="theme" @click="$store.commit('SET_ACTIVE_THEME', theme)" class="w-1/3 p-1">
         <div

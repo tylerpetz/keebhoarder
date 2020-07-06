@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="w-1/2 rounded min-w-64 relative bg-theme-bg-alt">
+  <div class="rounded relative bg-theme-bg-alt w-1/3">
     <header class="p-2">
       <Keycap theme="accent" @click.native="$emit('close')" class="ml-0">Esc</Keycap>
       <slot name="header" />
@@ -14,5 +14,6 @@ export default {
       <slot />
     </div>
     <slot name="footer" />
+    <slot name="msg" />
   </div>
 </template>
