@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <button class="keycap relative mx-2 rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
+  <button class="keycap relative rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
     <span
       :class="[faceClasses, textSize === 'large' ? 'text-base pb-3' : 'text-xs pb-1', capStyle === 'large' ? 'w-auto pr-3' : '']"
       class="keycap-face px-1 z-10 flex rounded text-xs leading-relaxed font-extrabold items-center justify-start relative"

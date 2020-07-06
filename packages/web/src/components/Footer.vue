@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-  <footer class="w-full p-4 pb-6 flex justify-between items-end z-10">
+  <footer class="w-full p-2 flex justify-between items-end z-10">
     <Keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</Keycap>
   </footer>
 </template>

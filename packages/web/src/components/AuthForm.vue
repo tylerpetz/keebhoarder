@@ -28,23 +28,24 @@ export default {
 
 <template>
   <Modal @close="$emit('close')">
-    <div class="flex flex-col p-2">
-      <input class="mb-2 bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded text-sm" type="text" placeholder="username" />
-      <input class="bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded text-sm" placeholder="email" />
+    <div class="flex flex-col p-6">
       <template v-if="authType === 'register'">
-        <input class="my-2 bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded text-sm" placeholder="password" />
-        <input class="bg-alpha-cap hover:bg-alpha-cap-alt text-alpha-legend-alt placeholder-alpha-legend p-2 rounded text-sm" placeholder="type password again" />
+        <FormInput class="mb-6" :inputProperties="{ type: 'email', placeholder: 'fam@keebhoarder.com' }">Email Address</FormInput>
+        <FormInput class="mb-6" :inputProperties="{ type: 'password', placeholder: '8+ characters, must include numbers or symbols' }">Password</FormInput>
+        <FormInput class="mb-0" :inputProperties="{ type: 'password', placeholder: '' }">Type Password Again</FormInput>
       </template>
+      <template v-else>
+        <FormInput class="mb-6">Username or Email Address</FormInput>
+        <FormInput class="mb-0" :inputProperties="{ type: 'password' }">Password</FormInput>
+      </template>
+      <!-- <div class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div> -->
     </div>
-    <footer class="p-2 flex justify-between" slot="footer">
-      <Keycap theme="base" capStyle="large" @click.native="$emit('close')" class="ml-0 mr-0">Forgot Password?</Keycap>
-      <Keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="ml-0 mr-0">&crarr; Log In</Keycap>
+    <footer class="p-2 flex" :class="authType === 'login' ? 'justify-between' : 'justify-end'" slot="footer">
+      <Keycap theme="base" capStyle="large" @click.native="$emit('close')" v-if="authType === 'login'">Forgot Password?</Keycap>
+      <Keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; {{ authType }}</Keycap>
     </footer>
-    <aside slot="msg" class="absolute w-full text-center mt-4">
-      <p class="text-sm font-semibold text-accent-cap-hover">username is available!</p>
-      <p class="text-sm font-semibold text-accent-cap-hover">we will never sell your email</p>
-      <p class="text-sm font-semibold text-accent-cap-hover">password must be good</p>
-      <p class="text-sm font-semibold text-accent-cap-hover">type it again (feels nice)</p>
+    <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
+      <p class="text-xs font-semibold text-accent-cap-hover mt-2">we will never sell your email, but we might send you emails related to your account</p>
     </aside>
   </Modal>
 </template>

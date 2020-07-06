@@ -74,5 +74,5 @@ export default {
 </template>
 
 <style lang="scss">
-@import "./assets/themes.scss";
+@import "./assets/main.scss";
 </style>

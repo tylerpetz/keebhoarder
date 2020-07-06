@@ -5,12 +5,12 @@ export default {
 </script>
 
 <template>
-  <div class="rounded relative bg-theme-bg-alt w-1/3">
+  <div class="rounded relative bg-theme-bg-alt w-11/12 max-h-full flex flex-col z-30">
     <header class="p-2">
-      <Keycap theme="accent" @click.native="$emit('close')" class="ml-0">Esc</Keycap>
+      <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
       <slot name="header" />
     </header>
-    <div class="bg-theme-bg relative">
+    <div class="bg-theme-bg relative flex-grow overflow-y-auto">
       <slot />
     </div>
     <slot name="footer" />

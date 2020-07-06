@@ -36,7 +36,7 @@
   /* theme backgrounds */
   --theme-bg-h: 193;
   --theme-bg-s: 100%;
-  --theme-bg-l: 6%;
+  --theme-bg-l: 10%;
   
   /* theme text */
   --theme-text-h: 0;
@@ -45,8 +45,7 @@
 
   /* theme links/borders */
   --theme-link-h: 353;
-  --theme-link-s: 39%;
-  --theme-link-l: 35%;
+  --theme-link-s: 39%;--theme-bg-l: 6%;
   
   /* modify hsl values like a boss */
   --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
@@ -124,7 +123,7 @@
   /* theme backgrounds */
   --theme-bg-h: 193;
   --theme-bg-s: 100%;
-  --theme-bg-l: 6%;
+  --theme-bg-l: 10%;
   
   /* theme text */
   --theme-text-h: 0;
