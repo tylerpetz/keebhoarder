@@ -37,8 +37,8 @@ export default {
 <template>
   <button class="keycap relative rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
     <span
-      :class="[faceClasses, textSize === 'large' ? 'text-base pb-3' : 'text-xs pb-1', capStyle === 'large' ? 'w-auto pr-3' : '']"
-      class="keycap-face px-1 z-10 flex rounded text-xs leading-relaxed font-extrabold items-center justify-start relative"
+      :class="[faceClasses, textSize === 'large' ? 'text-base font-extrabold pb-3' : 'text-xs font-bold pb-1', capStyle === 'large' ? 'w-auto pr-3' : '']"
+      class="keycap-face px-1 z-10 flex rounded text-xs leading-relaxed items-center justify-start relative"
     >
       <slot />
     </span>
@@ -52,13 +52,13 @@ export default {
 }
 
 .keycap-face {
-  transform: translateX(0px);
+  transform: translateY(0px);
   min-width: 32px;
   height: 38px;
   box-shadow: inset 8px 0px 12px -4px rgba(255,255,255,0.05), inset -8px 0px 12px -4px rgba(255,255,255,0.05);
 }
 
 .keycap:active .keycap-face {
-  transform: translateY(3px);
+  transform: translateY(2px);
 }
 </style>

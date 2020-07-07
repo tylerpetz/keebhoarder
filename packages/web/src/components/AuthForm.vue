@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <Modal @close="$emit('close')">
+  <Modal @close="$emit('close')" class="w-72 sm:w-80 md:w-96">
     <div class="flex flex-col p-6">
       <template v-if="authType === 'register'">
         <FormInput class="mb-6" type="email" placeholder="fam@keebhoarder.com">Email Address</FormInput>

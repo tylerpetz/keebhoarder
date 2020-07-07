@@ -2,15 +2,15 @@
 import AuthForm from '@/components/AuthForm.vue'
 import SwapCaps from '@/components/SwapCaps.vue'
 import CreateCapSet from '@/components/CreateCapSet.vue'
-import ItemModal from '@/components/ItemModal.vue'
+// import ItemModal from '@/components/ItemModal.vue'
 
 export default {
   name: 'Utilities',
   components: {
     AuthForm,
     SwapCaps,
-    CreateCapSet,
-    ItemModal
+    CreateCapSet
+    // ItemModal
   },
   computed: {
     activeModal: {
@@ -30,7 +30,7 @@ export default {
     <AuthForm v-if="activeModal === 'register' || activeModal === 'login'" :authType="activeModal || ''" @close="activeModal = false" />
     <SwapCaps v-if="activeModal === 'theme'" @close="activeModal = false" />
     <CreateCapSet v-if="activeModal === 'create'" @close="activeModal = false" />
-    <ItemModal />
-    <div class="absolute h-full w-full inset-0 bg-theme-bg-alt z-20 opacity-50" :class="activeModal ? 'z-20 opacity-50' : 'z-0'" />
+    <!-- <ItemModal /> -->
+    <div class="absolute h-full w-full inset-0 bg-theme-bg-alt" :class="activeModal ? 'z-20 opacity-50' : 'z-0'" />
   </div>
 </template>
