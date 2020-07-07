@@ -31,7 +31,7 @@ export default {
             ...this.form
           })
         }).then((res) => {
-          if (res.ok) {
+          if (res.status === 200) {
             this.submitted = true
           } else {
             this.error = true
@@ -49,11 +49,14 @@ export default {
   <div class="flex justify-center items-center flex-col h-full">
     <h1 class="text-theme-text text-4xl font-extrabold">Keebhoarder<span class="blink font-normal">|</span></h1>
     <h2 class="text-theme-text-alt text-lg font-semibold">securely manage your keyboard habit</h2>
-    <form class="mt-6 p-6 bg-theme-bg rounded text-center overflow-hidden relative" @submit.prevent="submitEmailForm" name="keebhoarder-interest" v-if="!submitted && !error">
-      <FormInput type="text" name="name" v-model="form.name" required>First Name</FormInput>
-      <FormInput type="email" name="email" v-model="form.email" required>Enter your email address for launch updates</FormInput>
+    <form class="mt-6 p-4 bg-theme-bg rounded overflow-hidden relative w-72 flex flex-col" @submit.prevent="submitEmailForm" name="keebhoarder-interest" v-if="!submitted && !error">
+      <h3 class="text-center mb-4 font-bold text-theme-link">Get launch updates</h3>
+      <FormInput type="text" name="name" v-model="form.name" class="mb-2" required>First Name</FormInput>
+      <FormInput type="email" name="email" v-model="form.email" class="mb-6" required>Email Address</FormInput>
       <FormInput type="text" name="birthday" v-model="honeypot" style="position: absolute !important;top: 9999px;">die robot scum</FormInput>
-      <Keycap class="mt-4" capStyle="large">&#10229; Keep me updated</Keycap>
+      <div class="w-full text-right">
+        <Keycap capStyle="large" theme="accent">&#10229; Keep me updated</Keycap>
+      </div>
     </form>
     <div class="mt-6 p-6 bg-accent-cap text-accent-legend rounded text-center font-bold" v-else-if="submitted">
       Form successfully submitted, we will let you know when we are ready!
