@@ -39,6 +39,7 @@ export default {
       if (activeTheme === 'laser') return 'theme-laser'
       if (activeTheme === 'bento') return 'theme-bento'
       if (activeTheme === 'metropolis') return 'theme-metropolis'
+      if (activeTheme === 'wavez') return 'theme-wavez'
 
       return 'theme-metropolis'
     }
