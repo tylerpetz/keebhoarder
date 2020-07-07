@@ -38,8 +38,9 @@ export default {
       if (activeTheme === 'oblivion') return 'theme-oblivion'
       if (activeTheme === 'laser') return 'theme-laser'
       if (activeTheme === 'bento') return 'theme-bento'
+      if (activeTheme === 'metropolis') return 'theme-metropolis'
 
-      return 'theme-wavez'
+      return 'theme-metropolis'
     },
     keymap () {
       return {
