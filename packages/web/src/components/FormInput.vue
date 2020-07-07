@@ -2,20 +2,18 @@
 export default {
   name: 'FormInput',
   props: {
-    inputProperties: {
-      type: Object,
-      default: () => ({
-        placeholder: '',
-        type: ''
-      })
+    inputClasses: {
+      type: String,
+      default: ''
     }
-  }
+  },
+  inheritAttrs: false
 }
 </script>
 
 <template>
-  <label class="relative flex flex-col w-full">
+  <label class="relative flex flex-col">
     <span class="text-alpha-legend text-xs"><slot /></span>
-    <input class="bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm" :type="inputProperties.type || 'text'" :placeholder="inputProperties.placeholder" />
+    <input v-bind="$attrs" class="bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm" :class="inputClasses" />
   </label>
 </template>

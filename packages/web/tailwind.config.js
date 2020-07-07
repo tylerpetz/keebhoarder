@@ -52,6 +52,11 @@ module.exports = {
           'legend-hover': 'var(--accent-legend-hover)',
           'legend-press': 'var(--accent-legend-press)'
         }
+      },
+      spacing: {
+        72: '18rem',
+        80: '20rem',
+        96: '24rem'
       }
     },
     boxShadow: {

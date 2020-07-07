@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="rounded relative bg-theme-bg-alt w-11/12 max-h-full flex flex-col z-30">
+  <div class="rounded relative bg-theme-bg-alt w-72 sm:w-80 md:w-96 flex flex-col z-30">
     <header class="p-2">
       <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
       <slot name="header" />

@@ -30,13 +30,13 @@ export default {
   <Modal @close="$emit('close')">
     <div class="flex flex-col p-6">
       <template v-if="authType === 'register'">
-        <FormInput class="mb-6" :inputProperties="{ type: 'email', placeholder: 'fam@keebhoarder.com' }">Email Address</FormInput>
-        <FormInput class="mb-6" :inputProperties="{ type: 'password', placeholder: '8+ characters, must include numbers or symbols' }">Password</FormInput>
-        <FormInput class="mb-0" :inputProperties="{ type: 'password', placeholder: '' }">Type Password Again</FormInput>
+        <FormInput class="mb-6" type="email" placeholder="fam@keebhoarder.com">Email Address</FormInput>
+        <FormInput class="mb-6" type="password" placeholder="8+ characters, must include numbers or symbols">Password</FormInput>
+        <FormInput class="mb-0" type="password">Type Password Again</FormInput>
       </template>
       <template v-else>
         <FormInput class="mb-6">Username or Email Address</FormInput>
-        <FormInput class="mb-0" :inputProperties="{ type: 'password' }">Password</FormInput>
+        <FormInput class="mb-0" type="password">Password</FormInput>
       </template>
       <!-- <div class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div> -->
     </div>

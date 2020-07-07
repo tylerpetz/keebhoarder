@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import FormInput from '@/components/FormInput.vue'
+import FormSelect from '@/components/FormSelect.vue'
 import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
 import Shortcut from '@/components/Shortcut.vue'
@@ -14,6 +15,7 @@ Vue.component('Keycap', Keycap)
 Vue.component('Modal', Modal)
 Vue.component('Shortcut', Shortcut)
 Vue.component('FormInput', FormInput)
+Vue.component('FormSelect', FormSelect)
 
 new Vue({
   router,
