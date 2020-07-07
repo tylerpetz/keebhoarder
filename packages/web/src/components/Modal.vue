@@ -1,6 +1,17 @@
 <script>
 export default {
-  name: 'Modal'
+  name: 'Modal',
+  created () {
+    document.onkeydown = e => {
+      e = e || window.event
+      if (e.keyCode === 27) {
+        this.$emit('close')
+      }
+    }
+  },
+  destroyed () {
+    document.onkeydown = null
+  }
 }
 </script>
 

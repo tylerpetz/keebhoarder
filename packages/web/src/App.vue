@@ -30,7 +30,7 @@ export default {
   computed: {
     containerClass () {
       // purgeable css classes
-      const { activeTheme = 'wavez' } = this.$store.getters
+      const { activeTheme = '' } = this.$store.getters
       if (activeTheme === '8008') return 'theme-8008'
       if (activeTheme === '9009') return 'theme-9009'
       if (activeTheme === 'dolch') return 'theme-dolch'
@@ -41,14 +41,6 @@ export default {
       if (activeTheme === 'metropolis') return 'theme-metropolis'
 
       return 'theme-metropolis'
-    },
-    keymap () {
-      return {
-        'alt+r': 'register',
-        'alt+l': 'login',
-        'alt+k': 'keycaps',
-        'alt+n': 'newtheme'
-      }
     }
   },
   methods: {
