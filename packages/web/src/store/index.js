@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import items from './modules/items'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,7 @@ export default new Vuex.Store({
     activeTheme: (state) => state.activeTheme
   },
   actions: {
-    keyboardShortcut ({ state, commit }, shortcut) {
+    keyboardShortcut ({ commit }, shortcut) {
       commit('SET_ACTIVE_MODAL', 'login')
     }
   },
@@ -33,5 +34,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    items
   }
 })
