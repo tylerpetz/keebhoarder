@@ -11,7 +11,31 @@ export default {
         notes {
           description
         },
-        trackingNumber
+        trackingNumber,
+        items {
+          id,
+          description,
+          price,
+          categories {
+            name,
+          },
+          images {
+            url,
+          }
+        }
+      }
+    }`,
+    items: gql`query {
+      items {
+        id,
+        description,
+        price,
+        categories {
+          name,
+        },
+        images {
+          url,
+        }
       }
     }`
   },
@@ -19,7 +43,8 @@ export default {
     return {
       loading: false,
       itemTypes: ['Keyboards', 'Keycap Sets', 'Artisans', 'Switches', 'Cases', 'Plates', 'PCBs/Controllers', 'Other'],
-      orders: []
+      orders: [],
+      items: []
     }
   },
   computed: {

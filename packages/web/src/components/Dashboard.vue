@@ -1,6 +1,24 @@
 <script>
+import gql from 'graphql-tag'
+
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
+  apollo: {
+    // Apollo specific options
+    orders: gql`query {
+      orders {
+        id,
+        items {
+          id
+        }
+      }
+    }`,
+    items: gql`query {
+      items {
+        id
+      }
+    }`
+  }
 }
 </script>
 
@@ -14,11 +32,13 @@ export default {
     <div class="md:col-span-3 lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
         <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
+        <h3 class="text-alpha-legend-press">{{ items.length }}</h3>
       </div>
       <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
-        <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
+        <h2 class="text-alpha-legend">Waiting on Orders:</h2>
+        <template v-for="order in orders">
+          <h3 class="text-alpha-legend-press" :key="order.id">{{ order.id }}</h3>
+        </template>
       </div>
       <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
         <h2 class="text-alpha-legend">Items in Hoard:</h2>
