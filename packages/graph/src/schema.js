@@ -5,7 +5,8 @@ const typeDefs = gql`
     deliveryStatus(id: String!, courierCode: String!): DeliveryStatus
     orders(id: Int): [Order]
     user: User,
-    items: [Item]
+    items: [Item],
+    getItemById(id: Int): Item 
   }
 
   type Mutation {
@@ -49,10 +50,21 @@ const typeDefs = gql`
 
   type Order{
     id: Int
+    name: String
     items: [Item]
     status: DeliveryStatus
     notes: [Note]
     trackingNumber: String
+    seller: Vendor
+    qty: Int
+    tax: Int
+    shipping: Int
+  }
+
+  type Vendor{
+    id: String
+    name: String
+    url: String
   }
 
   type Image{
@@ -62,6 +74,12 @@ const typeDefs = gql`
     description: String
   }
 
+  type Inventory{
+    id: ID!
+    item: [Item]
+    status: String
+  }
+
   type Item{
     id: ID!
     name: String
@@ -69,6 +87,8 @@ const typeDefs = gql`
     description: String
     images: [Image]
     categories: [Category]
+    notes: [Note]
+
   }
 
   type User{

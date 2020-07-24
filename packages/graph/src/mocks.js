@@ -7,6 +7,7 @@ const deliveryStatuses = [
     'Exception',
     'FailAttempt'
 ]
+const categories = ['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other']
 
 const mocks = {
     Courier: () => ({
@@ -21,6 +22,9 @@ const mocks = {
     DeliveryStatus: () => ({
       number: () => faker.random.number(),
       status: () => deliveryStatuses[Math.floor(Math.random() * deliveryStatuses.length)],
+    }),
+    Category: () => ({
+      status: () => categories[Math.floor(Math.random() * categories.length)],
     }),
     Item: () => ({
       id: faker.random.number(),
