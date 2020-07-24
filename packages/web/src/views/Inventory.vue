@@ -1,11 +1,25 @@
 <script>
+import gql from 'graphql-tag'
 
 export default {
   name: 'Inventory',
+  apollo: {
+    // Apollo specific options
+    orders: gql`query {
+      orders {
+        id,
+        notes {
+          description
+        },
+        trackingNumber
+      }
+    }`
+  },
   data () {
     return {
       loading: false,
-      itemTypes: ['Keyboards', 'Keycap Sets', 'Artisans', 'Switches', 'Cases', 'Plates', 'PCBs/Controllers', 'Other']
+      itemTypes: ['Keyboards', 'Keycap Sets', 'Artisans', 'Switches', 'Cases', 'Plates', 'PCBs/Controllers', 'Other'],
+      orders: []
     }
   },
   computed: {
@@ -28,6 +42,9 @@ export default {
       </div>
       <div>
         <Shortcut :hotkeys="[{text: 'Alt', theme: 'mod', type: 'mod' }, {text: 'N', theme: 'base' }]" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Add New Item</Shortcut>
+        <div v-for="(order, index) in orders" v-bind:key="index" class="text-white">
+          {{order.id}} - {{order.trackingNumber}}
+        </div>
       </div>
     </div>
   </div>

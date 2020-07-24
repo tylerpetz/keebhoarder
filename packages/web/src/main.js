@@ -10,6 +10,13 @@ import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
 import Shortcut from '@/components/Shortcut.vue'
 import './assets/themes.css'
+import ApolloClient from 'apollo-boost'
+import VueApollo from 'vue-apollo'
+
+const apolloClient = new ApolloClient({
+  // You should use an absolute URL here
+  uri: 'http://localhost:4000'
+})
 
 Vue.config.productionTip = false
 Vue.use(VueGtag, {
@@ -21,8 +28,13 @@ Vue.component('Shortcut', Shortcut)
 Vue.component('FormInput', FormInput)
 Vue.component('FormSelect', FormSelect)
 
+Vue.use(VueApollo)
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient
+})
 new Vue({
   router,
   store,
+  apolloProvider,
   render: h => h(App)
 }).$mount('#keebhoarder')
