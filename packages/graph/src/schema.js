@@ -4,7 +4,8 @@ const typeDefs = gql`
   type Query {
     deliveryStatus(id: String!, courierCode: String!): DeliveryStatus
     orders(id: Int): [Order]
-    user: User
+    user: User,
+    items: [Item]
   }
 
   type Mutation {
@@ -63,11 +64,11 @@ const typeDefs = gql`
 
   type Item{
     id: ID!
-    category: Category
     name: String
     price: Int
     description: String
     images: [Image]
+    categories: [Category]
   }
 
   type User{

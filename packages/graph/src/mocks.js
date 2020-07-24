@@ -31,7 +31,7 @@ const mocks = {
     }),
     Order: () => ({
       id: faker.random.number(),
-      trackingNumber: faker.random.uuid(),
+      trackingNumber: faker.random.uuid()
     }),
     Image: () => ({
       id: faker.random.number(),
