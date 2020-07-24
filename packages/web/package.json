@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "animejs": "^3.2.0",
@@ -31,5 +32,11 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/vue": "^5.3.19",
+    "babel-preset-vue": "^2.0.2"
   }
 }

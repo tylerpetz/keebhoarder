@@ -1,22 +1,15 @@
 <script>
-import Navigation from '@/components/Navigation.vue'
-import Footer from '@/components/Footer.vue'
-import Utilities from '@/components/Utilities.vue'
-
 export default {
-  name: 'App',
-  components: {
-    Navigation,
-    Footer,
-    Utilities
-  },
-  mounted () {
-    // this.checkAuthState()
+  name: 'Layout',
+  data () {
+    return {
+      activeTheme: 'metropolis'
+    }
   },
   computed: {
     containerClass () {
       // purgeable css classes
-      const { activeTheme = '' } = this.$store.getters
+      const activeTheme = ''
       if (activeTheme === '8008') return 'theme-8008'
       if (activeTheme === '9009') return 'theme-9009'
       if (activeTheme === 'dolch') return 'theme-dolch'
@@ -29,12 +22,6 @@ export default {
 
       return 'theme-metropolis'
     }
-  },
-  methods: {
-    checkAuthState () {
-      localStorage.getItem('loggedin')
-      this.$store.commit('LOG_IN')
-    }
   }
 }
 </script>
@@ -44,11 +31,8 @@ export default {
     :class="containerClass"
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen h-screen w-screen bg-caps flex flex-col items-center justify-between relative"
   >
-    <Navigation />
-    <section class="relative z-10 w-full px-2 my-2 rounded-lg flex-grow">
-      <router-view />
+    <section class="relative z-10 w-full px-2 my-2 rounded-lg flex-grow flex justify-center items-center">
+      <slot />
     </section>
-    <Footer />
-    <Utilities />
   </main>
 </template>
