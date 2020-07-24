@@ -59,7 +59,7 @@ export default {
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen h-screen w-screen bg-caps flex flex-col items-center justify-between relative"
   >
     <Navigation />
-    <section class="relative z-10 w-full px-6 mt-2 rounded-lg flex-grow">
+    <section class="relative z-10 w-full px-2 mt-2 rounded-lg flex-grow">
       <router-view />
     </section>
     <Footer />
