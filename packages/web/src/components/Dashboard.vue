@@ -5,16 +5,37 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-full">
+  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 h-full">
     <div class="col-span-1 bg-alpha-cap rounded p-4">
-      side
+      <a href="#" class="block bg-mod-cap text-mod-legend hover:bg-mod-cap-hover hover:text-mod-legend-hover p-2 mb-4 rounded">Orders</a>
+      <a href="#" class="block bg-mod-cap text-mod-legend hover:bg-mod-cap-hover hover:text-mod-legend-hover p-2 mb-4 rounded">Inventory</a>
+      <a href="#" class="block bg-mod-cap text-mod-legend hover:bg-mod-cap-hover hover:text-mod-legend-hover p-2 mb-4 rounded">Profile</a>
     </div>
-    <div class="col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="md:col-span-3 lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
         <h2 class="text-alpha-legend">Items in Hoard:</h2>
         <h3 class="text-alpha-legend-press">13</h3>
       </div>
-      <div class="bg-white">Waiting on X Orders</div>
+      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
+        <h2 class="text-alpha-legend">Items in Hoard:</h2>
+        <h3 class="text-alpha-legend-press">13</h3>
+      </div>
+      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
+        <h2 class="text-alpha-legend">Items in Hoard:</h2>
+        <h3 class="text-alpha-legend-press">13</h3>
+      </div>
+      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
+        <h2 class="text-alpha-legend">Items in Hoard:</h2>
+        <h3 class="text-alpha-legend-press">13</h3>
+      </div>
+      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
+        <h2 class="text-alpha-legend">Items in Hoard:</h2>
+        <h3 class="text-alpha-legend-press">13</h3>
+      </div>
+      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
+        <h2 class="text-alpha-legend">Items in Hoard:</h2>
+        <h3 class="text-alpha-legend-press">13</h3>
+      </div>
     </div>
   </div>
 </template>
