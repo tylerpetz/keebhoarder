@@ -2,8 +2,9 @@ const printMessage = require('print-message');
  
 printMessage([
     "welcome keeblord, don't just sit there, start typing",
-    "start doing web stuff type this command: ",
-    "start graphing type this command: "
+    "type this to run everything: yarn keeb",
+    "type this to run web: yarn web",
+    "type this to run the graph: yarn graph"
 ], {
     border: true, // Enable border
     color: 'green', // Default text color from console
