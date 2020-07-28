@@ -16,8 +16,14 @@ export default {
     items: gql`query {
       items {
         id
+        price
       }
     }`
+  },
+  computed: {
+    totalPrice () {
+      return this.items.reduce((acc, cur) => acc.price + cur.price)
+    }
   }
 }
 </script>
@@ -41,20 +47,8 @@ export default {
         </template>
       </div>
       <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
-        <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
-      </div>
-      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
-        <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
-      </div>
-      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
-        <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
-      </div>
-      <div class="bg-alpha-cap hover:bg-alpha-cap-hover rounded p-4">
-        <h2 class="text-alpha-legend">Items in Hoard:</h2>
-        <h3 class="text-alpha-legend-press">13</h3>
+        <h2 class="text-alpha-legend">Total Collection Purchase Price:</h2>
+        <h3 class="text-alpha-legend-press">{{ totalPrice }}</h3>
       </div>
     </div>
   </div>
