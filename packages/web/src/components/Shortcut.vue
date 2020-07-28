@@ -19,7 +19,7 @@ export default {
   <button class="text-theme-text hover:text-theme-text-alt cursor-pointer flex flex-row items-center">
     <span class="text-xs mr-1"><slot /></span>
     <div v-for="(hotkey, index) in hotkeys" :key="`${hotkey.text}-${_uid}`">
-      <Keycap :capStyle="hotkey.capStyle || undefined" :textSize="hotkey.textSize || undefined"  :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></Keycap>
+      <keycap :capStyle="hotkey.capStyle || undefined" :textSize="hotkey.textSize || undefined"  :theme="hotkey.theme || undefined"><span v-html="hotkey.text" /></keycap>
       <span v-if="showCombo(index)" class="text-xs">+</span>
     </div>
   </button>

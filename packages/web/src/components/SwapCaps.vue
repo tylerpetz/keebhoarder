@@ -33,9 +33,9 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">{{ theme }}</span>
           <div class="flex flex-row">
-            <Keycap textSize="large"><span v-html="first" /></Keycap>
-            <Keycap capStyle="large" theme="mod" type="mod" class="mx-2"><span v-html="second" /></Keycap>
-            <Keycap capStyle="large" theme="accent"><span v-html="third" /></Keycap>
+            <keycap textSize="large"><span v-html="first" /></keycap>
+            <keycap capStyle="large" theme="mod" type="mod" class="mx-2"><span v-html="second" /></keycap>
+            <keycap capStyle="large" theme="accent"><span v-html="third" /></keycap>
           </div>
         </div>
       </div>

@@ -41,8 +41,8 @@ export default {
       <!-- <div class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div> -->
     </div>
     <footer class="p-2 flex" :class="authType === 'login' ? 'justify-between' : 'justify-end'" slot="footer">
-      <Keycap theme="base" capStyle="large" @click.native="$emit('close')" v-if="authType === 'login'">Forgot Password?</Keycap>
-      <Keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; {{ authType }}</Keycap>
+      <keycap theme="base" capStyle="large" @click.native="$emit('close')" v-if="authType === 'login'">Forgot Password?</keycap>
+      <keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; {{ authType }}</keycap>
     </footer>
     <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
       <p class="text-xs font-semibold text-accent-cap-hover mt-2">we will never sell your email, but we might send you emails related to your account</p>
