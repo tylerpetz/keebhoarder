@@ -6,8 +6,7 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "animejs": "^3.2.0",
