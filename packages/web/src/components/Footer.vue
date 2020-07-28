@@ -20,7 +20,8 @@ export default {
 </script>
 
 <template>
-  <footer class="w-full p-4 flex justify-end z-10">
-    <p class="text-theme-text text-xs">copyright &copy; 2020 keebhoarder - github - donate</p>
+  <footer class="w-full p-2 flex justify-between z-10">
+    <p class="text-theme-text text-xs">copyright &copy; 2020 keebhoarder</p>
+    <p class="text-theme-text text-xs">about - help - donate</p>
   </footer>
 </template>

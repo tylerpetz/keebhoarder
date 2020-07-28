@@ -20,8 +20,15 @@ export default {
       }
     }`
   },
+  data () {
+    return {
+      orders: [],
+      items: []
+    }
+  },
   computed: {
     totalPrice () {
+      if (!this.items.length) return 0
       return this.items.reduce((acc, cur) => acc.price + cur.price)
     }
   }
