@@ -3,7 +3,8 @@ export default {
   name: 'Navigation',
   data () {
     return {
-      subNavOpen: false
+      subNavOpen: false,
+      loggedIn: false
     }
   },
   computed: {
@@ -30,23 +31,20 @@ export default {
       <keycap capStyle="large" class="ml-2">Resources</keycap> -->
     </div>
     <div class="flex flex-row">
-      <template v-if="!subNavOpen">
-        <keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</keycap>
-        <keycap capStyle="large" theme="accent" @click.native="subNavOpen = true" class="ml-2">username</keycap>
+      <keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')">Swap Keycaps</keycap>
+      <template v-if="loggedIn">
+        <keycap v-if="!subNavOpen" capStyle="large" theme="accent" @click.native="subNavOpen = true" class="ml-2">username</keycap>
+        <template v-else>
+          <keycap capStyle="large" class="ml-2">Profile</keycap>
+          <keycap capStyle="large" class="ml-2">Settings</keycap>
+          <keycap capStyle="large" theme="mod" class="ml-2">Log Out</keycap>
+          <keycap @click.native="subNavOpen = false" theme="accent" class="ml-6">Esc</keycap>
+        </template>
       </template>
       <template v-else>
-        <keycap capStyle="large" class="ml-2">Profile</keycap>
-        <keycap capStyle="large" class="ml-2">Settings</keycap>
-        <keycap capStyle="large" theme="mod" class="ml-2">Log Out</keycap>
-        <keycap @click.native="subNavOpen = false" theme="accent" class="ml-6">Esc</keycap>
+        <keycap capStyle="large" class="ml-2" @click.native="$store.commit('SET_ACTIVE_MODAL', 'register')">Register</keycap>
+        <keycap capStyle="large" class="ml-2" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')">Log In</keycap>
       </template>
-      <!-- <template v-if="!$store.getters.loggedIn">
-        <keycap theme="base" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'register')">Register</keycap>
-        <keycap theme="mod" capStyle="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')" class="ml-2">Log In</keycap>
-      </template>
-      <template v-else>
-        <keycap theme="mod" type="auto" @click.native="$store.commit('LOG_OUT')">Log Out</keycap>
-      </template> -->
     </div>
   </header>
 </template>

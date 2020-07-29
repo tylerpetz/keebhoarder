@@ -1,16 +1,21 @@
 <script>
 import WelcomeScreen from '@/components/WelcomeScreen'
+import Dashboard from '@/components/Dashboard'
 
 export default {
-  name: 'Dashboard',
+  name: 'Home',
   components: {
-    WelcomeScreen
+    WelcomeScreen,
+    Dashboard
+  },
+  data () {
+    return {
+      loggedIn: false
+    }
+  },
+  render (h) {
+    if (!this.loggedIn) return h('welcome-screen')
+    return h('dashboard')
   }
 }
 </script>
-
-<template>
-  <div class="flex flex-row items-center justify-center h-full">
-    <WelcomeScreen />
-  </div>
-</template>
