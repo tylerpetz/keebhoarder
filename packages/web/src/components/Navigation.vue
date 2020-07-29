@@ -5,6 +5,11 @@ export default {
     return {
       subNavOpen: false
     }
+  },
+  computed: {
+    routeName () {
+      return this.$route.name
+    }
   }
 }
 </script>
@@ -12,12 +17,12 @@ export default {
 <template>
   <header class="w-full p-2 flex flex-row items-start justify-between z-30">
     <div class="flex flex-row">
-      <h1>
-        <keycap theme="accent" textSize="large" @click.native="$router.push({ name: 'Home' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></keycap>
+      <h1 class="mr-4">
+        <keycap :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'" textSize="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></keycap>
       </h1>
-      <keycap capStyle="large" class="ml-6">Inventory</keycap>
-      <keycap capStyle="large" class="ml-2">Orders</keycap>
-      <keycap capStyle="large" class="ml-2">Builds</keycap>
+      <template v-for="route in ['Inventory', 'Orders', 'Builds']">
+        <keycap :key="route" @click.native="$router.push({ name: route })" capStyle="large" class="ml-2" :theme="routeName === route ? 'mod' : 'alpha'">{{ route }}</keycap>
+      </template>
       <!-- <keycap capStyle="large" class="ml-2">Artisan Box</keycap>
       <span class="block h-12 w-1 bg-theme-bg ml-2" />
       <keycap capStyle="large" class="ml-2">Marketplace</keycap>
