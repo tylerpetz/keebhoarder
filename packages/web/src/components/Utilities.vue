@@ -31,6 +31,6 @@ export default {
     <SwapCaps v-if="activeModal === 'theme'" @close="activeModal = false" />
     <CreateCapSet v-if="activeModal === 'create'" @close="activeModal = false" />
     <!-- <ItemModal /> -->
-    <div class="absolute h-full w-full inset-0 bg-theme-bg-alt" :class="activeModal ? 'z-20 opacity-50' : 'z-0'" />
+    <!-- <div class="absolute h-full w-full inset-0 bg-theme-bg" :class="activeModal ? 'z-20 opacity-50' : 'z-0'" /> -->
   </div>
 </template>

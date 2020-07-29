@@ -18,10 +18,15 @@ module.exports = {
         theme: {
           bg: 'var(--theme-bg)',
           'bg-alt': 'var(--theme-bg-alt)',
+          'bg-l': 'var(--theme-bg-light)',
+          'bg-d': 'var(--theme-bg-dark)',
           text: 'var(--theme-text)',
           'text-alt': 'var(--theme-text-alt)',
+          'text-l': 'var(--theme-text-light)',
+          'text-d': 'var(--theme-text-dark)',
           link: 'var(--theme-link)',
           'link-hover': 'var(--theme-link-hover)',
+          'link-press': 'var(--theme-link-press)',
           border: 'var(--theme-border)',
           'border-hover': 'var(--theme-border-hover)'
         },

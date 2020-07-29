@@ -16,12 +16,12 @@ export default {
 </script>
 
 <template>
-  <div class="rounded relative bg-theme-bg-alt flex flex-col z-30">
+  <div class="rounded relative bg-theme-bg-d flex flex-col z-30">
     <header class="p-2">
       <keycap theme="accent" @click.native="$emit('close')">Esc</keycap>
       <slot name="header" />
     </header>
-    <div class="bg-theme-bg relative flex-grow overflow-y-auto">
+    <div class="bg-theme-bg-l relative flex-grow overflow-y-auto">
       <slot />
     </div>
     <slot name="footer" />
