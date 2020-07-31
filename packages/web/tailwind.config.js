@@ -17,11 +17,9 @@ module.exports = {
       colors: {
         theme: {
           bg: 'var(--theme-bg)',
-          'bg-alt': 'var(--theme-bg-alt)',
           'bg-l': 'var(--theme-bg-light)',
           'bg-d': 'var(--theme-bg-dark)',
           text: 'var(--theme-text)',
-          'text-alt': 'var(--theme-text-alt)',
           'text-l': 'var(--theme-text-light)',
           'text-d': 'var(--theme-text-dark)',
           link: 'var(--theme-link)',

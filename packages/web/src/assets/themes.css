@@ -45,21 +45,11 @@
 
   /* theme links/borders */
   --theme-link-h: 353;
-  --theme-link-s: 39%;--theme-bg-l: 6%;
-  
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
+  --theme-link-s: 39%;
+  --theme-bg-l: 6%;
+}
 
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
+.keebhoarder-theme, .keebhoarder-theme * {
   --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
   --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
   --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
@@ -86,6 +76,23 @@
   --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
   --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
   --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
+
+  /* modify hsl values like a boss */
+  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
+  --theme-bg-light: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * 1.2) );
+  --theme-bg-dark: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) / 1.2));
+
+  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
+  --theme-text-light: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * 1.2));
+  --theme-text-dark: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) / 1.2));
+
+  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
+  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * 1.2));
+  --theme-link-press: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) / 1.2));
+
+  --theme-border: var(--theme-link);
+  --theme-border-hover: var(--theme-link-hover);
+  --theme-border-press: var(--theme-link-press);
 }
 
 /* keycap themes */
@@ -134,46 +141,6 @@
   --theme-link-h: 104;
   --theme-link-s: 75%;
   --theme-link-l: 58%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-8008 {
@@ -221,46 +188,6 @@
   --theme-link-h: 339;
   --theme-link-s: 99%;
   --theme-link-l: 67%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-9009 {
@@ -308,46 +235,6 @@
   --theme-link-h: 339;
   --theme-link-s: 99%;
   --theme-link-l: 67%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-dolch {
@@ -395,46 +282,6 @@
   --theme-link-h: 353;
   --theme-link-s: 39%;
   --theme-link-l: 35%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
       
 .theme-milkshake {
@@ -482,46 +329,6 @@
   --theme-link-h: 271;
   --theme-link-s: 48%;
   --theme-link-l: 72%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-laser {
@@ -569,46 +376,6 @@
   --theme-link-h: 343;
   --theme-link-s: 80%;
   --theme-link-l: 45%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-oblivion {
@@ -656,139 +423,54 @@
   --theme-link-h: 81;
   --theme-link-s: 30%;
   --theme-link-l: 46%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 .theme-bento {
-/* alpha caps */
---alpha-cap-h: 13;
---alpha-cap-s: 15%;
---alpha-cap-l: 82%;
+  /* alpha caps */
+  --alpha-cap-h: 13;
+  --alpha-cap-s: 15%;
+  --alpha-cap-l: 82%;
 
-/* alpha legends */
---alpha-legend-h: 202;
---alpha-legend-s: 33%;
---alpha-legend-l: 36%;
+  /* alpha legends */
+  --alpha-legend-h: 202;
+  --alpha-legend-s: 33%;
+  --alpha-legend-l: 36%;
 
-/* mod caps */
---mod-cap-h: 202;
---mod-cap-s: 33%;
---mod-cap-l: 36%;
+  /* mod caps */
+  --mod-cap-h: 202;
+  --mod-cap-s: 33%;
+  --mod-cap-l: 36%;
 
-/* mod legends */
---mod-legend-h: 358;
---mod-legend-s: 62%;
---mod-legend-l: 64%;
+  /* mod legends */
+  --mod-legend-h: 358;
+  --mod-legend-s: 62%;
+  --mod-legend-l: 64%;
 
-/* accent caps */
---accent-cap-h: 358;
---accent-cap-s: 62%;
---accent-cap-l: 64%;
+  /* accent caps */
+  --accent-cap-h: 358;
+  --accent-cap-s: 62%;
+  --accent-cap-l: 64%;
 
-/* accent legends */
---accent-legend-h: 12;
---accent-legend-s: 100%;
---accent-legend-l: 97%;
+  /* accent legends */
+  --accent-legend-h: 12;
+  --accent-legend-s: 100%;
+  --accent-legend-l: 97%;
 
---alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
---alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
---alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
---alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
+  /* theme backgrounds */
+  --theme-bg-h: 2;
+  --theme-bg-s: 55%;
+  --theme-bg-l: 67%;
 
---alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
---alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
---alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
+  /* theme text */
+  --theme-text-h: 215;
+  --theme-text-s: 29%;
+  --theme-text-l: 23%;
 
---mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
---mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
---mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
---mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
---mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
---mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
---mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
---accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
---accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
---accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
---accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
---accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
---accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
---accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
-
-/* theme backgrounds */
---theme-bg-h: 2;
---theme-bg-s: 55%;
---theme-bg-l: 67%;
-
-/* theme text */
---theme-text-h: 215;
---theme-text-s: 29%;
---theme-text-l: 23%;
-
-/* theme links/borders */
---theme-link-h: 359;
---theme-link-s: 62%;
---theme-link-l: 69%;
-
-/* modify hsl values like a boss */
---theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
---theme-bg-light: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * 1.1) );
---theme-bg-dark: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) / 1.1));
-
---theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
---theme-text-light: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * 1.1));
---theme-text-dark: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) / 1.1));
-
---theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
---theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * 1.1));
---theme-link-press: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) / 1.1));
-
---theme-border: var(--theme-link);
---theme-border-hover: var(--theme-link-hover);
---theme-border-press: var(--theme-link-press);
+  /* theme links/borders */
+  --theme-link-h: 359;
+  --theme-link-s: 62%;
+  --theme-link-l: 69%;
 }
-
 
 .theme-metropolis {
   /* alpha caps */
@@ -835,46 +517,6 @@
   --theme-link-h: 11;
   --theme-link-s: 68%;
   --theme-link-l: 49%;
-
-  /* modify hsl values like a boss */
-  --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-alt: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * .75));
-
-  --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-alt: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * .75));
-
-  --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * .75));
-
-  --theme-border: var(--theme-link);
-  --theme-border-hover: var(--theme-link-hover);
-
-  --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
-  --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
-  --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));
-  --alpha-cap-press: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .9));
-
-  --alpha-legend: hsl(var(--alpha-legend-h), var(--alpha-legend-s), var(--alpha-legend-l));
-  --alpha-legend-hover: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) / .85));
-  --alpha-legend-press: hsl(var(--alpha-legend-h), var(--alpha-legend-s), calc(var(--alpha-legend-l) * .85));
-
-  --mod-cap: hsl(var(--mod-cap-h), var(--mod-cap-s), var(--mod-cap-l));
-  --mod-cap-side: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .7));
-  --mod-cap-hover: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) / .9));
-  --mod-cap-press: hsl(var(--mod-cap-h), var(--mod-cap-s), calc(var(--mod-cap-l) * .9));
-
-  --mod-legend: hsl(var(--mod-legend-h), var(--mod-legend-s), var(--mod-legend-l));
-  --mod-legend-hover: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) / .85));
-  --mod-legend-press: hsl(var(--mod-legend-h), var(--mod-legend-s), calc(var(--mod-legend-l) * .85));
-
-  --accent-cap: hsl(var(--accent-cap-h), var(--accent-cap-s), var(--accent-cap-l));
-  --accent-cap-side: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .7));
-  --accent-cap-hover: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) / .9));
-  --accent-cap-press: hsl(var(--accent-cap-h), var(--accent-cap-s), calc(var(--accent-cap-l) * .9));
-
-  --accent-legend: hsl(var(--accent-legend-h), var(--accent-legend-s), var(--accent-legend-l));
-  --accent-legend-hover: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) / .85));
-  --accent-legend-press: hsl(var(--accent-legend-h), var(--accent-legend-s), calc(var(--accent-legend-l) * .85));
 }
 
 /* additional styles */

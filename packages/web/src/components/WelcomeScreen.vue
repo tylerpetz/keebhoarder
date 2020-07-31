@@ -50,7 +50,7 @@ export default {
     <div class="flex justify-center items-center flex-col h-full">
       <h1 class="text-theme-text text-4xl font-extrabold">Keebhoarder<span class="blink font-normal">|</span></h1>
       <h2 class="text-theme-text-l text-lg font-semibold">securely manage your keyboard habit</h2>
-      <form class="mt-6 p-4 bg-theme-bg-l rounded overflow-hidden relative w-72 flex flex-col" @submit.prevent="submitEmailForm" name="keebhoarder-interest" v-if="!submitted && !error">
+      <form class="mt-6 p-4 bg-theme-bg-l rounded overflow-hidden relative w-72 flex flex-col shadow-md" @submit.prevent="submitEmailForm" name="keebhoarder-interest" v-if="!submitted && !error">
         <h3 class="text-center mb-4 font-bold text-theme-text">Get launch updates</h3>
         <FormInput type="text" name="name" v-model="form.name" class="mb-2" required>First Name</FormInput>
         <FormInput type="email" name="email" v-model="form.email" class="mb-6" required>Email Address</FormInput>
