@@ -27,7 +27,7 @@ export default {
       if (activeTheme === 'metropolis') return 'theme-metropolis'
       if (activeTheme === 'wavez') return 'theme-wavez'
 
-      return 'theme-metropolis'
+      return 'theme-bento'
     }
   },
   methods: {

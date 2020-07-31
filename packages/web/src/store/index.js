@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     activeModal: false,
     user: {},
-    activeTheme: 'metropolis'
+    activeTheme: 'bento'
   },
   getters: {
     loggedIn: (state) => Object.keys(state.user).length > 0,

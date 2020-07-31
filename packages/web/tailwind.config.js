@@ -63,12 +63,6 @@ module.exports = {
         80: '20rem',
         96: '24rem'
       }
-    },
-    boxShadow: {
-      default: '2px 2px 0 0 var(--alpha-cap)',
-      hover: '2px 2px 0 0 var(--alpha-legend)',
-      focus: '1px 1px 0 0 var(--alpha-legend)',
-      active: '0px 0px 0 0 var(--alpha-cap)'
     }
   },
   variants: {
