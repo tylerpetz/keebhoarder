@@ -54,9 +54,9 @@ export default {
         <h3 class="text-center mb-4 font-bold text-theme-text">Get launch updates</h3>
         <FormInput type="text" name="name" v-model="form.name" class="mb-2" required>First Name</FormInput>
         <FormInput type="email" name="email" v-model="form.email" class="mb-6" required>Email Address</FormInput>
-        <FormInput type="text" name="birthday" v-model="honeypot" style="position: absolute !important;top: 9999px;">die robot scum</FormInput>
+        <FormInput type="text" name="birthday" v-model="honeypot" style="position: absolute !important;top: 9999px;" tabindex="-1">die robot scum</FormInput>
         <div class="w-full text-right">
-          <keycap capStyle="large" theme="accent">&#10229; Keep me updated</keycap>
+          <keycap capStyle="large" theme="accent" type="submit">&#10229; Keep me updated</keycap>
         </div>
       </form>
       <div class="mt-6 p-6 bg-accent-cap text-accent-legend rounded text-center font-bold" v-else-if="submitted">
