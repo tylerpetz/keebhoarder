@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-  <Modal @close="$emit('close')">
+  <Modal @close="$emit('close')" modalClass="w-2/3">
     <div class="flex flex-row flex-wrap items-stretch p-1">
       <div v-for="theme in themes" :key="theme" @click="$store.commit('SET_ACTIVE_THEME', theme)" class="w-full sm:w-1/2 md:w-1/3 p-1">
         <div
