@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <header class="w-full p-2 flex flex-row items-start justify-between z-30">
+  <header class="w-full p-2 flex flex-row items-start justify-between">
     <div class="flex flex-row">
       <h1 class="mr-4">
         <keycap :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'" textSize="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></keycap>

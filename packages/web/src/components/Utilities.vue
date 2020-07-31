@@ -26,11 +26,10 @@ export default {
 </script>
 
 <template>
-  <div class="absolute h-full w-full inset-0 flex items-center justify-center py-20">
+  <div>
     <AuthForm v-if="activeModal === 'register' || activeModal === 'login'" :authType="activeModal || ''" @close="activeModal = false" />
     <SwapCaps v-if="activeModal === 'theme'" @close="activeModal = false" />
     <CreateCapSet v-if="activeModal === 'create'" @close="activeModal = false" />
     <!-- <ItemModal /> -->
-    <div class="absolute h-full w-full inset-0 bg-theme-bg-d" :class="activeModal ? 'z-20 opacity-75' : 'opacity-0 z-0'" />
   </div>
 </template>

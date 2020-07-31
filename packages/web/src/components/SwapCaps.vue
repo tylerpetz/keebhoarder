@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-  <Modal @close="$emit('close')" class="swap-caps max-h-full">
+  <Modal @close="$emit('close')">
     <div class="flex flex-row flex-wrap items-stretch p-1">
       <div v-for="theme in themes" :key="theme" @click="$store.commit('SET_ACTIVE_THEME', theme)" class="w-full sm:w-1/2 md:w-1/3 p-1">
         <div
@@ -45,10 +45,3 @@ export default {
     </footer>
   </Modal>
 </template>
-
-<style scoped>
-.swap-caps {
-  width: 95%;
-  max-width: 900px;
-}
-</style>
