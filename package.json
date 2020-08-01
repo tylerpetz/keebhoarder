@@ -3,37 +3,8 @@
   "private": true,
   "useWorkspaces": true,
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-plugin-pwa": "~4.4.0",
-    "@vue/cli-plugin-router": "~4.4.0",
-    "@vue/cli-plugin-unit-jest": "~4.4.0",
-    "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "@vue/test-utils": "^1.0.3",
-    "apollo": "^2.1.8",
-    "apollo-link": "^1.2.3",
-    "apollo-link-http": "^1.5.5",
-    "babel-eslint": "^10.1.0",
-    "babel-preset-vue": "^2.0.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-graphql": "^4.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "jest": "^25.0.0",
     "lerna": "^3.14.1",
-    "lint-staged": "^9.5.0",
-    "nock": "^10.0.2",
-    "node-fetch": "^2.2.1",
-    "now": "^12.1.3",
-    "print-message": "^3.0.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "print-message": "^3.0.1"
   },
   "scripts": {
     "prepare": "node ./sup-keeblord.js",
@@ -41,9 +12,5 @@
     "web": "cd ./packages/web && yarn start",
     "graph": "cd ./packages/graph && yarn start",
     "lerna-wizard": "npx lerna-wizard"
-  },
-  "dependencies": {
-    "keebhoarder-graph": "file:packages/graph",
-    "keebhoarder-web": "file:packages/web"
   }
 }

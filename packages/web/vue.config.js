@@ -3,6 +3,9 @@ module.exports = {
   productionSourceMap: false,
   // split up chunk vendors file: https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
   configureWebpack: {
+    resolve: {
+      symlinks: false
+    },
     optimization: {
       runtimeChunk: 'single',
       splitChunks: {

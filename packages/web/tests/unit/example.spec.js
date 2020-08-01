@@ -1,12 +1,11 @@
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { shallowMount, mount } from '@vue/test-utils'
+import AuthForm from '@/components/AuthForm.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe('AuthForm.vue', () => {
+  it('renders login form', () => {
+    const wrapper = mount(AuthForm, {
+      propsData: { authType: 'login' },
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect(wrapper.text()).toMatch('sup')
   })
 })
