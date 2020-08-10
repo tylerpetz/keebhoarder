@@ -45,7 +45,7 @@ export default {
       <keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; {{ authType }}</keycap>
     </footer>
     <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
-      <p class="text-xs font-semibold text-accent-cap-hover mt-2">we will never sell your email, but we might send you emails related to your account</p>
+      <p class="text-xs font-semibold text-theme-text-l mt-2">we will never sell your email, but we might send you emails related to your account</p>
     </aside>
   </Modal>
 </template>
