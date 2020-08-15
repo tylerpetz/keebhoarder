@@ -47,7 +47,7 @@ export default {
 
 <style lang="css" scoped>
 .keycap {
-  box-shadow: inset 10px -3px 5px -7px rgba(0,0,0,0.2), inset -10px -3px 5px -7px rgba(0,0,0,0.2);
+  box-shadow: inset 10px -3px 5px -7px rgba(0,0,0,0.15), inset -10px -3px 5px -7px rgba(0,0,0,0.25);
   padding: 0 6px;
 }
 
@@ -56,7 +56,7 @@ export default {
   min-width: 32px;
   height: 38px;
   box-shadow: inset 8px 0px 12px -4px rgba(255,255,255,0.05), inset -8px 0px 12px -4px rgba(255,255,255,0.05);
-  text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
 }
 
 .keycap:active .keycap-face {
