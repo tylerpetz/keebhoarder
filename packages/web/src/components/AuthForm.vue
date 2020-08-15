@@ -9,14 +9,18 @@ export default {
   },
   data () {
     return {
-      errors: []
+      errors: [],
+      email: '',
+      password: '',
+      passwordRepeat: ''
     }
   },
   methods: {
     forgotPassword () {
       this.$emit('close')
     },
-    handleSubmit () {
+    async handleSubmit () {
+      await this.$store.dispatch(this.authType, { email: this.email, password: this.password })
       this.$emit('close')
     }
   }
@@ -28,13 +32,13 @@ export default {
     <form @submit.prevent="handleSubmit" class="m-0 p-0">
       <div class="flex flex-col p-6">
         <template v-if="authType === 'register'">
-          <FormInput required class="mb-6" type="email" placeholder="fam@keebhoarder.com">Email Address</FormInput>
-          <FormInput required class="mb-6" type="password" placeholder="8+ characters, must include numbers or symbols">Password</FormInput>
-          <FormInput required class="mb-0" type="password">Type Password Again</FormInput>
+          <FormInput required v-model="email" class="mb-6" type="email" placeholder="fam@keebhoarder.com">Email Address</FormInput>
+          <FormInput required v-model="password" class="mb-6" type="password" placeholder="8+ characters, must include numbers or symbols">Password</FormInput>
+          <FormInput required v-model="passwordRepeat" class="mb-0" type="password">Type Password Again</FormInput>
         </template>
         <template v-else>
-          <FormInput required class="mb-6">Username or Email Address</FormInput>
-          <FormInput required class="mb-0" type="password">Password</FormInput>
+          <FormInput required v-model="email" class="mb-6">Username or Email Address</FormInput>
+          <FormInput required v-model="password" class="mb-0" type="password">Password</FormInput>
         </template>
         <div v-if="errors.length" class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div>
       </div>

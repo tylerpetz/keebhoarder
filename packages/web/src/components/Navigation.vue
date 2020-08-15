@@ -3,8 +3,7 @@ export default {
   name: 'Navigation',
   data () {
     return {
-      subNavOpen: false,
-      loggedIn: false
+      subNavOpen: false
     }
   },
   computed: {
@@ -33,12 +32,12 @@ export default {
     <div class="flex flex-row">
       <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'create')">Create</Keycap>
       <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')" class="ml-2">Swap Keycaps</Keycap>
-      <template v-if="loggedIn">
+      <template v-if="$store.getters.loggedIn">
         <Keycap v-if="!subNavOpen" cap-style="large" theme="accent" @click.native="subNavOpen = true" class="ml-2">username</Keycap>
         <template v-else>
           <Keycap cap-style="large" class="ml-2">Profile</Keycap>
           <Keycap cap-style="large" class="ml-2">Settings</Keycap>
-          <Keycap cap-style="large" theme="mod" class="ml-2">Log Out</Keycap>
+          <Keycap @click.native="$store.dispatch('logout')" cap-style="large" theme="mod" class="ml-2">Log Out</Keycap>
           <Keycap @click.native="subNavOpen = false" theme="accent" class="ml-6">Esc</Keycap>
         </template>
       </template>

@@ -1,22 +1,33 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import items from './modules/items'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     activeModal: false,
-    user: {},
-    activeTheme: 'milkshake'
+    activeTheme: 'milkshake',
+    userToken: false
   },
   getters: {
-    loggedIn: (state) => Object.keys(state.user).length > 0,
+    loggedIn: (state) => !!state.userToken,
     activeTheme: (state) => state.activeTheme
   },
   actions: {
-    keyboardShortcut ({ commit }, shortcut) {
-      commit('SET_ACTIVE_MODAL', 'login')
+    login ({ commit }, { email = '', password = '' }) {
+      localStorage.setItem('token', 'aksdjflkjsdlfkjsdlf')
+      commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+    },
+    logout ({ commit }) {
+      localStorage.removeItem('token')
+      commit('SET_USER_TOKEN', false)
+    },
+    register ({ commit }, { email = '', password = '' }) {
+      localStorage.setItem('token')
+      commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+    },
+    forgotPassword ({ commit }, { email = '' }) {
+      commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
     }
   },
   mutations: {
@@ -26,14 +37,8 @@ export default new Vuex.Store({
     SET_ACTIVE_THEME (state, theme = false) {
       state.activeTheme = theme
     },
-    LOG_IN (state, user) {
-      state.user = { loggedIn: true }
-    },
-    LOG_OUT (state) {
-      state.user = {}
+    SET_USER_TOKEN (state, userToken) {
+      state.userToken = userToken
     }
-  },
-  modules: {
-    items
   }
 })

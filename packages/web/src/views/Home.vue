@@ -14,7 +14,7 @@ export default {
     }
   },
   render (h) {
-    if (!this.loggedIn) return h('WelcomeScreen')
+    if (!this.$store.getters.loggedIn) return h('WelcomeScreen')
     return h('Dashboard')
   }
 }

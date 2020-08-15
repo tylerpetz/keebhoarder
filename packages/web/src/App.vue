@@ -10,8 +10,8 @@ export default {
     Footer,
     Utilities
   },
-  mounted () {
-    // this.checkAuthState()
+  created () {
+    this.checkAuthState()
   },
   computed: {
     containerClass () {
@@ -32,8 +32,9 @@ export default {
   },
   methods: {
     checkAuthState () {
-      localStorage.getItem('loggedin')
-      this.$store.commit('LOG_IN')
+      const token = localStorage.getItem('token')
+      if (!token) return
+      this.$store.commit('SET_USER_TOKEN', token)
     }
   }
 }
