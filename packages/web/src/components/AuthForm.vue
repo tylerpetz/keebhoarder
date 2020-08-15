@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <Modal @close="$emit('close')" modalClass="w-72 sm:w-80 md:w-96">
+  <Modal @close="$emit('close')" modal-class="w-72 sm:w-80 md:w-96">
     <form @submit.prevent="handleSubmit" class="m-0 p-0">
       <div class="flex flex-col p-6">
         <template v-if="authType === 'register'">

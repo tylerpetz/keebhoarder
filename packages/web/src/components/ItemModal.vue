@@ -58,8 +58,8 @@ export default {
       <FormInput class="w-full mb-6" type="text">Name *</FormInput>
       <FormSelect :options="itemTypes" class="w-full mb-6" type="text" placeholder="Select Item Type">Type *</FormSelect>
       <div class="grid grid-cols-5 w-full mb-6">
-        <FormInput class="col-span-3" inputClasses="rounded-r-none" type="number" step="any">Price *</FormInput>
-        <FormSelect class="col-span-2" :options="currencyTypes" inputClasses="rounded-l-none" type="text" >Currency *</FormSelect>
+        <FormInput class="col-span-3" input-classes="rounded-r-none" type="number" step="any">Price *</FormInput>
+        <FormSelect class="col-span-2" :options="currencyTypes" input-classes="rounded-l-none" type="text" >Currency *</FormSelect>
       </div>
       <FormInput class="w-full mb-6" type="text">Description</FormInput>
       <Keycap theme="mod" cap-style="large" @click.native="$emit('close')">Add Photos</Keycap>

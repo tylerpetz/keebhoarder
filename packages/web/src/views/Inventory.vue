@@ -4,26 +4,26 @@ import gql from 'graphql-tag'
 export default {
   name: 'Inventory',
   apollo: {
-    // orders: gql`query {
-    //   orders {
-    //     id,
-    //     notes {
-    //       description
-    //     },
-    //     trackingNumber,
-    //     items {
-    //       id,
-    //       description,
-    //       price,
-    //       categories {
-    //         name,
-    //       },
-    //       images {
-    //         url,
-    //       }
-    //     }
-    //   }
-    // }`,
+    orders: gql`query {
+      orders {
+        id,
+        notes {
+          description
+        },
+        trackingNumber,
+        items {
+          id,
+          description,
+          price,
+          categories {
+            name,
+          },
+          images {
+            url,
+          }
+        }
+      }
+    }`,
     items: gql`query {
       items {
         id,
@@ -43,15 +43,6 @@ export default {
       loading: false,
       itemTypes: ['Keyboards', 'Keycap Sets', 'Artisans', 'Switches', 'Cases', 'Plates', 'PCBs/Controllers', 'Other'],
       items: []
-    }
-  },
-  computed: {
-    localData () {
-      return [
-        {
-          name: 'sup'
-        }
-      ]
     }
   }
 }

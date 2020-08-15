@@ -132,8 +132,8 @@ export default {
 </script>
 
 <template>
-  <div class="w-3/4 relative z-50">
-    <div class="flex mt-8 bg-theme-bg-d p-8 flex-col mx-auto">
+  <Modal @close="$emit('close')" modal-class="w-10/12">
+    <div class="flex p-8 flex-col mx-auto">
       <input class="mb-6" type="text" v-model="themeName" placeholder="theme name" />
 
       <div class="flex flex-row justify-between mb-6">
@@ -160,5 +160,5 @@ export default {
 
       <textarea v-model="generatedTheme" readonly class="mt-8" rows="20" />
     </div>
-  </div>
+  </Modal>
 </template>

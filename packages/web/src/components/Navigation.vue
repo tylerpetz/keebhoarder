@@ -30,7 +30,7 @@ export default {
       <Keycap cap-style="large" class="ml-2">Resources</Keycap> -->
     </div>
     <div class="flex flex-row">
-      <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'create')">Create</Keycap>
+      <!-- <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'create')">Create</Keycap> -->
       <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')" class="ml-2">Swap Keycaps</Keycap>
       <template v-if="$store.getters.loggedIn">
         <Keycap v-if="!subNavOpen" cap-style="large" theme="accent" @click.native="subNavOpen = true" class="ml-2">username</Keycap>

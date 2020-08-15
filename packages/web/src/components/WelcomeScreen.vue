@@ -6,7 +6,6 @@ export default {
       error: false,
       submitted: false,
       honeypot: '',
-      haxor: false,
       form: {
         name: '',
         email: ''
