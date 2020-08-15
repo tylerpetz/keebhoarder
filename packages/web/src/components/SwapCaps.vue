@@ -40,7 +40,7 @@ export default {
         </div>
       </div>
     </div>
-    <footer class="p-2 flex" :class="authType === 'login' ? 'justify-between' : 'justify-end'" slot="footer">
+    <footer class="p-2 flex justify-end" slot="footer">
       <keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">Create Cap Set</keycap>
     </footer>
   </Modal>
