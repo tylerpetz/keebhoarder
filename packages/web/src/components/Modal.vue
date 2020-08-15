@@ -24,7 +24,7 @@ export default {
 <template>
   <transition name="modal">
     <div class="absolute h-full w-full inset-0 flex items-center justify-center py-20 shadow-xl">
-      <div class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md" :class="modalClass">
+      <div class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden" :class="modalClass">
         <header class="p-2">
           <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
           <slot name="header" />
