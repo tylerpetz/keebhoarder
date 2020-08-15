@@ -17,13 +17,7 @@ export default {
         themeText: '',
         themeLink: ''
         // themeBorder: ''
-      },
-      close: [
-        {
-          text: 'Esc',
-          theme: 'accent'
-        }
-      ]
+      }
     }
   },
   computed: {
@@ -165,9 +159,6 @@ export default {
       </div>
 
       <textarea v-model="generatedTheme" readonly class="mt-8" rows="20" />
-    </div>
-    <div class="flex flex-row justify-between mt-6">
-      <!-- <Shortcut :hotkeys="close" @click.native="$store.commit('SET_ACTIVE_MODAL', '')">Close</Shortcut> -->
     </div>
   </div>
 </template>

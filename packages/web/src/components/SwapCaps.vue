@@ -33,15 +33,15 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">{{ theme }}</span>
           <div class="flex flex-row">
-            <keycap textSize="large"><span v-html="first" /></keycap>
-            <keycap capStyle="large" theme="mod" type="mod" class="mx-2"><span v-html="second" /></keycap>
-            <keycap capStyle="large" theme="accent"><span v-html="third" /></keycap>
+            <Keycap text-size="large"><span v-html="first" /></Keycap>
+            <Keycap cap-style="large" theme="mod" type="mod" class="mx-2"><span v-html="second" /></Keycap>
+            <Keycap cap-style="large" theme="accent"><span v-html="third" /></Keycap>
           </div>
         </div>
       </div>
     </div>
     <footer class="p-2 flex justify-end" slot="footer">
-      <keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">Create Cap Set</keycap>
+      <Keycap theme="mod" cap-style="large" @click.native="$emit('close')" class="capitalize">Create Cap Set</Keycap>
     </footer>
   </Modal>
 </template>

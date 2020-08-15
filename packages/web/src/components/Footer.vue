@@ -3,17 +3,7 @@ export default {
   name: 'Footer',
   data () {
     return {
-      swapCaps: [
-        {
-          text: 'Alt',
-          capStyle: 'large',
-          theme: 'mod'
-        },
-        {
-          text: 'K',
-          textSize: 'large'
-        }
-      ]
+
     }
   }
 }

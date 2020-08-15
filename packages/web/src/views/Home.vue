@@ -14,8 +14,8 @@ export default {
     }
   },
   render (h) {
-    if (!this.loggedIn) return h('welcome-screen')
-    return h('dashboard')
+    if (!this.loggedIn) return h('WelcomeScreen')
+    return h('Dashboard')
   }
 }
 </script>

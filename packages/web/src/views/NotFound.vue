@@ -8,6 +8,6 @@ export default {
 
   <div>
     <h1>Page Not Found</h1>
-    <keycap @click.native="$router.push({ name: 'Home' })">home</keycap>
+    <Keycap @click.native="$router.push({ name: 'Home' })">home</Keycap>
   </div>
 </template>

@@ -42,8 +42,8 @@ export default {
         <div v-if="errors.length" class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div>
       </div>
       <footer class="p-2 flex" :class="authType === 'login' ? 'justify-between' : 'justify-end'" slot="footer">
-        <keycap v-if="authType === 'login'" theme="base" capStyle="large" @click.native="forgotPassword">Forgot Password?</keycap>
-        <keycap theme="mod" capStyle="large" class="capitalize" type="submit">&#10229; {{ authType === 'register' ? 'Register' : 'Log In'}}</keycap>
+        <Keycap v-if="authType === 'login'" theme="base" cap-style="large" @click.native="forgotPassword">Forgot Password?</Keycap>
+        <Keycap theme="mod" cap-style="large" class="capitalize" type="submit">&#10229; {{ authType === 'register' ? 'Register' : 'Log In'}}</Keycap>
       </footer>
       <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
         <p class="text-xs font-semibold text-theme-text-l mt-2">we will never sell your email, but we might send you emails related to your account</p>

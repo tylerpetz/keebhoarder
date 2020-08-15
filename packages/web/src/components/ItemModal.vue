@@ -62,10 +62,10 @@ export default {
         <FormSelect class="col-span-2" :options="currencyTypes" inputClasses="rounded-l-none" type="text" >Currency *</FormSelect>
       </div>
       <FormInput class="w-full mb-6" type="text">Description</FormInput>
-      <keycap theme="mod" capStyle="large" @click.native="$emit('close')">Add Photos</keycap>
+      <Keycap theme="mod" cap-style="large" @click.native="$emit('close')">Add Photos</Keycap>
     </div>
     <footer class="p-2 flex justify-end" slot="footer">
-      <keycap theme="accent" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; Save Item</keycap>
+      <Keycap theme="accent" cap-style="large" @click.native="$emit('close')" class="capitalize">&#10229; Save Item</Keycap>
     </footer>
   </Modal>
 </template>

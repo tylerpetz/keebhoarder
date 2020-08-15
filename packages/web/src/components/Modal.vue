@@ -26,7 +26,7 @@ export default {
     <div class="absolute h-full w-full inset-0 flex items-center justify-center py-20 shadow-xl">
       <div class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md" :class="modalClass">
         <header class="p-2">
-          <keycap theme="accent" @click.native="$emit('close')">Esc</keycap>
+          <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
           <slot name="header" />
         </header>
         <div class="bg-theme-bg-l relative flex-grow overflow-y-auto">
