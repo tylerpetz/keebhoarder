@@ -10,6 +10,15 @@ export default {
     routeName () {
       return this.$route.name
     }
+  },
+  methods: {
+    goHome () {
+      if (this.$store.getters.loggedIn) {
+        this.$router.push({ name: 'Dashboard' })
+      } else {
+        this.$router.push({ name: 'Home' })
+      }
+    }
   }
 }
 </script>
@@ -18,7 +27,7 @@ export default {
   <header class="w-full p-2 flex flex-row items-start justify-between">
     <div class="flex flex-row">
       <h1 class="mr-4">
-        <Keycap :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'" text-size="large" @click.native="$router.push({ name: 'Dashboard' })">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
+        <Keycap :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'" text-size="large" @click.native="goHome">K<span class="hidden">eeb</span>h<span class="hidden">oarder</span></Keycap>
       </h1>
       <template v-for="route in ['Inventory', 'Orders', 'Builds']">
         <Keycap :key="route" @click.native="$router.push({ name: route })" cap-style="large" class="ml-2" :theme="routeName === route ? 'mod' : 'alpha'">{{ route }}</Keycap>
