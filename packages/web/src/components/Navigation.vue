@@ -24,6 +24,10 @@ export default {
       } else {
         this.$router.push({ name: 'Home' })
       }
+    },
+    logout () {
+      this.$store.dispatch('logout')
+      this.$router.push({ name: 'Home' })
     }
   }
 }
@@ -89,7 +93,7 @@ export default {
             cap-style="large"
             theme="mod"
             class="ml-2"
-            @click.native="$store.dispatch('logout')"
+            @click.native="logout"
           >
             Log Out
           </Keycap>
