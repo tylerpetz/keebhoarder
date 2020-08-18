@@ -40,8 +40,5 @@ export default {
         </div>
       </div>
     </div>
-    <footer class="p-2 flex justify-end" slot="footer">
-      <Keycap theme="mod" cap-style="large" @click.native="$emit('close')" class="capitalize">Create Cap Set</Keycap>
-    </footer>
   </Modal>
 </template>

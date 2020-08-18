@@ -64,6 +64,7 @@ export default {
       <div class="mt-6 p-6 bg-accent-cap text-accent-legend rounded text-center font-bold" v-else-if="error">
         There was a problem submitting the form. We are working on that.
       </div>
+      <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')" class="mt-6">Swap Keycaps</Keycap>
     </div>
   </div>
 </template>
