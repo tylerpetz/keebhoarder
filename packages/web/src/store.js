@@ -26,20 +26,19 @@ export const getters = {
 }
 
 export const actions = {
-  login ({ commit }, { email = '', password = '' }) {
+  login ({ commit }, { email = '', password = '' } = {}) {
+    if (!email || !password) return
+    localStorage.setItem('token', 'aksdjflkjsdlfkjsdlf')
+    commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+  },
+  register ({ commit }, { email = '', password = '' } = {}) {
+    if (!email || !password) return
     localStorage.setItem('token', 'aksdjflkjsdlfkjsdlf')
     commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
   },
   logout ({ commit }) {
     localStorage.removeItem('token')
     commit('SET_USER_TOKEN', false)
-  },
-  register ({ commit }, { email = '', password = '' }) {
-    localStorage.setItem('token')
-    commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
-  },
-  forgotPassword ({ commit }, { email = '' }) {
-    commit('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
   }
 }
 

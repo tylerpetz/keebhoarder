@@ -1,4 +1,5 @@
-import { getters, mutations } from '@/store'
+import { getters, actions, mutations } from '@/store'
+const commit = jest.fn()
 
 describe('store.js', () => {
   describe('getters', () => {
@@ -9,20 +10,30 @@ describe('store.js', () => {
       expect(getters.loggedIn(state)).toBe(true)
     })
   })
-  // describe('actions', () => {
-  //   it('login', () => {
 
-  //   })
-  //   it('logout', () => {
+  describe('actions', () => {
+    it('login', async () => {
+      const email = 'keeb@keebhoarder.com'
+      const password = 'password'
+      await actions.login({ commit }, { email, password })
+      expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+      await actions.login({ commit })
+      expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+    })
+    it('register', async () => {
+      const email = 'keeb@keebhoarder.com'
+      const password = 'password'
+      await actions.register({ commit }, { email, password })
+      expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+      await actions.register({ commit })
+      expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', 'aksdjflkjsdlfkjsdlf')
+    })
+    it('logout', async () => {
+      await actions.logout({ commit })
+      expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', false)
+    })
+  })
 
-  //   })
-  //   it('register', () => {
-
-  //   })
-  //   it('forgotPassword', () => {
-
-  //   })
-  // })
   describe('mutations', () => {
     it('SET_ACTIVE_MODAL', () => {
       const state = {
