@@ -13,15 +13,21 @@ module.exports = {
     fontFamily: {
       body: ['Nunito', 'sans-serif']
     },
+    fontSize: {
+      xs: '0.813rem'
+    },
     extend: {
       colors: {
         theme: {
           bg: 'var(--theme-bg)',
-          'bg-alt': 'var(--theme-bg-alt)',
+          'bg-l': 'var(--theme-bg-light)',
+          'bg-d': 'var(--theme-bg-dark)',
           text: 'var(--theme-text)',
-          'text-alt': 'var(--theme-text-alt)',
+          'text-l': 'var(--theme-text-light)',
+          'text-d': 'var(--theme-text-dark)',
           link: 'var(--theme-link)',
           'link-hover': 'var(--theme-link-hover)',
+          'link-press': 'var(--theme-link-press)',
           border: 'var(--theme-border)',
           'border-hover': 'var(--theme-border-hover)'
         },
@@ -58,12 +64,6 @@ module.exports = {
         80: '20rem',
         96: '24rem'
       }
-    },
-    boxShadow: {
-      default: '2px 2px 0 0 var(--alpha-cap)',
-      hover: '2px 2px 0 0 var(--alpha-legend)',
-      focus: '1px 1px 0 0 var(--alpha-legend)',
-      active: '0px 0px 0 0 var(--alpha-cap)'
     }
   },
   variants: {

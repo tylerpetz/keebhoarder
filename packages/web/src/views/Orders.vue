@@ -3,7 +3,7 @@
     <div class="w-full flex justify-between mb-6">
       <div>
         <h1 class="text-theme-text text-xl">
-          Builds
+          Orders
         </h1>
       </div>
     </div>

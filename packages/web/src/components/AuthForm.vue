@@ -9,43 +9,111 @@ export default {
   },
   data () {
     return {
-      forgotPassword: [
-        {
-          text: 'Alt',
-          type: 'mod'
-        }
-      ],
-      close: [
-        {
-          text: 'Esc',
-          theme: 'accent'
-        }
-      ]
+      errors: [],
+      email: '',
+      password: '',
+      passwordRepeat: ''
+    }
+  },
+  methods: {
+    forgotPassword () {
+      this.$emit('close')
+    },
+    async handleSubmit () {
+      await this.$store.dispatch(this.authType, { email: this.email, password: this.password })
+      this.$emit('close')
     }
   }
 }
 </script>
 
 <template>
-  <Modal @close="$emit('close')" class="w-72 sm:w-80 md:w-96">
-    <div class="flex flex-col p-6">
-      <template v-if="authType === 'register'">
-        <FormInput class="mb-6" type="email" placeholder="fam@keebhoarder.com">Email Address</FormInput>
-        <FormInput class="mb-6" type="password" placeholder="8+ characters, must include numbers or symbols">Password</FormInput>
-        <FormInput class="mb-0" type="password">Type Password Again</FormInput>
-      </template>
-      <template v-else>
-        <FormInput class="mb-6">Username or Email Address</FormInput>
-        <FormInput class="mb-0" type="password">Password</FormInput>
-      </template>
-      <!-- <div class="text-xs font-semibold text-theme-text rounded mt-4">Errors!</div> -->
-    </div>
-    <footer class="p-2 flex" :class="authType === 'login' ? 'justify-between' : 'justify-end'" slot="footer">
-      <keycap theme="base" capStyle="large" @click.native="$emit('close')" v-if="authType === 'login'">Forgot Password?</keycap>
-      <keycap theme="mod" capStyle="large" @click.native="$emit('close')" class="capitalize">&#10229; {{ authType }}</keycap>
-    </footer>
-    <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
-      <p class="text-xs font-semibold text-accent-cap-hover mt-2">we will never sell your email, but we might send you emails related to your account</p>
-    </aside>
+  <Modal
+    modal-class="w-72 sm:w-80 md:w-96"
+    @close="$emit('close')"
+  >
+    <form
+      class="m-0 p-0"
+      @submit.prevent="handleSubmit"
+    >
+      <div class="flex flex-col p-6">
+        <template v-if="authType === 'register'">
+          <FormInput
+            v-model="email"
+            required
+            class="mb-6"
+            type="email"
+            placeholder="fam@keebhoarder.com"
+          >
+            Email Address
+          </FormInput>
+          <FormInput
+            v-model="password"
+            required
+            class="mb-6"
+            type="password"
+            placeholder="8+ characters, must include numbers or symbols"
+          >
+            Password
+          </FormInput>
+          <FormInput
+            v-model="passwordRepeat"
+            required
+            class="mb-0"
+            type="password"
+          >
+            Type Password Again
+          </FormInput>
+        </template>
+        <template v-else>
+          <FormInput
+            v-model="email"
+            required
+            class="mb-6"
+          >
+            Username or Email Address
+          </FormInput>
+          <FormInput
+            v-model="password"
+            required
+            class="mb-0"
+            type="password"
+          >
+            Password
+          </FormInput>
+        </template>
+        <div
+          v-if="errors.length"
+          class="text-xs font-semibold text-theme-text rounded mt-4"
+        >
+          Errors!
+        </div>
+      </div>
+      <footer
+        slot="footer"
+        class="p-2 flex bg-theme-bg-d"
+        :class="authType === 'login' ? 'justify-between' : 'justify-end'"
+      >
+        <Keycap
+          v-if="authType === 'login'"
+          theme="base"
+          cap-style="large"
+          @click.native="forgotPassword"
+        >
+          Forgot Password?
+        </Keycap>
+        <Keycap
+          theme="mod"
+          cap-style="large"
+          class="capitalize"
+          type="submit"
+        >
+          &#10229; {{ authType === 'register' ? 'Register' : 'Log In' }}
+        </Keycap>
+      </footer>
+      <!-- <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
+        <p class="text-xs font-semibold text-theme-text-l mt-2">we will never sell your email, but we might send you emails related to your account</p>
+      </aside> -->
+    </form>
   </Modal>
 </template>

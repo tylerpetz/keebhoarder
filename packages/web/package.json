@@ -5,8 +5,8 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest --verbose"
   },
   "dependencies": {
     "animejs": "^3.2.0",
@@ -14,6 +14,8 @@
     "color-convert": "^2.0.1",
     "core-js": "^3.6.5",
     "graphql": "^15.3.0",
+    "jest": "^26.2.2",
+    "jest-serializer-vue": "^2.0.2",
     "register-service-worker": "^1.7.1",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
@@ -24,12 +26,37 @@
     "vuex": "^3.4.0"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn test"
   },
   "lint-staged": {
     "*.{js,jsx,vue}": [
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.4.6",
+    "@vue/cli-plugin-eslint": "^4.4.6",
+    "@vue/cli-plugin-pwa": "^4.4.6",
+    "@vue/cli-plugin-router": "^4.4.6",
+    "@vue/cli-plugin-unit-jest": "^4.4.6",
+    "@vue/cli-plugin-vuex": "^4.4.6",
+    "@vue/cli-service": "^4.4.6",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^10.2.11",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "vue-jest": "^3.0.6",
+    "vue-template-compiler": "^2.6.11"
   }
 }

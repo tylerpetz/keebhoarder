@@ -10,13 +10,10 @@ export default {
     Footer,
     Utilities
   },
-  mounted () {
-    // this.checkAuthState()
-  },
   computed: {
     containerClass () {
       // purgeable css classes
-      const { activeTheme = '' } = this.$store.getters
+      const { activeTheme = '' } = this.$store.state
       if (activeTheme === '8008') return 'theme-8008'
       if (activeTheme === '9009') return 'theme-9009'
       if (activeTheme === 'dolch') return 'theme-dolch'
@@ -27,13 +24,17 @@ export default {
       if (activeTheme === 'metropolis') return 'theme-metropolis'
       if (activeTheme === 'wavez') return 'theme-wavez'
 
-      return 'theme-metropolis'
+      return 'theme-milkshake'
     }
+  },
+  created () {
+    this.checkAuthState()
   },
   methods: {
     checkAuthState () {
-      localStorage.getItem('loggedin')
-      this.$store.commit('LOG_IN')
+      const token = localStorage.getItem('token')
+      if (!token) return
+      this.$store.commit('SET_USER_TOKEN', token)
     }
   }
 }
@@ -45,7 +46,7 @@ export default {
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen h-screen w-screen bg-caps flex flex-col items-center justify-between relative"
   >
     <Navigation />
-    <section class="relative z-10 w-full px-2 mt-2 rounded-lg flex-grow">
+    <section class="relative z-10 w-full mt-2 rounded-lg flex-grow">
       <router-view />
     </section>
     <Footer />
