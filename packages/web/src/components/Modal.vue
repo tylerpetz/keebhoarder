@@ -8,7 +8,7 @@ export default {
     }
   },
   created () {
-    document.onkeydown = e => {
+    document.onkeydown = (e) => {
       e = e || window.event
       if (e.keyCode === 27) {
         this.$emit('close')
@@ -24,9 +24,17 @@ export default {
 <template>
   <transition name="modal">
     <div class="absolute h-full w-full inset-0 flex items-center justify-center py-20 shadow-xl">
-      <div class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden" :class="modalClass">
+      <div
+        class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden"
+        :class="modalClass"
+      >
         <header class="p-2">
-          <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
+          <Keycap
+            theme="accent"
+            @click.native="$emit('close')"
+          >
+            Esc
+          </Keycap>
           <slot name="header" />
         </header>
         <div class="bg-theme-bg-l relative flex-grow overflow-y-auto">
@@ -41,10 +49,12 @@ export default {
 </template>
 
 <style lang="css" scoped>
-.modal-enter-active, .modal-leave-active {
-  transition: opacity .25s
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.25s;
 }
-.modal-enter, .modal-leave-to {
-  opacity: 0
+.modal-enter,
+.modal-leave-to {
+  opacity: 0;
 }
 </style>

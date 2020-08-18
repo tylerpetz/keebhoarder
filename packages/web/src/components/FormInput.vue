@@ -1,6 +1,7 @@
 <script>
 export default {
   name: 'FormInput',
+  inheritAttrs: false,
   props: {
     inputClasses: {
       type: String,
@@ -10,8 +11,7 @@ export default {
       type: String,
       default: ''
     }
-  },
-  inheritAttrs: false
+  }
 }
 </script>
 
@@ -24,6 +24,6 @@ export default {
       :class="inputClasses"
       :value="value"
       @input="$emit('input', $event.target.value)"
-    />
+    >
   </label>
 </template>

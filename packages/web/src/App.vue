@@ -10,9 +10,6 @@ export default {
     Footer,
     Utilities
   },
-  created () {
-    this.checkAuthState()
-  },
   computed: {
     containerClass () {
       // purgeable css classes
@@ -29,6 +26,9 @@ export default {
 
       return 'theme-milkshake'
     }
+  },
+  created () {
+    this.checkAuthState()
   },
   methods: {
     checkAuthState () {

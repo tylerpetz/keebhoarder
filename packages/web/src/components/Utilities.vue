@@ -27,9 +27,19 @@ export default {
 
 <template>
   <div>
-    <AuthForm v-if="activeModal === 'register' || activeModal === 'login'" :authType="activeModal || ''" @close="activeModal = false" />
-    <SwapCaps v-if="activeModal === 'theme'" @close="activeModal = false" />
-    <CreateCapSet v-if="activeModal === 'create'" @close="activeModal = false" />
+    <AuthForm
+      v-if="activeModal === 'register' || activeModal === 'login'"
+      :auth-type="activeModal || ''"
+      @close="activeModal = false"
+    />
+    <SwapCaps
+      v-if="activeModal === 'theme'"
+      @close="activeModal = false"
+    />
+    <CreateCapSet
+      v-if="activeModal === 'create'"
+      @close="activeModal = false"
+    />
     <!-- <ItemModal /> -->
   </div>
 </template>

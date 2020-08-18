@@ -25,7 +25,7 @@ export default {
       const colors = Object.keys(this.colors)
       const convertedColors = {}
       console.log('colors', colors)
-      colors.forEach(color => {
+      colors.forEach((color) => {
         convertedColors[color] = convert.hex.hsl(this.colors[color].replace('#', ''))
       })
       return convertedColors
@@ -132,33 +132,85 @@ export default {
 </script>
 
 <template>
-  <Modal @close="$emit('close')" modal-class="w-10/12">
+  <Modal
+    modal-class="w-10/12"
+    @close="$emit('close')"
+  >
     <div class="flex p-8 flex-col mx-auto">
-      <input class="mb-6" type="text" v-model="themeName" placeholder="theme name" />
+      <input
+        v-model="themeName"
+        class="mb-6"
+        type="text"
+        placeholder="theme name"
+      >
 
       <div class="flex flex-row justify-between mb-6">
-        <input type="text" v-model="colors.themeBackground" placeholder="theme bg" />
-        <input type="text" v-model="colors.themeText" placeholder="theme text" />
-        <input type="text" v-model="colors.themeLink" placeholder="theme link" />
+        <input
+          v-model="colors.themeBackground"
+          type="text"
+          placeholder="theme bg"
+        >
+        <input
+          v-model="colors.themeText"
+          type="text"
+          placeholder="theme text"
+        >
+        <input
+          v-model="colors.themeLink"
+          type="text"
+          placeholder="theme link"
+        >
         <!-- <input type="text" v-model="colors.themeBorder" placeholder="theme border" /> -->
       </div>
 
       <div class="flex flex-row justify-between">
         <div class="flex flex-col">
-          <input class="mb-6" type="text" v-model="colors.alphaCaps" placeholder="alpha caps" />
-          <input type="text" v-model="colors.alphaLegends" placeholder="alpha legends" />
+          <input
+            v-model="colors.alphaCaps"
+            class="mb-6"
+            type="text"
+            placeholder="alpha caps"
+          >
+          <input
+            v-model="colors.alphaLegends"
+            type="text"
+            placeholder="alpha legends"
+          >
         </div>
         <div class="flex flex-col">
-          <input class="mb-6" type="text" v-model="colors.modCaps" placeholder="mod caps" />
-          <input type="text" v-model="colors.modLegends" placeholder="mod legends" />
+          <input
+            v-model="colors.modCaps"
+            class="mb-6"
+            type="text"
+            placeholder="mod caps"
+          >
+          <input
+            v-model="colors.modLegends"
+            type="text"
+            placeholder="mod legends"
+          >
         </div>
         <div class="flex flex-col">
-          <input class="mb-6" type="text" v-model="colors.accentCaps" placeholder="accent caps" />
-          <input type="text" v-model="colors.accentLegends" placeholder="accent legends" />
+          <input
+            v-model="colors.accentCaps"
+            class="mb-6"
+            type="text"
+            placeholder="accent caps"
+          >
+          <input
+            v-model="colors.accentLegends"
+            type="text"
+            placeholder="accent legends"
+          >
         </div>
       </div>
 
-      <textarea v-model="generatedTheme" readonly class="mt-8" rows="20" />
+      <textarea
+        v-model="generatedTheme"
+        readonly
+        class="mt-8"
+        rows="20"
+      />
     </div>
   </Modal>
 </template>

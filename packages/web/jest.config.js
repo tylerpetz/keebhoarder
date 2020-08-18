@@ -1,8 +1,6 @@
 module.exports = {
   preset: '@vue/cli-plugin-unit-jest',
-  roots: [
-    '<rootDir>/src'
-  ],
+  roots: ['<rootDir>/src'],
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.{js,vue}', '!**/node_modules/**'],
   moduleFileExtensions: ['js', 'json', 'vue'],
@@ -13,7 +11,5 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
-  snapshotSerializers: [
-    '<rootDir>/node_modules/jest-serializer-vue'
-  ]
+  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue']
 }

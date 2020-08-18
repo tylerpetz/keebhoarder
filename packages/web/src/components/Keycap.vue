@@ -21,9 +21,30 @@ export default {
   computed: {
     // purgable css classes
     faceClasses () {
-      if (this.theme === 'mod') return ['text-mod-legend', 'bg-mod-cap', 'hover:text-mod-legend-hover', 'hover:bg-mod-cap-hover']
-      if (this.theme === 'accent') return ['text-accent-legend', 'bg-accent-cap', 'hover:text-accent-legend-hover', 'hover:bg-accent-cap-hover']
-      return ['text-alpha-legend', 'bg-alpha-cap', 'hover:text-alpha-legend-hover', 'hover:bg-alpha-cap-hover', 'active:bg-text-alpha-legend-press', 'active:bg-alpha-cap-press']
+      if (this.theme === 'mod') {
+        return [
+          'text-mod-legend',
+          'bg-mod-cap',
+          'hover:text-mod-legend-hover',
+          'hover:bg-mod-cap-hover'
+        ]
+      }
+      if (this.theme === 'accent') {
+        return [
+          'text-accent-legend',
+          'bg-accent-cap',
+          'hover:text-accent-legend-hover',
+          'hover:bg-accent-cap-hover'
+        ]
+      }
+      return [
+        'text-alpha-legend',
+        'bg-alpha-cap',
+        'hover:text-alpha-legend-hover',
+        'hover:bg-alpha-cap-hover',
+        'active:bg-text-alpha-legend-press',
+        'active:bg-alpha-cap-press'
+      ]
     },
     sideClasses () {
       if (this.theme === 'mod') return ['bg-mod-cap-side']
@@ -35,9 +56,16 @@ export default {
 </script>
 
 <template>
-  <button class="keycap relative rounded-sm h-12 w-auto inline-flex flex-col justify-start" :class="sideClasses">
+  <button
+    class="keycap relative rounded-sm h-12 w-auto inline-flex flex-col justify-start"
+    :class="sideClasses"
+  >
     <span
-      :class="[faceClasses, textSize === 'large' ? 'text-base font-extrabold pb-3' : 'text-xs font-bold pb-1', capStyle === 'large' ? 'w-auto pr-3' : '']"
+      :class="[
+        faceClasses,
+        textSize === 'large' ? 'text-base font-extrabold pb-3' : 'text-xs font-bold pb-1',
+        capStyle === 'large' ? 'w-auto pr-3' : ''
+      ]"
       class="keycap-face px-1 z-10 flex rounded leading-relaxed items-center justify-start relative"
     >
       <slot />
@@ -47,7 +75,8 @@ export default {
 
 <style lang="css" scoped>
 .keycap {
-  box-shadow: inset 10px -3px 5px -7px rgba(0,0,0,0.15), inset -10px -3px 5px -7px rgba(0,0,0,0.25);
+  box-shadow: inset 10px -3px 5px -7px rgba(0, 0, 0, 0.15),
+    inset -10px -3px 5px -7px rgba(0, 0, 0, 0.25);
   padding: 0 6px;
 }
 
@@ -55,8 +84,9 @@ export default {
   transform: translateY(0px);
   min-width: 32px;
   height: 38px;
-  box-shadow: inset 8px 0px 12px -4px rgba(255,255,255,0.05), inset -8px 0px 12px -4px rgba(255,255,255,0.05);
-  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+  box-shadow: inset 8px 0px 12px -4px rgba(255, 255, 255, 0.05),
+    inset -8px 0px 12px -4px rgba(255, 255, 255, 0.05);
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .keycap:active .keycap-face {

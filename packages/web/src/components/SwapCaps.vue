@@ -3,39 +3,64 @@ export default {
   name: 'SwapCaps',
   data () {
     return {
-      themes: ['8008', '9009', 'bento', 'dolch', 'laser', 'metropolis', 'milkshake', 'oblivion', 'wavez'],
-      firstKeys: ['B', 'C', 'Q', 'R', 'U'],
-      secondKeys: ['Control', 'Alt', 'Super', 'Shift', 'Tab', 'Meta'],
-      thirdKeys: ['Esc', '&#10229; Enter']
-    }
-  },
-  computed: {
-    first () {
-      return this.firstKeys[Math.floor(Math.random() * this.firstKeys.length)]
-    },
-    second () {
-      return this.secondKeys[Math.floor(Math.random() * this.secondKeys.length)]
-    },
-    third () {
-      return this.thirdKeys[Math.floor(Math.random() * this.thirdKeys.length)]
+      themes: [
+        '8008',
+        '9009',
+        'bento',
+        'dolch',
+        'laser',
+        'metropolis',
+        'milkshake',
+        'oblivion',
+        'wavez'
+      ]
     }
   }
 }
 </script>
 
 <template>
-  <Modal @close="$emit('close')" modal-class="w-2/3">
+  <Modal
+    modal-class="w-2/3"
+    @close="$emit('close')"
+  >
     <div class="flex flex-row flex-wrap items-stretch p-1">
-      <div v-for="theme in themes" :key="theme" @click="$store.commit('SET_ACTIVE_THEME', theme)" class="w-full sm:w-1/2 md:w-1/3 p-1">
+      <div
+        v-for="theme in themes"
+        :key="theme"
+        class="w-full sm:w-1/2 md:w-1/3 p-1"
+        @click="$store.commit('SET_ACTIVE_THEME', theme)"
+      >
         <div
-          :class="[`theme-${theme}`, $store.getters.activeTheme === theme ? 'border-theme-border' : 'border-transparent cursor-pointer']"
+          :class="[
+            `theme-${theme}`,
+            $store.getters.activeTheme === theme
+              ? 'border-theme-border'
+              : 'border-transparent cursor-pointer'
+          ]"
           class="border-2 bg-theme-bg p-4 pb-6 flex flex-col items-center rounded"
         >
-          <span class="pb-2 text-theme-text text-lg font-bold">{{ theme }}</span>
+          <span class="pb-2 text-theme-text text-lg font-bold">{{
+            theme
+          }}</span>
           <div class="flex flex-row">
-            <Keycap text-size="large"><span v-html="first" /></Keycap>
-            <Keycap cap-style="large" theme="mod" type="mod" class="mx-2"><span v-html="second" /></Keycap>
-            <Keycap cap-style="large" theme="accent"><span v-html="third" /></Keycap>
+            <Keycap text-size="large">
+              Base
+            </Keycap>
+            <Keycap
+              cap-style="large"
+              theme="mod"
+              type="mod"
+              class="mx-2"
+            >
+              Mods
+            </Keycap>
+            <Keycap
+              cap-style="large"
+              theme="accent"
+            >
+              Accents
+            </Keycap>
           </div>
         </div>
       </div>

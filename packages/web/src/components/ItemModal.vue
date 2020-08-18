@@ -55,17 +55,64 @@ export default {
 <template>
   <Modal @close="$emit('close')">
     <div class="flex flex-col p-6 items-center">
-      <FormInput class="w-full mb-6" type="text">Name *</FormInput>
-      <FormSelect :options="itemTypes" class="w-full mb-6" type="text" placeholder="Select Item Type">Type *</FormSelect>
+      <FormInput
+        class="w-full mb-6"
+        type="text"
+      >
+        Name *
+      </FormInput>
+      <FormSelect
+        :options="itemTypes"
+        class="w-full mb-6"
+        type="text"
+        placeholder="Select Item Type"
+      >
+        Type *
+      </FormSelect>
       <div class="grid grid-cols-5 w-full mb-6">
-        <FormInput class="col-span-3" input-classes="rounded-r-none" type="number" step="any">Price *</FormInput>
-        <FormSelect class="col-span-2" :options="currencyTypes" input-classes="rounded-l-none" type="text" >Currency *</FormSelect>
+        <FormInput
+          class="col-span-3"
+          input-classes="rounded-r-none"
+          type="number"
+          step="any"
+        >
+          Price *
+        </FormInput>
+        <FormSelect
+          class="col-span-2"
+          :options="currencyTypes"
+          input-classes="rounded-l-none"
+          type="text"
+        >
+          Currency *
+        </FormSelect>
       </div>
-      <FormInput class="w-full mb-6" type="text">Description</FormInput>
-      <Keycap theme="mod" cap-style="large" @click.native="$emit('close')">Add Photos</Keycap>
+      <FormInput
+        class="w-full mb-6"
+        type="text"
+      >
+        Description
+      </FormInput>
+      <Keycap
+        theme="mod"
+        cap-style="large"
+        @click.native="$emit('close')"
+      >
+        Add Photos
+      </Keycap>
     </div>
-    <footer class="p-2 flex justify-end" slot="footer">
-      <Keycap theme="accent" cap-style="large" @click.native="$emit('close')" class="capitalize">&#10229; Save Item</Keycap>
+    <footer
+      slot="footer"
+      class="p-2 flex justify-end"
+    >
+      <Keycap
+        theme="accent"
+        cap-style="large"
+        class="capitalize"
+        @click.native="$emit('close')"
+      >
+        &#10229; Save Item
+      </Keycap>
     </footer>
   </Modal>
 </template>
