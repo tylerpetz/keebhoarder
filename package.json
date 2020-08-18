@@ -12,9 +12,7 @@
     "web": "cd ./packages/web && yarn start",
     "graph": "cd ./packages/graph && yarn start",
     "lerna-wizard": "npx lerna-wizard",
-    "test-web": "lerna exec --stream -- yarn test"
-  },
-  "gitHooks": {
-    "pre-push": "yarn test-web"
+    "test-web": "lerna exec --stream -- yarn test",
+    "build-web": "cd ./packages/web && yarn build"
   }
 }
