@@ -13,7 +13,7 @@ export default {
   computed: {
     containerClass () {
       // purgeable css classes
-      const { activeTheme = '' } = this.$store.getters
+      const { activeTheme = '' } = this.$store.state
       if (activeTheme === '8008') return 'theme-8008'
       if (activeTheme === '9009') return 'theme-9009'
       if (activeTheme === 'dolch') return 'theme-dolch'

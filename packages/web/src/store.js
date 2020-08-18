@@ -3,6 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const THEMES = [
+  '8008',
+  '9009',
+  'dolch',
+  'milkshake',
+  'oblivion',
+  'laser',
+  'bento',
+  'metropolis',
+  'wavez'
+]
+
 export const state = {
   activeModal: false,
   activeTheme: 'milkshake',
@@ -10,8 +22,7 @@ export const state = {
 }
 
 export const getters = {
-  loggedIn: (state) => !!state.userToken,
-  activeTheme: (state) => state.activeTheme
+  loggedIn: (state) => !!state.userToken
 }
 
 export const actions = {
@@ -36,8 +47,8 @@ export const mutations = {
   SET_ACTIVE_MODAL (state, modal = false) {
     state.activeModal = modal
   },
-  SET_ACTIVE_THEME (state, theme = false) {
-    state.activeTheme = theme
+  SET_ACTIVE_THEME (state, theme = '') {
+    if (THEMES.includes(theme)) { state.activeTheme = theme }
   },
   SET_USER_TOKEN (state, userToken) {
     state.userToken = userToken

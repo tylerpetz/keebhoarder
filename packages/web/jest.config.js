@@ -1,6 +1,5 @@
 module.exports = {
   preset: '@vue/cli-plugin-unit-jest',
-  roots: ['<rootDir>/src'],
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.{js,vue}', '!**/node_modules/**'],
   moduleFileExtensions: ['js', 'json', 'vue'],
