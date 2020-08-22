@@ -9,14 +9,14 @@ describe('FormInput.vue', () => {
     expect(wrapper.classes()).toContain('test-class')
   })
 
-  it('accepts props as input value', () => {
+  it('uses v-model as input value', () => {
     const wrapper = shallowMount(FormInput, {
       propsData: { value: 'test input' }
     }).find('input')
     expect(wrapper.element._value).toMatch('test input')
   })
 
-  it('accepts input when text is entered', async () => {
+  it('emits the text that was entered', async () => {
     const wrapper = mount(FormInput, {
       propsData: { value: 'test input' }
     })

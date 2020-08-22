@@ -9,12 +9,7 @@ export default {
     },
     options: {
       type: Array,
-      default: () => [
-        {
-          text: 'option 1',
-          value: 1
-        }
-      ]
+      default: () => []
     },
     placeholder: {
       type: String,
