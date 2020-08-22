@@ -13,10 +13,10 @@ module.exports = {
     fontFamily: {
       body: ['Nunito', 'sans-serif']
     },
-    fontSize: {
-      xs: '0.813rem'
-    },
     extend: {
+      fontSize: {
+        xs: '0.813rem'
+      },
       colors: {
         theme: {
           bg: 'var(--theme-bg)',

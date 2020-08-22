@@ -45,10 +45,10 @@ export default {
 <template>
   <div class="flex flex-row items-center justify-center h-full">
     <div class="flex justify-center items-center flex-col h-full">
-      <h1 class="text-theme-text text-4xl font-extrabold">
+      <h1 class="text-theme-text text-xl md:text-3xl font-extrabold">
         Keebhoarder<span class="blink font-normal">|</span>
       </h1>
-      <h2 class="text-theme-text-l text-lg font-semibold">
+      <h2 class="text-theme-text-l md:text-lg font-semibold">
         securely manage your keyboard habit
       </h2>
       <form

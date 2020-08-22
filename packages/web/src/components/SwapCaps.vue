@@ -21,14 +21,14 @@ export default {
 
 <template>
   <Modal
-    modal-class="w-2/3"
+    modal-class="w-10/12 md:w-2/3 max-h-full overflow-y-scroll"
     @close="$emit('close')"
   >
     <div class="flex flex-row flex-wrap items-stretch p-1">
       <div
         v-for="theme in themes"
         :key="theme"
-        class="w-full sm:w-1/2 md:w-1/3 p-1"
+        class="w-full md:w-1/2 lg:w-1/3 p-1"
         @click="$store.commit('SET_ACTIVE_THEME', theme)"
       >
         <div
@@ -44,7 +44,7 @@ export default {
             theme
           }}</span>
           <div class="flex flex-row">
-            <Keycap text-size="large">
+            <Keycap cap-style="large">
               Base
             </Keycap>
             <Keycap
