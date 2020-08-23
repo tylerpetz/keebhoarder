@@ -18,13 +18,6 @@ export default {
     }
   },
   methods: {
-    goHome () {
-      if (this.$store.getters.loggedIn) {
-        this.$router.push({ name: 'Dashboard' })
-      } else {
-        this.$router.push({ name: 'Home' })
-      }
-    },
     logout () {
       this.$store.dispatch('logout')
       this.$router.push({ name: 'Home' })
@@ -37,24 +30,28 @@ export default {
   <header class="w-full p-2 flex flex-row items-start justify-between">
     <div class="flex flex-row">
       <h1 class="mr-4">
-        <Keycap
-          :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'"
-          text-size="large"
-          @click.native="goHome"
-        >
-          K<span class="hidden">eeb</span>h<span class="hidden">oarder</span>
-        </Keycap>
+        <router-link :to="{ name: 'Home' }">
+          <Keycap
+            :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'"
+            text-size="large"
+          >
+            K<span class="hidden">eeb</span>h<span class="hidden">oarder</span>
+          </Keycap>
+        </router-link>
       </h1>
       <template v-for="route in routes">
-        <Keycap
+        <router-link
           :key="route"
-          cap-style="large"
-          class="ml-2"
-          :theme="routeName === route ? 'mod' : 'alpha'"
-          @click.native="$router.push({ name: route })"
+          :to="{ name: route }"
         >
-          {{ route }}
-        </Keycap>
+          <Keycap
+            cap-style="large"
+            class="ml-2"
+            :theme="routeName === route ? 'mod' : 'alpha'"
+          >
+            {{ route }}
+          </Keycap>
+        </router-link>
       </template>
     </div>
     <div class="flex flex-row">

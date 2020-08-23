@@ -39,6 +39,7 @@ export default {
   >
     <form
       class="m-0 p-0"
+      @keydown.enter="handleSubmit"
       @submit.prevent="handleSubmit"
     >
       <div class="flex flex-col p-6">
