@@ -66,7 +66,7 @@ export default {
 <style lang="css" scoped>
 .modal-enter-active,
 .modal-leave-active {
-  transition: opacity 0.25s;
+  transition: opacity 0.15s;
 }
 .modal-enter,
 .modal-leave-to {

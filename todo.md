@@ -9,3 +9,6 @@
     </footer> -->
 
 <!-- <Keycap theme="mod" cap-style="large" @click.native="$store.commit('SET_ACTIVE_MODAL', 'create')">Create</Keycap> -->
+
+
+update click events that change routes to router links

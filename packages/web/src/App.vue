@@ -60,7 +60,7 @@ export default {
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen w-screen bg-caps flex flex-col justify-between items-center relative"
   >
     <Navigation />
-    <router-view />
+    <router-view class="w-full flex-grow" />
     <Footer />
     <AuthForm
       :show="activeModal === 'register' || activeModal === 'login'"
