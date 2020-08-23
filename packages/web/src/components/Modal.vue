@@ -28,7 +28,6 @@ export default {
 <template>
   <transition
     name="modal"
-    mode="out-in"
   >
     <div
       v-if="show"

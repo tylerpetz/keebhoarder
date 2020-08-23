@@ -1,6 +1,12 @@
 <script>
 export default {
   name: 'SwapCaps',
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       themes: [
@@ -22,6 +28,7 @@ export default {
 <template>
   <Modal
     modal-class="w-10/12 md:w-2/3 max-h-full overflow-y-scroll"
+    :show="show"
     @close="$emit('close')"
   >
     <div class="flex flex-row flex-wrap items-stretch p-1">

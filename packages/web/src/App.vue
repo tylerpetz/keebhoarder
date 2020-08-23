@@ -1,7 +1,6 @@
 <script>
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
-// import Utilities from '@/components/Utilities.vue'
 import AuthForm from '@/components/AuthForm.vue'
 import SwapCaps from '@/components/SwapCaps.vue'
 import CreateCapSet from '@/components/CreateCapSet.vue'
@@ -16,7 +15,6 @@ export default {
     SwapCaps,
     CreateCapSet
     // ItemModal
-    // Utilities
   },
   computed: {
     activeModal: {
