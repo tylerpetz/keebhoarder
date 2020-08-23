@@ -26,7 +26,9 @@ export default {
           'text-mod-legend',
           'bg-mod-cap',
           'hover:text-mod-legend-hover',
-          'hover:bg-mod-cap-hover'
+          'hover:bg-mod-cap-hover',
+          'active:bg-text-mod-legend-press',
+          'active:bg-mod-cap-press'
         ]
       }
       if (this.theme === 'accent') {
@@ -34,7 +36,9 @@ export default {
           'text-accent-legend',
           'bg-accent-cap',
           'hover:text-accent-legend-hover',
-          'hover:bg-accent-cap-hover'
+          'hover:bg-accent-cap-hover',
+          'active:bg-text-accent-legend-press',
+          'active:bg-accent-cap-press'
         ]
       }
       return [
