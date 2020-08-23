@@ -2,15 +2,31 @@
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
 // import Utilities from '@/components/Utilities.vue'
+import AuthForm from '@/components/AuthForm.vue'
+import SwapCaps from '@/components/SwapCaps.vue'
+import CreateCapSet from '@/components/CreateCapSet.vue'
+// import ItemModal from '@/components/ItemModal.vue'
 
 export default {
   name: 'App',
   components: {
     Navigation,
-    Footer
+    Footer,
+    AuthForm,
+    SwapCaps,
+    CreateCapSet
+    // ItemModal
     // Utilities
   },
   computed: {
+    activeModal: {
+      get () {
+        return this.$store.state.activeModal
+      },
+      set (modal = false) {
+        this.$store.commit('SET_ACTIVE_MODAL', modal)
+      }
+    },
     containerClass () {
       // purgeable css classes
       const { activeTheme = '' } = this.$store.state
@@ -48,6 +64,19 @@ export default {
     <Navigation />
     <router-view />
     <Footer />
-    <!-- <Utilities /> -->
+    <AuthForm
+      :show="activeModal === 'register' || activeModal === 'login'"
+      :auth-type="activeModal || ''"
+      @close="activeModal = false"
+    />
+    <SwapCaps
+      :show="activeModal === 'theme'"
+      @close="activeModal = false"
+    />
+    <CreateCapSet
+      :show="activeModal === 'create'"
+      @close="activeModal = false"
+    />
+    <!-- <ItemModal /> -->
   </main>
 </template>

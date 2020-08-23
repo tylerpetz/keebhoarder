@@ -5,6 +5,10 @@ export default {
     authType: {
       type: String,
       default: ''
+    },
+    show: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -30,6 +34,7 @@ export default {
 <template>
   <Modal
     modal-class="w-72 sm:w-80 md:w-96"
+    :show="show"
     @close="$emit('close')"
   >
     <form

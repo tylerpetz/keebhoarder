@@ -5,6 +5,10 @@ export default {
     modalClass: {
       type: String,
       default: 'w-72 sm:w-80 md:w-96'
+    },
+    show: {
+      type: Boolean,
+      default: false
     }
   },
   created () {
@@ -22,8 +26,14 @@ export default {
 </script>
 
 <template>
-  <transition name="modal">
-    <div class="absolute h-full w-full inset-0 flex items-center justify-center py-10 md:py-20 shadow-xl">
+  <transition
+    name="modal"
+    mode="out-in"
+  >
+    <div
+      v-if="show"
+      class="absolute z-50 flex h-full w-full inset-0 items-center justify-center py-10 md:py-20"
+    >
       <div
         class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden"
         :class="modalClass"
@@ -37,13 +47,19 @@ export default {
           </Keycap>
           <slot name="header" />
         </header>
-        <div class="bg-theme-bg-l relative flex-grow overflow-y-auto">
+        <div
+          class="bg-theme-bg-l relative flex-grow overflow-y-auto"
+          @click.stop
+        >
           <slot />
         </div>
         <slot name="footer" />
         <slot name="msg" />
       </div>
-      <div class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-50" />
+      <div
+        class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-50"
+        @click="$emit('close')"
+      />
     </div>
   </transition>
 </template>
