@@ -46,15 +46,18 @@ export default {
         </Keycap>
       </h1>
       <template v-for="route in routes">
-        <Keycap
+        <router-link
           :key="route"
-          cap-style="large"
-          class="ml-2"
-          :theme="routeName === route ? 'mod' : 'alpha'"
-          @click.native="$router.push({ name: route })"
+          :to="{ name: route }"
         >
-          {{ route }}
-        </Keycap>
+          <Keycap
+            cap-style="large"
+            class="ml-2"
+            :theme="routeName === route ? 'mod' : 'alpha'"
+          >
+            {{ route }}
+          </Keycap>
+        </router-link>
       </template>
     </div>
     <div class="flex flex-row">
