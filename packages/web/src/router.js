@@ -14,9 +14,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/inventory',
+    path: '/inventory/:category?',
     name: 'Inventory',
-    component: () => import(/* webpackChunkName: "inventory" */ '@/views/Inventory.vue')
+    component: () => import(/* webpackChunkName: "inventory" */ '@/views/Inventory.vue'),
+    props: true
   },
   {
     path: '/inventory-item',
