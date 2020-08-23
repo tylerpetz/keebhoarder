@@ -4,13 +4,15 @@ const typeDefs = gql`
   type Query {
     deliveryStatus(id: String!, courierCode: String!): DeliveryStatus
     orders(id: Int): [Order]
-    user: User,
+    user(email: String!): User,
+    users(email: String): [User],
     items: [Item],
     getItemById(id: Int): Item 
   }
 
   type Mutation {
     login(email: String): String # login token
+    createUser(email: String): User # login token
 
     # for use with the iOS tutorial
     uploadProfileImage(file: Upload!): User
@@ -20,6 +22,11 @@ const typeDefs = gql`
     id: Int
     name: String
     icon: String
+  }
+
+  type Token{
+    id: Int
+    token: String
   }
 
   type Courier{
@@ -95,6 +102,14 @@ const typeDefs = gql`
     id: ID!
     email: String!
     profileImage: String
+    """
+      A users active inventory
+    """
+    inventory: [Inventory]
+    """
+      A users orders
+    """
+    orders: [Order]
   }
 
 `;

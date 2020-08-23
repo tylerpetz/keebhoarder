@@ -44,7 +44,7 @@ const mocks = {
       description: faker.random.words()
     }),
      User: () => ({
-      email: () => faker.internet.emailAddress(),
+      email: () => faker.internet.email(),
     })
 };
 

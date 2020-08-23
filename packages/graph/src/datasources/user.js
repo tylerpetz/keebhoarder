@@ -25,19 +25,29 @@ class UserAPI extends DataSource {
    * have to be. If the user is already on the context, it will use that user
    * instead
    */
-  async findOrCreateUser({ email: emailArg } = {}) {
+  async findUser({ email: emailArg } = {}) {
     const email =
       this.context && this.context.user ? this.context.user.email : emailArg;
     if (!email || !isEmail.validate(email)) return null;
-
-    const users = await this.store.users.findOrCreate({ where: { email } });
+    const users = await this.store.users.findUser({ where: { email } });
     return users && users[0] ? users[0] : null;
   }
-  
+
   /**
-   * This function is currently only used by the iOS tutorial to upload a
-   * profile image to S3 and update the user row
-   */
+ * A query for an admin to view all users in system
+ */
+  async getAllUsers({ email: emailArg }) {
+    const email =
+      this.context && this.context.user ? this.context.user.email : emailArg;
+    if (!email || !isEmail.validate(email)) return null;
+    const users = await this.store.users.getAllUsers({ where: { email } });
+    return users && users[0] ? users[0] : null;
+  }
+
+  async createUser(email) {
+    return {email:'sidufhiuh'}
+  }
+
   async uploadProfileImage({ file }) {
     const userId = this.context.user.id;
     if (!userId) return;
