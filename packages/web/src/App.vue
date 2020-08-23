@@ -1,14 +1,14 @@
 <script>
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
-import Utilities from '@/components/Utilities.vue'
+// import Utilities from '@/components/Utilities.vue'
 
 export default {
   name: 'App',
   components: {
     Navigation,
-    Footer,
-    Utilities
+    Footer
+    // Utilities
   },
   computed: {
     containerClass () {
@@ -43,13 +43,11 @@ export default {
 <template>
   <main
     :class="containerClass"
-    class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen h-full w-screen bg-caps flex flex-col items-center justify-between relative"
+    class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen w-screen bg-caps flex flex-col justify-between items-center relative"
   >
     <Navigation />
-    <section class="relative z-10 w-full mt-2 rounded-lg flex-grow">
-      <router-view />
-    </section>
+    <router-view />
     <Footer />
-    <Utilities />
+    <!-- <Utilities /> -->
   </main>
 </template>
