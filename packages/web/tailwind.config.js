@@ -14,6 +14,9 @@ module.exports = {
       body: ['Nunito', 'sans-serif']
     },
     extend: {
+      borderRadius: {
+        lg: '1rem'
+      },
       fontSize: {
         xs: '0.813rem'
       },

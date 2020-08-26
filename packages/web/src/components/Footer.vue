@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <footer class="w-full p-2 flex justify-between">
+  <footer class="w-full px-3 py-2 flex justify-between">
     <p class="text-theme-text text-xs">
       &copy; 2020 keebhoarder
     </p>
