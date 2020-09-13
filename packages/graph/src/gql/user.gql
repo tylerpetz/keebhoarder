@@ -1,0 +1,26 @@
+# Write your query or mutation here
+query getAllUsers($email: String) {
+  users(email:$email){
+    email
+    orders {
+      id
+      trackingNumber
+      items {
+        images {
+          url
+        }
+        name
+        description
+      }
+    }
+    inventory {
+      item {
+        images {
+          url
+        }
+        name
+        description
+      }
+    }
+  },
+}

@@ -1,20 +1,20 @@
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./schema');
+const {schema} = require('./schema');
 const { mocks } = require('./mocks');
-const { resolvers } = require('./resolvers');
-const UserAPI = require('./datasources/user');
-
 const { createStore } = require('./utils');
-// creates a sequelize connection once. NOT for every request
-const store = createStore();
+const { createContext } = require('./context');
 
-// set up any dataSources our resolvers need
-const dataSources = () => ({
-  userAPI: new UserAPI({ store }),
-});
+// creates a sequelize connection once. NOT for every request
+const { PrismaClient } = require('@prisma/client') 
+const store = new PrismaClient()
+
 const server = new ApolloServer({
-  typeDefs,
-  mocks: mocks
+  schema,
+  tracing: true,
+  context: createContext,
+  engine: {
+    debugPrintReports: true
+  }
 });
 
 server
@@ -22,3 +22,4 @@ server
   .then(({ url }) => {
     console.log(`🚀 app running at ${url}`)
   });
+

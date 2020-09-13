@@ -10,6 +10,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Courier {
+  id   Int      @default(autoincrement()) @id
+  code String?
+  name String?      @unique
+}
+
 model Post {
   id        Int      @default(autoincrement()) @id
   createdAt DateTime @default(now())
@@ -79,7 +85,9 @@ model Order {
   qty            Int
   tax            Int
   shipping       Int
-  OrderItem     OrderItem[]
+  OrderItem      OrderItem[]
+  User           User?  @relation(fields: [userId], references: [id])
+  userId         Int?
 }
 
 model OrderItem {
@@ -89,3 +97,4 @@ model OrderItem {
   Order   Order @relation(fields: [orderId], references: [id])
   orderId Int
 }
+
