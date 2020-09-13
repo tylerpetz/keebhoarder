@@ -5,17 +5,30 @@ const typeDefs = gql`
   type Query {
     deliveryStatus(id: String!, courierCode: String!): DeliveryStatus
     orders(userId: Int, id: Int): [Order]
-    user(email: String!): User
-    users(email: String): [User]
-    items: [Item]
+    user(id: Int, email: String): User
+    users(id: Int, email: String): [User]
+    userItems(id: Int, email: String): User
     orderItems: [OrderItem]
-
+    items(id: Int, userId: Int): [Item]
+    brand(id: Int): [Brand]
+    brands(id: Int): [Brand]
   }
 
   type Mutation {
-    login(email: String): String 
-    createUser(email: String): User
+    signupUser(data: UserCreateInput!) : AuthPayLoad!
+    loginUser(data: UserLoginInput!): AuthPayLoad!
     createOrder(name: String): Order
+    createUser(email: String): User
+  }
+  
+  type AuthPayLoad {
+    token: String!
+  }
+
+  type Brand {
+    id: Int
+    name: String
+    logo: String
   }
 
   type Category{
@@ -103,12 +116,27 @@ const typeDefs = gql`
     notes: [Note]
   }
 
+  type KeyCap {
+    id: Int
+    brand: Brand
+    name: String
+    keyCapProfileId: Int
+    itemCategoryId:  Int
+  }
+
+  type KeyCapProfile {
+    id:      Int      
+    name:    String
+    keyCaps:  [KeyCap]
+  }
+
   type User{
     id: ID!
     email: String!
     profileImage: String
     inventory: [Inventory]
     orders: [Order]
+    items: [Item]
   }
   
 
@@ -117,12 +145,24 @@ const typeDefs = gql`
     name: String
     trackingNumber: String
   }
+
+  input UserCreateInput {
+    email: String!
+    password: String!
+  }
+  
+  input UserLoginInput {
+    email: String!
+    password: String!
+  }
 `;
 
 const resolvers = {
   Query: {
     users: (parent, args, ctx) => {
-      return ctx.prisma.user.findMany()
+      return ctx.prisma.user.findMany({
+        where: args,
+      })
     },
     items: (parent, args, ctx) => {
       return ctx.prisma.item.findMany()
@@ -153,7 +193,7 @@ const resolvers = {
           where: { orderId: parent.id },
         })
     },
-       
+
   },
   User: {
     orders: (parent, args, ctx) => {
@@ -161,13 +201,7 @@ const resolvers = {
         .findMany({
           where: { userId: parent.id },
         })
-    }, 
-    items: (parent, args, ctx) => {
-      return ctx.prisma.item
-        .findMany({
-          where: { orderId: parent.id },
-        })
-    },  
+    }
   },
   OrderItem: {
     item: (parent) => parent.getItem({
