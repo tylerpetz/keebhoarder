@@ -167,6 +167,9 @@ const resolvers = {
     items: (parent, args, ctx) => {
       return ctx.prisma.item.findMany()
     },
+    brands: (parent, args, ctx) => {
+      return ctx.prisma.brand.findMany()
+    },
     orders: (parent, args, ctx) => {
       return ctx.prisma.order.findMany()
     },
