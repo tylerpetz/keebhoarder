@@ -42,7 +42,7 @@
     "apollo-link-http": "^1.5.17",
     "jest": "^26.2.2",
     "nock": "^13.0.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "now": "^19.2.0"
   }
 }
