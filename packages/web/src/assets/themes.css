@@ -96,53 +96,6 @@
 }
 
 /* keycap themes */
-.theme-wavez {
-  /* alpha caps */
-  --alpha-cap-h: 188;
-  --alpha-cap-s: 56%;
-  --alpha-cap-l: 17%;
-  
-  /* alpha legends */
-  --alpha-legend-h: 104;
-  --alpha-legend-s: 75%;
-  --alpha-legend-l: 58%;
-  
-  /* mod caps */
-  --mod-cap-h: 202;
-  --mod-cap-s: 21%;
-  --mod-cap-l: 17%;
-  
-  /* mod legends */
-  --mod-legend-h: 104;
-  --mod-legend-s: 75%;
-  --mod-legend-l: 58%;
-  
-  /* accent caps */
-  --accent-cap-h: 104;
-  --accent-cap-s: 75%;
-  --accent-cap-l: 58%;
-  
-  /* accent legends */
-  --accent-legend-h: 202;
-  --accent-legend-s: 21%;
-  --accent-legend-l: 17%;
-
-  /* theme backgrounds */
-  --theme-bg-h: 193;
-  --theme-bg-s: 100%;
-  --theme-bg-l: 10%;
-  
-  /* theme text */
-  --theme-text-h: 0;
-  --theme-text-s: 0%;
-  --theme-text-l: 95%;
-
-  /* theme links/borders */
-  --theme-link-h: 104;
-  --theme-link-s: 75%;
-  --theme-link-l: 58%;
-}
-
 .theme-8008 {
   /* alpha caps */
   --alpha-cap-h: 215;
@@ -212,9 +165,9 @@
   --mod-legend-l: 5%;
 
   /* accent caps */
-  --accent-cap-h: 4;
-  --accent-cap-s: 80%;
-  --accent-cap-l: 80%;
+  --accent-cap-h: 108;
+  --accent-cap-s: 11%;
+  --accent-cap-l: 50%;
 
   /* accent legends */
   --accent-legend-h: 30;
@@ -222,9 +175,9 @@
   --accent-legend-l: 5%;
 
   /* theme backgrounds */
-  --theme-bg-h: 132;
-  --theme-bg-s: 18%;
-  --theme-bg-l: 67%;
+  --theme-bg-h: 42;
+  --theme-bg-s: 15%;
+  --theme-bg-l: 90%;
 
   /* theme text */
   --theme-text-h: 30;
@@ -234,7 +187,242 @@
   /* theme links/borders */
   --theme-link-h: 339;
   --theme-link-s: 99%;
-  --theme-link-l: 67%;
+  --theme-link-l: 60%;
+}
+
+.theme-apollo {
+  /* alpha caps */
+  --alpha-cap-h: 202;
+  --alpha-cap-s: 9%;
+  --alpha-cap-l: 39%;
+
+  /* alpha legends */
+  --alpha-legend-h: 0;
+  --alpha-legend-s: 0%;
+  --alpha-legend-l: 81%;
+
+  /* mod caps */
+  --mod-cap-h: 227;
+  --mod-cap-s: 11%;
+  --mod-cap-l: 45%;
+
+  /* mod legends */
+  --mod-legend-h: 30;
+  --mod-legend-s: 8%;
+  --mod-legend-l: 0%;
+
+  /* accent caps */
+  --accent-cap-h: 0;
+  --accent-cap-s: 0%;
+  --accent-cap-l: 81%;
+
+  /* accent legends */
+  --accent-legend-h: 227;
+  --accent-legend-s: 11%;
+  --accent-legend-l: 45%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 105;
+  --theme-bg-s: 5%;
+  --theme-bg-l: 8%;
+
+  /* theme text */
+  --theme-text-h: 0;
+  --theme-text-s: 0%;
+  --theme-text-l: 81%;
+
+  /* theme links/borders */
+  --theme-link-h: 224;
+  --theme-link-s: 10%;
+  --theme-link-l: 55%;
+}
+
+.theme-bento {
+  /* alpha caps */
+  --alpha-cap-h: 13;
+  --alpha-cap-s: 15%;
+  --alpha-cap-l: 82%;
+
+  /* alpha legends */
+  --alpha-legend-h: 202;
+  --alpha-legend-s: 33%;
+  --alpha-legend-l: 36%;
+
+  /* mod caps */
+  --mod-cap-h: 202;
+  --mod-cap-s: 33%;
+  --mod-cap-l: 30%;
+
+  /* mod legends */
+  --mod-legend-h: 358;
+  --mod-legend-s: 62%;
+  --mod-legend-l: 68%;
+
+  /* accent caps */
+  --accent-cap-h: 358;
+  --accent-cap-s: 62%;
+  --accent-cap-l: 64%;
+
+  /* accent legends */
+  --accent-legend-h: 12;
+  --accent-legend-s: 100%;
+  --accent-legend-l: 97%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 215;
+  --theme-bg-s: 32%;
+  --theme-bg-l: 12%;
+
+  /* theme text */
+  --theme-text-h: 8;
+  --theme-text-s: 56%;
+  --theme-text-l: 95%;
+
+  /* theme links/borders */
+  --theme-link-h: 359;
+  --theme-link-s: 68%;
+  --theme-link-l: 69%;
+}
+
+.theme-camping {
+  /* alpha caps */
+  --alpha-cap-h: 36;
+  --alpha-cap-s: 47%;
+  --alpha-cap-l: 88%;
+
+  /* alpha legends */
+  --alpha-legend-h: 120;
+  --alpha-legend-s: 15%;
+  --alpha-legend-l: 42%;
+
+  /* mod caps */
+  --mod-cap-h: 120;
+  --mod-cap-s: 15%;
+  --mod-cap-l: 42%;
+
+  /* mod legends */
+  --mod-legend-h: 36;
+  --mod-legend-s: 47%;
+  --mod-legend-l: 88%;
+
+  /* accent caps */
+  --accent-cap-h: 36;
+  --accent-cap-s: 47%;
+  --accent-cap-l: 95%;
+
+  /* accent legends */
+  --accent-legend-h: 0;
+  --accent-legend-s: 36%;
+  --accent-legend-l: 36%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 120;
+  --theme-bg-s: 15%;
+  --theme-bg-l: 90%;
+
+  /* theme text */
+  --theme-text-h: 0;
+  --theme-text-s: 36%;
+  --theme-text-l: 20%;
+
+  /* theme links/borders */
+  --theme-link-h: 120;
+  --theme-link-s: 25%;
+  --theme-link-l: 40%;
+}
+
+.theme-coral {
+  /* alpha caps */
+  --alpha-cap-h: 47;
+  --alpha-cap-s: 60%;
+  --alpha-cap-l: 97%;
+
+  /* alpha legends */
+  --alpha-legend-h: 8;
+  --alpha-legend-s: 64%;
+  --alpha-legend-l: 62%;
+
+  /* mod caps */
+  --mod-cap-h: 8;
+  --mod-cap-s: 64%;
+  --mod-cap-l: 62%;
+
+  /* mod legends */
+  --mod-legend-h: 47;
+  --mod-legend-s: 60%;
+  --mod-legend-l: 97%;
+
+  /* accent caps */
+  --accent-cap-h: 173;
+  --accent-cap-s: 37%;
+  --accent-cap-l: 70%;
+
+  /* accent legends */
+  --accent-legend-h: 8;
+  --accent-legend-s: 37%;
+  --accent-legend-l: 100%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 173;
+  --theme-bg-s: 37%;
+  --theme-bg-l: 100%;
+
+  /* theme text */
+  --theme-text-h: 8;
+  --theme-text-s: 64%;
+  --theme-text-l: 50%;
+
+  /* theme links/borders */
+  --theme-link-h: 8;
+  --theme-link-s: 89%;
+  --theme-link-l: 39%;
+}
+
+.theme-devtty {
+  /* alpha caps */
+  --alpha-cap-h: 80;
+  --alpha-cap-s: 14%;
+  --alpha-cap-l: 91%;
+
+  /* alpha legends */
+  --alpha-legend-h: 40;
+  --alpha-legend-s: 6%;
+  --alpha-legend-l: 10%;
+
+  /* mod caps */
+  --mod-cap-h: 34;
+  --mod-cap-s: 7%;
+  --mod-cap-l: 82%;
+
+  /* mod legends */
+  --mod-legend-h: 40;
+  --mod-legend-s: 6%;
+  --mod-legend-l: 10%;
+
+  /* accent caps */
+  --accent-cap-h: 5;
+  --accent-cap-s: 75%;
+  --accent-cap-l: 48%;
+
+  /* accent legends */
+  --accent-legend-h: 40;
+  --accent-legend-s: 6%;
+  --accent-legend-l: 10%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 0;
+  --theme-bg-s: 0%;
+  --theme-bg-l: 94%;
+
+  /* theme text */
+  --theme-text-h: 40;
+  --theme-text-s: 6%;
+  --theme-text-l: 10%;
+
+  /* theme links/borders */
+  --theme-link-h: 8;
+  --theme-link-s: 89%;
+  --theme-link-l: 39%;
 }
 
 .theme-dolch {
@@ -259,9 +447,9 @@
   --mod-legend-l: 95%;
 
   /* accent caps */
-  --accent-cap-h: 353;
-  --accent-cap-s: 39%;
-  --accent-cap-l: 35%;
+  --accent-cap-h: 350;
+  --accent-cap-s: 65%;
+  --accent-cap-l: 50%;
 
   /* accent legends */
   --accent-legend-h: 0;
@@ -271,7 +459,7 @@
   /* theme backgrounds */
   --theme-bg-h: 200;
   --theme-bg-s: 2%;
-  --theme-bg-l: 35%;
+  --theme-bg-l: 10%;
 
   /* theme text */
   --theme-text-h: 0;
@@ -279,56 +467,56 @@
   --theme-text-l: 95%;
 
   /* theme links/borders */
-  --theme-link-h: 353;
-  --theme-link-s: 39%;
-  --theme-link-l: 35%;
+  --theme-link-h: 350;
+  --theme-link-s: 65%;
+  --theme-link-l: 50%;
 }
-      
-.theme-milkshake {
+
+.theme-hammerhead {
   /* alpha caps */
-  --alpha-cap-h: 0;
-  --alpha-cap-s: 0%;
-  --alpha-cap-l: 100%;
+  --alpha-cap-h: 216;
+  --alpha-cap-s: 25%;
+  --alpha-cap-l: 71%;
 
   /* alpha legends */
-  --alpha-legend-h: 227;
-  --alpha-legend-s: 29%;
-  --alpha-legend-l: 19%;
+  --alpha-legend-h: 221;
+  --alpha-legend-s: 37%;
+  --alpha-legend-l: 20%;
 
   /* mod caps */
-  --mod-cap-h: 169;
-  --mod-cap-s: 67%;
-  --mod-cap-l: 67%;
+  --mod-cap-h: 221;
+  --mod-cap-s: 37%;
+  --mod-cap-l: 20%;
 
   /* mod legends */
-  --mod-legend-h: 227;
-  --mod-legend-s: 29%;
-  --mod-legend-l: 19%;
+  --mod-legend-h: 171;
+  --mod-legend-s: 51%;
+  --mod-legend-l: 53%;
 
   /* accent caps */
-  --accent-cap-h: 193;
-  --accent-cap-s: 78%;
-  --accent-cap-l: 65%;
+  --accent-cap-h: 171;
+  --accent-cap-s: 51%;
+  --accent-cap-l: 53%;
 
   /* accent legends */
-  --accent-legend-h: 227;
-  --accent-legend-s: 29%;
-  --accent-legend-l: 19%;
+  --accent-legend-h: 221;
+  --accent-legend-s: 37%;
+  --accent-legend-l: 20%;
 
   /* theme backgrounds */
-  --theme-bg-h: 220;
-  --theme-bg-s: 8%;
-  --theme-bg-l: 64%;
+  --theme-bg-h: 216;
+  --theme-bg-s: 25%;
+  --theme-bg-l: 94%;
 
   /* theme text */
-  --theme-text-h: 227;
-  --theme-text-s: 29%;
-  --theme-text-l: 19%;
+  --theme-text-h: 221;
+  --theme-text-s: 37%;
+  --theme-text-l: 20%;
 
   /* theme links/borders */
-  --theme-link-h: 271;
-  --theme-link-s: 48%;
-  --theme-link-l: 72%;
+  --theme-link-h: 171;
+  --theme-link-s: 51%;
+  --theme-link-l: 40%;
 }
 
 .theme-laser {
@@ -378,100 +566,6 @@
   --theme-link-l: 45%;
 }
 
-.theme-oblivion {
-  /* alpha caps */
-  --alpha-cap-h: 190;
-  --alpha-cap-s: 3%;
-  --alpha-cap-l: 38%;
-
-  /* alpha legends */
-  --alpha-legend-h: 50;
-  --alpha-legend-s: 3%;
-  --alpha-legend-l: 65%;
-
-  /* mod caps */
-  --mod-cap-h: 0;
-  --mod-cap-s: 0%;
-  --mod-cap-l: 28%;
-
-  /* mod legends */
-  --mod-legend-h: 194;
-  --mod-legend-s: 58%;
-  --mod-legend-l: 46%;
-
-  /* accent caps */
-  --accent-cap-h: 0;
-  --accent-cap-s: 0%;
-  --accent-cap-l: 28%;
-
-  /* accent legends */
-  --accent-legend-h: 9;
-  --accent-legend-s: 77%;
-  --accent-legend-l: 51%;
-
-  /* theme backgrounds */
-  --theme-bg-h: 0;
-  --theme-bg-s: 0%;
-  --theme-bg-l: 24%;
-
-  /* theme text */
-  --theme-text-h: 33;
-  --theme-text-s: 54%;
-  --theme-text-l: 54%;
-
-  /* theme links/borders */
-  --theme-link-h: 81;
-  --theme-link-s: 30%;
-  --theme-link-l: 46%;
-}
-
-.theme-bento {
-  /* alpha caps */
-  --alpha-cap-h: 13;
-  --alpha-cap-s: 15%;
-  --alpha-cap-l: 82%;
-
-  /* alpha legends */
-  --alpha-legend-h: 202;
-  --alpha-legend-s: 33%;
-  --alpha-legend-l: 36%;
-
-  /* mod caps */
-  --mod-cap-h: 202;
-  --mod-cap-s: 33%;
-  --mod-cap-l: 36%;
-
-  /* mod legends */
-  --mod-legend-h: 358;
-  --mod-legend-s: 62%;
-  --mod-legend-l: 64%;
-
-  /* accent caps */
-  --accent-cap-h: 358;
-  --accent-cap-s: 62%;
-  --accent-cap-l: 64%;
-
-  /* accent legends */
-  --accent-legend-h: 12;
-  --accent-legend-s: 100%;
-  --accent-legend-l: 97%;
-
-  /* theme backgrounds */
-  --theme-bg-h: 2;
-  --theme-bg-s: 55%;
-  --theme-bg-l: 67%;
-
-  /* theme text */
-  --theme-text-h: 215;
-  --theme-text-s: 29%;
-  --theme-text-l: 23%;
-
-  /* theme links/borders */
-  --theme-link-h: 359;
-  --theme-link-s: 62%;
-  --theme-link-l: 69%;
-}
-
 .theme-metropolis {
   /* alpha caps */
   --alpha-cap-h: 207;
@@ -518,6 +612,195 @@
   --theme-link-s: 68%;
   --theme-link-l: 49%;
 }
+
+.theme-milkshake {
+  /* alpha caps */
+  --alpha-cap-h: 0;
+  --alpha-cap-s: 0%;
+  --alpha-cap-l: 100%;
+
+  /* alpha legends */
+  --alpha-legend-h: 227;
+  --alpha-legend-s: 29%;
+  --alpha-legend-l: 19%;
+
+  /* mod caps */
+  --mod-cap-h: 169;
+  --mod-cap-s: 67%;
+  --mod-cap-l: 67%;
+
+  /* mod legends */
+  --mod-legend-h: 227;
+  --mod-legend-s: 29%;
+  --mod-legend-l: 19%;
+
+  /* accent caps */
+  --accent-cap-h: 193;
+  --accent-cap-s: 78%;
+  --accent-cap-l: 65%;
+
+  /* accent legends */
+  --accent-legend-h: 227;
+  --accent-legend-s: 29%;
+  --accent-legend-l: 19%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 220;
+  --theme-bg-s: 8%;
+  --theme-bg-l: 34%;
+
+  /* theme text */
+  --theme-text-h: 227;
+  --theme-text-s: 29%;
+  --theme-text-l: 95%;
+
+  /* theme links/borders */
+  --theme-link-h: 271;
+  --theme-link-s: 55%;
+  --theme-link-l: 72%;
+}
+
+.theme-midnight {
+  /* alpha caps */
+  --alpha-cap-h: 90;
+  --alpha-cap-s: 5%;
+  --alpha-cap-l: 16%;
+
+  /* alpha legends */
+  --alpha-legend-h: 150;
+  --alpha-legend-s: 63%;
+  --alpha-legend-l: 70%;
+
+  /* mod caps */
+  --mod-cap-h: 220;
+  --mod-cap-s: 4%;
+  --mod-cap-l: 27%;
+
+  /* mod legends */
+  --mod-legend-h: 150;
+  --mod-legend-s: 63%;
+  --mod-legend-l: 79%;
+
+  /* accent caps */
+  --accent-cap-h: 40;
+  --accent-cap-s: 92%;
+  --accent-cap-l: 57%;
+
+  /* accent legends */
+  --accent-legend-h: 90;
+  --accent-legend-s: 5%;
+  --accent-legend-l: 16%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 150;
+  --theme-bg-s: 6%;
+  --theme-bg-l: 5%;
+
+  /* theme text */
+  --theme-text-h: 170;
+  --theme-text-s: 6%;
+  --theme-text-l: 60%;
+
+  /* theme links/borders */
+  --theme-link-h: 150;
+  --theme-link-s: 63%;
+  --theme-link-l: 79%;
+}
+
+.theme-oblivion {
+  /* alpha caps */
+  --alpha-cap-h: 190;
+  --alpha-cap-s: 3%;
+  --alpha-cap-l: 38%;
+
+  /* alpha legends */
+  --alpha-legend-h: 50;
+  --alpha-legend-s: 3%;
+  --alpha-legend-l: 65%;
+
+  /* mod caps */
+  --mod-cap-h: 0;
+  --mod-cap-s: 0%;
+  --mod-cap-l: 28%;
+
+  /* mod legends */
+  --mod-legend-h: 194;
+  --mod-legend-s: 58%;
+  --mod-legend-l: 46%;
+
+  /* accent caps */
+  --accent-cap-h: 0;
+  --accent-cap-s: 0%;
+  --accent-cap-l: 28%;
+
+  /* accent legends */
+  --accent-legend-h: 9;
+  --accent-legend-s: 77%;
+  --accent-legend-l: 51%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 0;
+  --theme-bg-s: 0%;
+  --theme-bg-l: 8%;
+
+  /* theme text */
+  --theme-text-h: 33;
+  --theme-text-s: 54%;
+  --theme-text-l: 54%;
+
+  /* theme links/borders */
+  --theme-link-h: 81;
+  --theme-link-s: 30%;
+  --theme-link-l: 46%;
+}
+
+.theme-wavez {
+  /* alpha caps */
+  --alpha-cap-h: 188;
+  --alpha-cap-s: 56%;
+  --alpha-cap-l: 17%;
+
+  /* alpha legends */
+  --alpha-legend-h: 104;
+  --alpha-legend-s: 75%;
+  --alpha-legend-l: 58%;
+
+  /* mod caps */
+  --mod-cap-h: 202;
+  --mod-cap-s: 21%;
+  --mod-cap-l: 17%;
+
+  /* mod legends */
+  --mod-legend-h: 104;
+  --mod-legend-s: 75%;
+  --mod-legend-l: 58%;
+
+  /* accent caps */
+  --accent-cap-h: 104;
+  --accent-cap-s: 75%;
+  --accent-cap-l: 58%;
+
+  /* accent legends */
+  --accent-legend-h: 202;
+  --accent-legend-s: 21%;
+  --accent-legend-l: 17%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 193;
+  --theme-bg-s: 100%;
+  --theme-bg-l: 10%;
+
+  /* theme text */
+  --theme-text-h: 0;
+  --theme-text-s: 0%;
+  --theme-text-l: 95%;
+
+  /* theme links/borders */
+  --theme-link-h: 104;
+  --theme-link-s: 75%;
+  --theme-link-l: 58%;
+}
+
 
 /* additional styles */
 :focus {
