@@ -1,23 +1,12 @@
+import { themes, defaultTheme } from '@/utils/themes.js'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const THEMES = [
-  '8008',
-  '9009',
-  'dolch',
-  'milkshake',
-  'oblivion',
-  'laser',
-  'bento',
-  'metropolis',
-  'wavez'
-]
-
 export const state = {
   activeModal: false,
-  activeTheme: 'milkshake',
+  activeTheme: defaultTheme,
   userToken: false
 }
 
@@ -47,7 +36,7 @@ export const mutations = {
     state.activeModal = modal
   },
   SET_ACTIVE_THEME (state, theme = '') {
-    if (THEMES.includes(theme)) { state.activeTheme = theme }
+    if (themes.includes(theme)) { state.activeTheme = theme }
   },
   SET_USER_TOKEN (state, userToken) {
     state.userToken = userToken

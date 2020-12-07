@@ -1,4 +1,6 @@
 <script>
+import { themes } from '@/utils/themes'
+
 export default {
   name: 'SwapCaps',
   props: {
@@ -9,17 +11,7 @@ export default {
   },
   data () {
     return {
-      themes: [
-        '8008',
-        '9009',
-        'bento',
-        'dolch',
-        'laser',
-        'metropolis',
-        'milkshake',
-        'oblivion',
-        'wavez'
-      ]
+      themes
     }
   }
 }
@@ -34,21 +26,21 @@ export default {
     <div class="flex flex-row flex-wrap items-stretch p-1">
       <div
         v-for="theme in themes"
-        :key="theme"
+        :key="theme.id"
         class="w-full md:w-1/2 lg:w-1/3 p-1"
         @click="$store.commit('SET_ACTIVE_THEME', theme)"
       >
         <div
           :class="[
-            `theme-${theme}`,
-            $store.getters.activeTheme === theme
+            `theme-${theme.id}`,
+            $store.state.activeTheme.id === theme.id
               ? 'border-theme-border'
               : 'border-transparent cursor-pointer'
           ]"
           class="border-2 bg-theme-bg p-4 pb-6 flex flex-col items-center rounded"
         >
           <span class="pb-2 text-theme-text text-lg font-bold">{{
-            theme
+            theme.name
           }}</span>
           <div class="flex flex-row">
             <Keycap cap-style="large">
