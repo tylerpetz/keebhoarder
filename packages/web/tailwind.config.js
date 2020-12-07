@@ -1,3 +1,7 @@
+
+const { themes } = require('src/utils/themes.js')
+const themeNames = themes.map(theme => `theme-${theme.id}`)
+
 module.exports = {
   important: true,
   purge: {
@@ -7,7 +11,8 @@ module.exports = {
       './src/views/**/*.vue',
       './src/components/**/*.vue',
       './src/main.js'
-    ]
+    ],
+    safelist: [...themeNames]
   },
   theme: {
     fontFamily: {

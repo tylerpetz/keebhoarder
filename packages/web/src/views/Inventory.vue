@@ -102,7 +102,7 @@ export default {
 </script>
 
 <template>
-  <section class="p-4 w-full h-full flex flex-col flex-no-wrap justify-between mb-6">
+  <section class="p-4 w-full h-full flex flex-col flex-nowrap justify-between mb-6">
     <h1 class="text-theme-text text-2xl mb-4">
       {{ selectedCategory ? selectedCategory.text : 'Inventory' }}
     </h1>
