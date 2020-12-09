@@ -27,12 +27,18 @@ const createThemeObject = (rules) => rules.map(rule => {
   return {
     [ruleName]: {
       background: `hsl(${declarations['cap-h']}, ${declarations['cap-s']}, ${declarations['cap-l']})`,
-      backgroundS: `hsl(${declarations['cap-h']}, ${declarations['cap-s']}, ${declarations['cap-l'] - 5})`,
+      backgroundS: `hsl(${declarations['cap-h']}, ${declarations['cap-s']}, ${decreasePercentValue(declarations['cap-l'])})`,
       foreground: `hsl(${declarations['legend-h']}, ${declarations['legend-s']}, ${declarations['legend-l']})`,
-      foregroundS: `hsl(${declarations['legend-h']}, ${declarations['legend-s']}, ${declarations['legend-l'] - 5})`
+      foregroundS: `hsl(${declarations['legend-h']}, ${declarations['legend-s']}, ${decreasePercentValue(declarations['legend-l'])})`
     }
   }
 })
+
+const decreasePercentValue = (value) => {
+  const base = value.slice(0, -1)
+  const result = Number(base) - 5
+  return `${result}%`
+}
 
 const generateThemes = async () => {
   const { stylesheet } = await read('./src/assets/themes.css')
