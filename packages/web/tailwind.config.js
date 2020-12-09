@@ -1,5 +1,5 @@
 
-const { themes } = require('src/utils/themes.js')
+const { themes } = require('./src/utils/themes.js')
 const themeNames = themes.map(theme => `theme-${theme.id}`)
 
 module.exports = {

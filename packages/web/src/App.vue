@@ -29,6 +29,12 @@ export default {
   created () {
     this.checkAuthState()
   },
+  mounted () {
+    if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
+      console.log('hi')
+      this.$store.commit('SET_ACTIVE_THEME', JSON.parse(localStorage.getItem('activeTheme')))
+    }
+  },
   methods: {
     checkAuthState () {
       const token = localStorage.getItem('token')
