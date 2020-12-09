@@ -35,7 +35,7 @@ export default {
             :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'"
             text-size="large"
           >
-            K<span class="hidden">eeb</span>h<span class="hidden">oarder</span>
+            K<span class="hidden">eebhoarder</span>
           </Keycap>
         </router-link>
       </h1>
