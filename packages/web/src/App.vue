@@ -24,6 +24,9 @@ export default {
       set (modal = false) {
         this.$store.commit('SET_ACTIVE_MODAL', modal)
       }
+    },
+    themeFavicon () {
+      return `favicon-${this.$store.state.activeTheme.id}.svg`
     }
   },
   created () {
@@ -31,8 +34,7 @@ export default {
   },
   mounted () {
     if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
-      console.log('hi')
-      this.$store.commit('SET_ACTIVE_THEME', JSON.parse(localStorage.getItem('activeTheme')))
+      this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }
   },
   methods: {
@@ -40,6 +42,12 @@ export default {
       const token = localStorage.getItem('token')
       if (!token) return
       this.$store.commit('SET_USER_TOKEN', token)
+    },
+    changeThemes (theme) {
+      this.$store.commit('SET_ACTIVE_THEME', theme)
+
+      const favicon = document.getElementById('favicon')
+      favicon.href = this.themeFavicon
     }
   }
 }
@@ -61,6 +69,7 @@ export default {
     <SwapCaps
       :show="activeModal === 'theme'"
       @close="activeModal = false"
+      @change-themes="changeThemes"
     />
     <CreateCapSet
       :show="activeModal === 'create'"
