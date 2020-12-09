@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   /* alpha caps */
   --alpha-cap-h: 188;
@@ -799,30 +795,4 @@
   --theme-link-h: 104;
   --theme-link-s: 75%;
   --theme-link-l: 58%;
-}
-
-
-/* additional styles */
-:focus {
-  outline: none !important;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 2px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--theme-link);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-link-hover);
 }

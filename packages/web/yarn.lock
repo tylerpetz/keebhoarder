@@ -4362,7 +4362,7 @@ css-what@^3.2.1:
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.3.0.tgz#10fec696a9ece2e591ac772d759aacabac38cd39"
   integrity sha512-pv9JPyatiPaQ6pf4OvD/dbfm0o5LviWmwxNWzblYf/1u9QZd0ihV+PMwy5jdQWQ3349kZmKEx9WXuSka2dM4cg==
 
-css@^2.1.0:
+css@^2.1.0, css@^2.2.1:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/css/-/css-2.2.4.tgz#c646755c73971f2bba6a601e2cf2fd71b1298929"
   integrity sha512-oUnjmWpy0niI3x/mPL8dVEI1l7MnG3+HHyRPHf+YFSbK+svOhXpmSOcDURUh2aOCgl2grzrOPt1nHLuCVFULLw==
@@ -10083,6 +10083,13 @@ react-is@^16.12.0, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+read-css@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/read-css/-/read-css-0.3.0.tgz#c0e92e3c92d61a06c68dd0149bf427e3dcb08a8d"
+  integrity sha512-K0bjpD/VJqqaGBEANpt6ETnSUv1rGltW+Gy/pOTQh3hJJtMGE8lGZtGESQe4BjVSkGPYXGSHLs+p8YSGae6VEg==
+  dependencies:
+    css "^2.2.1"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
