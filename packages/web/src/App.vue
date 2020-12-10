@@ -21,7 +21,7 @@ export default {
       get () {
         return this.$store.state.activeModal
       },
-      set (modal = false) {
+      set (modal) {
         this.$store.commit('SET_ACTIVE_MODAL', modal)
       }
     },
