@@ -1,5 +1,5 @@
 import {
-  // themes,
+  themes,
   defaultTheme
 } from '@/utils/themes.js'
 import Vue from 'vue'
@@ -38,14 +38,14 @@ export const mutations = {
   SET_ACTIVE_MODAL (state, modal = false) {
     state.activeModal = modal
   },
-  SET_ACTIVE_THEME (state, theme = '') {
-    // if (themes.includes(theme)) {
-    state.activeTheme = theme
+  SET_ACTIVE_THEME (state, { id, name }) {
+    if (themes.some(theme => theme.name === name && theme.id === id)) {
+      state.activeTheme = { id, name }
 
-    if (window.localStorage) {
-      localStorage.setItem('activeTheme', JSON.stringify(theme))
+      if (window.localStorage) {
+        localStorage.setItem('activeTheme', JSON.stringify({ id, name }))
+      }
     }
-    // }
   },
   SET_USER_TOKEN (state, userToken) {
     state.userToken = userToken

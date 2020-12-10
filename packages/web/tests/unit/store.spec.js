@@ -1,4 +1,7 @@
 import { getters, actions, mutations } from '@/store'
+import localStorage from '../helpers/localStorage'
+
+window.localStorage = localStorage
 const commit = jest.fn()
 
 describe('store.js', () => {
@@ -40,26 +43,59 @@ describe('store.js', () => {
         activeModal: false
       }
       mutations.SET_ACTIVE_MODAL(state, 'register')
-      expect(state.activeModal).toBe('register')
+      expect(state.activeModal).toEqual('register')
       mutations.SET_ACTIVE_MODAL(state, false)
-      expect(state.activeModal).toBe(false)
+      expect(state.activeModal).toEqual(false)
       mutations.SET_ACTIVE_MODAL(state, 'login')
-      expect(state.activeModal).toBe('login')
+      expect(state.activeModal).toEqual('login')
       mutations.SET_ACTIVE_MODAL(state)
-      expect(state.activeModal).toBe(false)
+      expect(state.activeModal).toEqual(false)
     })
     it('SET_ACTIVE_THEME', () => {
       const state = {
-        activeTheme: 'milkshake'
+        activeTheme: {
+          id: '8008',
+          name: '8008'
+        }
       }
-      mutations.SET_ACTIVE_THEME(state, '8008')
-      expect(state.activeTheme).toBe('8008')
+
+      window.localStorage = false
+
+      // no theme
       mutations.SET_ACTIVE_THEME(state, false)
-      expect(state.activeTheme).toBe('8008')
-      mutations.SET_ACTIVE_THEME(state, 'milkshake')
-      expect(state.activeTheme).toBe('milkshake')
-      mutations.SET_ACTIVE_THEME(state)
-      expect(state.activeTheme).toBe('milkshake')
+      expect(state.activeTheme).toStrictEqual({
+        id: '8008',
+        name: '8008'
+      })
+
+      window.localStorage = localStorage
+
+      // good theme
+      mutations.SET_ACTIVE_THEME(state, {
+        id: 'milkshake',
+        name: 'milkshake'
+      })
+      expect(state.activeTheme).toStrictEqual({
+        id: 'milkshake',
+        name: 'milkshake'
+      })
+      expect(JSON.parse(window.localStorage.getItem('activeTheme'))).toStrictEqual({
+        id: 'milkshake',
+        name: 'milkshake'
+      })
+
+      // bad theme
+      mutations.SET_ACTIVE_THEME(state, {
+        id: 'milkshake',
+        name: '8008'
+      })
+      expect(state.activeTheme).toStrictEqual({
+        id: 'milkshake',
+        name: 'milkshake'
+      })
+
+      // mutations.SET_ACTIVE_THEME(state)
+      // expect(state.activeTheme).toBe('milkshake')
     })
     it('SET_USER_TOKEN', () => {
       const state = {

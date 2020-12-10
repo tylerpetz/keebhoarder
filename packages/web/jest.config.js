@@ -10,5 +10,6 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
+  testEnvironment: 'jsdom',
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue']
 }
