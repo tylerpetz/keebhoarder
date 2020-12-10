@@ -40,42 +40,53 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-2 h-full">
-    <div
-      class="md:col-span-3 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-6 gap-2"
-    >
-      <div class="flex items-center justify-center flex-col">
-        <h2 class="text-alpha-legend">
-          Total Items in Collection
-        </h2>
-        <h3 class="text-alpha-legend-press">
-          {{ items.length }}
-        </h3>
-      </div>
-      <div class="flex items-center justify-center flex-col">
-        <h2 class="text-alpha-legend">
-          Waiting on Orders:
-        </h2>
-        <template v-for="order in orders">
-          <h3
-            :key="order.id"
-            class="text-alpha-legend-press"
-          >
-            {{ order.id }}
-          </h3>
-        </template>
-      </div>
-      <div class="flex items-center justify-center flex-col">
-        <h2 class="text-alpha-legend">
-          Total Collection Purchase Price:
-        </h2>
-        <h3 class="text-alpha-legend-press">
-          {{ totalPrice }}
-        </h3>
-      </div>
-      <div class="col-span-3 row-span-5 bg-alpha-cap rounded p-4">
-        latest items
+  <div class="flex flex-row justify-end">
+    <!-- <h1>Recent Activity</h1> -->
+    <div class="bg-theme-bg-l pr-4 sm:pr-6 lg:pr-8 lg:border-l lg:border-theme-border xl:pr-0">
+      <div class="pl-6 ">
+        <div class="pt-6 pb-2">
+          <h2 class="text-sm font-semibold text-theme-text">
+            Activity
+          </h2>
+        </div>
+        <div>
+          <ul class="divide-y divide-theme-border">
+            <li class="py-4">
+              <div class="flex space-x-3">
+                <img
+                  class="h-6 w-6 rounded-full"
+                  src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
+                  alt=""
+                >
+                <div class="flex-1 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-sm text-theme-text-d font-medium">
+                      You
+                    </h3>
+                    <p class="text-sm text-theme-text-d">
+                      1h
+                    </p>
+                  </div>
+                  <p class="text-sm text-theme-text-l">
+                    Added "Keycult" to wishlist
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <!-- More items... -->
+          </ul>
+          <div class="py-4 text-sm border-t border-theme-border">
+            <a
+              href="#"
+              class="text-theme-link font-semibold hover:text-theme-link-hover"
+            >View all activity <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- <h1>Get Started</h1>
+    <h1>My Profile</h1> -->
   </div>
 </template>
