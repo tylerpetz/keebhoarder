@@ -56,10 +56,12 @@ export default {
 <template>
   <main
     :class="`theme-${$store.state.activeTheme.id}`"
-    class="keebhoarder-theme bg-theme-bg font-body tracking-wider min-w-screen min-h-screen w-screen bg-caps flex flex-col justify-between items-center relative"
+    class="keebhoarder-theme bg-theme-bg font-body tracking-wider w-full h-screen overflow-y-scroll bg-caps flex flex-col pr-1 justify-between items-center relative scrollbar-thin scrollbar-track-accent-legend scrollbar-thumb-accent-cap hover:scrollbar-thumb-accent-cap-hover"
   >
     <Navigation />
-    <router-view class="w-full flex-grow" />
+    <router-view
+      class="w-full flex-grow"
+    />
     <Footer />
     <AuthForm
       :show="activeModal === 'register' || activeModal === 'login'"

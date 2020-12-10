@@ -45,7 +45,7 @@
   --theme-bg-l: 6%;
 }
 
-.keebhoarder-theme, .keebhoarder-theme * {
+:root, :root * {
   --alpha-cap: hsl(var(--alpha-cap-h), var(--alpha-cap-s), var(--alpha-cap-l));
   --alpha-cap-side: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) * .7));
   --alpha-cap-hover: hsl(var(--alpha-cap-h), var(--alpha-cap-s), calc(var(--alpha-cap-l) / .9));

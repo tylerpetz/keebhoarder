@@ -27,7 +27,10 @@ export default {
 </script>
 
 <template>
-  <header class="w-full px-3 pt-3 pb-2 flex flex-row items-start justify-between">
+  <header
+    class="w-full p-3 flex flex-row items-start justify-between"
+    :class="{ 'bg-theme-bg-d': $store.getters.loggedIn }"
+  >
     <div class="flex flex-row">
       <h1 class="mr-4">
         <router-link :to="{ name: 'Home' }">

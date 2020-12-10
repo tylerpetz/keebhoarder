@@ -59,6 +59,7 @@
     "read-css": "^0.3.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
+    "tailwind-scrollbar": "^1.0.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue-jest": "^3.0.6",
     "vue-template-compiler": "^2.6.11"
