@@ -20,6 +20,7 @@ module.exports = {
     },
     extend: {
       borderRadius: {
+        sm: '0.175rem',
         lg: '1rem'
       },
       fontSize: {
