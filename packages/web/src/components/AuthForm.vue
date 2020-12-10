@@ -104,6 +104,7 @@ export default {
           v-if="authType === 'login'"
           theme="base"
           cap-style="large"
+          data-test="forgot-password"
           @click.native="forgotPassword"
         >
           Forgot Password?
@@ -112,6 +113,7 @@ export default {
           theme="mod"
           cap-style="large"
           class="capitalize"
+          data-test="submit-auth-form"
           type="submit"
         >
           &#10229; {{ authType === 'register' ? 'Register' : 'Log In' }}
