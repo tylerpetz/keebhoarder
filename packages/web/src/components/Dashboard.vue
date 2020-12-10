@@ -43,7 +43,7 @@ export default {
   <div class="flex flex-row justify-end">
     <!-- <h1>Recent Activity</h1> -->
     <div class="bg-theme-bg-l pr-4 sm:pr-6 lg:pr-8 lg:border-l lg:border-theme-border xl:pr-0">
-      <div class="pl-6 ">
+      <div class="pl-6 lg:w-80">
         <div class="pt-6 pb-2">
           <h2 class="text-sm font-semibold text-theme-text">
             Activity
