@@ -6,17 +6,6 @@ export default {
       subNavOpen: false
     }
   },
-  computed: {
-    routeName () {
-      return this.$route.name
-    },
-    routes () {
-      if (this.$store.getters.loggedIn) {
-        return ['Inventory', 'Orders', 'Builds']
-      }
-      return []
-    }
-  },
   methods: {
     logout () {
       this.$store.dispatch('logout')
@@ -29,7 +18,7 @@ export default {
 <template>
   <header
     class="w-full p-3 flex flex-row items-start justify-between"
-    :class="{ 'bg-theme-bg-d': $store.getters.loggedIn }"
+    :class="$store.getters.loggedIn ? 'border-theme-border' : 'border-transparent'"
   >
     <div class="flex flex-row">
       <h1 class="mr-4">
@@ -42,20 +31,6 @@ export default {
           </Keycap>
         </router-link>
       </h1>
-      <template v-for="route in routes">
-        <router-link
-          :key="route"
-          :to="{ name: route }"
-        >
-          <Keycap
-            cap-style="large"
-            class="ml-2"
-            :theme="routeName === route ? 'mod' : 'alpha'"
-          >
-            {{ route }}
-          </Keycap>
-        </router-link>
-      </template>
     </div>
     <div class="flex flex-row">
       <template v-if="$store.getters.loggedIn">

@@ -1,8 +1,19 @@
 <script>
+import Sidebar from '@/components/Sidebar'
+import DashboardStats from '@/components/DashboardStats'
+import DashboardRecentActivity from '@/components/DashboardRecentActivity'
+// import DashboardGetStarted from '@/components/DashboardGetStarted'
+
 import gql from 'graphql-tag'
 
 export default {
   name: 'Dashboard',
+  components: {
+    Sidebar,
+    DashboardStats,
+    DashboardRecentActivity
+    // DashboardGetStarted
+  },
   apollo: {
     // Apollo specific options
     orders: gql`
@@ -40,99 +51,26 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row justify-between min-h-screen">
-    <div>
-      stuff
-    </div>
-    <div class="bg-theme-bg-l pr-4 sm:pr-6 lg:pr-8 xl:pr-0">
-      <div class="px-6 lg:w-96">
-        <div class="pt-6 pb-2">
-          <h2 class="font-bold text-theme-text">
-            Recent Activity
-          </h2>
-        </div>
-        <div>
-          <ul class="divide-y divide-theme-border">
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                  alt=""
-                >
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-sm text-theme-text font-medium">
-                      You
-                    </h3>
-                    <p class="text-sm text-theme-text">
-                      1h
-                    </p>
-                  </div>
-                  <p class="text-sm text-theme-text-l">
-                    Added "Keycult" to wishlist
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                  alt=""
-                >
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-sm text-theme-text font-medium">
-                      You
-                    </h3>
-                    <p class="text-sm text-theme-text">
-                      1h
-                    </p>
-                  </div>
-                  <p class="text-sm text-theme-text-l">
-                    Added "Keycult" to wishlist
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="py-4">
-              <div class="flex space-x-3">
-                <img
-                  class="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                  alt=""
-                >
-                <div class="flex-1 space-y-1">
-                  <div class="flex items-center justify-between">
-                    <h3 class="text-sm text-theme-text font-medium">
-                      You
-                    </h3>
-                    <p class="text-sm text-theme-text">
-                      1h
-                    </p>
-                  </div>
-                  <p class="text-sm text-theme-text-l">
-                    Added "Keycult" to wishlist
-                  </p>
-                </div>
-              </div>
-            </li>
+  <div>
+    <div class="flex bg-theme-bg h-full">
+      <div class="block fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden" />
+      <sidebar />
+      <main class="flex-1 overflow-x-hidden bg-theme-bg p-6">
+        <h3 class="text-theme-text text-3xl font-medium">
+          Dashboard
+        </h3>
 
-            <!-- More items... -->
-          </ul>
-          <div class="py-4 text-sm border-t border-theme-border">
-            <a
-              href="#"
-              class="text-theme-link font-semibold hover:text-theme-link-hover"
-            >View all activity <span aria-hidden="true">&rarr;</span></a>
+        <dashboard-stats />
+
+        <div class="mt-8 flex space-x-8 w-full items-start">
+          <div class="w-2/3">
+            <!-- <dashboard-get-started /> -->
+          </div>
+          <div class="w-1/3">
+            <dashboard-recent-activity />
           </div>
         </div>
-      </div>
+      </main>
     </div>
-
-    <!-- <h1>Get Started</h1>
-    <h1>My Profile</h1> -->
   </div>
 </template>

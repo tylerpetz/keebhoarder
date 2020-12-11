@@ -75,16 +75,16 @@
 
   /* modify hsl values like a boss */
   --theme-bg: hsl(var(--theme-bg-h), var(--theme-bg-s), var(--theme-bg-l));
-  --theme-bg-light: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * 1.2) );
-  --theme-bg-dark: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) / 1.2));
+  --theme-bg-light: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) * 1.35) );
+  --theme-bg-dark: hsl(var(--theme-bg-h), var(--theme-bg-s), calc(var(--theme-bg-l) / 1.3));
 
   --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
-  --theme-text-light: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * 1.2));
-  --theme-text-dark: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) / 1.2));
+  --theme-text-light: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * 1.35));
+  --theme-text-dark: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) / 1.3));
 
   --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
-  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * 1.2));
-  --theme-link-press: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) / 1.2));
+  --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * 1.35));
+  --theme-link-press: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) / 1.3));
 
   --theme-border: var(--theme-link);
   --theme-border-hover: var(--theme-link-hover);

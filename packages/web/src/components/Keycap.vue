@@ -61,14 +61,18 @@ export default {
 
 <template>
   <button
-    class="keycap relative rounded-sm h-12 w-auto inline-flex flex-col justify-start"
-    :class="sideClasses"
+    class="keycap relative rounded-sm w-auto inline-flex flex-col justify-start"
+    :class="[
+      sideClasses,
+      capStyle !== 'tiny' ? 'h-12' : 'tiny'
+    ]"
   >
     <span
       :class="[
         faceClasses,
         textSize === 'large' ? 'text-base font-extrabold pb-3' : 'text-xs font-bold pb-1',
-        capStyle === 'large' ? 'w-auto pr-3' : ''
+        capStyle === 'large' ? 'w-auto pr-3' : '',
+        capStyle === 'tiny' ? 'tiny' : ''
       ]"
       class="keycap-face px-1 z-10 flex rounded leading-relaxed items-center justify-start relative"
     >
@@ -84,6 +88,11 @@ export default {
   padding: 0 6px;
 }
 
+.keycap.tiny {
+  height: 34px;
+  padding: 0 4px;
+}
+
 .keycap-face {
   transform: translateY(0px);
   min-width: 32px;
@@ -91,6 +100,11 @@ export default {
   box-shadow: inset 8px 0px 12px -4px rgba(255, 255, 255, 0.05),
     inset -8px 0px 12px -4px rgba(255, 255, 255, 0.05);
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.keycap-face.tiny {
+  min-width: 24px;
+  height: 26px;
 }
 
 .keycap:active .keycap-face {
