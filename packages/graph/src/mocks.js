@@ -1,51 +1,46 @@
 const faker = require('faker')
-const deliveryStatuses = [
-    'InfoReceived',
-    'Pending',
-    'InTransit',
-    'Delivered',
-    'Exception',
-    'FailAttempt'
-]
+
 const categories = ['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other']
+const transactionTypes = ['Buy', 'Sell', 'Trade']
+
+const randomCategory = categories[Math.floor(Math.random() * categories.length)]
+const randomTransactionType = transactionTypes[Math.floor(Math.random() * transactionTypes.length)]
 
 const mocks = {
-    Courier: () => ({
-      code: () => faker.address.latitude(),
-      name: () => faker.address.latitude(),
-    }),
-    DeliveryCheckpoints: () => ({
-      location: () => faker.random.uuid(),
-      message: () => faker.random.words(),
-      updatedAt: () => faker.date.past(),
-    }),
-    DeliveryStatus: () => ({
-      number: () => faker.random.number(),
-      status: () => deliveryStatuses[Math.floor(Math.random() * deliveryStatuses.length)],
-    }),
-    Category: () => ({
-      status: () => categories[Math.floor(Math.random() * categories.length)],
-    }),
-    Item: () => ({
-      id: faker.random.number(),
-      trackingNumber: faker.random.uuid(),
-      name: faker.random.word(),
-      price: faker.random.number(),
-      description: faker.random.words()
-    }),
-    Order: () => ({
-      id: faker.random.number(),
-      trackingNumber: faker.random.uuid()
-    }),
-    Image: () => ({
-      id: faker.random.number(),
-      url: faker.image.image(),
-      name: faker.random.word(),
-      description: faker.random.words()
-    }),
-     User: () => ({
-      email: () => faker.internet.emailAddress(),
-    })
+  Item: () => ({
+    id: faker.random.number(),
+    name: faker.commerce.productName(),
+    description: faker.random.words(),
+  }),
+  ItemAttributes: () => ({
+    colorway: faker.commerce.color(),
+    maker: faker.commerce.product(),
+    model: faker.commerce.productName()
+  }),
+  Image: () => ({
+    id: faker.random.number(),
+    url: faker.image.image(),
+    name: faker.random.word(),
+    description: faker.random.words()
+  }),
+  Category: () => ({
+    id: faker.random.number(),
+    name: randomCategory,
+    icon: `${randomCategory}.svg`,
+    description: faker.random.words(),
+  }),
+  Note: () => ({
+    id: faker.random.number(),
+    content: faker.random.words(),
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.past()
+  }),
+  PriceHistory: () => ({
+    id: faker.random.number(),
+    updateType: randomTransactionType,
+    price: faker.commerce.price(),
+    createdAt: faker.date.past(),
+  })
 };
 
 module.exports = { mocks };
