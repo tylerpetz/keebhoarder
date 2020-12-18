@@ -1,21 +1,21 @@
 const faker = require('faker')
 
-const categories = ['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other']
-const transactionTypes = ['Buy', 'Sell', 'Trade']
-
-const randomCategory = categories[Math.floor(Math.random() * categories.length)]
-const randomTransactionType = transactionTypes[Math.floor(Math.random() * transactionTypes.length)]
+const randomTransactionType = faker.random.arrayElement(['Buy', 'Sell', 'Trade'])
+const randomCategory = faker.random.arrayElement(['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other'])
+const randomMaker = faker.random.arrayElement(['Gothcaps', 'Rathcaps', 'Keyforge', 'Keycult'])
+const randomModel = faker.random.arrayElement(['Hellcap', 'Brimcap', 'Groot', '1/65'])
+const randomColor = faker.random.arrayElement(['Polycarbonate', 'Black', 'Grey', 'White', 'Blue', 'Red'])
 
 const mocks = {
   Item: () => ({
     id: faker.random.number(),
-    name: faker.commerce.productName(),
+    name: `${randomMaker} - ${randomModel}`,
     description: faker.random.words(),
   }),
   ItemAttributes: () => ({
-    colorway: faker.commerce.color(),
-    maker: faker.commerce.product(),
-    model: faker.commerce.productName()
+    colorway: randomColor,
+    maker: randomMaker,
+    model: randomModel,
   }),
   Image: () => ({
     id: faker.random.number(),
