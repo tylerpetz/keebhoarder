@@ -9,21 +9,6 @@
     "test": "jest --verbose",
     "generate-favicons": "node write-favicons.js"
   },
-  "dependencies": {
-    "animejs": "^3.2.0",
-    "apollo-boost": "^0.4.9",
-    "color-convert": "^2.0.1",
-    "core-js": "^3.6.5",
-    "graphql": "^15.3.0",
-    "jest": "^26.2.2",
-    "jest-serializer-vue": "^2.0.2",
-    "register-service-worker": "^1.7.1",
-    "vue": "^2.6.11",
-    "vue-apollo": "^3.0.3",
-    "vue-gtag": "^1.7.0",
-    "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
-  },
   "gitHooks": {
     "pre-commit": "lint-staged",
     "pre-push": "yarn test"
@@ -33,6 +18,25 @@
       "vue-cli-service lint",
       "git add"
     ]
+  },
+  "dependencies": {
+    "animejs": "^3.2.0",
+    "apollo-boost": "^0.4.9",
+    "color-convert": "^2.0.1",
+    "core-js": "^3.6.5",
+    "faunadb": "^4.0.0",
+    "generate-password": "^1.5.1",
+    "gotrue-js": "^0.9.28",
+    "graphql": "^15.3.0",
+    "jest": "^26.2.2",
+    "jest-serializer-vue": "^2.0.2",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-apollo": "^3.0.3",
+    "vue-gtag": "^1.7.0",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0",
+    "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
