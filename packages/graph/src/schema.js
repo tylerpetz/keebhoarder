@@ -7,13 +7,6 @@ const typeDefs = gql`
     getItemById(id: Int): Item 
   }
 
-  # type Mutation {
-  #   login(email: String): String # login token
-
-  #   # for use with the iOS tutorial
-  #   uploadProfileImage(file: Upload!): User
-  # }
-
   type Order{
     id: ID!
     items: [Item]
