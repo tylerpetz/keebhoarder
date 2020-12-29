@@ -2,9 +2,7 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type Query {
-    # deliveryStatus(id: String!, courierCode: String!): DeliveryStatus
-    # orders(id: Int): [Order]
-    # user: User,
+    orders(id: Int): [Order]
     items: [Item],
     getItemById(id: Int): Item 
   }
@@ -16,72 +14,37 @@ const typeDefs = gql`
   #   uploadProfileImage(file: Upload!): User
   # }
 
-  # type Courier{
-  #   code: String
-  #   name: String
-  # }
+  type Order{
+    id: ID!
+    items: [Item]
+    notes: [Note]
+    seller: Vendor
+    tax: Int
+    shipping: Int
+  }
 
-  # type DeliveryCheckpoints{
-  #   courier: Courier
-  #   location: String
-  #   message: String
-  #   time: String
-  # }
-
-  # type DeliveryStatus{
-  #   courier: Courier
-  #   number: String
-  #   status: String
-  #   checkpoints: [DeliveryCheckpoints]
-  # }
-
-  # type Order{
-  #   id: Int
-  #   name: String
-  #   items: [Item]
-  #   status: DeliveryStatus
-  #   notes: [Note]
-  #   trackingNumber: String
-  #   seller: Vendor
-  #   qty: Int
-  #   tax: Int
-  #   shipping: Int
-  # }
-
-  # type Vendor{
-  #   id: String
-  #   name: String
-  #   url: String
-  # }
-
-  # type User{
-  #   id: ID!
-  #   email: String!
-  #   profileImage: String
-  # }
-
-    # type Inventory {
-  #   id: ID!
-  #   item: [Item]
-  #   status: String
-  # }
+  type Vendor{
+    id: ID!
+    name: String
+    url: String
+  }
 
   type Image {
-    id: Int
+    id: ID!
     url: String
     name: String
     description: String
   }
 
   type Note {
-    id: Int
+    id: ID!
     content: String
     createdAt: String
     updatedAt: String
   }
 
   type Category {
-    id: Int
+    id: ID!
     name: String
     icon: String
     description: String
@@ -94,6 +57,7 @@ const typeDefs = gql`
     description: String
     attributes: ItemAttributes
     category: Category
+    qty: Int
     images: [Image]
     notes: [Note]
     priceHistory: [PriceHistory]

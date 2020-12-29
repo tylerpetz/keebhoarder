@@ -1,16 +1,22 @@
 const faker = require('faker')
 
-const randomTransactionType = faker.random.arrayElement(['Buy', 'Sell', 'Trade'])
-const randomCategory = faker.random.arrayElement(['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other'])
-const randomMaker = faker.random.arrayElement(['Gothcaps', 'Rathcaps', 'Keyforge', 'Keycult'])
-const randomModel = faker.random.arrayElement(['Hellcap', 'Brimcap', 'Groot', '1/65'])
-const randomColor = faker.random.arrayElement(['Polycarbonate', 'Black', 'Grey', 'White', 'Blue', 'Red'])
+const randomTransactionType = () => faker.random.arrayElement(['Buy', 'Sell', 'Trade'])
+const randomCategory = () => faker.random.arrayElement(['Keyboard', 'Keycap Set', 'Artisan Keycap', 'Switch', 'Case', 'PCB', 'Cable', 'Deskmat', 'Lube', 'Other'])
+const randomMaker = () => faker.random.arrayElement(['Gothcaps', 'Rathcaps', 'Keyforge', 'Keycult'])
+const randomModel = () => faker.random.arrayElement(['Hellcap', 'Brimcap', 'Groot', '1/65'])
+const randomColor = () => faker.random.arrayElement(['Polycarbonate', 'Black', 'Grey', 'White', 'Blue', 'Red'])
 
 const mocks = {
+  Order: () => ({
+    id: faker.random.number(),
+    tax: faker.commerce.price(),
+    shipping: faker.commerce.price(),
+  }),
   Item: () => ({
     id: faker.random.number(),
-    name: `${randomMaker} - ${randomModel}`,
+    name: `${randomMaker()} - ${randomModel()}`,
     description: faker.random.words(),
+    quantity: Math.random() * (3 - 1) + 1
   }),
   ItemAttributes: () => ({
     colorway: randomColor,
@@ -26,7 +32,7 @@ const mocks = {
   Category: () => ({
     id: faker.random.number(),
     name: randomCategory,
-    icon: `${randomCategory}.svg`,
+    icon: `${randomCategory()}.svg`,
     description: faker.random.words(),
   }),
   Note: () => ({
@@ -40,6 +46,11 @@ const mocks = {
     updateType: randomTransactionType,
     price: faker.commerce.price(),
     createdAt: faker.date.past(),
+  }),
+  Vendor: () => ({
+    id: faker.random.number(),
+    name: faker.company.companyName(),
+    url: faker.internet.url()
   })
 };
 

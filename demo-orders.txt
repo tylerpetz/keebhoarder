@@ -1,0 +1,43 @@
+order 1:
+-https://mail.google.com/mail/u/0/#search/kbdfans/FMfcgxwKjdwWBKTHLLFxsfSVlzxCntMP
+tax: 5.74
+shipping: 0
+
+name: Tofu60 Case
+description: Brand New
+category: Case
+
+-colorway: black
+-maker: kbdfans
+-model: Tofu60
+
+-type: purchase
+-price: 89.00
+-date: 11/27/20
+
+name: DZ60 v3 PCB
+description: Brand New
+category: PCB
+
+-colorway: black
+-maker: kbdfans
+-model: DZ60 V3 60%
+
+-type: purchase
+-price: 46.00
+-date: 11/27/20
+
+order 2:
+-https://drop.com/transactions/receipt/2841855262855
+tax: 4.40
+shipping: free
+
+name: GMK WoB
+description: New from drop
+category: Keycap Set
+
+-colorway: White on black
+-maker: GMK
+-model/profile: Cherry
+
+
