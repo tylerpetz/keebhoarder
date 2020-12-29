@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import localStorage from '../../tests/helpers/localStorage'
+import localStorage from './utils/localStorage'
 
 import App from '@/App.vue'
 
