@@ -13,9 +13,11 @@ describe('App.vue', () => {
       mocks: {
         $store: {
           state: {
-            activeTheme: {
-              id: '8008',
-              name: '8008'
+            app: {
+              activeTheme: {
+                id: '8008',
+                name: '8008'
+              }
             }
           }
         }
@@ -31,11 +33,13 @@ describe('App.vue', () => {
       mocks: {
         $store: {
           state: {
-            activeTheme: {
-              id: '8008',
-              name: '8008'
-            },
-            activeModal: false
+            app: {
+              activeTheme: {
+                id: '8008',
+                name: '8008'
+              },
+              activeModal: false
+            }
           },
           commit
         }
@@ -43,7 +47,7 @@ describe('App.vue', () => {
       stubs: ['router-view']
     })
     wrapper.vm.activeModal = 'register'
-    expect(commit).toHaveBeenCalledWith('SET_ACTIVE_MODAL', 'register')
+    expect(commit).toHaveBeenCalledWith('app/SET_ACTIVE_MODAL', 'register')
   })
 
   it('closes modal', () => {
@@ -51,11 +55,13 @@ describe('App.vue', () => {
       mocks: {
         $store: {
           state: {
-            activeTheme: {
-              id: '8008',
-              name: '8008'
-            },
-            activeModal: 'register'
+            app: {
+              activeTheme: {
+                id: '8008',
+                name: '8008'
+              },
+              activeModal: 'register'
+            }
           },
           commit
         }
@@ -63,7 +69,7 @@ describe('App.vue', () => {
       stubs: ['router-view']
     })
     wrapper.vm.activeModal = false
-    expect(commit).toHaveBeenCalledWith('SET_ACTIVE_MODAL', false)
+    expect(commit).toHaveBeenCalledWith('app/SET_ACTIVE_MODAL', false)
   })
 
   it('loads users theme from localstorage', async () => {
@@ -75,9 +81,11 @@ describe('App.vue', () => {
       mocks: {
         $store: {
           state: {
-            activeTheme: {
-              id: '8008',
-              name: '8008'
+            app: {
+              activeTheme: {
+                id: '8008',
+                name: '8008'
+              }
             }
           },
           commit
@@ -86,26 +94,6 @@ describe('App.vue', () => {
       stubs: ['router-view']
     })
     await wrapper.vm.$nextTick()
-    expect(commit).toHaveBeenCalledWith('SET_ACTIVE_THEME', { id: 'milkshake', name: 'milkshake' })
-  })
-
-  it('does something with user token', async () => {
-    window.localStorage.setItem('token', 'sup')
-    const wrapper = shallowMount(App, {
-      mocks: {
-        $store: {
-          state: {
-            activeTheme: {
-              id: '8008',
-              name: '8008'
-            }
-          },
-          commit
-        }
-      },
-      stubs: ['router-view']
-    })
-    await wrapper.vm.$nextTick()
-    expect(commit).toHaveBeenCalledWith('SET_USER_TOKEN', 'sup')
+    expect(commit).toHaveBeenCalledWith('app/SET_ACTIVE_THEME', { id: 'milkshake', name: 'milkshake' })
   })
 })
