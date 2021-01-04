@@ -19,18 +19,18 @@ export default {
   computed: {
     activeModal: {
       get () {
-        return this.$store.state.activeModal
+        return this.$store.state.app.activeModal
       },
       set (modal) {
-        this.$store.commit('SET_ACTIVE_MODAL', modal)
+        this.$store.commit('app/SET_ACTIVE_MODAL', modal)
       }
     },
     themeFavicon () {
-      return `favicon-${this.$store.state.activeTheme.id}.svg`
+      return `favicon-${this.$store.state.app.activeTheme.id}.svg`
     }
   },
   created () {
-    this.checkAuthState()
+    // this.checkAuthState()
   },
   mounted () {
     if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
@@ -38,13 +38,13 @@ export default {
     }
   },
   methods: {
-    checkAuthState () {
-      const token = localStorage.getItem('token')
-      if (!token) return
-      this.$store.commit('SET_USER_TOKEN', token)
-    },
+    // checkAuthState () {
+    //   const token = localStorage.getItem('token')
+    //   if (!token) return
+    //   this.$store.commit('SET_USER_TOKEN', token)
+    // },
     changeThemes (theme) {
-      this.$store.commit('SET_ACTIVE_THEME', theme)
+      this.$store.commit('app/SET_ACTIVE_THEME', theme)
 
       const favicon = document.getElementById('favicon')
       favicon.href = this.themeFavicon
@@ -55,7 +55,7 @@ export default {
 
 <template>
   <main
-    :class="`theme-${$store.state.activeTheme.id}`"
+    :class="`theme-${$store.state.app.activeTheme.id}`"
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider w-full h-screen overflow-y-scroll bg-caps flex flex-col pr-1 justify-between items-center relative scrollbar-thin scrollbar-track-accent-legend scrollbar-thumb-accent-cap hover:scrollbar-thumb-accent-cap-hover"
   >
     <Navigation />

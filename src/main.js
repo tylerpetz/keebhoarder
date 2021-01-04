@@ -13,6 +13,8 @@ import './assets/themes.css'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
 
+import attemptToAuthorizeTokens from './helpers/authorize-tokens'
+
 const apolloClient = new ApolloClient({
   // You should use an absolute URL here
   uri: 'http://localhost:4000'
@@ -37,3 +39,7 @@ new Vue({
   apolloProvider,
   render: (h) => h(App)
 }).$mount('#keebhoarder')
+
+store.dispatch('auth/initAuth')
+
+attemptToAuthorizeTokens()

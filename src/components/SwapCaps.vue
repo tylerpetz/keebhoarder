@@ -33,7 +33,7 @@ export default {
         <div
           :class="[
             `theme-${theme.id}`,
-            $store.state.activeTheme.id === theme.id
+            $store.state.app.activeTheme.id === theme.id
               ? 'border-theme-border'
               : 'border-transparent cursor-pointer'
           ]"

@@ -24,7 +24,7 @@ export default {
       <h1 class="mr-4">
         <router-link :to="{ name: 'Home' }">
           <Keycap
-            :theme="routeName === 'Home' || routeName === 'Dashboard' ? 'accent' : 'alpha'"
+            :theme="$route.name === 'Home' || $route.name === 'Dashboard' ? 'accent' : 'alpha'"
             text-size="large"
           >
             K<span class="hidden">eebhoarder</span>
@@ -60,7 +60,7 @@ export default {
             theme="mod"
             cap-style="large"
             class="ml-2"
-            @click.native="$store.commit('SET_ACTIVE_MODAL', 'theme')"
+            @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'theme')"
           >
             Swap Keycaps
           </Keycap>
@@ -86,7 +86,7 @@ export default {
           cap-style="large"
           class="ml-2"
           theme="mod"
-          @click.native="$store.commit('SET_ACTIVE_MODAL', 'register')"
+          @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'register')"
         >
           Join
         </Keycap>
@@ -94,7 +94,7 @@ export default {
           cap-style="large"
           class="ml-2"
           theme="accent"
-          @click.native="$store.commit('SET_ACTIVE_MODAL', 'login')"
+          @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'login')"
         >
           Log In
         </Keycap>
