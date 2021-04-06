@@ -8,14 +8,10 @@ export default {
   state () {
     return {
       activeModal: false,
-      activeTheme: defaultTheme,
-      isDevEnvironment: false,
-      siteURL: null
+      activeTheme: defaultTheme
     }
   },
   getters: {
-    isDevEnvironment: state => state.isDevEnvironment,
-    siteURL: state => state.siteURL
   },
   mutations: {
     SET_ACTIVE_MODAL (state, modal = false) {
@@ -29,12 +25,6 @@ export default {
           localStorage.setItem('activeTheme', JSON.stringify({ id, name }))
         }
       }
-    },
-    SET_DEV_ENV (state, value) {
-      state.isDevEnvironment = value
-    },
-    SET_SITE_URL (state, value) {
-      state.siteURL = value
     }
   }
 }

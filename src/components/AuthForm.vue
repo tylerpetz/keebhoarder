@@ -14,17 +14,21 @@ export default {
   data () {
     return {
       errors: [],
+      username: '',
       email: '',
       password: '',
       passwordRepeat: ''
     }
+  },
+  mounted () {
+    console.log(this.axios)
   },
   methods: {
     forgotPassword () {
       this.$emit('close')
     },
     async handleSubmit () {
-      await this.$store.dispatch(this.authType, { email: this.email, password: this.password })
+      await this.$store.dispatch(`auth/${this.authType}`, { username: this.username, email: this.email, password: this.password })
       this.$emit('close')
     }
   }
@@ -44,6 +48,15 @@ export default {
     >
       <div class="flex flex-col p-6">
         <template v-if="authType === 'register'">
+          <FormInput
+            v-model="username"
+            required
+            class="mb-6"
+            type="text"
+            placeholder="keeblord"
+          >
+            Username
+          </FormInput>
           <FormInput
             v-model="email"
             required

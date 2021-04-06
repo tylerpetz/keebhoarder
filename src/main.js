@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
@@ -24,6 +26,7 @@ Vue.config.productionTip = false
 Vue.use(VueGtag, {
   config: { id: 'UA-131740937-2' }
 })
+Vue.use(VueAxios, axios)
 Vue.component('Keycap', Keycap)
 Vue.component('Modal', Modal)
 Vue.component('FormInput', FormInput)
@@ -40,6 +43,6 @@ new Vue({
   render: (h) => h(App)
 }).$mount('#keebhoarder')
 
-store.dispatch('auth/initAuth')
+// store.dispatch('auth/initAuth')
 
 attemptToAuthorizeTokens()
