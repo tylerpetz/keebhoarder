@@ -29,20 +29,12 @@ export default {
       return `favicon-${this.$store.state.app.activeTheme.id}.svg`
     }
   },
-  created () {
-    // this.checkAuthState()
-  },
   mounted () {
     if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }
   },
   methods: {
-    // checkAuthState () {
-    //   const token = localStorage.getItem('token')
-    //   if (!token) return
-    //   this.$store.commit('SET_USER_TOKEN', token)
-    // },
     changeThemes (theme) {
       this.$store.commit('app/SET_ACTIVE_THEME', theme)
 
@@ -66,7 +58,7 @@ export default {
     <AuthForm
       :show="activeModal === 'register' || activeModal === 'login'"
       :auth-type="activeModal || ''"
-      @close="activeModal = false"
+      @close="activeModal = ''"
     />
     <SwapCaps
       :show="activeModal === 'theme'"

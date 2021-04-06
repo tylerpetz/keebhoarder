@@ -7,9 +7,9 @@ export default {
 <template>
   <div class="translate-x-0 ease-out fixed z-30 inset-y-0 left-0 w-48 transition duration-300 transform bg-theme-bg-d overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
     <nav>
-      <a
+      <router-link
         class="flex items-center mt-2 p-3 text-theme-link"
-        href="/"
+        :to="{ name: 'Home' }"
       >
         <Keycap
           theme="accent"
@@ -18,10 +18,10 @@ export default {
           D
         </Keycap>
         <span class="ml-4">Dashboard</span>
-      </a>
-      <a
+      </router-link>
+      <router-link
         class="flex items-center p-3 text-theme-text"
-        href="/"
+        :to="{ name: 'Orders' }"
       >
         <Keycap
           theme="base"
@@ -30,10 +30,10 @@ export default {
           O
         </Keycap>
         <span class="ml-4">Orders</span>
-      </a>
-      <a
+      </router-link>
+      <router-link
         class="flex items-center p-3 text-theme-text"
-        href="/"
+        :to="{ name: 'Inventory' }"
       >
         <Keycap
           theme="base"
@@ -42,10 +42,10 @@ export default {
           I
         </Keycap>
         <span class="ml-4">Inventory</span>
-      </a>
-      <a
+      </router-link>
+      <router-link
         class="flex items-center p-3 text-theme-text"
-        href="/"
+        :to="{ name: 'Builds' }"
       >
         <Keycap
           theme="base"
@@ -54,7 +54,7 @@ export default {
           B
         </Keycap>
         <span class="ml-4">Builds</span>
-      </a>
+      </router-link>
     </nav>
   </div>
 </template>

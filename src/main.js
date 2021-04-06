@@ -43,6 +43,12 @@ new Vue({
   render: (h) => h(App)
 }).$mount('#keebhoarder')
 
-// store.dispatch('auth/initAuth')
+const loginUserFromStorage = () => {
+  const tokens = JSON.parse(localStorage.getItem('tokens')) || null
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || null
+  if (!tokens || !currentUser) return
+  store.commit('auth/AUTH_SUCCESS', { tokens, currentUser })
+}
 
 attemptToAuthorizeTokens()
+loginUserFromStorage()

@@ -8,13 +8,8 @@ export default {
     WelcomeScreen,
     Dashboard
   },
-  data () {
-    return {
-      loggedIn: false
-    }
-  },
   render (h) {
-    if (!this.$store.getters.loggedIn) return h('WelcomeScreen')
+    if (!this.$store.getters['auth/loggedIn']) return h('WelcomeScreen')
     return h('Dashboard')
   }
 }

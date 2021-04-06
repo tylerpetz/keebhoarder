@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     logout () {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('auth/logout')
       this.$router.push({ name: 'Home' })
     }
   }
@@ -18,7 +18,7 @@ export default {
 <template>
   <header
     class="w-full p-3 flex flex-row items-start justify-between"
-    :class="$store.getters.loggedIn ? 'border-theme-border' : 'border-transparent'"
+    :class="$store.getters['auth/loggedIn'] ? 'border-theme-border' : 'border-transparent'"
   >
     <div class="flex flex-row">
       <h1 class="mr-4">
@@ -33,7 +33,7 @@ export default {
       </h1>
     </div>
     <div class="flex flex-row">
-      <template v-if="$store.getters.loggedIn">
+      <template v-if="$store.getters['auth/loggedIn']">
         <Keycap
           v-if="!subNavOpen"
           cap-style="large"
@@ -41,7 +41,7 @@ export default {
           class="ml-2"
           @click.native="subNavOpen = true"
         >
-          username
+          {{ $store.getters['auth/currentUser'].username }}
         </Keycap>
         <template v-else>
           <Keycap

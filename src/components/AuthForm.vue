@@ -14,21 +14,21 @@ export default {
   data () {
     return {
       errors: [],
-      username: '',
-      email: '',
-      password: '',
-      passwordRepeat: ''
+      credentials: {
+        username: '',
+        email: '',
+        password: '',
+        passwordRepeat: ''
+      }
     }
-  },
-  mounted () {
-    console.log(this.axios)
   },
   methods: {
     forgotPassword () {
       this.$emit('close')
     },
     async handleSubmit () {
-      await this.$store.dispatch(`auth/${this.authType}`, { username: this.username, email: this.email, password: this.password })
+      const params = this.authType === 'register' ? this.credentials : { email: this.credentials.username, password: this.credentials.password }
+      await this.$store.dispatch(`auth/${this.authType}`, params)
       this.$emit('close')
     }
   }
@@ -49,7 +49,7 @@ export default {
       <div class="flex flex-col p-6">
         <template v-if="authType === 'register'">
           <FormInput
-            v-model="username"
+            v-model="credentials.username"
             required
             class="mb-6"
             type="text"
@@ -58,7 +58,7 @@ export default {
             Username
           </FormInput>
           <FormInput
-            v-model="email"
+            v-model="credentials.email"
             required
             class="mb-6"
             type="email"
@@ -67,7 +67,7 @@ export default {
             Email Address
           </FormInput>
           <FormInput
-            v-model="password"
+            v-model="credentials.password"
             required
             class="mb-6"
             type="password"
@@ -76,7 +76,7 @@ export default {
             Password
           </FormInput>
           <FormInput
-            v-model="passwordRepeat"
+            v-model="credentials.passwordRepeat"
             required
             class="mb-0"
             type="password"
@@ -86,14 +86,14 @@ export default {
         </template>
         <template v-else>
           <FormInput
-            v-model="email"
+            v-model="credentials.username"
             required
             class="mb-6"
           >
             Username or Email Address
           </FormInput>
           <FormInput
-            v-model="password"
+            v-model="credentials.password"
             required
             class="mb-0"
             type="password"
