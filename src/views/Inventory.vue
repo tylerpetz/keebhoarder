@@ -1,6 +1,4 @@
 <script>
-import gql from 'graphql-tag'
-
 const categories = [
   {
     text: 'Keyboards',
@@ -44,45 +42,6 @@ export default {
       required: false,
       default: null
     }
-  },
-  apollo: {
-    orders: gql`
-      query {
-        orders {
-          id
-          notes {
-            description
-          }
-          trackingNumber
-          items {
-            id
-            description
-            price
-            categories {
-              name
-            }
-            images {
-              url
-            }
-          }
-        }
-      }
-    `,
-    items: gql`
-      query {
-        items {
-          id
-          description
-          price
-          categories {
-            name
-          }
-          images {
-            url
-          }
-        }
-      }
-    `
   },
   data () {
     return {

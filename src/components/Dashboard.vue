@@ -4,8 +4,6 @@ import DashboardStats from '@/components/DashboardStats'
 import DashboardRecentActivity from '@/components/DashboardRecentActivity'
 // import DashboardGetStarted from '@/components/DashboardGetStarted'
 
-import gql from 'graphql-tag'
-
 export default {
   name: 'Dashboard',
   components: {
@@ -13,27 +11,6 @@ export default {
     DashboardStats,
     DashboardRecentActivity
     // DashboardGetStarted
-  },
-  apollo: {
-    // Apollo specific options
-    orders: gql`
-      query {
-        orders {
-          id
-          items {
-            id
-          }
-        }
-      }
-    `,
-    items: gql`
-      query {
-        items {
-          id
-          price
-        }
-      }
-    `
   },
   data () {
     return {

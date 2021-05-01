@@ -24,7 +24,6 @@
     "color-convert": "^2.0.1",
     "core-js": "^3.6.5",
     "generate-password": "^1.5.1",
-    "graphql": "^15.3.0",
     "jest": "^26.2.2",
     "jest-serializer-vue": "^2.0.2",
     "register-service-worker": "^1.7.1",
