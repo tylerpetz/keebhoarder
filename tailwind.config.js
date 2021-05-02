@@ -10,6 +10,7 @@ module.exports = {
       './src/App.vue',
       './src/views/**/*.vue',
       './src/components/**/*.vue',
+      './src/modals/**/*.vue',
       './src/main.js'
     ],
     safelist: [...themeNames]
