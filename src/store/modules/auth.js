@@ -15,6 +15,11 @@ export default {
   },
   actions: {
     async register ({ commit }, user) {
+      if (user.password !== user.passwordRepeat) {
+        return commit('AUTH_ERROR', 'Your passwords must match!')
+      } else {
+        delete user.passwordRepeat
+      }
       commit('AUTH_START')
       try {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/register', user)
@@ -23,7 +28,8 @@ export default {
         Vue.axios.defaults.headers.common.Authorization = data.tokens.access.token
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
       } catch (e) {
-        commit('AUTH_ERROR')
+        console.log(e)
+        commit('AUTH_ERROR', e)
       }
     },
     async login ({ commit }, user) {

@@ -20,7 +20,7 @@ export default {
     class="w-full p-3 flex flex-row items-start justify-between"
     :class="$store.getters['auth/loggedIn'] ? 'border-theme-border' : 'border-transparent'"
   >
-    <div class="flex flex-row">
+    <div class="flex flex-row items-center">
       <h1 class="mr-4">
         <router-link :to="{ name: 'Home' }">
           <Keycap
@@ -31,6 +31,15 @@ export default {
           </Keycap>
         </router-link>
       </h1>
+      <template v-if="$store.getters['auth/loggedIn']">
+        <router-link
+          :to="{ name: 'Lists' }"
+          :class="$route.name === 'Lists' ? 'text-theme-link hover:text-theme-link-hover' : 'text-theme-text hover:text-theme-text-d'"
+          class="p-3"
+        >
+          Lists
+        </router-link>
+      </template>
     </div>
     <div class="flex flex-row">
       <template v-if="$store.getters['auth/loggedIn']">

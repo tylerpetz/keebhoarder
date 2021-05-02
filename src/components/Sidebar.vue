@@ -45,6 +45,18 @@ export default {
       </router-link>
       <router-link
         class="flex items-center p-3 text-theme-text"
+        :to="{ name: 'Lists' }"
+      >
+        <Keycap
+          theme="base"
+          cap-style="tiny"
+        >
+          I
+        </Keycap>
+        <span class="ml-4">Lists</span>
+      </router-link>
+      <router-link
+        class="flex items-center p-3 text-theme-text"
         :to="{ name: 'Builds' }"
       >
         <Keycap
