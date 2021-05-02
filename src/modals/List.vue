@@ -25,7 +25,6 @@ export default {
 
 <template>
   <Modal
-    :show="$store.state.app.activeModal === 'list'"
     @close="$emit('close')"
   >
     <div class="flex flex-col p-6 items-center">

@@ -21,7 +21,7 @@ export default {
         v-for="theme in themes"
         :key="theme.id"
         class="w-full md:w-1/2 lg:w-1/3 p-1"
-        @click="$emit('change-themes', theme)"
+        @click="$store.commit('app/SET_ACTIVE_THEME', theme)"
       >
         <div
           :class="[

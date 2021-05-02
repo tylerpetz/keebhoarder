@@ -10,8 +10,7 @@
     "generate-favicons": "node write-favicons.js"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged",
-    "pre-push": "yarn test"
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,vue}": [
