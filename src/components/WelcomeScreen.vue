@@ -112,7 +112,7 @@ export default {
       theme="mod"
       cap-style="large"
       class="mt-6"
-      @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'theme')"
+      @click.native="$showModal('Themes')"
     >
       Swap Keycaps
     </Keycap>

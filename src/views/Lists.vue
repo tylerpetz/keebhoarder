@@ -1,26 +1,14 @@
 <script>
-import ListModal from '@/components/ListModal'
 import IsPublic from '@/components/IsPublic'
+
 export default {
   name: 'Lists',
   components: {
-    ListModal,
     IsPublic
   },
   data () {
     return {
-      lists: [],
-      activeList: false
-    }
-  },
-  computed: {
-    activeModal: {
-      get () {
-        return this.$store.state.app.activeModal
-      },
-      set (modal) {
-        this.$store.commit('app/SET_ACTIVE_MODAL', modal)
-      }
+      lists: []
     }
   },
   mounted () {
@@ -30,8 +18,7 @@ export default {
   },
   methods: {
     editList (list) {
-      this.activeList = list
-      this.activeModal = 'list'
+      this.$showModal('List', { props: { list } })
     }
   }
 }
@@ -53,7 +40,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="activeModal = 'list'"
+          @click.native="$showModal('List')"
         >
           Create New List
         </Keycap>
@@ -170,10 +157,6 @@ export default {
           </div>
         </div>
       </div>
-      <list-modal
-        :list="activeList || null"
-        @close="activeModal = ''"
-      />
     </div>
   </div>
 </template>

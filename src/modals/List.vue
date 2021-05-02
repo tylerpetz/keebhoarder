@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'ListModal',
+  name: 'List',
   props: {
     list: {
       type: Object,

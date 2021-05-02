@@ -69,7 +69,7 @@ export default {
             theme="mod"
             cap-style="large"
             class="ml-2"
-            @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'theme')"
+            @click.native="$showModal('Themes')"
           >
             Swap Keycaps
           </Keycap>
@@ -95,7 +95,7 @@ export default {
           cap-style="large"
           class="ml-2"
           theme="mod"
-          @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'register')"
+          @click.native="$showModal('Auth', { props: { authType: 'register' }})"
         >
           Join
         </Keycap>
@@ -103,7 +103,7 @@ export default {
           cap-style="large"
           class="ml-2"
           theme="accent"
-          @click.native="$store.commit('app/SET_ACTIVE_MODAL', 'login')"
+          @click.native="$showModal('Auth', { props: { authType: 'login' }})"
         >
           Log In
         </Keycap>

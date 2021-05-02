@@ -5,10 +5,6 @@ export default {
     modalClass: {
       type: String,
       default: 'w-72 sm:w-80 md:w-96'
-    },
-    show: {
-      type: Boolean,
-      default: false
     }
   },
   created () {
@@ -30,7 +26,6 @@ export default {
     name="modal"
   >
     <div
-      v-if="show"
       class="absolute z-50 flex h-full w-full inset-0 items-center justify-center py-10 md:py-20"
     >
       <div
@@ -40,7 +35,7 @@ export default {
         <header class="p-2">
           <Keycap
             theme="accent"
-            @click.native="$emit('close')"
+            @click.native="$closeModal"
           >
             Esc
           </Keycap>

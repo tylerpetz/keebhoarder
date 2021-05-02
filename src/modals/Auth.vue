@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'AuthForm',
+  name: 'Auth',
   props: {
     authType: {
       type: String,
@@ -30,7 +30,7 @@ export default {
       const params = this.authType === 'register' ? this.credentials : { email: this.credentials.username, password: this.credentials.password }
       const auth = await this.$store.dispatch(`auth/${this.authType}`, params)
       if (auth === 'success') {
-        this.$emit('close')
+        this.$closeModal()
       }
     }
   }
@@ -40,8 +40,7 @@ export default {
 <template>
   <Modal
     modal-class="w-72 sm:w-80 md:w-96"
-    :show="show"
-    @close="$emit('close')"
+    @close="$closeModal"
   >
     <form
       class="m-0 p-0"
