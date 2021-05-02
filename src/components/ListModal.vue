@@ -1,70 +1,44 @@
 <script>
 export default {
-  name: 'ItemModal',
+  name: 'ListModal',
+  props: {
+    list: {
+      type: Object,
+      required: false,
+      default: () => {}
+    }
+  },
   data () {
     return {
-      itemTypes: [
-        {
-          text: 'Keyboard',
-          value: 'usd'
-        },
-        {
-          text: 'Keycap Set',
-          value: 'usd'
-        },
-        {
-          text: 'Artisan Keycap',
-          value: 'usd'
-        },
-        {
-          text: 'Switch',
-          value: 'usd'
-        },
-        {
-          text: 'Case',
-          value: 'usd'
-        },
-        {
-          text: 'PCB',
-          value: 'usd'
-        },
-        {
-          text: 'Cable',
-          value: 'usd'
-        },
-        {
-          text: 'Deskmat',
-          value: 'usd'
-        },
-        {
-          text: 'Other',
-          value: 'usd'
-        }
-      ],
-      currencyTypes: [
-        {
-          text: '$ (USD)',
-          value: 'usd'
-        }
-      ]
+      currentList: {
+        name: '',
+        description: '',
+        public: false
+      }
     }
+  },
+  mounted () {
+    console.log('moutned!')
+    this.currentList = this.list
   }
 }
 </script>
 
 <template>
   <Modal
-    :show="$store.state.app.activeModal === 'add-list'"
+    :show="$store.state.app.activeModal === 'list'"
     @close="$emit('close')"
   >
     <div class="flex flex-col p-6 items-center">
       <FormInput
+        v-model="currentList.name"
         class="w-full mb-6"
         type="text"
       >
         Name *
       </FormInput>
       <FormInput
+        v-model="currentList.description"
         class="w-full mb-6"
         type="text"
       >
