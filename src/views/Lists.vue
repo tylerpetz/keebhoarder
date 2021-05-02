@@ -8,32 +8,7 @@ export default {
   },
   data () {
     return {
-      people: [
-        {
-          name: 'tyler',
-          title: 'baws',
-          email: 'tylerpetz@gmail.com',
-          role: 'admin'
-        },
-        {
-          name: 'tyler',
-          title: 'baws',
-          email: 'tylerpetz@gmail.com',
-          role: 'admin'
-        },
-        {
-          name: 'tyler',
-          title: 'baws',
-          email: 'tylerpetz@gmail.com',
-          role: 'admin'
-        },
-        {
-          name: 'tyler',
-          title: 'baws',
-          email: 'tylerpetz@gmail.com',
-          role: 'admin'
-        }
-      ]
+      lists: []
     }
   },
   computed: {
@@ -45,6 +20,11 @@ export default {
         this.$store.commit('app/SET_ACTIVE_MODAL', modal)
       }
     }
+  },
+  mounted () {
+    this.axios.get('http://localhost:3000/v1/lists?limit=10&page=1').then(({ data }) => {
+      this.lists = [...data.results]
+    })
   }
 }
 </script>
@@ -110,21 +90,21 @@ export default {
               </thead>
               <tbody>
                 <tr
-                  v-for="person in people"
-                  :key="person.email"
+                  v-for="list in lists"
+                  :key="list.id"
                   class="bg-theme-bg-l text-theme-text"
                 >
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ person.name }}
+                    {{ list.name }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ person.title }}
+                    {{ list.description }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ person.email }}
+                    {{ list.public }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ person.role }}
+                    {{ list.count }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a

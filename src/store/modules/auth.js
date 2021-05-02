@@ -25,7 +25,7 @@ export default {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/register', user)
         localStorage.setItem('tokens', JSON.stringify(data.tokens))
         localStorage.setItem('currentUser', JSON.stringify(data.user))
-        Vue.axios.defaults.headers.common.Authorization = data.tokens.access.token
+        Vue.axios.defaults.headers.common.Authorization = `Bearer ${data.tokens.access.token}`
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
       } catch (e) {
         console.log(e)
@@ -38,7 +38,7 @@ export default {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/login', user)
         localStorage.setItem('tokens', JSON.stringify(data.tokens))
         localStorage.setItem('currentUser', JSON.stringify(data.user))
-        Vue.axios.defaults.headers.common.Authorization = data.tokens.access.token
+        Vue.axios.defaults.headers.common.Authorization = `Bearer ${data.tokens.access.token}`
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
       } catch (e) {
         commit('AUTH_ERROR')
