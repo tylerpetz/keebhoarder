@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
-    "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "generate-favicons": "node write-favicons.js",
     "start": "vue-cli-service serve",
-    "test": "jest --verbose"
+    "test": "vue-cli-service test:e2e"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-rc.8",
