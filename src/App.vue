@@ -30,6 +30,7 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('auth/attemptLogin')
     if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }

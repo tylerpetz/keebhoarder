@@ -14,23 +14,20 @@ function detectTokens () {
   const recoveryToken = detectRecoveryToken()
 
   if (emailToken) {
-    console.log('Detected email confirmation token', emailToken)
+    // console.log('Detected email confirmation token', emailToken)
     confirmEmailToken(emailToken)
-    return
   } else if (externalAccessToken) {
-    console.log(
-      'Detected external access token, received object for external login',
-      externalAccessToken
-    )
+    // console.log(
+    //   'Detected external access token, received object for external login',
+    //   externalAccessToken
+    // )
     confirmExternalAccessToken(externalAccessToken)
-    return
   } else if (recoveryToken) {
-    console.log('found recovery token', recoveryToken)
+    // console.log('found recovery token', recoveryToken)
     confirmRecoveryToken(recoveryToken)
-    return
   }
 
-  console.log('No tokens detected in URL hash')
+  // console.log('No tokens detected in URL hash')
 }
 
 /**

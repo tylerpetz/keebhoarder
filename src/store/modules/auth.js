@@ -1,10 +1,16 @@
 import Vue from 'vue'
 
+const setTokensAndUser = function (tokens, user) {
+  localStorage.setItem('tokens', JSON.stringify(tokens))
+  localStorage.setItem('currentUser', JSON.stringify(user))
+  Vue.axios.defaults.headers.common.Authorization = `Bearer ${tokens.access.token}`
+}
+
 export default {
   namespaced: true,
   state () {
     return {
-      status: '',
+      error: '',
       currentUser: null,
       tokens: {}
     }
@@ -14,39 +20,46 @@ export default {
     currentUser: state => state.currentUser
   },
   actions: {
+    attemptLogin ({ commit }) {
+      if (localStorage.getItem('tokens') && localStorage.getItem('currentUser')) {
+        const tokens = JSON.parse(localStorage.getItem('tokens'))
+        const user = JSON.parse(localStorage.getItem('currentUser'))
+        setTokensAndUser(tokens, user)
+        commit('AUTH_SUCCESS', { tokens, currentUser: user })
+      }
+    },
     async register ({ commit }, user) {
       if (user.password !== user.passwordRepeat) {
         return commit('AUTH_ERROR', 'Your passwords must match!')
       } else {
         delete user.passwordRepeat
       }
-      commit('AUTH_START')
       try {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/register', user)
-        localStorage.setItem('tokens', JSON.stringify(data.tokens))
-        localStorage.setItem('currentUser', JSON.stringify(data.user))
-        Vue.axios.defaults.headers.common.Authorization = `Bearer ${data.tokens.access.token}`
+        setTokensAndUser(data.tokens, data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
+        return 'success'
       } catch (e) {
-        console.log(e)
-        commit('AUTH_ERROR', e)
+        commit('AUTH_ERROR', e.response.data.message || 'There was a problem registering you.')
+        return 'error'
       }
     },
     async login ({ commit }, user) {
-      commit('AUTH_START')
       try {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/login', user)
-        localStorage.setItem('tokens', JSON.stringify(data.tokens))
-        localStorage.setItem('currentUser', JSON.stringify(data.user))
-        Vue.axios.defaults.headers.common.Authorization = `Bearer ${data.tokens.access.token}`
+        setTokensAndUser(data.tokens, data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
+        return 'success'
       } catch (e) {
-        commit('AUTH_ERROR')
+        commit('AUTH_ERROR', e.response.data.message || 'There was a problem logging you in.')
+        return 'error'
       }
     },
-    async logout ({ commit }) {
+    async logout ({ state, commit }) {
       try {
-        await Vue.axios.post('http://localhost:3000/v1/auth/logout')
+        if (state.tokens.refresh.token) {
+          await Vue.axios.post('http://localhost:3000/v1/auth/logout', { refreshToken: state.tokens.refresh.token })
+        }
         localStorage.removeItem('tokens')
         localStorage.removeItem('currentUser')
         Vue.axios.defaults.headers.common.Authorization = ''
@@ -59,18 +72,14 @@ export default {
   },
   mutations: {
     AUTH_SUCCESS (state, { tokens, currentUser }) {
-      state.status = 'success'
       state.tokens = tokens
       state.currentUser = currentUser
     },
-    AUTH_START (state) {
-      state.status = 'loading'
-    },
-    AUTH_ERROR (state) {
-      state.status = 'error'
+    AUTH_ERROR (state, error = 'error') {
+      state.error = error
     },
     LOGOUT (state) {
-      state.status = ''
+      state.error = ''
       state.tokens = {}
       state.currentUser = null
     }

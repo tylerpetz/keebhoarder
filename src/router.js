@@ -58,12 +58,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('routerbeforeeach', to.name, store.getters['auth/loggedIn'])
   if (PUBLIC_ROUTES.includes(to.name) || store.getters['auth/loggedIn']) {
-    console.log('1')
     next()
   } else {
-    console.log('2')
     next({ name: 'Home' })
   }
 })

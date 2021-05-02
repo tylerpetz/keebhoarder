@@ -28,8 +28,10 @@ export default {
     },
     async handleSubmit () {
       const params = this.authType === 'register' ? this.credentials : { email: this.credentials.username, password: this.credentials.password }
-      await this.$store.dispatch(`auth/${this.authType}`, params)
-      this.$emit('close')
+      const auth = await this.$store.dispatch(`auth/${this.authType}`, params)
+      if (auth === 'success') {
+        this.$emit('close')
+      }
     }
   }
 }
@@ -102,10 +104,10 @@ export default {
           </FormInput>
         </template>
         <div
-          v-if="errors.length"
-          class="text-xs font-semibold text-theme-text rounded mt-4"
+          v-if="$store.state.auth.error"
+          class="text-xs font-semibold text-theme-link rounded mt-4"
         >
-          Errors!
+          {{ $store.state.auth.error }}
         </div>
       </div>
       <footer

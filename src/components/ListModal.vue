@@ -18,7 +18,6 @@ export default {
     }
   },
   mounted () {
-    console.log('moutned!')
     this.currentList = this.list
   }
 }

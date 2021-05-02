@@ -30,7 +30,6 @@ export default {
     hsl () {
       const colors = Object.keys(this.colors)
       const convertedColors = {}
-      console.log('colors', colors)
       colors.forEach((color) => {
         convertedColors[color] = convert.hex.hsl(this.colors[color].replace('#', ''))
       })
