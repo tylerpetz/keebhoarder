@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
 import auth from './modules/auth'
 import app from './modules/app'
+import list from './modules/list'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     auth,
-    app
+    app,
+    list
   },
   plugins: [vuexLocalStorage.plugin]
 })

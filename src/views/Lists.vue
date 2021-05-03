@@ -6,19 +6,15 @@ export default {
   components: {
     IsPublic
   },
-  data () {
-    return {
-      lists: []
-    }
-  },
   mounted () {
-    this.axios.get('http://localhost:3000/v1/lists?limit=10&page=1').then(({ data }) => {
-      this.lists = [...data.results]
-    })
+    this.$store.dispatch('list/getLists')
   },
   methods: {
     editList (list) {
       this.$showModal('List', { props: { list } })
+    },
+    removeList ({ id }) {
+      this.$store.dispatch('list/deleteList', id)
     }
   }
 }
@@ -85,12 +81,17 @@ export default {
               </thead>
               <tbody>
                 <tr
-                  v-for="list in lists"
+                  v-for="list in $store.getters['list/lists']"
                   :key="list.id"
                   class="bg-theme-bg-l text-theme-text"
                 >
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ list.name }}
+                    <router-link
+                      :to="{ name: 'SingleList', params: { id: list.id } }"
+                      class="text-theme-link hover:text-theme-link-hover"
+                    >
+                      {{ list.name }}
+                    </router-link>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm">
                     {{ list.description }}
@@ -127,6 +128,7 @@ export default {
                       <button
                         type="button"
                         class="text-theme-link hover:text-theme-link-hover"
+                        @click="removeList(list)"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -139,13 +141,7 @@ export default {
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                           />
                         </svg>
                       </button>

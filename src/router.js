@@ -40,6 +40,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "lists" */ '@/views/Lists.vue')
   },
   {
+    path: '/lists/:id',
+    name: 'SingleList',
+    component: () => import(/* webpackChunkName: "lists" */ '@/views/SingleList.vue'),
+    props: true
+  },
+  {
     path: '/settings',
     name: 'Settings',
     component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings.vue')
