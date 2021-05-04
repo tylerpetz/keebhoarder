@@ -28,11 +28,15 @@ export default {
         dispatch('getLists')
       })
     },
-    updateList ({ dispatch }, list) {
+    updateList ({ commit, dispatch }, { list, updateCurrent = false }) {
+      console.log('updatecurrent', updateCurrent)
       const updatedList = { ...list }
       delete updatedList.user
       delete updatedList.id
-      Vue.axios.patch(`http://localhost:3000/v1/lists/${list.id}`, updatedList).then(() => {
+      Vue.axios.patch(`http://localhost:3000/v1/lists/${list.id}`, updatedList).then(({ data }) => {
+        if (updateCurrent) {
+          commit('SET_CURRENT_LIST', data)
+        }
         dispatch('getLists')
       })
     },

@@ -25,9 +25,9 @@ export default {
   methods: {
     createOrUpdateList () {
       if (this.list) {
-        this.$store.dispatch('list/updateList', this.currentList)
+        this.$store.dispatch('list/updateList', { list: this.currentList, updateCurrent: this.$route.name === 'SingleList' })
       } else {
-        this.$store.dispatch('list/createList', this.currentList)
+        this.$store.dispatch('list/createList', { list: this.currentList })
       }
       this.$closeModal()
     }
@@ -39,8 +39,8 @@ export default {
   <Modal
     @close="$closeModal"
   >
-    <form @submit="createOrUpdateList">
-      <div class="flex flex-col p-6 items-center">
+    <form @submit.prevent="createOrUpdateList">
+      <div class="flex flex-col p-6">
         <FormInput
           v-model="currentList.name"
           class="w-full mb-6"
@@ -56,17 +56,28 @@ export default {
         >
           Description
         </FormInput>
-        <label>
-          <input
-            v-model="currentList.public"
-            type="checkbox"
-          >
-          Make List Public
-        </label>
+        <div class="relative flex items-start justify-start">
+          <div class="flex items-center h-6">
+            <input
+              id="isPublic"
+              v-model="currentList.public"
+              type="checkbox"
+              class="focus:text-theme-border-press h-4 w-4 text-theme-border border-theme-border rounded"
+            >
+          </div>
+          <div class="ml-3">
+            <label
+              for="isPublic"
+              class="font-medium text-theme-text text-sm"
+            >Public</label>
+            <p class="text-theme-text-l text-xs">
+              Allow other users to see this list.
+            </p>
+          </div>
+        </div>
       </div>
       <footer
-        slot="footer"
-        class="p-2 flex justify-end"
+        class="bg-theme-bg-d p-2 flex justify-end"
       >
         <Keycap
           theme="accent"

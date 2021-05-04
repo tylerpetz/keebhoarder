@@ -102,8 +102,7 @@ export default {
       </Keycap>
     </div>
     <footer
-      slot="footer"
-      class="p-2 flex justify-end"
+      class="bg-theme-bg-d p-2 flex justify-end"
     >
       <Keycap
         theme="accent"

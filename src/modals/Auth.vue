@@ -110,7 +110,6 @@ export default {
         </div>
       </div>
       <footer
-        slot="footer"
         class="p-2 flex bg-theme-bg-d"
         :class="authType === 'login' ? 'justify-between' : 'justify-end'"
       >

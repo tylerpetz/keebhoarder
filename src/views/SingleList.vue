@@ -1,7 +1,11 @@
 <script>
 
 export default {
-  name: 'Lists',
+  name: 'SingleList',
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('list/SET_CURRENT_LIST', null)
+    next()
+  },
   props: {
     id: {
       type: String,
@@ -23,7 +27,10 @@ export default {
 </script>
 
 <template>
-  <div class="h-full p-3">
+  <div
+    v-if="$store.getters['list/currentList']"
+    class="h-full p-3"
+  >
     <div class="flex flex-col">
       <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-center rounded shadow">
         <div>

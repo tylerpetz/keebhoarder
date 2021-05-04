@@ -47,7 +47,6 @@ export default {
         >
           <slot />
         </div>
-        <slot name="footer" />
         <slot name="msg" />
       </div>
       <div
