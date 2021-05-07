@@ -22,16 +22,31 @@ export default {
       return `favicon-${this.$store.state.app.activeTheme.id}.svg`
     }
   },
+  created () {
+    this.setupApp()
+  },
   mounted () {
-    Vue.prototype.$showModal = this.ModalProvider.showModal
-    Vue.prototype.$closeModal = this.ModalProvider.closeModal
-    Vue.prototype.$currentModal = this.ModalProvider.getModal.value
     this.$store.dispatch('auth/attemptLogin')
     if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }
   },
   methods: {
+    setupApp () {
+      Vue.prototype.$showModal = this.ModalProvider.showModal
+      Vue.prototype.$closeModal = this.ModalProvider.closeModal
+      Vue.prototype.$currentModal = this.ModalProvider.getModal.value
+      Vue.axios.interceptors.response.use((req) => {
+        console.log(req)
+        return req
+      },
+      (error) => {
+        if (error.response && error.response.status === 401) {
+          this.$store.dispatch('auth/refreshTokens')
+        }
+        return Promise.reject(error)
+      })
+    },
     changeThemes (theme) {
       this.$store.commit('app/SET_ACTIVE_THEME', theme)
 

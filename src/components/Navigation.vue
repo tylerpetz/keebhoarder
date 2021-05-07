@@ -20,8 +20,8 @@ export default {
     class="w-full p-3 flex flex-row items-start justify-between"
     :class="$store.getters['auth/loggedIn'] ? 'border-theme-border' : 'border-transparent'"
   >
-    <div class="flex flex-row items-center">
-      <h1 class="mr-4">
+    <div class="flex flex-row items-center space-x-4">
+      <h1 class="mr-2">
         <router-link :to="{ name: 'Home' }">
           <Keycap
             :theme="$route.name === 'Home' || $route.name === 'Dashboard' ? 'accent' : 'alpha'"
@@ -38,6 +38,13 @@ export default {
           class="p-3"
         >
           Lists
+        </router-link>
+        <router-link
+          :to="{ name: 'Items' }"
+          :class="$route.name === 'Items' ? 'text-theme-link hover:text-theme-link-hover' : 'text-theme-text hover:text-theme-text-d'"
+          class="p-3"
+        >
+          Items
         </router-link>
       </template>
     </div>

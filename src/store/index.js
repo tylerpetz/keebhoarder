@@ -4,6 +4,7 @@ import VuexPersist from 'vuex-persist'
 import auth from './modules/auth'
 import app from './modules/app'
 import list from './modules/list'
+import item from './modules/item'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ const store = new Vuex.Store({
   modules: {
     auth,
     app,
-    list
+    list,
+    item
   },
   plugins: [vuexLocalStorage.plugin]
 })

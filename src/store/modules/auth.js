@@ -55,6 +55,20 @@ export default {
         return 'error'
       }
     },
+    async refreshTokens ({ state, commit }) {
+      try {
+        if (state.tokens.refresh.token) {
+          const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/refresh-tokens', { refreshToken: state.tokens.refresh.token })
+          setTokensAndUser(data.tokens, data.user)
+        }
+      } catch (e) {
+        localStorage.removeItem('tokens')
+        localStorage.removeItem('currentUser')
+        Vue.axios.defaults.headers.common.Authorization = ''
+        commit('AUTH_ERROR')
+        commit('LOGOUT')
+      }
+    },
     async logout ({ state, commit }) {
       try {
         if (state.tokens.refresh.token) {

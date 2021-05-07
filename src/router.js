@@ -20,21 +20,6 @@ const routes = [
     props: true
   },
   {
-    path: '/inventory-item',
-    name: 'InventoryItem',
-    component: () => import(/* webpackChunkName: "inventory-item" */ '@/views/InventoryItem.vue')
-  },
-  {
-    path: '/orders',
-    name: 'Orders',
-    component: () => import(/* webpackChunkName: "orders" */ '@/views/Orders.vue')
-  },
-  {
-    path: '/builds',
-    name: 'Builds',
-    component: () => import(/* webpackChunkName: "builds" */ '@/views/Builds.vue')
-  },
-  {
     path: '/lists',
     name: 'Lists',
     component: () => import(/* webpackChunkName: "lists" */ '@/views/Lists.vue')
@@ -46,9 +31,15 @@ const routes = [
     props: true
   },
   {
-    path: '/settings',
-    name: 'Settings',
-    component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings.vue')
+    path: '/items',
+    name: 'Items',
+    component: () => import(/* webpackChunkName: "items" */ '@/views/Items.vue')
+  },
+  {
+    path: '/items/:id',
+    name: 'SingleItem',
+    component: () => import(/* webpackChunkName: "items" */ '@/views/SingleItem.vue'),
+    props: true
   },
   {
     path: '*',

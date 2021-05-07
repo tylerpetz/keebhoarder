@@ -1,117 +1,93 @@
 <script>
 export default {
   name: 'ItemModal',
+  props: {
+    item: {
+      type: [Object, null],
+      required: false,
+      default: () => null
+    }
+  },
   data () {
     return {
-      itemTypes: [
-        {
-          text: 'Keyboard',
-          value: 'usd'
-        },
-        {
-          text: 'Keycap Set',
-          value: 'usd'
-        },
-        {
-          text: 'Artisan Keycap',
-          value: 'usd'
-        },
-        {
-          text: 'Switch',
-          value: 'usd'
-        },
-        {
-          text: 'Case',
-          value: 'usd'
-        },
-        {
-          text: 'PCB',
-          value: 'usd'
-        },
-        {
-          text: 'Cable',
-          value: 'usd'
-        },
-        {
-          text: 'Deskmat',
-          value: 'usd'
-        },
-        {
-          text: 'Other',
-          value: 'usd'
-        }
-      ],
-      currencyTypes: [
-        {
-          text: '$ (USD)',
-          value: 'usd'
-        }
-      ]
+      currentItem: {
+        name: '',
+        description: '',
+        public: false
+      }
+    }
+  },
+  mounted () {
+    if (this.item) {
+      this.currentItem = { ...this.item }
+    }
+  },
+  methods: {
+    createOrUpdateItem () {
+      if (this.item) {
+        this.$store.dispatch('item/updateItem', { item: this.currentItem, updateCurrent: this.$route.name === 'SingleItem' })
+      } else {
+        this.$store.dispatch('item/createItem', { item: this.currentItem })
+      }
+      this.$closeModal()
     }
   }
 }
 </script>
 
 <template>
-  <Modal @close="$emit('close')">
-    <div class="flex flex-col p-6 items-center">
-      <FormInput
-        class="w-full mb-6"
-        type="text"
-      >
-        Name *
-      </FormInput>
-      <FormSelect
-        :options="itemTypes"
-        class="w-full mb-6"
-        type="text"
-        placeholder="Select Item Type"
-      >
-        Type *
-      </FormSelect>
-      <div class="grid grid-cols-5 w-full mb-6">
+  <Modal
+    @close="$closeModal"
+  >
+    <form @submit.prevent="createOrUpdateItem">
+      <div class="flex flex-col p-6">
         <FormInput
-          class="col-span-3"
-          input-classes="rounded-r-none"
-          type="number"
-          step="any"
+          v-model="currentItem.name"
+          class="w-full mb-6"
+          type="text"
+          required
         >
-          Price *
+          Name *
         </FormInput>
-        <FormSelect
-          class="col-span-2"
-          :options="currencyTypes"
-          input-classes="rounded-l-none"
+        <FormInput
+          v-model="currentItem.description"
+          class="w-full mb-6"
           type="text"
         >
-          Currency *
-        </FormSelect>
+          Description
+        </FormInput>
+        <div class="relative flex items-start justify-start">
+          <div class="flex items-center h-6">
+            <input
+              id="isPublic"
+              v-model="currentItem.public"
+              type="checkbox"
+              class="focus:text-theme-border-press h-4 w-4 text-theme-border border-theme-border rounded"
+            >
+          </div>
+          <div class="ml-3">
+            <label
+              for="isPublic"
+              class="font-medium text-theme-text text-sm"
+            >Public</label>
+            <p class="text-theme-text-l text-xs">
+              Allow other users to see this item.
+            </p>
+          </div>
+        </div>
       </div>
-      <FormInput
-        class="w-full mb-6"
-        type="text"
+      <footer
+        class="bg-theme-bg-d p-2 flex justify-end"
       >
-        Description
-      </FormInput>
-      <Keycap
-        theme="mod"
-        cap-style="large"
-        @click.native="$emit('close')"
-      >
-        Add Photos
-      </Keycap>
-    </div>
-    <footer
-      class="bg-theme-bg-d p-2 flex justify-end"
-    >
-      <Keycap
-        theme="accent"
-        cap-style="large"
-        class="capitalize"
-        @click.native="$emit('close')"
-      >
-        &#10229; Save Item
-      </Keycap>
-    </footer>
+        <Keycap
+          theme="accent"
+          cap-style="large"
+          class="capitalize"
+          type="submit"
+        >
+          &#10229; Save Item
+        </Keycap>
+      </footer>
+    </form>
   </Modal>
 </template>

@@ -3,19 +3,9 @@ import IsPublic from '@/components/IsPublic'
 import itemColumns from '@/tables/itemColumns.js'
 
 export default {
-  name: 'SingleList',
+  name: 'Items',
   components: {
     IsPublic
-  },
-  beforeRouteLeave (to, from, next) {
-    this.$store.commit('list/SET_CURRENT_LIST', null)
-    next()
-  },
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
   },
   data () {
     return {
@@ -23,50 +13,38 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('list/getListById', this.id)
+    this.$store.dispatch('item/getItems')
   },
   methods: {
-    editList (list) {
-      this.$showModal('List', { props: { list } })
+    editItem (item) {
+      this.$showModal('Item', { props: { item } })
     },
-    removeList ({ id }) {
-      this.$store.dispatch('list/deleteList', id)
+    removeItem ({ id }) {
+      this.$store.dispatch('item/deleteItem', id)
     }
   }
 }
 </script>
 
 <template>
-  <div
-    v-if="$store.getters['list/currentList']"
-    class="h-full p-3"
-  >
+  <div class="h-full p-3">
     <div class="flex flex-col">
       <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-center rounded shadow">
-        <div>
-          <h3 class="text-xl leading-6 font-medium text-theme-text">
-            {{ $store.getters['list/currentList'].name }}
-
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 text-2xs">
-              {{ $store.getters['list/currentList'].public ? 'Public' : 'Private' }}
-            </span>
-          </h3>
-          <p class="mt-2 max-w-lg text-sm text-theme-text">
-            {{ $store.getters['list/currentList'].description }}
-          </p>
-        </div>
+        <h3 class="text-lg leading-6 font-medium text-theme-text">
+          Items
+        </h3>
         <Keycap
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('List', { props: { list: $store.getters['list/currentList'] }})"
+          @click.native="$showModal('Item')"
         >
-          Edit {{ $store.getters['list/currentList'].name }}
+          Create New Item
         </Keycap>
       </div>
       <vue-good-table
         :columns="columns"
-        :rows="$store.getters['list/currentList'].items"
+        :rows="$store.getters['item/items']"
       >
         <template
           slot="table-row"
@@ -90,7 +68,7 @@ export default {
             <button
               type="button"
               class="text-theme-link hover:text-theme-link-hover"
-              @click="editList(props.row)"
+              @click="editItem(props.row)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +89,7 @@ export default {
             <button
               type="button"
               class="text-theme-link hover:text-theme-link-hover"
-              @click="removeList(props.row)"
+              @click="removeItem(props.row)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
