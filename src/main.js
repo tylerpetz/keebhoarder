@@ -10,10 +10,16 @@ import FormInput from '@/components/FormInput.vue'
 import FormSelect from '@/components/FormSelect.vue'
 import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
+import VueGoodTablePlugin from 'vue-good-table'
 import './assets/main.css'
 import './assets/themes.css'
 
 import attemptToAuthorizeTokens from './helpers/authorize-tokens'
+
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+
+Vue.use(VueGoodTablePlugin)
 
 Vue.config.productionTip = false
 Vue.use(VueGtag, {
