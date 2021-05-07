@@ -36,16 +36,13 @@ export default {
       Vue.prototype.$showModal = this.ModalProvider.showModal
       Vue.prototype.$closeModal = this.ModalProvider.closeModal
       Vue.prototype.$currentModal = this.ModalProvider.getModal.value
-      Vue.axios.interceptors.response.use((req) => {
-        console.log(req)
-        return req
-      },
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          this.$store.dispatch('auth/refreshTokens')
-        }
-        return Promise.reject(error)
-      })
+      Vue.axios.interceptors.response.use(null,
+        (error) => {
+          if (error.response && error.response.status === 401) {
+            this.$store.dispatch('auth/refreshTokens')
+          }
+          return Promise.reject(error)
+        })
     },
     changeThemes (theme) {
       this.$store.commit('app/SET_ACTIVE_THEME', theme)

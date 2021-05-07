@@ -5,12 +5,12 @@ export default {
   state () {
     return {
       lists: [],
-      currentList: null
+      currentList: {}
     }
   },
   getters: {
     lists: state => state.lists,
-    currentList: state => state.currentList
+    currentList: state => Object.keys(state.currentList).length ? state.currentList : null
   },
   actions: {
     getLists ({ commit }) {

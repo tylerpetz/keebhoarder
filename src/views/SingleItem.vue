@@ -2,7 +2,7 @@
 export default {
   name: 'SingleItem',
   beforeRouteLeave (to, from, next) {
-    this.$store.commit('item/SET_CURRENT_ITEM', null)
+    this.$store.commit('item/SET_CURRENT_ITEM', {})
     next()
   },
   props: {
@@ -33,10 +33,10 @@ export default {
     <div class="flex flex-col">
       <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-center rounded shadow">
         <div>
-          <h3 class="text-xl leading-6 font-medium text-theme-text">
+          <h3 class="text-xl leading-6 font-medium text-theme-text flex items-center">
             {{ $store.getters['item/currentItem'].name }}
 
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 text-2xs">
+            <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
               {{ $store.getters['item/currentItem'].public ? 'Public' : 'Private' }}
             </span>
           </h3>

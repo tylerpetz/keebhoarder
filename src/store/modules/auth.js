@@ -1,9 +1,12 @@
 import Vue from 'vue'
 
-const setTokensAndUser = function (tokens, user) {
+const setTokens = function (tokens) {
   localStorage.setItem('tokens', JSON.stringify(tokens))
-  localStorage.setItem('currentUser', JSON.stringify(user))
   Vue.axios.defaults.headers.common.Authorization = `Bearer ${tokens.access.token}`
+}
+
+const setUser = function (user) {
+  localStorage.setItem('currentUser', JSON.stringify(user))
 }
 
 export default {
@@ -24,7 +27,8 @@ export default {
       if (localStorage.getItem('tokens') && localStorage.getItem('currentUser')) {
         const tokens = JSON.parse(localStorage.getItem('tokens'))
         const user = JSON.parse(localStorage.getItem('currentUser'))
-        setTokensAndUser(tokens, user)
+        setTokens(tokens)
+        setUser(user)
         commit('AUTH_SUCCESS', { tokens, currentUser: user })
       }
     },
@@ -36,7 +40,8 @@ export default {
       }
       try {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/register', user)
-        setTokensAndUser(data.tokens, data.user)
+        setTokens(data.tokens)
+        setUser(data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
         return 'success'
       } catch (e) {
@@ -47,7 +52,8 @@ export default {
     async login ({ commit }, user) {
       try {
         const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/login', user)
-        setTokensAndUser(data.tokens, data.user)
+        setTokens(data.tokens)
+        setUser(data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
         return 'success'
       } catch (e) {
@@ -59,7 +65,7 @@ export default {
       try {
         if (state.tokens.refresh.token) {
           const { data } = await Vue.axios.post('http://localhost:3000/v1/auth/refresh-tokens', { refreshToken: state.tokens.refresh.token })
-          setTokensAndUser(data.tokens, data.user)
+          setTokens(data)
         }
       } catch (e) {
         localStorage.removeItem('tokens')
