@@ -54,6 +54,7 @@ export default {
           Edit {{ $store.getters['list/currentList'].name }}
         </Keycap>
       </div>
+      <pre>{{ $store.getters['list/currentList'].items }}</pre>
     </div>
   </div>
 </template>
