@@ -33,6 +33,10 @@ export default {
       delete updatedList.user
       delete updatedList.id
       delete updatedList.items
+      delete updatedList.vgt_id
+      delete updatedList.originalIndex
+      delete updatedList.createdAt
+      delete updatedList.updatedAt
       Vue.axios.patch(`http://localhost:3000/v1/lists/${list.id}`, updatedList).then(({ data }) => {
         if (updateCurrent) {
           commit('SET_CURRENT_LIST', data)

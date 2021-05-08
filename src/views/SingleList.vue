@@ -55,14 +55,23 @@ export default {
             {{ $store.getters['list/currentList'].description }}
           </p>
         </div>
-        <Keycap
-          theme="mod"
-          cap-style="large"
-          type="button"
-          @click.native="$showModal('ListModal', { props: { list: $store.getters['list/currentList'] }})"
-        >
-          Edit {{ $store.getters['list/currentList'].name }}
-        </Keycap>
+        <div class="flex space-x-4">
+          <Keycap
+            cap-style="large"
+            type="button"
+            @click.native="$showModal('ListModal', { props: { list: $store.getters['list/currentList'] }})"
+          >
+            Edit {{ $store.getters['list/currentList'].name }}
+          </Keycap>
+          <Keycap
+            theme="mod"
+            cap-style="large"
+            type="button"
+            @click.native="$showModal('ItemModal', { props: { listId: $store.getters['list/currentList']._id }})"
+          >
+            Add Item to {{ $store.getters['list/currentList'].name }}
+          </Keycap>
+        </div>
       </div>
       <vue-good-table
         :columns="columns"
