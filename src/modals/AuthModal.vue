@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Auth',
+  name: 'AuthModal',
   props: {
     authType: {
       type: String,

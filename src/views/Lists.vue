@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     editList (list) {
-      this.$showModal('List', { props: { list } })
+      this.$showModal('ListModal', { props: { list } })
     },
     removeList ({ id }) {
       this.$store.dispatch('list/deleteList', id)
@@ -42,7 +42,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('List')"
+          @click.native="$showModal('ListModal')"
         >
           Create New List
         </Keycap>

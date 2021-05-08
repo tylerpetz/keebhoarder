@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     editItem (item) {
-      this.$showModal('Item', { props: { item } })
+      this.$showModal('ItemModal', { props: { item } })
     },
     removeItem ({ id }) {
       this.$store.dispatch('item/deleteItem', id)
@@ -37,7 +37,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('Item')"
+          @click.native="$showModal('ItemModal')"
         >
           Create New Item
         </Keycap>

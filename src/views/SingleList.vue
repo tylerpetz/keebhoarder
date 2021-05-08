@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     editList (list) {
-      this.$showModal('List', { props: { list } })
+      this.$showModal('ListModal', { props: { list } })
     },
     removeList ({ id }) {
       this.$store.dispatch('list/deleteList', id)
@@ -59,7 +59,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('List', { props: { list: $store.getters['list/currentList'] }})"
+          @click.native="$showModal('ListModal', { props: { list: $store.getters['list/currentList'] }})"
         >
           Edit {{ $store.getters['list/currentList'].name }}
         </Keycap>

@@ -48,7 +48,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('Item', { props: { item: $store.getters['item/currentItem'] }})"
+          @click.native="$showModal('ItemModal', { props: { item: $store.getters['item/currentItem'] }})"
         >
           Edit {{ $store.getters['item/currentItem'].name }}
         </Keycap>

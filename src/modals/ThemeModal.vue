@@ -2,7 +2,7 @@
 import { themes } from '@/utils/themes'
 
 export default {
-  name: 'Themes',
+  name: 'ThemeModal',
   data () {
     return {
       themes
