@@ -23,6 +23,22 @@ export default [
     sortable: false
   },
   {
+    label: 'Created',
+    field: 'createdAt',
+    type: 'date',
+    dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
+    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
+    sortable: true
+  },
+  {
+    label: 'Last Updated',
+    field: 'updatedAt',
+    type: 'date',
+    dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
+    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
+    sortable: true
+  },
+  {
     label: 'Actions',
     field: 'after',
     type: 'boolean',
