@@ -29,7 +29,7 @@ export default {
 <template>
   <div class="h-full p-3">
     <div class="flex flex-col">
-      <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-center rounded shadow">
+      <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-start rounded shadow">
         <div>
           <h3 class="text-lg leading-6 font-medium text-theme-text">
             Lists
@@ -50,6 +50,7 @@ export default {
       <vue-good-table
         :columns="columns"
         :rows="$store.getters['list/lists']"
+        style-class="vgt-table striped"
       >
         <template
           slot="table-row"

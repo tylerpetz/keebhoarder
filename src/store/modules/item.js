@@ -32,7 +32,7 @@ export default {
       const updatedItem = { ...item }
       delete updatedItem.user
       delete updatedItem.id
-      delete updatedItem.items
+      // delete updatedItem.items
       Vue.axios.patch(`http://localhost:3000/v1/items/${item.id}`, updatedItem).then(({ data }) => {
         if (updateCurrent) {
           commit('SET_CURRENT_ITEM', data)

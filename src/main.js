@@ -11,21 +11,18 @@ import FormSelect from '@/components/FormSelect.vue'
 import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
 import VueGoodTablePlugin from 'vue-good-table'
+import 'vue-good-table/dist/vue-good-table.css'
 import './assets/main.css'
 import './assets/themes.css'
 
 import attemptToAuthorizeTokens from './helpers/authorize-tokens'
-
-// import the styles
-import 'vue-good-table/dist/vue-good-table.css'
-
-Vue.use(VueGoodTablePlugin)
 
 Vue.config.productionTip = false
 Vue.use(VueGtag, {
   config: { id: 'UA-131740937-2' }
 })
 Vue.use(VueAxios, axios)
+Vue.use(VueGoodTablePlugin)
 Vue.component('Keycap', Keycap)
 Vue.component('Modal', Modal)
 Vue.component('FormInput', FormInput)
