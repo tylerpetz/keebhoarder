@@ -12,9 +12,9 @@ import FormSelect from '@/components/FormSelect.vue'
 import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
 import VueGoodTablePlugin from 'vue-good-table'
-import 'vue-good-table/dist/vue-good-table.css'
 import './assets/main.css'
 import './assets/themes.css'
+import './assets/table.scss'
 
 import attemptToAuthorizeTokens from './helpers/authorize-tokens'
 

@@ -55,11 +55,10 @@ export default {
       <vue-good-table
         :columns="columns"
         :is-loading.sync="isLoading"
-        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20] }"
+        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20], dropdownAllowAll: false, rowsPerPageLabel: 'Items per page' }"
         :rows="$store.getters['item/items']"
         :total-rows="$store.getters['list/totalResults']"
         mode="remote"
-        style-class="vgt-table striped"
         @on-page-change="$store.dispatch('item/onPagingChange', $event)"
         @on-per-page-change="$store.dispatch('item/onPagingChange', $event)"
         @on-search="$store.dispatch('item/onSearch', $event)"

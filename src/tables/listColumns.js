@@ -1,7 +1,8 @@
 export default [
   {
     label: 'Name',
-    field: 'name'
+    field: 'name',
+    clickable: true
   },
   {
     label: 'Description',

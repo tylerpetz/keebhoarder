@@ -60,9 +60,14 @@ export default {
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider w-full h-screen overflow-y-scroll bg-caps flex flex-col pr-1 justify-between items-center relative scrollbar-thin scrollbar-track-accent-legend scrollbar-thumb-accent-cap hover:scrollbar-thumb-accent-cap-hover"
   >
     <Navigation />
-    <router-view
-      class="w-full flex-grow"
-    />
+    <transition
+      name="fade"
+      mode="out-in"
+    >
+      <router-view
+        class="w-full flex-grow"
+      />
+    </transition>
     <Footer />
     <ModalList />
   </main>
