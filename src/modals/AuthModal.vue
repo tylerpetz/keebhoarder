@@ -91,7 +91,7 @@ export default {
             required
             class="mb-6"
           >
-            Username or Email Address
+            Email Address
           </FormInput>
           <FormInput
             v-model="credentials.password"

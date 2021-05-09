@@ -60,7 +60,7 @@ export default {
           {{ $store.getters['auth/currentUser'].username }}
         </Keycap>
         <template v-else>
-          <Keycap
+          <!-- <Keycap
             cap-style="large"
             class="ml-2"
           >
@@ -71,7 +71,7 @@ export default {
             class="ml-2"
           >
             Settings
-          </Keycap>
+          </Keycap> -->
           <Keycap
             theme="mod"
             cap-style="large"

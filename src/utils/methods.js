@@ -20,3 +20,22 @@ export const pick = (object, keys) => {
     return obj
   }, {})
 }
+
+/**
+ * Remove empty object properties recursively
+ * @param {Object} object
+ * @returns {Object}
+ */
+export const removeEmpty = (obj) => {
+  let isAllUndefined = true
+
+  for (const k in obj) {
+    if (typeof obj[k] === 'object') {
+      obj[k] = removeEmpty(obj[k])
+    }
+    if (typeof obj[k] !== 'undefined' && obj[k] !== '') { isAllUndefined = false }
+  }
+
+  if (isAllUndefined) { obj = undefined }
+  return obj
+}

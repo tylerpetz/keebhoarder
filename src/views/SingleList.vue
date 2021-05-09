@@ -67,7 +67,7 @@ export default {
             theme="mod"
             cap-style="large"
             type="button"
-            @click.native="$showModal('ItemModal', { props: { listId: $store.getters['list/currentList']._id }})"
+            @click.native="$showModal('ItemModal', { props: { listId: $store.getters['list/currentList'].id }})"
           >
             Add Item to {{ $store.getters['list/currentList'].name }}
           </Keycap>

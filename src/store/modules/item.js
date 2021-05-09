@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { queryStringify, pick } from '@/utils/methods.js'
+import { queryStringify, pick, removeEmpty } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
@@ -41,7 +41,7 @@ export default {
       })
     },
     createItem ({ dispatch }, item) {
-      Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/items', item).then(() => {
+      Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/items', removeEmpty(item)).then(() => {
         dispatch('getItems')
       })
     },
