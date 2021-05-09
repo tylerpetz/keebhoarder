@@ -80,7 +80,7 @@ export default {
     },
     onSearch ({ state }, params) {
       // name={query} - only works for exact match on 1 field
-      console.log(params)
+      // console.log(params)
     }
   },
   mutations: {

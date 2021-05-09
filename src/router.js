@@ -13,12 +13,12 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/inventory/:category?',
-    name: 'Inventory',
-    component: () => import(/* webpackChunkName: "inventory" */ '@/views/Inventory.vue'),
-    props: true
-  },
+  // {
+  //   path: '/inventory/:category?',
+  //   name: 'Inventory',
+  //   component: () => import(/* webpackChunkName: "inventory" */ '@/views/Inventory.vue'),
+  //   props: true
+  // },
   {
     path: '/lists',
     name: 'Lists',

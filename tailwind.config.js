@@ -4,6 +4,7 @@ const themeNames = themes.map(theme => `theme-${theme.id}`)
 
 module.exports = {
   important: true,
+  mode: 'jit',
   purge: {
     content: [
       './public/index.html',
