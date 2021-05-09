@@ -10,10 +10,10 @@ export default {
     :class="{ 'bg-theme-bg-d': $store.getters.loggedIn }"
   >
     <p class="text-theme-text text-xs">
-      &copy; 2020 keebhoarder
+      &copy; 2021 keebhoarder
     </p>
-    <p class="text-theme-text text-xs pr-1">
+    <!-- <p class="text-theme-text text-xs pr-1">
       about - help - donate
-    </p>
+    </p> -->
   </footer>
 </template>

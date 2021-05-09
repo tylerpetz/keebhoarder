@@ -39,7 +39,7 @@ export default {
 <template>
   <div class="h-full p-3">
     <div class="flex flex-col">
-      <div class="p-6 bg-theme-bg-d mb-4 flex flex-row justify-between items-start rounded shadow">
+      <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-start rounded shadow">
         <div>
           <h3 class="text-lg leading-6 font-medium text-theme-text">
             Lists
@@ -135,7 +135,7 @@ export default {
           </span>
         </template>
       </vue-good-table>
-      <div class="p-6 bg-theme-bg-d mt-4 flex flex-row justify-end items-start rounded shadow">
+      <div class="p-6 bg-theme-bg-d mt-8 flex flex-row justify-end items-start rounded shadow">
         <Keycap
           theme="mod"
           cap-style="large"
