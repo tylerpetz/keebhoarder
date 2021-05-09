@@ -29,19 +29,19 @@ export default {
   },
   actions: {
     getLists ({ commit, getters }) {
-      Vue.axios.get(`http://localhost:3000/v1/lists?${getters.pagination}${getters.sorts}`).then(({ data }) => {
+      Vue.axios.get(`https://keebhoarder-api.herokuapp.com/v1/lists?${getters.pagination}${getters.sorts}`).then(({ data }) => {
         commit('SET_LISTS', data.results)
         commit('SET_LIST_PAGINATION', pick(data, ['limit', 'page']))
         commit('SET_LIST_META', pick(data, ['totalPages', 'totalResults']))
       })
     },
     getListById ({ commit }, listId) {
-      Vue.axios.get(`http://localhost:3000/v1/lists/${listId}`).then(({ data }) => {
+      Vue.axios.get(`https://keebhoarder-api.herokuapp.com/v1/lists/${listId}`).then(({ data }) => {
         commit('SET_CURRENT_LIST', data)
       })
     },
     createList ({ dispatch }, list) {
-      Vue.axios.post('http://localhost:3000/v1/lists', list).then(() => {
+      Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/lists', list).then(() => {
         dispatch('getLists')
       })
     },
@@ -54,7 +54,7 @@ export default {
       delete updatedList.originalIndex
       delete updatedList.createdAt
       delete updatedList.updatedAt
-      Vue.axios.patch(`http://localhost:3000/v1/lists/${list.id}`, updatedList).then(({ data }) => {
+      Vue.axios.patch(`https://keebhoarder-api.herokuapp.com/v1/lists/${list.id}`, updatedList).then(({ data }) => {
         if (updateCurrent) {
           commit('SET_CURRENT_LIST', data)
         }
@@ -62,7 +62,7 @@ export default {
       })
     },
     deleteList ({ dispatch }, listId) {
-      Vue.axios.delete(`http://localhost:3000/v1/lists/${listId}`).then(() => {
+      Vue.axios.delete(`https://keebhoarder-api.herokuapp.com/v1/lists/${listId}`).then(() => {
         dispatch('getLists')
       })
     },
