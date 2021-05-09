@@ -34,15 +34,15 @@ export default {
       <template v-if="$store.getters['auth/loggedIn']">
         <router-link
           :to="{ name: 'Lists' }"
-          :class="$route.name === 'Lists' ? 'text-theme-link hover:text-theme-link-hover' : 'text-theme-text hover:text-theme-text-d'"
-          class="p-3"
+          :class="$route.name === 'Lists' ? 'underline' : ''"
+          class="p-3 text-theme-text hover:text-theme-text-d"
         >
           Lists
         </router-link>
         <router-link
           :to="{ name: 'Items' }"
-          :class="$route.name === 'Items' ? 'text-theme-link hover:text-theme-link-hover' : 'text-theme-text hover:text-theme-text-d'"
-          class="p-3"
+          :class="$route.name === 'Items' ? 'underline' : ''"
+          class="p-3 text-theme-text hover:text-theme-text-d"
         >
           Items
         </router-link>

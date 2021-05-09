@@ -1,21 +1,38 @@
 import Vue from 'vue'
+import { queryStringify, pick } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
   state () {
     return {
+      loading: false,
       lists: [],
-      currentList: {}
+      currentList: {},
+      pagination: {
+        limit: 5, // vgt-table perPage
+        page: 1 // vgt-table currentPage
+      },
+      sorts: {},
+      meta: {
+        totalResults: 0, // vgt-table totalRows
+        totalPages: 0
+      }
     }
   },
   getters: {
+    currentList: state => Object.keys(state.currentList).length ? state.currentList : null,
     lists: state => state.lists,
-    currentList: state => Object.keys(state.currentList).length ? state.currentList : null
+    loading: state => state.loading,
+    pagination: state => queryStringify(state.pagination),
+    sorts: state => Object.keys(state.sorts).length ? `&sortBy=${state.sorts.field}:${state.sorts.type}` : '',
+    totalResults: state => state.meta.totalResults
   },
   actions: {
-    getLists ({ commit }) {
-      Vue.axios.get('http://localhost:3000/v1/lists?limit=10&page=1').then(({ data }) => {
+    getLists ({ commit, getters }) {
+      Vue.axios.get(`http://localhost:3000/v1/lists?${getters.pagination}${getters.sorts}`).then(({ data }) => {
         commit('SET_LISTS', data.results)
+        commit('SET_LIST_PAGINATION', pick(data, ['limit', 'page']))
+        commit('SET_LIST_META', pick(data, ['totalPages', 'totalResults']))
       })
     },
     getListById ({ commit }, listId) {
@@ -48,14 +65,47 @@ export default {
       Vue.axios.delete(`http://localhost:3000/v1/lists/${listId}`).then(() => {
         dispatch('getLists')
       })
+    },
+    // table options
+    onPagingChange ({ commit, dispatch }, params) {
+      const modifiedParams = {
+        ...params.currentPage && { page: params.currentPage },
+        ...params.currentPerPage && { limit: params.currentPerPage }
+      }
+      commit('SET_LIST_PAGINATION', modifiedParams)
+      dispatch('getLists')
+    },
+    onSortChange ({ commit, dispatch }, params) {
+      commit('SET_LIST_SORTS', params[0])
+      dispatch('getLists')
+    },
+    onSearch ({ state }, params) {
+      // name={query} - only works for exact match on 1 field
+      console.log(params)
     }
   },
   mutations: {
+    SET_LOADING (state, loading) {
+      state.loading = loading
+    },
     SET_LISTS (state, results) {
       state.lists = [...results]
     },
     SET_CURRENT_LIST (state, list) {
       state.currentList = { ...list }
+    },
+    SET_LIST_PAGINATION (state, pagination) {
+      state.pagination = { ...pagination }
+    },
+    SET_LIST_META (state, meta) {
+      state.meta = { ...meta }
+    },
+    SET_LIST_SORTS (state, sorts) {
+      if (sorts.type === 'none') {
+        state.sorts = {}
+      } else {
+        state.sorts = { ...sorts }
+      }
     }
   }
 }

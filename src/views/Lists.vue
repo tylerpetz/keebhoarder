@@ -12,6 +12,16 @@ export default {
       columns: listColumns
     }
   },
+  computed: {
+    isLoading: {
+      get () {
+        return this.$store.getters['list/loading']
+      },
+      set (value) {
+        this.$store.commit('list/SET_LOADING', value)
+      }
+    }
+  },
   mounted () {
     this.$store.dispatch('list/getLists')
   },
@@ -49,8 +59,16 @@ export default {
       </div>
       <vue-good-table
         :columns="columns"
+        :is-loading.sync="isLoading"
+        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20] }"
         :rows="$store.getters['list/lists']"
+        :total-rows="$store.getters['list/totalResults']"
+        mode="remote"
         style-class="vgt-table striped"
+        @on-page-change="$store.dispatch('list/onPagingChange', $event)"
+        @on-per-page-change="$store.dispatch('list/onPagingChange', $event)"
+        @on-search="$store.dispatch('list/onSearch', $event)"
+        @on-sort-change="$store.dispatch('list/onSortChange', $event)"
       >
         <template
           slot="table-row"
@@ -118,6 +136,16 @@ export default {
           </span>
         </template>
       </vue-good-table>
+      <div class="p-6 bg-theme-bg-d mt-4 flex flex-row justify-end items-start rounded shadow">
+        <Keycap
+          theme="mod"
+          cap-style="large"
+          type="button"
+          @click.native="$showModal('ListModal')"
+        >
+          Update Table Options
+        </Keycap>
+      </div>
     </div>
   </div>
 </template>

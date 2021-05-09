@@ -12,6 +12,16 @@ export default {
       columns: itemColumns
     }
   },
+  computed: {
+    isLoading: {
+      get () {
+        return this.$store.getters['item/loading']
+      },
+      set (value) {
+        this.$store.commit('item/SET_LOADING', value)
+      }
+    }
+  },
   mounted () {
     this.$store.dispatch('item/getItems')
   },
@@ -44,7 +54,16 @@ export default {
       </div>
       <vue-good-table
         :columns="columns"
+        :is-loading.sync="isLoading"
+        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20] }"
         :rows="$store.getters['item/items']"
+        :total-rows="$store.getters['list/totalResults']"
+        mode="remote"
+        style-class="vgt-table striped"
+        @on-page-change="$store.dispatch('item/onPagingChange', $event)"
+        @on-per-page-change="$store.dispatch('item/onPagingChange', $event)"
+        @on-search="$store.dispatch('item/onSearch', $event)"
+        @on-sort-change="$store.dispatch('item/onSortChange', $event)"
       >
         <template
           slot="table-row"

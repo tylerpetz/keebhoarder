@@ -1,42 +1,38 @@
 export default [
   {
     label: 'Name',
-    field: 'name',
-    sortable: false
+    field: 'name'
   },
   {
     label: 'Description',
-    field: 'description',
-    sortable: false
+    field: 'description'
   },
   {
     label: 'Public',
     field: 'public',
     type: 'boolean',
-    sortable: false
+    width: '100px'
   },
   {
     label: 'Item Count',
     field: 'items',
     formatFn: (val) => val.length,
     type: 'number',
-    sortable: false
+    width: '150px'
   },
   {
     label: 'Created',
     field: 'createdAt',
     type: 'date',
     dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
-    sortable: true
+    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
   },
   {
     label: 'Last Updated',
     field: 'updatedAt',
     type: 'date',
     dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
-    sortable: true
+    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
   },
   {
     label: 'Actions',

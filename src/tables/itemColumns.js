@@ -1,47 +1,46 @@
 export default [
   {
     label: 'Name',
-    field: 'name',
-    sortable: false
+    field: 'name'
   },
   {
     label: 'Description',
-    field: 'description',
-    sortable: false
+    field: 'description'
   },
   {
     label: 'Qty',
     field: 'qty',
     type: 'number',
-    sortable: false
+    width: '100px'
+
   },
   {
     label: 'Price',
     field: 'price',
     type: 'number',
-    sortable: false
+    width: '150px'
+
   },
   {
     label: 'Public',
     field: 'public',
     type: 'boolean',
-    sortable: false
+    width: '100px'
+
   },
   {
     label: 'Created',
     field: 'createdAt',
     type: 'date',
     dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
-    sortable: true
+    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
   },
   {
     label: 'Last Updated',
     field: 'updatedAt',
     type: 'date',
     dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
-    sortable: true
+    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
   },
   {
     label: 'Actions',

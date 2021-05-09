@@ -76,6 +76,7 @@ export default {
       <vue-good-table
         :columns="columns"
         :rows="$store.getters['list/currentList'].items"
+        style-class="vgt-table striped"
       >
         <template
           slot="table-row"
