@@ -27,7 +27,7 @@ export default {
       if (this.item) {
         this.$store.dispatch('item/updateItem', { item: this.currentItem, updateCurrent: this.$route.name === 'SingleItem' })
       } else {
-        this.$store.dispatch('item/createItem', { item: this.currentItem })
+        this.$store.dispatch('item/createItem', this.currentItem)
       }
       this.$closeModal()
     }
