@@ -1,4 +1,6 @@
 <script>
+import { getValue } from 'vue-currency-input'
+
 export default {
   name: 'ItemModal',
   props: {
@@ -27,7 +29,13 @@ export default {
           model: '',
           color: ''
         }
-      }
+      },
+      formattedPrice: 0
+    }
+  },
+  watch: {
+    formattedPrice () {
+      this.currentItem.price = getValue(this.$refs.price)
     }
   },
   mounted () {
@@ -80,9 +88,11 @@ export default {
             Qty
           </FormInput>
           <FormInput
-            v-model="currentItem.price"
+            ref="price"
+            v-model="formattedPrice"
+            v-currency
             class="w-full mb-6"
-            type="number"
+            type="text"
             required
           >
             Price

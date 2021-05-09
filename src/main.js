@@ -6,6 +6,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueGtag from 'vue-gtag'
+import VueCurrencyInput from 'vue-currency-input'
 import FormInput from '@/components/FormInput.vue'
 import FormSelect from '@/components/FormSelect.vue'
 import Keycap from '@/components/Keycap.vue'
@@ -23,6 +24,20 @@ Vue.use(VueGtag, {
 })
 Vue.use(VueAxios, axios)
 Vue.use(VueGoodTablePlugin)
+Vue.use(VueCurrencyInput, {
+  globalOptions: {
+    currency: 'USD',
+    locale: 'en',
+    valueAsInteger: true,
+    distractionFree: {
+      hideNegligibleDecimalDigits: false,
+      hideCurrencySymbol: true,
+      hideGroupingSymbol: true
+    },
+    valueRange: { min: 0 },
+    allowNegative: false
+  }
+})
 Vue.component('Keycap', Keycap)
 Vue.component('Modal', Modal)
 Vue.component('FormInput', FormInput)
