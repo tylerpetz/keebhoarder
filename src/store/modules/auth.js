@@ -39,7 +39,7 @@ export default {
         delete user.passwordRepeat
       }
       try {
-        const { data } = await Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/auth/register', user)
+        const { data } = await Vue.axios.post('/auth/register', user)
         setTokens(data.tokens)
         setUser(data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
@@ -51,7 +51,7 @@ export default {
     },
     async login ({ commit }, user) {
       try {
-        const { data } = await Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/auth/login', user)
+        const { data } = await Vue.axios.post('/auth/login', user)
         setTokens(data.tokens)
         setUser(data.user)
         commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
@@ -64,7 +64,7 @@ export default {
     async refreshTokens ({ state, commit }) {
       try {
         if (state.tokens.refresh.token) {
-          const { data } = await Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/auth/refresh-tokens', { refreshToken: state.tokens.refresh.token })
+          const { data } = await Vue.axios.post('/auth/refresh-tokens', { refreshToken: state.tokens.refresh.token })
           setTokens(data)
         }
       } catch (e) {
@@ -78,7 +78,7 @@ export default {
     async logout ({ state, commit }) {
       try {
         if (state.tokens.refresh.token) {
-          await Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/auth/logout', { refreshToken: state.tokens.refresh.token })
+          await Vue.axios.post('/auth/logout', { refreshToken: state.tokens.refresh.token })
         }
         localStorage.removeItem('tokens')
         localStorage.removeItem('currentUser')

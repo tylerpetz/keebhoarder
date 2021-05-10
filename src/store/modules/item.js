@@ -29,19 +29,19 @@ export default {
   },
   actions: {
     getItems ({ commit, getters }) {
-      Vue.axios.get(`https://keebhoarder-api.herokuapp.com/v1/items?${getters.pagination}${getters.sorts}`).then(({ data }) => {
+      Vue.axios.get(`/items?${getters.pagination}${getters.sorts}`).then(({ data }) => {
         commit('SET_ITEMS', data.results)
         commit('SET_ITEM_PAGINATION', pick(data, ['limit', 'page']))
         commit('SET_ITEM_META', pick(data, ['totalPages', 'totalResults']))
       })
     },
     getItemById ({ commit }, itemId) {
-      Vue.axios.get(`https://keebhoarder-api.herokuapp.com/v1/items/${itemId}`).then(({ data }) => {
+      Vue.axios.get(`/items/${itemId}`).then(({ data }) => {
         commit('SET_CURRENT_ITEM', data)
       })
     },
     createItem ({ dispatch }, item) {
-      Vue.axios.post('https://keebhoarder-api.herokuapp.com/v1/items', removeEmpty(item)).then(() => {
+      Vue.axios.post('/items', removeEmpty(item)).then(() => {
         dispatch('getItems')
       })
     },
@@ -53,7 +53,7 @@ export default {
       delete updatedItem.originalIndex
       delete updatedItem.createdAt
       delete updatedItem.updatedAt
-      Vue.axios.patch(`https://keebhoarder-api.herokuapp.com/v1/items/${item.id}`, updatedItem).then(({ data }) => {
+      Vue.axios.patch(`/items/${item.id}`, updatedItem).then(({ data }) => {
         if (updateCurrent) {
           commit('SET_CURRENT_ITEM', data)
         }
@@ -61,7 +61,7 @@ export default {
       })
     },
     deleteItem ({ dispatch }, itemId) {
-      Vue.axios.delete(`https://keebhoarder-api.herokuapp.com/v1/items/${itemId}`).then(() => {
+      Vue.axios.delete(`/items/${itemId}`).then(() => {
         dispatch('getItems')
       })
     },
