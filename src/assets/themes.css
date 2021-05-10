@@ -750,6 +750,53 @@
   --theme-link-l: 46%;
 }
 
+.theme-striker {
+  /* alpha caps */
+  --alpha-cap-h: 212;
+  --alpha-cap-s: 93%;
+  --alpha-cap-l: 32%;
+
+  /* alpha legends */
+  --alpha-legend-h: 0;
+  --alpha-legend-s: 0%;
+  --alpha-legend-l: 95%;
+
+  /* mod caps */
+  --mod-cap-h: 212;
+  --mod-cap-s: 93%;
+  --mod-cap-l: 32%;
+
+  /* mod legends */
+  --mod-legend-h: 0;
+  --mod-legend-s: 0%;
+  --mod-legend-l: 95%;
+
+  /* accent caps */
+  --accent-cap-h: 225;
+  --accent-cap-s: 40%;
+  --accent-cap-l: 24%;
+
+  /* accent legends */
+  --accent-legend-h: 0;
+  --accent-legend-s: 0%;
+  --accent-legend-l: 95%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 215;
+  --theme-bg-s: 71%;
+  --theme-bg-l: 7%;
+
+  /* theme text */
+  --theme-text-h: 0;
+  --theme-text-s: 0%;
+  --theme-text-l: 95%;
+
+  /* theme links/borders */
+  --theme-link-h: 212;
+  --theme-link-s: 93%;
+  --theme-link-l: 35%;
+}
+
 .theme-wavez {
   /* alpha caps */
   --alpha-cap-h: 188;

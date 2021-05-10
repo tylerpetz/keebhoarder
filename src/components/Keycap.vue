@@ -108,10 +108,10 @@ export default {
 }
 
 .keycap:active .keycap-face {
-  transform: translateY(2px);
+  transform: translateY(1px);
 }
 
-.keycap:focus .keycap-face {
-  transform: translateY(-1px);
+.keycap:focus {
+  @apply ring-2 ring-theme-link-press;
 }
 </style>

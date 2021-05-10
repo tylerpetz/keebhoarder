@@ -61,6 +61,10 @@ module.exports = {
       name: 'oblivion'
     },
     {
+      id: 'striker',
+      name: 'striker'
+    },
+    {
       id: 'wavez',
       name: 'wavez'
     }

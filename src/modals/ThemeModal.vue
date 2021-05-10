@@ -20,7 +20,7 @@ export default {
       <div
         v-for="theme in themes"
         :key="theme.id"
-        class="w-full md:w-1/2 lg:w-1/3 p-1"
+        class="w-full md:w-1/2 xl:w-1/4 p-1"
         @click="$store.commit('app/SET_ACTIVE_THEME', theme)"
       >
         <div
