@@ -36,7 +36,7 @@ function detectTokens () {
 function detectEmailConfirmationToken () {
   try {
     // split the hash where it detects `confirmation_token=`. The string which proceeds is the part which we want.
-    const token = decodeURIComponent(document.location.hash).split(
+    const token = decodeURIComponent(document.location.search).split(
       'confirmation_token='
     )[1]
     return token
@@ -99,13 +99,14 @@ function detectRecoveryToken () {
  */
 function confirmEmailToken (token) {
   store
-    .dispatch('auth/attemptConfirmation', token)
+    .dispatch('auth/verifyEmailToken', token)
     .then(resp => {
-      alert(`${resp.email} has been confirmed, please login`)
+      router.push({ name: 'Home' })
     })
     .catch(error => {
-      alert('Can\'t authorise your account right now. Please try again')
-      console.error(error, 'Somethings gone wrong logging in')
+      store.commit('auth/AUTH_ERROR', 'tokenValidationError')
+      router.push({ name: 'Home' })
+      console.error(error, 'Somethings gone wrong validating your email token')
     })
 }
 

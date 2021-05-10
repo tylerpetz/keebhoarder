@@ -88,6 +88,15 @@ export default {
       } finally {
         commit('LOGOUT')
       }
+    },
+    async verifyEmailToken ({ commit }, token) {
+      try {
+        await Vue.axios.post('/auth/verify-email', token)
+        return 'success'
+      } catch (e) {
+        commit('AUTH_ERROR', e.response.data.message || 'There was a problem verifying your email.')
+        return 'error'
+      }
     }
   },
   mutations: {
