@@ -101,14 +101,6 @@ export default {
         <Keycap
           cap-style="large"
           class="ml-2"
-          theme="mod"
-          @click.native="$showModal('AuthModal', { props: { authType: 'register' }})"
-        >
-          Join
-        </Keycap>
-        <Keycap
-          cap-style="large"
-          class="ml-2"
           theme="accent"
           @click.native="$showModal('AuthModal', { props: { authType: 'login' }})"
         >
