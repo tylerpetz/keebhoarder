@@ -26,7 +26,7 @@ export default {
     name="modal"
   >
     <div
-      class="absolute z-50 flex h-full w-full inset-0 items-center justify-center py-10 md:py-20"
+      class="absolute z-50 flex h-full w-full inset-0 items-center justify-center py-10"
     >
       <div
         class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden"

@@ -3,10 +3,6 @@ export default {
   name: 'FormInput',
   inheritAttrs: false,
   props: {
-    inputClasses: {
-      type: String,
-      default: ''
-    },
     value: {
       type: String,
       default: ''
@@ -21,7 +17,6 @@ export default {
     <input
       v-bind="$attrs"
       class="bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
-      :class="inputClasses"
       :value="value"
       @input="$emit('input', $event.target.value)"
     >

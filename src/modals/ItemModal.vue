@@ -24,6 +24,7 @@ export default {
         qty: 0,
         public: false,
         photos: [''],
+        urls: [''],
         details: {
           maker: '',
           model: '',
@@ -62,7 +63,7 @@ export default {
     @close="$closeModal"
   >
     <form @submit.prevent="createOrUpdateItem">
-      <div class="flex flex-row w-full space-x-4 p-6">
+      <div class="flex flex-row w-full space-x-6 p-6">
         <div class="w-1/2">
           <form-input
             v-model="currentItem.name"
@@ -72,6 +73,14 @@ export default {
           >
             Name *
           </form-input>
+          <!-- <form-input
+            v-model="formattedPrice"
+            class="w-full mb-6"
+            type="text"
+            required
+          >
+            Category
+          </form-input> -->
           <form-input
             v-model="currentItem.description"
             class="w-full mb-6"
@@ -128,22 +137,38 @@ export default {
           >
             Color
           </form-input>
-          <div class="relative flex flex-col">
+          <div class="relative flex flex-col mb-6">
             <span class="text-theme-text text-xs">Photos</span>
             <template v-for="(photo, index) in currentItem.photos">
-              <!-- <FormInput
-              v-model="currentItem.photos[index]"
-              class="w-full mb-6"
-            /> -->
               <input
                 :key="index"
                 type="text"
-                class="w-full mb-6 bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
+                class="w-full bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
+                :class="{ 'mt-2': index > 0 }"
                 @input="currentItem.photos[index]"
               >
             </template>
           </div>
-          <div class="w-full text-right">
+          <div class="relative flex flex-col mb-6">
+            <span class="text-theme-text text-xs">Web URLs</span>
+            <template v-for="(url, index) in currentItem.urls">
+              <input
+                :key="index"
+                type="text"
+                class="w-full bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
+                :class="{ 'mt-2': index > 0 }"
+                @input="currentItem.urls[index]"
+              >
+            </template>
+          </div>
+          <div class="flex space-x-4 justify-end w-full text-right">
+            <Keycap
+              cap-style="large"
+              type="button"
+              @click.native="currentItem.urls.push('')"
+            >
+              &#10229; Add URL
+            </Keycap>
             <Keycap
               cap-style="large"
               type="button"

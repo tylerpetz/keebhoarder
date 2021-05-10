@@ -3,10 +3,6 @@ export default {
   name: 'FormSelect',
   inheritAttrs: false,
   props: {
-    inputClasses: {
-      type: String,
-      default: ''
-    },
     options: {
       type: Array,
       default: () => []
@@ -25,7 +21,6 @@ export default {
     <select
       v-bind="$attrs"
       class="bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
-      :class="inputClasses"
     >
       <option
         v-if="placeholder"

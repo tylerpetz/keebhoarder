@@ -3,10 +3,6 @@ export default {
   name: 'FormToggle',
   inheritAttrs: false,
   props: {
-    inputClasses: {
-      type: String,
-      default: ''
-    },
     value: {
       type: Boolean
     }
