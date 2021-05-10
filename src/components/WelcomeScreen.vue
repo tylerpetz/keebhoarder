@@ -12,7 +12,7 @@ export default {
     <h2 class="text-theme-text-l md:text-lg font-semibold">
       securely manage your keyboard habit
     </h2>
-    <div class="flex mt-6 space-x-6">
+    <div class="flex my-6 space-x-6">
       <Keycap
         theme="mod"
         cap-style="large"

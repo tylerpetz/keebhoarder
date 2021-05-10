@@ -9,6 +9,7 @@ import VueGtag from 'vue-gtag'
 import VueCurrencyInput from 'vue-currency-input'
 import FormInput from '@/components/FormInput.vue'
 import FormSelect from '@/components/FormSelect.vue'
+import FormToggle from '@/components/FormToggle.vue'
 import Keycap from '@/components/Keycap.vue'
 import Modal from '@/components/Modal.vue'
 import VueGoodTablePlugin from 'vue-good-table'
@@ -42,6 +43,7 @@ Vue.component('Keycap', Keycap)
 Vue.component('Modal', Modal)
 Vue.component('FormInput', FormInput)
 Vue.component('FormSelect', FormSelect)
+Vue.component('FormToggle', FormToggle)
 
 new Vue({
   router,

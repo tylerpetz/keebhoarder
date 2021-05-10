@@ -1,6 +1,9 @@
 <script>
+import FormToggle from '../components/FormToggle.vue'
+
 export default {
   name: 'ListModal',
+  components: { FormToggle },
   props: {
     list: {
       type: [Object, null],
@@ -41,39 +44,30 @@ export default {
   >
     <form @submit.prevent="createOrUpdateList">
       <div class="flex flex-col p-6">
-        <FormInput
+        <form-input
           v-model="currentList.name"
           class="w-full mb-6"
           type="text"
           required
         >
           Name *
-        </FormInput>
-        <FormInput
+        </form-input>
+        <form-input
           v-model="currentList.description"
           class="w-full mb-6"
           type="text"
         >
           Description
-        </FormInput>
-        <div class="relative flex items-start justify-start">
-          <div class="flex items-center h-6">
-            <input
-              id="isPublic"
-              v-model="currentList.public"
-              type="checkbox"
-              class="focus:text-theme-border-press h-4 w-4 text-theme-border border-theme-border rounded"
-            >
-          </div>
-          <div class="ml-3">
-            <label
-              for="isPublic"
-              class="font-medium text-theme-text text-sm"
-            >Public</label>
+        </form-input>
+        <div class="relative flex items-start justify-start pb-1">
+          <form-toggle v-model="currentList.public">
+            <p class="font-medium text-theme-text text-sm">
+              Public
+            </p>
             <p class="text-theme-text-l text-xs">
               Allow other users to see this list.
             </p>
-          </div>
+          </form-toggle>
         </div>
       </div>
       <footer

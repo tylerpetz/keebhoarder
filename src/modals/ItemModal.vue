@@ -62,32 +62,32 @@ export default {
     @close="$closeModal"
   >
     <form @submit.prevent="createOrUpdateItem">
-      <div class="flex flex-row w-full space-x-4 p-6 pb-0">
+      <div class="flex flex-row w-full space-x-4 p-6">
         <div class="w-1/2">
-          <FormInput
+          <form-input
             v-model="currentItem.name"
             class="w-full mb-6"
             type="text"
             required
           >
             Name *
-          </FormInput>
-          <FormInput
+          </form-input>
+          <form-input
             v-model="currentItem.description"
             class="w-full mb-6"
             type="text"
           >
             Description
-          </FormInput>
-          <FormInput
+          </form-input>
+          <form-input
             v-model="currentItem.qty"
             class="w-full mb-6"
             type="number"
             required
           >
             Qty
-          </FormInput>
-          <FormInput
+          </form-input>
+          <form-input
             ref="price"
             v-model="formattedPrice"
             v-currency
@@ -96,30 +96,38 @@ export default {
             required
           >
             Price
-          </FormInput>
+          </form-input>
+          <form-toggle v-model="currentItem.public">
+            <p class="font-medium text-theme-text text-sm">
+              Public
+            </p>
+            <p class="text-theme-text-l text-xs">
+              Allow other users to see this item.
+            </p>
+          </form-toggle>
         </div>
         <div class="w-1/2">
-          <FormInput
+          <form-input
             v-model="currentItem.details.maker"
             class="w-full mb-6"
             type="text"
           >
             Manufacturer
-          </FormInput>
-          <FormInput
+          </form-input>
+          <form-input
             v-model="currentItem.details.model"
             class="w-full mb-6"
             type="text"
           >
             Model Name
-          </FormInput>
-          <FormInput
+          </form-input>
+          <form-input
             v-model="currentItem.details.color"
             class="w-full mb-6"
             type="text"
           >
             Color
-          </FormInput>
+          </form-input>
           <div class="relative flex flex-col">
             <span class="text-theme-text text-xs">Photos</span>
             <template v-for="(photo, index) in currentItem.photos">
@@ -144,25 +152,6 @@ export default {
               &#10229; Add Photo
             </Keycap>
           </div>
-        </div>
-      </div>
-      <div class="p-6 pt-0 relative w-full flex items-start justify-start">
-        <div class="flex items-center h-6">
-          <input
-            id="isPublic"
-            v-model="currentItem.public"
-            type="checkbox"
-            class="focus:text-theme-border-press h-4 w-4 text-theme-border border-theme-border rounded"
-          >
-        </div>
-        <div class="ml-3">
-          <label
-            for="isPublic"
-            class="font-medium text-theme-text text-sm"
-          >Public</label>
-          <p class="text-theme-text-l text-xs">
-            Allow other users to see this item.
-          </p>
         </div>
       </div>
       <footer
