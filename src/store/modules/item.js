@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { queryStringify, pick, removeEmpty } from '@/utils/methods.js'
+import { queryStringify, removeEmpty } from '@/utils/methods.js'
+import pick from 'lodash/pick'
 
 export default {
   namespaced: true,
