@@ -1,5 +1,7 @@
 <script>
 import { getValue } from 'vue-currency-input'
+import _isEqual from 'lodash/isEqual'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'ItemModal',
@@ -32,7 +34,9 @@ export default {
           color: ''
         }
       },
-      formattedPrice: 0
+      formattedPrice: 0,
+      itemChanged: false,
+      originalItem: {}
     }
   },
   computed: {
@@ -61,7 +65,10 @@ export default {
   },
   mounted () {
     if (this.item) {
-      this.currentItem = { ...this.item }
+      this.currentItem = _cloneDeep(this.item)
+      this.originalItem = _cloneDeep(this.item)
+    } else {
+      this.originalItem = _cloneDeep(this.currentItem)
     }
   },
   methods: {
@@ -72,6 +79,16 @@ export default {
         this.$store.dispatch('item/createItem', { ...this.currentItem, ...this.listId && { lists: [this.listId] } })
       }
       this.$closeModal()
+    },
+    askToClose () {
+      if (_isEqual(this.currentItem, this.originalItem)) {
+        this.$closeModal()
+      } else {
+        const choice = confirm('Are you sure you stop adding this item? You will lose any unsaved changes.')
+        if (choice) {
+          this.$closeModal()
+        }
+      }
     }
   }
 }
@@ -80,7 +97,8 @@ export default {
 <template>
   <Modal
     modal-class="w-10/12 md:w-2/3 max-h-full"
-    @close="$closeModal"
+    :click-bg-to-close="false"
+    @close="askToClose"
   >
     <form @submit.prevent="createOrUpdateItem">
       <div class="flex flex-row w-full space-x-6 p-6">

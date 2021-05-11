@@ -2,6 +2,10 @@
 export default {
   name: 'Modal',
   props: {
+    clickBgToClose: {
+      type: Boolean,
+      default: true
+    },
     modalClass: {
       type: String,
       default: 'w-72 sm:w-80 md:w-96'
@@ -17,6 +21,13 @@ export default {
   },
   destroyed () {
     document.onkeydown = null
+  },
+  methods: {
+    bgClicked () {
+      if (this.clickBgToClose) {
+        this.$emit('close')
+      }
+    }
   }
 }
 </script>
@@ -35,7 +46,7 @@ export default {
         <header class="p-2">
           <Keycap
             theme="accent"
-            @click.native="$closeModal"
+            @click.native="$emit('close')"
           >
             Esc
           </Keycap>
@@ -51,7 +62,7 @@ export default {
       </div>
       <div
         class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-50"
-        @click="$emit('close')"
+        @click="bgClicked"
       />
     </div>
   </transition>
