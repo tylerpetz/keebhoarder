@@ -5,8 +5,6 @@ import store from './store'
 
 Vue.use(VueRouter)
 
-const PUBLIC_ROUTES = ['Home', '404']
-
 const routes = [
   {
     path: '/',
@@ -14,26 +12,46 @@ const routes = [
     component: Home
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/lists',
     name: 'Lists',
-    component: () => import(/* webpackChunkName: "lists" */ '@/views/Lists.vue')
+    component: () => import(/* webpackChunkName: "lists" */ '@/views/Lists.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/lists/:id',
     name: 'SingleList',
     component: () => import(/* webpackChunkName: "lists" */ '@/views/SingleList.vue'),
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/items',
     name: 'Items',
-    component: () => import(/* webpackChunkName: "items" */ '@/views/Items.vue')
+    component: () => import(/* webpackChunkName: "items" */ '@/views/Items.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/items/:id',
     name: 'SingleItem',
     component: () => import(/* webpackChunkName: "items" */ '@/views/SingleItem.vue'),
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '*',
@@ -49,7 +67,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (PUBLIC_ROUTES.includes(to.name) || store.getters['auth/loggedIn']) {
+  if (to.name === 'Home') {
+    next()
+  } else if (to.matched.some((record) => record.meta.requiresAuth) && store.getters['auth/loggedIn']) {
     next()
   } else {
     next({ name: 'Home' })

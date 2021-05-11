@@ -60,13 +60,15 @@ export default {
           {{ $store.getters['auth/currentUser'].username }}
         </Keycap>
         <template v-else>
+          <router-link :to="{ name: 'Profile' }">
+            <Keycap
+              cap-style="large"
+              class="ml-2"
+            >
+              Profile
+            </Keycap>
+          </router-link>
           <!-- <Keycap
-            cap-style="large"
-            class="ml-2"
-          >
-            Profile
-          </Keycap>
-          <Keycap
             cap-style="large"
             class="ml-2"
           >
