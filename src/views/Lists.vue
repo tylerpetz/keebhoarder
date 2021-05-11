@@ -1,12 +1,8 @@
 <script>
-import IsPublic from '@/components/IsPublic'
 import listColumns from '@/tables/listColumns.js'
 
 export default {
   name: 'Lists',
-  components: {
-    IsPublic
-  },
   data () {
     return {
       columns: listColumns

@@ -1,12 +1,8 @@
 <script>
-import IsPublic from '@/components/IsPublic'
 import itemColumns from '@/tables/itemColumns.js'
 
 export default {
   name: 'ItemTable',
-  components: {
-    IsPublic
-  },
   props: {
     items: {
       type: Array,

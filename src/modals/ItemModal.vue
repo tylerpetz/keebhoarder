@@ -20,6 +20,7 @@ export default {
       currentItem: {
         name: '',
         description: '',
+        category: 'Uncategorized',
         price: 0,
         qty: 0,
         public: false,
@@ -32,6 +33,25 @@ export default {
         }
       },
       formattedPrice: 0
+    }
+  },
+  computed: {
+    categories () {
+      const categories = [
+        'Uncategorized',
+        'Keyboard',
+        'Keycap Set',
+        'Case',
+        'Switches',
+        'Artisan Keycap',
+        'Cable',
+        'Deskmat',
+        'Lube',
+        'Springs',
+        'Stabilizers',
+        'Other'
+      ]
+      return categories.map(cat => ({ text: cat, value: cat }))
     }
   },
   watch: {
@@ -64,7 +84,7 @@ export default {
   >
     <form @submit.prevent="createOrUpdateItem">
       <div class="flex flex-row w-full space-x-6 p-6">
-        <div class="w-1/2">
+        <div class="w-1/3">
           <form-input
             v-model="currentItem.name"
             class="w-full mb-6"
@@ -73,28 +93,13 @@ export default {
           >
             Name *
           </form-input>
-          <!-- <form-input
-            v-model="formattedPrice"
-            class="w-full mb-6"
-            type="text"
-            required
-          >
-            Category
-          </form-input> -->
+
           <form-input
             v-model="currentItem.description"
             class="w-full mb-6"
             type="text"
           >
             Description
-          </form-input>
-          <form-input
-            v-model="currentItem.qty"
-            class="w-full mb-6"
-            type="number"
-            required
-          >
-            Qty
           </form-input>
           <form-input
             ref="price"
@@ -106,6 +111,14 @@ export default {
           >
             Price
           </form-input>
+          <form-input
+            v-model="currentItem.qty"
+            class="w-full mb-6"
+            type="number"
+            required
+          >
+            Qty
+          </form-input>
           <form-toggle v-model="currentItem.public">
             <p class="font-medium text-theme-text text-sm">
               Public
@@ -115,7 +128,14 @@ export default {
             </p>
           </form-toggle>
         </div>
-        <div class="w-1/2">
+        <div class="w-1/3">
+          <form-select
+            v-model="currentItem.category"
+            :options="categories"
+            class="mb-6"
+          >
+            Category
+          </form-select>
           <form-input
             v-model="currentItem.details.maker"
             class="w-full mb-6"
@@ -137,20 +157,10 @@ export default {
           >
             Color
           </form-input>
-          <div class="relative flex flex-col mb-6">
-            <span class="text-theme-text text-xs">Photos</span>
-            <template v-for="(photo, index) in currentItem.photos">
-              <input
-                :key="index"
-                type="text"
-                class="w-full bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
-                :class="{ 'mt-2': index > 0 }"
-                @input="currentItem.photos[index]"
-              >
-            </template>
-          </div>
-          <div class="relative flex flex-col mb-6">
-            <span class="text-theme-text text-xs">Web URLs</span>
+        </div>
+        <div class="w-1/3">
+          <div class="relative flex flex-col mb-2">
+            <span class="text-theme-text text-xs">Additional Links</span>
             <template v-for="(url, index) in currentItem.urls">
               <input
                 :key="index"
@@ -161,20 +171,60 @@ export default {
               >
             </template>
           </div>
-          <div class="flex space-x-4 justify-end w-full text-right">
+          <div class="flex justify-end w-full text-right">
             <Keycap
               cap-style="large"
               type="button"
               @click.native="currentItem.urls.push('')"
             >
-              &#10229; Add URL
+              Add URL
             </Keycap>
+          </div>
+          <div class="relative flex flex-col mb-6">
+            <span class="text-theme-text text-xs">Photos</span>
+            <template v-for="(photo, index) in currentItem.photos">
+              <form-input
+                :key="index"
+                v-model="currentItem.photos[index]"
+                type="text"
+                :class="{ 'mt-2': index > 0 }"
+              >
+                <template
+                  v-if="index > 0"
+                  slot="icon"
+                >
+                  <button
+                    class="appearance-none"
+                    type="button"
+                    @click="currentItem.photos.splice(index, 1)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </button>
+                </template>
+              </form-input>
+            </template>
+          </div>
+
+          <div class="flex space-x-4 justify-end w-full text-right">
             <Keycap
               cap-style="large"
               type="button"
               @click.native="currentItem.photos.push('')"
             >
-              &#10229; Add Photo
+              Add Photo
             </Keycap>
           </div>
         </div>
