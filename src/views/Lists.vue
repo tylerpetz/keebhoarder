@@ -130,6 +130,12 @@ export default {
             {{ props.formattedRow[props.column.field] }}
           </span>
         </template>
+        <div
+          slot="emptystate"
+          class="text-center"
+        >
+          There are no lists.
+        </div>
       </vue-good-table>
       <div class="p-6 bg-theme-bg-d mt-8 flex flex-row justify-end items-start rounded shadow">
         <Keycap

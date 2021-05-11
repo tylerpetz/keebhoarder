@@ -140,5 +140,11 @@ export default {
         {{ props.formattedRow[props.column.field] }}
       </span>
     </template>
+    <div
+      slot="emptystate"
+      class="text-center"
+    >
+      There are no items{{ listId ? ' on this list' : '.' }}
+    </div>
   </vue-good-table>
 </template>
