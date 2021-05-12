@@ -1,5 +1,5 @@
 <script>
-import { getValue } from 'vue-currency-input'
+import { getValue, setValue } from 'vue-currency-input'
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
 
@@ -67,6 +67,7 @@ export default {
   },
   mounted () {
     if (this.item) {
+      this.formattedPrice = setValue(this.$refs.price, getValue(this.$refs.price) + this.item.price)
       this.currentItem = {
         ...itemModel,
         ...this.item

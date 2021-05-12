@@ -28,7 +28,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('auth/attemptLogin')
-    if (this.$store.getters['auth/currentUser'].profile.theme) {
+    if (this.$store.getters['auth/currentUser']?.profile.theme) {
       this.changeThemes({ id: this.$store.getters['auth/currentUser'].profile.theme })
     } else if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
