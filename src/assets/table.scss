@@ -114,7 +114,7 @@ table.vgt-table {
 }
 
 .vgt-loading {
-  @apply w-full h-full absolute z-10 bg-theme-bg-l text-theme-text flex items-center justify-center opacity-80;
+  @apply w-full h-full absolute z-10 bg-theme-bg-l text-theme-text flex items-center justify-center opacity-80 rounded-sm;
 }
 
 .vgt-inner-wrap.is-loading {
@@ -172,12 +172,14 @@ table.vgt-table {
 
       &.disabled,
       &.disabled:hover {
-        @apply opacity-80 cursor-not-allowed;
+        @apply opacity-80 text-theme-link cursor-not-allowed;
 
         .chevron.left:after {
+          @apply opacity-80;
           border-right-color: var(--theme-link);
         }
         .chevron.right:after {
+          @apply opacity-80;
           border-left-color: var(--theme-link);
         }
       }

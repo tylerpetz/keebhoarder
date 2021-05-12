@@ -3,6 +3,22 @@ import { getValue } from 'vue-currency-input'
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
 
+const itemModel = {
+  name: '',
+  description: '',
+  category: 'Uncategorized',
+  price: 0,
+  qty: 0,
+  public: false,
+  photos: [''],
+  urls: [''],
+  details: {
+    maker: '',
+    model: '',
+    color: ''
+  }
+}
+
 export default {
   name: 'ItemModal',
   props: {
@@ -19,24 +35,10 @@ export default {
   },
   data () {
     return {
-      currentItem: {
-        name: '',
-        description: '',
-        category: 'Uncategorized',
-        price: 0,
-        qty: 0,
-        public: false,
-        photos: [''],
-        urls: [''],
-        details: {
-          maker: '',
-          model: '',
-          color: ''
-        }
-      },
+      currentItem: itemModel,
       formattedPrice: 0,
       itemChanged: false,
-      originalItem: {}
+      originalItem: itemModel
     }
   },
   computed: {
@@ -65,10 +67,11 @@ export default {
   },
   mounted () {
     if (this.item) {
-      this.currentItem = _cloneDeep(this.item)
+      this.currentItem = {
+        ...itemModel,
+        ...this.item
+      }
       this.originalItem = _cloneDeep(this.item)
-    } else {
-      this.originalItem = _cloneDeep(this.currentItem)
     }
   },
   methods: {

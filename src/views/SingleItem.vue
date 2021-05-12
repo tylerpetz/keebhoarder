@@ -39,6 +39,9 @@ export default {
             <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
               {{ $store.getters['item/currentItem'].public ? 'Public' : 'Private' }}
             </span>
+            <!-- <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+              {{ $store.getters['item/currentItem'].owned ? '' : 'I Want This' }}
+            </span> -->
           </h3>
           <p class="mt-2 max-w-lg text-sm text-theme-text">
             {{ $store.getters['item/currentItem'].description }}

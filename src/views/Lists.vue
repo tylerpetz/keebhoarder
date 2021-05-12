@@ -35,15 +35,10 @@ export default {
 <template>
   <div class="h-full p-3">
     <div class="flex flex-col">
-      <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-start rounded shadow">
-        <div>
-          <h3 class="text-lg leading-6 font-medium text-theme-text">
-            Lists
-          </h3>
-          <p class="mt-2 max-w-lg text-sm text-theme-text">
-            Lists are the simplest way to organize your collection. Try creating a list for items you already own, and a wishlist for your financial advisor.
-          </p>
-        </div>
+      <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-center rounded shadow">
+        <h3 class="text-xl leading-6 font-medium text-theme-text">
+          Lists
+        </h3>
         <Keycap
           theme="mod"
           cap-style="large"

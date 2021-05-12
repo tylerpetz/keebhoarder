@@ -15,8 +15,8 @@ export default {
 <template>
   <div class="h-full p-3">
     <div class="flex flex-col">
-      <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-start rounded shadow">
-        <h3 class="text-lg leading-6 font-medium text-theme-text">
+      <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-center rounded shadow">
+        <h3 class="text-xl leading-6 font-medium text-theme-text">
           Items
         </h3>
         <Keycap
