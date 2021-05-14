@@ -54,7 +54,7 @@ export default {
       delete updatedItem.originalIndex
       delete updatedItem.createdAt
       delete updatedItem.updatedAt
-      Vue.axios.patch(`/items/${item.id}`, updatedItem).then(({ data }) => {
+      Vue.axios.patch(`/items/${item.id}`, removeEmpty(updatedItem)).then(({ data }) => {
         if (updateCurrent) {
           commit('SET_CURRENT_ITEM', data)
         }

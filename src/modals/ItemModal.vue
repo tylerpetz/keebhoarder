@@ -106,13 +106,13 @@ export default {
 
 <template>
   <Modal
-    modal-class="w-10/12 md:w-2/3 max-h-full"
+    modal-class="w-11/12 max-w-2xl lg:max-w-none xl:w-10/12 max-h-full"
     :click-bg-to-close="false"
     @close="askToClose"
   >
     <form @submit.prevent="createOrUpdateItem">
-      <div class="flex flex-row w-full space-x-6 p-6">
-        <div class="w-1/3">
+      <div class="flex flex-col lg:flex-row w-full space-y-6 lg:space-y-0 lg:space-x-6 p-6">
+        <div class="w-full lg:w-1/3">
           <form-input
             v-model="currentItem.name"
             class="w-full mb-6"
@@ -156,7 +156,7 @@ export default {
             </p>
           </form-toggle>
         </div>
-        <div class="w-1/3">
+        <div class="w-full lg:w-1/3">
           <form-select
             v-model="currentItem.category"
             :options="categories"
@@ -186,7 +186,7 @@ export default {
             Color
           </form-input>
         </div>
-        <div class="w-1/3">
+        <div class="w-full lg:w-1/3">
           <label
             class="block text-sm font-medium text-theme-text"
           >
