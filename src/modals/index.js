@@ -1,4 +1,4 @@
-import { ModalProvider } from './modal-provider.js'
+import { ModalProvider } from '@/compositions/modal-provider.js'
 
 export default {
   name: 'ModalList',

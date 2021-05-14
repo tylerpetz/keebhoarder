@@ -2,18 +2,21 @@
 import Vue from 'vue'
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
-import ModalList from './modals/index.js'
-import { ModalProvider } from './modals/modal-provider.js'
+import SystemMessages from '@/components/SystemMessage.vue'
+import ModalList from '@/modals/index.js'
+import { MessageProvider, ModalProvider } from '@/compositions'
 
 export default {
   name: 'App',
   components: {
     Navigation,
     Footer,
-    ModalList
+    ModalList,
+    SystemMessages
   },
   data () {
     return {
+      MessageProvider,
       ModalProvider,
       show: false
     }
@@ -33,12 +36,18 @@ export default {
     } else if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }
+    // this.$showMessage({ title: 'hey', text: 'sup', closeAfter: 4000 })
+    // this.$showMessage({ title: 'oh noes', text: 'bad', type: 'error', closeAfter: 3000 })
+    // this.$showMessage({ title: 'good job', text: 'cool', type: 'success', closeAfter: 2000 })
   },
   methods: {
     setupApp () {
       Vue.prototype.$showModal = this.ModalProvider.showModal
       Vue.prototype.$closeModal = this.ModalProvider.closeModal
       Vue.prototype.$currentModal = this.ModalProvider.getModal.value
+      Vue.prototype.$showMessage = this.MessageProvider.showMessage
+      Vue.prototype.$closeMessage = this.MessageProvider.closeMessage
+      Vue.prototype.$getMessages = this.MessageProvider.getMessages.value
       Vue.axios.interceptors.response.use(null,
         (error) => {
           if (error.response && error.response.status === 401) {
@@ -72,6 +81,7 @@ export default {
       />
     </transition>
     <Footer />
-    <ModalList />
+    <modal-list />
+    <system-messages />
   </main>
 </template>
