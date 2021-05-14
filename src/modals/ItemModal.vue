@@ -38,7 +38,8 @@ export default {
       currentItem: itemModel,
       formattedPrice: 0,
       itemChanged: false,
-      originalItem: itemModel
+      originalItem: itemModel,
+      tempImageUrl: null
     }
   },
   computed: {
@@ -93,6 +94,11 @@ export default {
           this.$closeModal()
         }
       }
+    },
+    onFileUpload (e) {
+      const file = e.target.files[0]
+      this.currentItem.photos[0] = file
+      this.tempImageUrl = URL.createObjectURL(file)
     }
   }
 }
@@ -181,6 +187,59 @@ export default {
           </form-input>
         </div>
         <div class="w-1/3">
+          <label
+            class="block text-sm font-medium text-theme-text"
+          >
+            Cover photo
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
+            <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-theme-border border-dashed rounded-md relative">
+              <img
+                v-if="tempImageUrl"
+                :src="tempImageUrl"
+                class="absolute h-full w-full inset-0 object-cover z-10"
+              >
+              <div
+                class="space-y-1 text-center"
+              >
+                <svg
+                  class="mx-auto h-12 w-12 text-theme-link"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="flex text-sm text-theme-text">
+                  <label
+                    for="file-upload"
+                    class="relative cursor-pointer rounded-md font-medium text-theme-link hover:text-theme-link focus-within:outline-none focus-within:ring-2 focus-within:ring-theme-link"
+                  >
+                    <span>Upload a file</span>
+                    <input
+                      id="file-upload"
+                      accept="image/*"
+                      type="file"
+                      class="sr-only"
+                      @change="onFileUpload"
+                    >
+                  </label>
+                  <p class="pl-1">
+                    or drag and drop
+                  </p>
+                </div>
+                <p class="text-xs text-theme-text">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+              </div>
+            </div>
+          </div>
           <div class="relative flex flex-col mb-2">
             <span class="text-theme-text text-xs">Additional Links</span>
             <template v-for="(url, index) in currentItem.urls">
@@ -225,53 +284,6 @@ export default {
               @click.native="currentItem.urls.push('')"
             >
               Add URL
-            </Keycap>
-          </div>
-          <div class="relative flex flex-col mb-6">
-            <span class="text-theme-text text-xs">Photos</span>
-            <template v-for="(photo, index) in currentItem.photos">
-              <form-input
-                :key="index"
-                v-model="currentItem.photos[index]"
-                type="text"
-                :class="{ 'mt-2': index > 0 }"
-              >
-                <template
-                  v-if="index > 0"
-                  slot="icon"
-                >
-                  <button
-                    class="appearance-none"
-                    type="button"
-                    @click="currentItem.photos.splice(index, 1)"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </button>
-                </template>
-              </form-input>
-            </template>
-          </div>
-
-          <div class="flex space-x-4 justify-end w-full text-right">
-            <Keycap
-              cap-style="large"
-              type="button"
-              @click.native="currentItem.photos.push('')"
-            >
-              Add Photo
             </Keycap>
           </div>
         </div>
