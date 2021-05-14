@@ -19,23 +19,9 @@
   opacity: 0
 }
 
-/* .vgt-table thead th {
-  background: none;
-  @apply bg-theme-bg text-base text-theme-text;
+@media (prefers-reduced-motion) {
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: none;
+  }
 }
-
-table.vgt-table {
-  @apply bg-theme-bg;
-}
-
-.vgt-table th {
-  @apply bg-theme-bg-d;
-}
-
-.vgt-table th, .vgt-table td {
-  @apply border border-theme-border;
-}
-
-.vgt-text-disabled {
-  @apply text-theme-text-d;
-} */

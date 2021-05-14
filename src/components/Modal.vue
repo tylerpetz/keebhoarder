@@ -61,7 +61,7 @@ export default {
         <slot name="msg" />
       </div>
       <div
-        class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-50"
+        class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-70"
         @click="bgClicked"
       />
     </div>
@@ -76,5 +76,12 @@ export default {
 .modal-enter,
 .modal-leave-to {
   opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .modal-enter-active,
+  .modal-leave-active {
+    transition: none;
+  }
 }
 </style>
