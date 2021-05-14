@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Navigation',
+  name: 'HeaderNavigation',
   data () {
     return {
       subNavOpen: false
@@ -45,6 +45,13 @@ export default {
           class="p-3 text-theme-text hover:text-theme-text-d"
         >
           Items
+        </router-link>
+        <router-link
+          :to="{ name: 'Orders' }"
+          :class="$route.name === 'Orders' ? 'underline' : ''"
+          class="p-3 text-theme-text hover:text-theme-text-d"
+        >
+          Orders
         </router-link>
       </template>
     </div>

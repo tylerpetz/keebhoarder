@@ -132,9 +132,6 @@ export default {
           &#10229; {{ authType === 'register' ? 'Register' : 'Log In' }}
         </Keycap>
       </footer>
-      <!-- <aside slot="msg" class="absolute w-full text-center" style="top:100%;" v-if="authType === 'register'">
-        <p class="text-xs font-semibold text-theme-text-l mt-2">we will never sell your email, but we might send you emails related to your account</p>
-      </aside> -->
     </form>
   </Modal>
 </template>

@@ -1,8 +1,8 @@
 <script>
 export default {
-  name: 'ListModal',
+  name: 'OrderModal',
   props: {
-    list: {
+    order: {
       type: [Object, null],
       required: false,
       default: () => null
@@ -10,7 +10,7 @@ export default {
   },
   data () {
     return {
-      currentList: {
+      currentOrder: {
         name: '',
         description: '',
         public: false
@@ -18,16 +18,16 @@ export default {
     }
   },
   mounted () {
-    if (this.list) {
-      this.currentList = { ...this.list }
+    if (this.order) {
+      this.currentOrder = { ...this.order }
     }
   },
   methods: {
-    createOrUpdateList () {
-      if (this.list) {
-        this.$store.dispatch('list/updateList', { list: this.currentList, updateCurrent: this.$route.name === 'SingleList' })
+    createOrUpdateOrder () {
+      if (this.order) {
+        this.$store.dispatch('order/updateOrder', { order: this.currentOrder, updateCurrent: this.$route.name === 'SingleOrder' })
       } else {
-        this.$store.dispatch('list/createList', this.currentList)
+        this.$store.dispatch('order/createOrder', this.currentOrder)
       }
       this.$closeModal()
     }
@@ -39,10 +39,10 @@ export default {
   <Modal
     @close="$closeModal"
   >
-    <form @submit.prevent="createOrUpdateList">
+    <form @submit.prevent="createOrUpdateOrder">
       <div class="flex flex-col p-6">
         <form-input
-          v-model="currentList.name"
+          v-model="currentOrder.name"
           class="w-full mb-6"
           type="text"
           required
@@ -50,19 +50,19 @@ export default {
           Name *
         </form-input>
         <form-input
-          v-model="currentList.description"
+          v-model="currentOrder.description"
           class="w-full mb-6"
           type="text"
         >
           Description
         </form-input>
         <div class="relative flex items-start justify-start pb-1">
-          <form-toggle v-model="currentList.public">
+          <form-toggle v-model="currentOrder.public">
             <p class="font-medium text-theme-text text-sm">
               Public
             </p>
             <p class="text-theme-text-l text-xs">
-              Allow other users to see this list.
+              Allow other users to see this order.
             </p>
           </form-toggle>
         </div>
@@ -76,7 +76,7 @@ export default {
           class="capitalize"
           type="submit"
         >
-          &#10229; Save List
+          &#10229; Save Order
         </Keycap>
       </footer>
     </form>

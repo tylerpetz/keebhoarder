@@ -37,6 +37,23 @@ const routes = [
     }
   },
   {
+    path: '/orders',
+    name: 'Orders',
+    component: () => import(/* webpackChunkName: "orders" */ '@/views/Orders.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/orders/:id',
+    name: 'SingleOrder',
+    component: () => import(/* webpackChunkName: "orders" */ '@/views/SingleOrder.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/items',
     name: 'Items',
     component: () => import(/* webpackChunkName: "items" */ '@/views/Items.vue'),

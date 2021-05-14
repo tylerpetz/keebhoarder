@@ -1,7 +1,7 @@
 <script>
 import Vue from 'vue'
-import Navigation from '@/components/Navigation.vue'
-import Footer from '@/components/Footer.vue'
+import HeaderNavigation from '@/components/HeaderNavigation.vue'
+import SiteFooter from '@/components/SiteFooter.vue'
 import SystemMessages from '@/components/SystemMessage.vue'
 import ModalList from '@/modals/index.js'
 import { MessageProvider, ModalProvider } from '@/compositions'
@@ -9,16 +9,15 @@ import { MessageProvider, ModalProvider } from '@/compositions'
 export default {
   name: 'App',
   components: {
-    Navigation,
-    Footer,
+    HeaderNavigation,
     ModalList,
+    SiteFooter,
     SystemMessages
   },
   data () {
     return {
       MessageProvider,
-      ModalProvider,
-      show: false
+      ModalProvider
     }
   },
   computed: {
@@ -71,7 +70,7 @@ export default {
     :class="`theme-${$store.state.app.activeTheme.id}`"
     class="keebhoarder-theme bg-theme-bg font-body tracking-wider w-full h-screen overflow-y-scroll bg-caps flex flex-col pr-1 justify-between items-center relative scrollbar-thin scrollbar-track-accent-legend scrollbar-thumb-accent-cap hover:scrollbar-thumb-accent-cap-hover"
   >
-    <Navigation />
+    <header-navigation />
     <transition
       name="fade"
       mode="out-in"
@@ -80,7 +79,7 @@ export default {
         class="w-full flex-grow"
       />
     </transition>
-    <Footer />
+    <site-footer />
     <modal-list />
     <system-messages />
   </main>

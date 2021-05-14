@@ -1,32 +1,32 @@
 <script>
-import listColumns from '@/tables/listColumns.js'
+import orderColumns from '@/tables/orderColumns.js'
 
 export default {
-  name: 'Lists',
+  name: 'Orders',
   data () {
     return {
-      columns: listColumns
+      columns: orderColumns
     }
   },
   computed: {
     isLoading: {
       get () {
-        return this.$store.getters['list/loading']
+        return this.$store.getters['order/loading']
       },
       set (value) {
-        this.$store.commit('list/SET_LOADING', value)
+        this.$store.commit('order/SET_LOADING', value)
       }
     }
   },
   mounted () {
-    this.$store.dispatch('list/getLists')
+    this.$store.dispatch('order/getOrders')
   },
   methods: {
-    editList (list) {
-      this.$showModal('ListModal', { props: { list } })
+    editOrder (order) {
+      this.$showModal('OrderModal', { props: { order } })
     },
-    removeList ({ id }) {
-      this.$store.dispatch('list/deleteList', id)
+    removeOrder ({ id }) {
+      this.$store.dispatch('order/deleteOrder', id)
     }
   }
 }
@@ -37,28 +37,28 @@ export default {
     <div class="flex flex-col">
       <div class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-center rounded shadow">
         <h3 class="text-xl leading-6 font-medium text-theme-text">
-          Lists
+          Orders
         </h3>
         <Keycap
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('ListModal')"
+          @click.native="$showModal('OrderModal')"
         >
-          Create New List
+          Create New Order
         </Keycap>
       </div>
       <vue-good-table
         :columns="columns"
         :is-loading.sync="isLoading"
-        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20], dropdownAllowAll: false, rowsPerPageLabel: 'Lists per page' }"
-        :rows="$store.getters['list/lists']"
-        :total-rows="$store.getters['list/totalResults']"
+        :pagination-options="{ enabled: true, perPageDropdown: [5, 10, 20], dropdownAllowAll: false, rowsPerPageLabel: 'Orders per page' }"
+        :rows="$store.getters['order/orders']"
+        :total-rows="$store.getters['order/totalResults']"
         mode="remote"
-        @on-page-change="$store.dispatch('list/onPagingChange', $event)"
-        @on-per-page-change="$store.dispatch('list/onPagingChange', $event)"
-        @on-search="$store.dispatch('list/onSearch', $event)"
-        @on-sort-change="$store.dispatch('list/onSortChange', $event)"
+        @on-page-change="$store.dispatch('order/onPagingChange', $event)"
+        @on-per-page-change="$store.dispatch('order/onPagingChange', $event)"
+        @on-search="$store.dispatch('order/onSearch', $event)"
+        @on-sort-change="$store.dispatch('order/onSortChange', $event)"
       >
         <template
           slot="table-row"
@@ -66,7 +66,7 @@ export default {
         >
           <router-link
             v-if="props.column.field == 'name'"
-            :to="{ name: 'SingleList', params: { id: props.row.id } }"
+            :to="{ name: 'SingleOrder', params: { id: props.row.id } }"
             class="text-theme-link hover:text-theme-link-hover"
           >
             {{ props.row.name }}
@@ -82,7 +82,7 @@ export default {
             <button
               type="button"
               class="text-theme-link hover:text-theme-link-hover"
-              @click="editList(props.row)"
+              @click="editOrder(props.row)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ export default {
             <button
               type="button"
               class="text-theme-link hover:text-theme-link-hover"
-              @click="removeList(props.row)"
+              @click="removeOrder(props.row)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@ export default {
           slot="emptystate"
           class="text-center"
         >
-          There are no lists.
+          There are no orders.
         </div>
       </vue-good-table>
       <!-- <div class="p-6 bg-theme-bg-d mt-8 flex flex-row justify-end items-start rounded shadow">
@@ -137,7 +137,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('ListModal')"
+          @click.native="$showModal('OrderModal')"
         >
           Update Table Options
         </Keycap>
