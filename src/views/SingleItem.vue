@@ -11,6 +11,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    currentItem () {
+      return this.$store.getters['item/currentItem']
+    }
+  },
   mounted () {
     this.$store.dispatch('item/getItemById', this.id)
   },
@@ -27,7 +32,7 @@ export default {
 
 <template>
   <div
-    v-if="$store.getters['item/currentItem']"
+    v-if="currentItem"
     class="h-full p-3"
   >
     <div class="flex flex-col">
@@ -35,13 +40,13 @@ export default {
         <div class="flex flex-row justify-between items-center">
           <div>
             <h3 class="text-xl leading-6 font-medium text-theme-text flex items-center">
-              {{ $store.getters['item/currentItem'].name }}
+              {{ currentItem.name }}
 
               <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                {{ $store.getters['item/currentItem'].public ? 'Public' : 'Private' }}
+                {{ currentItem.public ? 'Public' : 'Private' }}
               </span>
               <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                {{ $store.getters['item/currentItem'].owned ? 'Owned' : 'I Want This' }}
+                {{ currentItem.owned ? 'Owned' : 'I Want This' }}
               </span>
             </h3>
           </div>
@@ -49,33 +54,33 @@ export default {
             theme="mod"
             cap-style="large"
             type="button"
-            @click.native="$showModal('ItemModal', { props: { item: $store.getters['item/currentItem'] }})"
+            @click.native="$showModal('ItemModal', { props: { item: currentItem }})"
           >
-            Edit {{ $store.getters['item/currentItem'].name }}
+            Edit {{ currentItem.name }}
           </Keycap>
         </div>
         <div class="flex flex-row">
           <div class="w-1/2">
             <img
-              v-for="img in $store.getters['item/currentItem'].photos"
+              v-for="img in currentItem.photos"
               :key="img"
               :src="img"
-              :alt="$store.getters['item/currentItem'].name"
+              :alt="currentItem.name"
               class="max-h-96"
             >
           </div>
           <div>
             <p class="mt-2 max-w-lg text-sm text-theme-text">
-              {{ $store.getters['item/currentItem'].description }}
+              {{ currentItem.description }}
             </p>
             <p class="mt-4 max-w-lg text-sm text-theme-text">
-              Maker: {{ $store.getters['item/currentItem'].details.maker }}<br>Model: {{ $store.getters['item/currentItem'].details.model }}<br>
-              Color: {{ $store.getters['item/currentItem'].details.color }}<br>Color: {{ $store.getters['item/currentItem'].qty }}
+              Maker: {{ currentItem.details.maker }}<br>Model: {{ currentItem.details.model }}<br>
+              Color: {{ currentItem.details.color }}<br>Color: {{ currentItem.qty }}
             </p>
           </div>
         </div>
       </div>
-      <pre class="text-theme-text">{{ $store.getters['item/currentItem'] }}</pre>
+      <!-- <pre class="text-theme-text">{{ currentItem }}</pre> -->
     </div>
   </div>
 </template>
