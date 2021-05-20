@@ -20,7 +20,7 @@ export default {
     class="w-full p-3 flex flex-row items-start justify-between"
     :class="$store.getters['auth/loggedIn'] ? 'border-theme-border' : 'border-transparent'"
   >
-    <div class="flex flex-row items-center space-x-4">
+    <nav class="flex flex-row items-center space-x-4">
       <h1 class="mr-2">
         <router-link :to="{ name: 'Home' }">
           <Keycap
@@ -54,8 +54,8 @@ export default {
           Orders
         </router-link>
       </template>
-    </div>
-    <div class="flex flex-row">
+    </nav>
+    <section class="flex flex-row">
       <template v-if="$store.getters['auth/loggedIn']">
         <Keycap
           v-if="!subNavOpen"
@@ -116,6 +116,6 @@ export default {
           Log In
         </Keycap>
       </template>
-    </div>
+    </section>
   </header>
 </template>

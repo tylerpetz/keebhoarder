@@ -2,7 +2,7 @@
 
 import { themes } from '../../../src/utils/themes'
 
-describe('Homepage tests', () => {
+describe('Theme modal - homepage', () => {
   it('swap caps modal opens', () => {
     cy.visit('/')
     cy.get('[data-test=welcome-swap-keycaps]').click()

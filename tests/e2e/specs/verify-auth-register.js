@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('Register from homepage', () => {
+describe('Home page auth modal - register', () => {
   it('create an account button shows register modal', () => {
     cy.visit('/')
     cy.contains('button', 'Create an Account').click()
