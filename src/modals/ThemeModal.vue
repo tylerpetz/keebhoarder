@@ -14,6 +14,7 @@ export default {
 <template>
   <Modal
     modal-class="w-10/12 md:w-2/3 max-h-full overflow-y-scroll"
+    data-test="theme-modal"
     @close="$closeModal"
   >
     <div class="flex flex-row flex-wrap items-stretch p-1">
@@ -21,6 +22,7 @@ export default {
         v-for="theme in themes"
         :key="theme.id"
         class="w-full md:w-1/2 xl:w-1/4 p-1"
+        data-test="theme-modal-theme"
         @click="$store.commit('app/SET_ACTIVE_THEME', theme)"
       >
         <div

@@ -16,6 +16,7 @@ export default {
       <Keycap
         theme="mod"
         cap-style="large"
+        data-test="welcome-swap-keycaps"
         @click.native="$showModal('ThemeModal')"
       >
         Swap Keycaps

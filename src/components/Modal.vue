@@ -62,6 +62,7 @@ export default {
       </div>
       <div
         class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-70"
+        data-test="modal-bg"
         @click="bgClicked"
       />
     </div>
