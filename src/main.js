@@ -62,4 +62,10 @@ const loginUserFromStorage = () => {
 
 attemptToAuthorizeTokens()
 loginUserFromStorage()
-Vue.axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/v1' : 'https://keebhoarder-api.herokuapp.com/v1'
+const axiosEnvUrls = {
+  development: 'http://localhost:3000/v1',
+  test: 'https://keebhoarder-api.herokuapp.com/v1',
+  production: 'https://keebhoarder-api.herokuapp.com/v1'
+}
+Vue.axios.defaults.baseURL = axiosEnvUrls[process.env.NODE_ENV] || 'https://keebhoarder-api.herokuapp.com/v1'
+console.log(process.env)

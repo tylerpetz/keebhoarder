@@ -30,14 +30,11 @@ export default {
   },
   mounted () {
     this.$store.dispatch('auth/attemptLogin')
-    if (this.$store.getters['auth/currentUser']?.profile?.theme) {
+    if (this.$store.getters['auth/currentUser'] && this.$store.getters['auth/currentUser'].profile.theme) {
       this.changeThemes({ id: this.$store.getters['auth/currentUser'].profile.theme })
     } else if (window.localStorage && localStorage.getItem('activeTheme') && JSON.parse(localStorage.getItem('activeTheme'))) {
       this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
     }
-    // this.$showMessage({ title: 'hey', text: 'sup', closeAfter: 4000 })
-    // this.$showMessage({ title: 'oh noes', text: 'bad', type: 'error', closeAfter: 3000 })
-    // this.$showMessage({ title: 'good job', text: 'cool', type: 'success', closeAfter: 2000 })
   },
   methods: {
     setupApp () {

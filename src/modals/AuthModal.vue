@@ -40,6 +40,7 @@ export default {
 <template>
   <Modal
     modal-class="w-72 sm:w-80 md:w-96"
+    :data-test="`${authType}-modal`"
     @close="$closeModal"
   >
     <form
@@ -55,6 +56,7 @@ export default {
             class="mb-6"
             type="text"
             placeholder="keeblord"
+            data-test="username"
           >
             Username
           </FormInput>
@@ -64,6 +66,7 @@ export default {
             class="mb-6"
             type="email"
             placeholder="fam@keebhoarder.com"
+            data-test="email"
           >
             Email Address
           </FormInput>
@@ -73,6 +76,7 @@ export default {
             class="mb-6"
             type="password"
             placeholder="8+ characters, must include numbers or symbols"
+            data-test="password"
           >
             Password
           </FormInput>
@@ -81,6 +85,7 @@ export default {
             required
             class="mb-0"
             type="password"
+            data-test="password-again"
           >
             Type Password Again
           </FormInput>
@@ -90,6 +95,7 @@ export default {
             v-model="credentials.username"
             required
             class="mb-6"
+            data-test="email-or-username"
           >
             Email Address
           </FormInput>
@@ -98,6 +104,7 @@ export default {
             required
             class="mb-0"
             type="password"
+            data-test="password"
           >
             Password
           </FormInput>
@@ -105,6 +112,7 @@ export default {
         <div
           v-if="$store.state.auth.error"
           class="text-xs font-semibold text-theme-link rounded mt-4"
+          data-test="auth-error"
         >
           {{ $store.state.auth.error }}
         </div>

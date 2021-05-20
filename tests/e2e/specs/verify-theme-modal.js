@@ -3,12 +3,8 @@
 import { themes } from '../../../src/utils/themes'
 
 describe('Homepage tests', () => {
-  it('visits the homepage', () => {
-    cy.visit('/')
-    cy.contains('h1', 'Keebhoarder')
-  })
-
   it('swap caps modal opens', () => {
+    cy.visit('/')
     cy.get('[data-test=welcome-swap-keycaps]').click()
     cy.get('[data-test=theme-modal]').should('be.visible')
   })
