@@ -46,16 +46,17 @@ export default {
     categories () {
       const categories = [
         'Uncategorized',
-        'Keyboard',
-        'Keycap Set',
-        'Case',
-        'Switches',
         'Artisan Keycap',
         'Cable',
+        'Case',
         'Deskmat',
+        'Keyboard',
+        'Keycap Set',
         'Lube',
+        'PCB',
         'Springs',
         'Stabilizers',
+        'Switches',
         'Other'
       ]
       return categories.map(cat => ({ text: cat, value: cat }))
@@ -190,20 +191,21 @@ export default {
           <label
             class="block text-sm font-medium text-theme-text"
           >
-            Cover photo
+            Photos (PNG, JPG, GIF up to 10MB)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
-            <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-theme-border border-dashed rounded-md relative">
+            <div class="w-1/3 flex justify-center px-2 pt-4 pb-5 border-2 border-theme-border border-dashed rounded-md relative">
               <img
                 v-if="tempImageUrl"
                 :src="tempImageUrl"
-                class="absolute h-full w-full inset-0 object-cover z-10"
+                class="absolute h-full w-full inset-0 object-contain z-10"
+                alt="cover image"
               >
               <div
                 class="space-y-1 text-center"
               >
                 <svg
-                  class="mx-auto h-12 w-12 text-theme-link"
+                  class="mx-auto h-10 w-10 text-theme-link"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 48 48"
@@ -216,7 +218,7 @@ export default {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <div class="flex text-sm text-theme-text">
+                <div class="flex flex-col items-center text-xs text-theme-text">
                   <label
                     for="file-upload"
                     class="relative cursor-pointer rounded-md font-medium text-theme-link hover:text-theme-link focus-within:outline-none focus-within:ring-2 focus-within:ring-theme-link"
@@ -234,9 +236,6 @@ export default {
                     or drag and drop
                   </p>
                 </div>
-                <p class="text-xs text-theme-text">
-                  PNG, JPG, GIF up to 10MB
-                </p>
               </div>
             </div>
           </div>
