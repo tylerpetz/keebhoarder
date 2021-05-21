@@ -18,6 +18,7 @@ export default {
       role="switch"
       :aria-checked="value"
       :theme="value ? 'mod' : 'alphas'"
+      v-bind="$attrs"
       @click.native="$emit('input', !value)"
     >
       <is-public :is-public="value" />

@@ -17,6 +17,7 @@ export default {
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    :data-test="`public-${isPublic}`"
   >
     <template v-if="isPublic">
       <path

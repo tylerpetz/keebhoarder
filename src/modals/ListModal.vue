@@ -37,6 +37,7 @@ export default {
 
 <template>
   <Modal
+    data-test="list-modal"
     @close="$closeModal"
   >
     <form @submit.prevent="createOrUpdateList">
@@ -46,6 +47,7 @@ export default {
           class="w-full mb-6"
           type="text"
           required
+          data-test="list-name"
         >
           Name *
         </form-input>
@@ -53,11 +55,15 @@ export default {
           v-model="currentList.description"
           class="w-full mb-6"
           type="text"
+          data-test="list-description"
         >
           Description
         </form-input>
         <div class="relative flex items-start justify-start pb-1">
-          <form-toggle v-model="currentList.public">
+          <form-toggle
+            v-model="currentList.public"
+            data-test="list-public"
+          >
             <p class="font-medium text-theme-text text-sm">
               Public
             </p>
@@ -75,6 +81,7 @@ export default {
           cap-style="large"
           class="capitalize"
           type="submit"
+          data-test="list-save-button"
         >
           &#10229; Save List
         </Keycap>
