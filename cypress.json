@@ -3,6 +3,6 @@
   "pluginsFile": "tests/e2e/plugins/index.js",
   "env": {
     "email": "fake@example.com",
-    "password": "password1"
+    "password": "password"
   }
 }

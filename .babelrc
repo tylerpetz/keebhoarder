@@ -1,0 +1,11 @@
+{
+  "presets": ["@vue/cli-plugin-babel/preset"],
+  "plugins": [
+    "istanbul"
+  ],
+  "env": {
+    "test": {
+      "presets": [["env", { "targets": { "node": "current" } }]]
+    }
+  }
+}
