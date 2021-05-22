@@ -1,7 +1,7 @@
 // programatic login, logs in user, sets localstorage
 Cypress.Commands.add('login', (email, password) => {
   let loginResponse
-  cy.request('POST', 'https://keebhoarder-api.herokuapp.com/v1/auth/login', {
+  cy.request('POST', 'http://localhost:3000/v1/auth/login', {
     email: Cypress.env('email'),
     password: Cypress.env('password')
   })
