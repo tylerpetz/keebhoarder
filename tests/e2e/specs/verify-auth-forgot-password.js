@@ -9,6 +9,12 @@ describe('Home page auth modal - forgot password', () => {
     cy.get('[data-test=forgot-password-modal]').should('be.visible')
   })
 
+  it('can send a forgot password email', function () {
+    cy.get('[data-test=forgot-password-modal] [data-test="email"]').type(this.email)
+    cy.get('[data-test=forgot-password-modal] [data-test="submit-auth-form"]').click()
+    cy.contains('p', 'Thanks, check your email for a link to reset your password.')
+  })
+
   // it('cannot register if formatting is wrong', () => {
   //   cy.get('[data-test=username]').type('sup')
   //   cy.get('[data-test=email]').type('fakeuser@fakeplace.com')

@@ -115,6 +115,7 @@ export default {
           theme="base"
           cap-style="large"
           data-test="forgot-password"
+          type="button"
           @click.native="$showModal('ForgotPasswordModal')"
         >
           Forgot Password?

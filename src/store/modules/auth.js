@@ -97,6 +97,15 @@ export default {
         commit('AUTH_ERROR', e.response.data.message || 'There was a problem verifying your email.')
         return 'error'
       }
+    },
+    async forgotPassword ({ commit }, user) {
+      try {
+        Vue.axios.post('/auth/forgot-password', user)
+        return 'success'
+      } catch (e) {
+        commit('AUTH_ERROR', e.response.data.message || 'We can\'t reset your password right now')
+        return 'error'
+      }
     }
   },
   mutations: {

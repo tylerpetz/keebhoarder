@@ -5,18 +5,16 @@ export default {
     return {
       credentials: {
         email: ''
-      }
+      },
+      submitted: false
     }
   },
   methods: {
     async handleSubmit () {
       const auth = await this.$store.dispatch('auth/forgotPassword', this.credentials)
       if (auth === 'success') {
-        this.$closeModal()
+        this.submitted = true
       }
-    },
-    showFormField (field) {
-      return this.formFields[this.authType].includes(field)
     }
   }
 }
@@ -25,7 +23,7 @@ export default {
 <template>
   <Modal
     modal-class="w-72 sm:w-80 md:w-96"
-    :data-test="`${authType}-modal`"
+    :data-test="`forgot-password-modal`"
     @close="$closeModal"
   >
     <form
@@ -33,7 +31,10 @@ export default {
       @keydown.enter="handleSubmit"
       @submit.prevent="handleSubmit"
     >
-      <div class="flex flex-col p-6 space-y-6">
+      <div
+        v-if="!submitted"
+        class="flex flex-col p-6 space-y-6"
+      >
         <FormInput
           v-model="credentials.email"
           required
@@ -56,6 +57,12 @@ export default {
           {{ $store.state.auth.error }}
         </div>
       </div>
+      <p
+        v-else
+        class="flex flex-col p-6 space-y-6 text-xs font-semibold text-theme-text"
+      >
+        Thanks, check your email for a link to reset your password.
+      </p>
       <footer
         class="p-2 flex bg-theme-bg-d justify-end"
       >

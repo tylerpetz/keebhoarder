@@ -16,6 +16,16 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 import '@cypress/code-coverage/support'
+import 'cypress-mailslurp'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+before(() => {
+  cy.mailslurp()
+    .then(mailslurp => mailslurp.createInbox())
+    .then(inbox => {
+      cy.log(inbox)
+      // save inbox id and email address to this (make sure you use function and not arrow syntax)
+      cy.wrap(inbox.id).as('inboxId')
+      cy.wrap(inbox.id).as('username')
+      cy.wrap(inbox.emailAddress).as('email')
+    })
+})

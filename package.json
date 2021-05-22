@@ -38,6 +38,7 @@
     "babel-plugin-istanbul": "^6.0.0",
     "babel-preset-env": "^1.7.0",
     "cypress": "^7.3.0",
+    "cypress-mailslurp": "^1.0.1",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
