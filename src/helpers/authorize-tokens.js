@@ -12,6 +12,7 @@ function detectTokens () {
   const emailToken = detectEmailConfirmationToken()
   const externalAccessToken = detectExternalAccessToken()
   const recoveryToken = detectRecoveryToken()
+  const localStorageTokens = detectLocalStorage()
 
   if (emailToken) {
     // console.log('Detected email confirmation token', emailToken)
@@ -25,6 +26,8 @@ function detectTokens () {
   } else if (recoveryToken) {
     // console.log('found recovery token', recoveryToken)
     confirmRecoveryToken(recoveryToken)
+  } else if (localStorageTokens) {
+    loadLocalStorageTokens(localStorageTokens)
   }
 
   // console.log('No tokens detected in URL hash')
@@ -35,11 +38,9 @@ function detectTokens () {
  */
 function detectEmailConfirmationToken () {
   try {
-    // split the hash where it detects `confirmation_token=`. The string which proceeds is the part which we want.
-    const token = decodeURIComponent(document.location.search).split(
+    return decodeURIComponent(document.location.search).split(
       'confirmation_token='
     )[1]
-    return token
   } catch (error) {
     console.error(
       'Something went wrong when trying to extract email confirmation email',
@@ -78,19 +79,33 @@ function detectExternalAccessToken () {
   }
 }
 
+/**
+ * Checks URL hash for `recovery_token` then extracts the token which proceeds.
+ */
 function detectRecoveryToken () {
   try {
-    // split the hash where it detects `confirmation_token=`. The string which proceeds is the part which we want.
-    const token = decodeURIComponent(document.location.hash).split(
+    return decodeURIComponent(document.location.hash).split(
       'recovery_token='
     )[1]
-    return token
   } catch (error) {
     console.error(
       'Something went wrong when trying to extract email confirmation email',
       error
     )
     return null
+  }
+}
+
+/**
+ * Checks localStorage for tokens and currentUser object and returns them.
+ */
+function detectLocalStorage () {
+  const tokens = JSON.parse(localStorage.getItem('tokens')) || null
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || null
+  if (!tokens || !currentUser) return null
+  return {
+    tokens,
+    currentUser
   }
 }
 
@@ -138,6 +153,10 @@ function confirmRecoveryToken (recoveryToken) {
     .catch(() => {
       alert('Can\'t recover password')
     })
+}
+
+function loadLocalStorageTokens ({ tokens, currentUser }) {
+  store.commit('auth/AUTH_SUCCESS', { tokens, currentUser })
 }
 
 export default function () {

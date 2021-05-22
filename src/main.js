@@ -53,18 +53,11 @@ new Vue({
   render: (h) => h(App)
 }).$mount('#keebhoarder')
 
-const loginUserFromStorage = () => {
-  const tokens = JSON.parse(localStorage.getItem('tokens')) || null
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || null
-  if (!tokens || !currentUser) return
-  store.commit('auth/AUTH_SUCCESS', { tokens, currentUser })
-}
-
 attemptToAuthorizeTokens()
-loginUserFromStorage()
+
 const axiosEnvUrls = {
   development: 'http://localhost:3000/v1',
-  test: 'https://keebhoarder-api.herokuapp.com/v1',
+  test: 'http://localhost:3000/v1',
   production: 'https://keebhoarder-api.herokuapp.com/v1'
 }
 Vue.axios.defaults.baseURL = axiosEnvUrls[process.env.NODE_ENV] || 'https://keebhoarder-api.herokuapp.com/v1'
