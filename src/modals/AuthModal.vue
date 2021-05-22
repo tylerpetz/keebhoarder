@@ -22,16 +22,36 @@ export default {
       }
     }
   },
+  computed: {
+    buttonText () {
+      const types = {
+        login: 'Log In',
+        register: 'Register',
+        'forgot-password': 'Send Reset Password Email'
+      }
+      return types[this.authType]
+    },
+    formFields () {
+      return {
+        login: ['email', 'password'],
+        register: ['username', 'email', 'password', 'passwordRepeat'],
+        'forgot-password': ['email', 'passwordPrompt']
+      }
+    }
+  },
   methods: {
     forgotPassword () {
       this.$emit('close')
     },
     async handleSubmit () {
-      const params = this.authType === 'register' ? this.credentials : { email: this.credentials.username, password: this.credentials.password }
+      const params = this.authType === 'register' ? this.credentials : { email: this.credentials.email, password: this.credentials.password }
       const auth = await this.$store.dispatch(`auth/${this.authType}`, params)
       if (auth === 'success') {
         this.$closeModal()
       }
+    },
+    showFormField (field) {
+      return this.formFields[this.authType].includes(field)
     }
   }
 }
@@ -48,70 +68,55 @@ export default {
       @keydown.enter="handleSubmit"
       @submit.prevent="handleSubmit"
     >
-      <div class="flex flex-col p-6">
-        <template v-if="authType === 'register'">
-          <FormInput
-            v-model="credentials.username"
-            required
-            class="mb-6"
-            type="text"
-            placeholder="keeblord"
-            data-test="username"
-          >
-            Username
-          </FormInput>
-          <FormInput
-            v-model="credentials.email"
-            required
-            class="mb-6"
-            type="email"
-            placeholder="fam@keebhoarder.com"
-            data-test="email"
-          >
-            Email Address
-          </FormInput>
-          <FormInput
-            v-model="credentials.password"
-            required
-            class="mb-6"
-            type="password"
-            placeholder="8+ characters, must include numbers or symbols"
-            data-test="password"
-          >
-            Password
-          </FormInput>
-          <FormInput
-            v-model="credentials.passwordRepeat"
-            required
-            class="mb-0"
-            type="password"
-            data-test="password-again"
-          >
-            Type Password Again
-          </FormInput>
-        </template>
-        <template v-else>
-          <FormInput
-            v-model="credentials.username"
-            required
-            class="mb-6"
-            data-test="email-or-username"
-          >
-            Email Address
-          </FormInput>
-          <FormInput
-            v-model="credentials.password"
-            required
-            class="mb-0"
-            type="password"
-            data-test="password"
-          >
-            Password
-          </FormInput>
-        </template>
+      <div class="flex flex-col p-6 space-y-6">
+        <FormInput
+          v-if="showFormField('username')"
+          v-model="credentials.username"
+          required
+          type="text"
+          placeholder="keeblord"
+          data-test="username"
+        >
+          Username
+        </FormInput>
+        <FormInput
+          v-if="showFormField('email')"
+          v-model="credentials.email"
+          required
+          type="email"
+          placeholder="fam@keebhoarder.com"
+          data-test="email"
+        >
+          Email Address
+        </FormInput>
+        <FormInput
+          v-if="showFormField('password')"
+          v-model="credentials.password"
+          required
+          type="password"
+          placeholder="8+ characters, must include numbers or symbols"
+          data-test="password"
+        >
+          Password
+        </FormInput>
+        <FormInput
+          v-if="showFormField('passwordRepeat')"
+          v-model="credentials.passwordRepeat"
+          required
+          type="password"
+          data-test="password-again"
+        >
+          Type Password Again
+        </FormInput>
+        <span
+          v-if="showFormField('passwordPrompt')"
+          class="text-xs font-semibold text-theme-text rounded"
+        >
+          Enter your email and we'll send you a link to reset your password.
+        </span>
         <div
           v-if="$store.state.auth.error"
-          class="text-xs font-semibold text-theme-link rounded mt-4"
+          class="text-xs font-semibold text-theme-link rounded"
           data-test="auth-error"
         >
           {{ $store.state.auth.error }}
@@ -126,7 +131,7 @@ export default {
           theme="base"
           cap-style="large"
           data-test="forgot-password"
-          @click.native="forgotPassword"
+          @click.native="$showModal('AuthModal', { props: { authType: 'forgot-password' }})"
         >
           Forgot Password?
         </Keycap>
@@ -137,7 +142,7 @@ export default {
           data-test="submit-auth-form"
           type="submit"
         >
-          &#10229; {{ authType === 'register' ? 'Register' : 'Log In' }}
+          &#10229; {{ buttonText }}
         </Keycap>
       </footer>
     </form>
