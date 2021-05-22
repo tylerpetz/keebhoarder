@@ -37,6 +37,7 @@ module.exports = {
           text: 'var(--theme-text)',
           'text-l': 'var(--theme-text-light)',
           'text-d': 'var(--theme-text-dark)',
+          'text-placeholder': 'var(--theme-text-transparent)',
           link: 'var(--theme-link)',
           'link-hover': 'var(--theme-link-hover)',
           'link-press': 'var(--theme-link-press)',

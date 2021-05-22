@@ -65,6 +65,7 @@ export default {
           required
           type="text"
           placeholder="keeblord"
+          autocomplete="new-password"
           data-test="username"
         >
           Username
@@ -75,6 +76,7 @@ export default {
           required
           type="email"
           placeholder="fam@keebhoarder.com"
+          autocomplete="new-password"
           data-test="email"
         >
           Email Address
@@ -85,6 +87,7 @@ export default {
           required
           type="password"
           placeholder="8+ characters, must include numbers or symbols"
+          autocomplete="new-password"
           data-test="password"
         >
           Password
@@ -94,6 +97,7 @@ export default {
           v-model="credentials.passwordRepeat"
           required
           type="password"
+          autocomplete="new-password"
           data-test="password-again"
         >
           Type Password Again

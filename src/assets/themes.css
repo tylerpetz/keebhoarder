@@ -81,6 +81,7 @@
   --theme-text: hsl(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l));
   --theme-text-light: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) * 1.35));
   --theme-text-dark: hsl(var(--theme-text-h), var(--theme-text-s), calc(var(--theme-text-l) / 1.3));
+  --theme-text-transparent: hsla(var(--theme-text-h), var(--theme-text-s), var(--theme-text-l), .75);
 
   --theme-link: hsl(var(--theme-link-h), var(--theme-link-s), var(--theme-link-l));
   --theme-link-hover: hsl(var(--theme-link-h), var(--theme-link-s), calc(var(--theme-link-l) * 1.35));
