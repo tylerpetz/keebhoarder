@@ -3,12 +3,6 @@ import convert from 'color-convert'
 
 export default {
   name: 'CreateCapSet',
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
   data () {
     return {
       themeName: '',
@@ -139,7 +133,6 @@ export default {
 <template>
   <Modal
     modal-class="w-10/12"
-    :show="show"
     @close="$emit('close')"
   >
     <div class="flex p-8 flex-col mx-auto">

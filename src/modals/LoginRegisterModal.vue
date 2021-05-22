@@ -1,19 +1,14 @@
 <script>
 export default {
-  name: 'AuthModal',
+  name: 'LoginRegisterModal',
   props: {
     authType: {
       type: String,
       default: ''
-    },
-    show: {
-      type: Boolean,
-      default: false
     }
   },
   data () {
     return {
-      errors: [],
       credentials: {
         username: '',
         email: '',
@@ -26,22 +21,20 @@ export default {
     buttonText () {
       const types = {
         login: 'Log In',
-        register: 'Register',
-        'forgot-password': 'Send Reset Password Email'
+        register: 'Register'
       }
       return types[this.authType]
     },
     formFields () {
       return {
         login: ['email', 'password'],
-        register: ['username', 'email', 'password', 'passwordRepeat'],
-        'forgot-password': ['email', 'passwordPrompt']
+        register: ['username', 'email', 'password', 'passwordRepeat']
       }
     }
   },
   methods: {
-    forgotPassword () {
-      this.$emit('close')
+    displayFormField (field) {
+      return this.formFields[this.authType].includes(field)
     },
     async handleSubmit () {
       const params = this.authType === 'register' ? this.credentials : { email: this.credentials.email, password: this.credentials.password }
@@ -49,9 +42,6 @@ export default {
       if (auth === 'success') {
         this.$closeModal()
       }
-    },
-    showFormField (field) {
-      return this.formFields[this.authType].includes(field)
     }
   }
 }
@@ -70,7 +60,7 @@ export default {
     >
       <div class="flex flex-col p-6 space-y-6">
         <FormInput
-          v-if="showFormField('username')"
+          v-if="displayFormField('username')"
           v-model="credentials.username"
           required
           type="text"
@@ -80,7 +70,7 @@ export default {
           Username
         </FormInput>
         <FormInput
-          v-if="showFormField('email')"
+          v-if="displayFormField('email')"
           v-model="credentials.email"
           required
           type="email"
@@ -90,7 +80,7 @@ export default {
           Email Address
         </FormInput>
         <FormInput
-          v-if="showFormField('password')"
+          v-if="displayFormField('password')"
           v-model="credentials.password"
           required
           type="password"
@@ -100,7 +90,7 @@ export default {
           Password
         </FormInput>
         <FormInput
-          v-if="showFormField('passwordRepeat')"
+          v-if="displayFormField('passwordRepeat')"
           v-model="credentials.passwordRepeat"
           required
           type="password"
@@ -108,12 +98,6 @@ export default {
         >
           Type Password Again
         </FormInput>
-        <span
-          v-if="showFormField('passwordPrompt')"
-          class="text-xs font-semibold text-theme-text rounded"
-        >
-          Enter your email and we'll send you a link to reset your password.
-        </span>
         <div
           v-if="$store.state.auth.error"
           class="text-xs font-semibold text-theme-link rounded"
@@ -131,7 +115,7 @@ export default {
           theme="base"
           cap-style="large"
           data-test="forgot-password"
-          @click.native="$showModal('AuthModal', { props: { authType: 'forgot-password' }})"
+          @click.native="$showModal('ForgotPasswordModal')"
         >
           Forgot Password?
         </Keycap>

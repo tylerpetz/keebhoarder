@@ -111,7 +111,7 @@ export default {
           cap-style="large"
           class="ml-2"
           theme="accent"
-          @click.native="$showModal('AuthModal', { props: { authType: 'login' }})"
+          @click.native="$showModal('LoginRegisterModal', { props: { authType: 'login' }})"
         >
           Log In
         </Keycap>

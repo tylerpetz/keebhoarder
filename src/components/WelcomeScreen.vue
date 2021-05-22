@@ -24,7 +24,7 @@ export default {
       <Keycap
         cap-style="large"
         theme="accent"
-        @click.native="$showModal('AuthModal', { props: { authType: 'register' }})"
+        @click.native="$showModal('LoginRegisterModal', { props: { authType: 'register' }})"
       >
         Create an Account
       </Keycap>
