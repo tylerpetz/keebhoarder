@@ -41,6 +41,11 @@ export default {
       const auth = await this.$store.dispatch(`auth/${this.authType}`, params)
       if (auth === 'success') {
         this.$closeModal()
+        if (this.authType === 'login') {
+          this.$showMessage({ title: 'Welcome back!', text: 'The keebs are waiting.', type: 'success' })
+        } else {
+          this.$showMessage({ title: `Welcome ${this.credentials.username}!`, text: 'You addiction has been enabled', type: 'success' })
+        }
       }
     }
   }
