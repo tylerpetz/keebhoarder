@@ -65,6 +65,13 @@ describe('Home page auth modal - register', () => {
     cy.contains('header button', this.username)
   })
 
+  it('can verify email address', function () {
+    cy.mailslurp()
+      .then(mailslurp => mailslurp.waitForLatestEmail(this.inboxId, 30000, true))
+      .then(email => expect(email.subject).to.contain('Email Verification'))
+      .then(email => /.*[a-z]+[:.].*?(?=\s).*/.exec(email.body)[1])
+  })
+
   // it('cannot register if formatting is wrong', () => {
   //   cy.get('[data-test=username]').type('sup')
   //   cy.get('[data-test=email]').type('fakeuser@fakeplace.com')
