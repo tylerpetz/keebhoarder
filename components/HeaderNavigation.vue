@@ -1,0 +1,120 @@
+<script>
+export default {
+  name: 'HeaderNavigation',
+  data() {
+    return {
+      subNavOpen: false,
+    }
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('auth/logout')
+      if (this.$route.path !== '/') {
+        this.$router.push({ name: 'index' })
+      }
+    },
+  },
+}
+</script>
+
+<template>
+  <header
+    class="w-full p-3 flex flex-row items-start justify-between"
+    :class="
+      $store.getters['auth/loggedIn']
+        ? 'border-theme-border'
+        : 'border-transparent'
+    "
+  >
+    <nav class="flex flex-row items-center space-x-4">
+      <Keycap
+        :theme="
+          $route.name === 'index' || $route.name === 'Dashboard'
+            ? 'accent'
+            : 'alpha'
+        "
+        text-size="large"
+        @click.native="$router.push('/')"
+      >
+        K<span class="hidden">eebhoarder</span>
+      </Keycap>
+      <nuxt-link
+        v-show="$store.getters['auth/loggedIn']"
+        :to="{ name: 'lists' }"
+        :class="$route.name === 'lists' ? 'underline' : ''"
+        class="p-3 text-theme-text hover:text-theme-text-d"
+      >
+        Lists
+      </nuxt-link>
+      <nuxt-link
+        v-show="$store.getters['auth/loggedIn']"
+        :to="{ name: 'items' }"
+        :class="$route.name === 'items' ? 'underline' : ''"
+        class="p-3 text-theme-text hover:text-theme-text-d"
+      >
+        Items
+      </nuxt-link>
+      <nuxt-link
+        v-show="$store.getters['auth/loggedIn']"
+        :to="{ name: 'orders' }"
+        :class="$route.name === 'orders' ? 'underline' : ''"
+        class="p-3 text-theme-text hover:text-theme-text-d"
+      >
+        Orders
+      </nuxt-link>
+    </nav>
+    <section v-if="$store.getters['auth/loggedIn']" class="flex flex-row">
+      <Keycap
+        v-if="!subNavOpen"
+        cap-style="large"
+        theme="accent"
+        class="ml-2"
+        @click.native="subNavOpen = true"
+      >
+        {{ $store.getters['auth/currentUser'].username }}
+      </Keycap>
+      <template v-else>
+        <nuxt-link :to="{ name: 'profile' }">
+          <Keycap cap-style="large" class="ml-2"> Profile </Keycap>
+        </nuxt-link>
+        <!-- <Keycap
+            cap-style="large"
+            class="ml-2"
+          >
+            Settings
+          </Keycap> -->
+        <Keycap
+          theme="mod"
+          cap-style="large"
+          class="ml-2"
+          @click.native="$showModal('ThemeModal')"
+        >
+          Swap Keycaps
+        </Keycap>
+        <Keycap
+          cap-style="large"
+          theme="mod"
+          class="ml-2"
+          @click.native="logout"
+        >
+          Log Out
+        </Keycap>
+        <Keycap theme="accent" class="ml-6" @click.native="subNavOpen = false">
+          Esc
+        </Keycap>
+      </template>
+    </section>
+    <section v-else class="flex flex-row">
+      <Keycap
+        cap-style="large"
+        class="ml-2"
+        theme="accent"
+        @click.native="
+          $showModal('LoginRegisterModal', { props: { authType: 'login' } })
+        "
+      >
+        Log In
+      </Keycap>
+    </section>
+  </header>
+</template>
