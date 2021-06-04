@@ -115,6 +115,22 @@ export default {
       >
         Log In
       </Keycap>
+      <!-- <Keycap
+        cap-style="large"
+        class="ml-2"
+        theme="accent"
+        @click.native="$auth.loginWith('auth0')"
+      >
+        Log In Auth0
+      </Keycap>
+      <Keycap
+        cap-style="large"
+        class="ml-2"
+        theme="accent"
+        @click.native="$auth.logout()"
+      >
+        Log Out Auth0
+      </Keycap> -->
     </section>
   </header>
 </template>

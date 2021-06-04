@@ -20,13 +20,14 @@ export default {
         class="
           bg-alpha-cap
           hover:bg-alpha-cap-hover
-          text-theme-text
-          placeholder-theme-text-placeholder
+          text-alpha-legend
+          placeholder-alpha-legend-hover
           p-2
           rounded
           text-sm
           w-full
         "
+        :class="{ 'opacity-50': $attrs.disabled !== undefined }"
         :value="value"
         @input="$emit('input', $event.target.value)"
       />

@@ -55,11 +55,31 @@ export default {
   modules: [
     // https://axios.nuxtjs.org/
     '@nuxtjs/axios',
+    // https://auth.nuxtjs.org/guide/setup/
+    '@nuxtjs/auth-next',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  // https://auth.nuxtjs.org/providers/auth0
+  auth: {
+    redirect: {
+      login: '/', // redirect user when not connected
+      callback: '/auth/signed-in',
+    },
+    strategies: {
+      local: false,
+      auth0: {
+        domain: 'keebhoarder.us.auth0.com',
+        clientId: '6LQP49Hwwgg8ELSw2jRhkFlRBJCdklWA',
+      },
+    },
+    vuex: {
+      namespace: 'auth0',
+    },
+    'vuex.namespace': 'auth0',
+  },
   googleFonts: {
     display: 'swap',
     families: {
