@@ -71,7 +71,7 @@ export default {
         class="ml-2"
         @click.native="subNavOpen = true"
       >
-        {{ $store.getters['auth/currentUser'].username }}
+        {{ $store.getters['auth/currentUser'].username || 'Settings' }}
       </Keycap>
       <template v-else>
         <nuxt-link :to="{ name: 'profile' }">

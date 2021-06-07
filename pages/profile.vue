@@ -1,6 +1,9 @@
 <script>
 export default {
   name: 'NotFound',
+  mounted() {
+    // this.$store.dispatch('auth/getUser')
+  },
 }
 </script>
 

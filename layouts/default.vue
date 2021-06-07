@@ -20,25 +20,26 @@ export default {
     },
   },
   created() {
-    this.setupApp()
+    this.$store.dispatch('auth/initSupabase')
   },
-  // mounted() {
-  //   this.$store.dispatch('auth/attemptLogin')
-  //   if (
-  //     this.$store.getters['auth/currentUser'] &&
-  //     this.$store.getters['auth/currentUser'].profile.theme
-  //   ) {
-  //     this.changeThemes({
-  //       id: this.$store.getters['auth/currentUser'].profile.theme,
-  //     })
-  //   } else if (
-  //     window.localStorage &&
-  //     localStorage.getItem('activeTheme') &&
-  //     JSON.parse(localStorage.getItem('activeTheme'))
-  //   ) {
-  //     this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
-  //   }
-  // },
+  mounted() {
+    this.setupApp()
+    //   if (
+    //     this.$store.getters['auth/currentUser'] &&
+    //     this.$store.getters['auth/currentUser'].profile.theme
+    //   ) {
+    //     this.changeThemes({
+    //       id: this.$store.getters['auth/currentUser'].profile.theme,
+    //     })
+    //   } else
+    if (
+      window.localStorage &&
+      localStorage.getItem('activeTheme') &&
+      JSON.parse(localStorage.getItem('activeTheme'))
+    ) {
+      this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
+    }
+  },
   methods: {
     setupApp() {
       Vue.prototype.$showModal = this.ModalProvider.showModal
