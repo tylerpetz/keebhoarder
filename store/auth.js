@@ -1,7 +1,4 @@
-const setTokens = function (tokens, $axios) {
-  localStorage.setItem('tokens', JSON.stringify(tokens))
-  $axios.defaults.headers.common.Authorization = `Bearer ${tokens.access.token}`
-}
+import supabase from '@/utils/supabase'
 
 const setUser = function (user) {
   localStorage.setItem('currentUser', JSON.stringify(user))
@@ -21,29 +18,29 @@ export default {
     currentUser: (state) => state.currentUser,
   },
   actions: {
-    attemptLogin({ commit }) {
-      if (
-        localStorage.getItem('tokens') &&
-        localStorage.getItem('currentUser')
-      ) {
-        const tokens = JSON.parse(localStorage.getItem('tokens'))
-        const user = JSON.parse(localStorage.getItem('currentUser'))
-        setTokens(tokens, this.$axios)
-        setUser(user)
-        commit('AUTH_SUCCESS', { tokens, currentUser: user })
-      }
-    },
-    async register({ commit }, user) {
-      if (user.password !== user.passwordRepeat) {
+    // attemptLogin({ commit }) {
+    //   if (
+    //     localStorage.getItem('tokens') &&
+    //     localStorage.getItem('currentUser')
+    //   ) {
+    //     const tokens = JSON.parse(localStorage.getItem('tokens'))
+    //     const user = JSON.parse(localStorage.getItem('currentUser'))
+    //     setTokens(tokens, this.$axios)
+    //     setUser(user)
+    //     commit('AUTH_SUCCESS', { tokens, currentUser: user })
+    //   }
+    // },
+    async register({ commit }, credentials) {
+      if (credentials.password !== credentials.passwordRepeat) {
         return commit('AUTH_ERROR', 'Your passwords must match!')
       } else {
-        delete user.passwordRepeat
+        delete credentials.passwordRepeat
       }
       try {
-        const { data } = await this.$axios.post('/auth/register', user)
-        setTokens(data.tokens, this.$axios)
-        setUser(data.user)
-        commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
+        const { user, error } = await supabase.auth.signUp(credentials)
+        if (error) throw error
+        setUser(user)
+        commit('AUTH_SUCCESS', { currentUser: user })
         return 'success'
       } catch (e) {
         commit(
@@ -53,12 +50,12 @@ export default {
         return 'error'
       }
     },
-    async login({ commit }, user) {
+    async login({ commit }, credentials) {
       try {
-        const { data } = await this.$axios.post('/auth/login', user)
-        setTokens(data.tokens, this.$axios)
-        setUser(data.user)
-        commit('AUTH_SUCCESS', { tokens: data.tokens, currentUser: data.user })
+        const { user, error } = await supabase.auth.signIn(credentials)
+        if (error) throw error
+        setUser(user)
+        commit('AUTH_SUCCESS', { currentUser: user })
         return 'success'
       } catch (e) {
         commit(
@@ -68,53 +65,34 @@ export default {
         return 'error'
       }
     },
-    async refreshTokens({ state, commit }) {
-      try {
-        if (state.tokens.refresh.token) {
-          const { data } = await this.$axios.post('/auth/refresh-tokens', {
-            refreshToken: state.tokens.refresh.token,
-          })
-          setTokens(data, this.$axios)
-        }
-      } catch (e) {
-        localStorage.removeItem('tokens')
-        localStorage.removeItem('currentUser')
-        this.$axios.defaults.headers.common.Authorization = ''
-        commit('AUTH_ERROR')
-        commit('LOGOUT')
-      }
-    },
     async logout({ state, commit }) {
       try {
-        if (state.tokens.refresh.token) {
-          await this.$axios.post('/auth/logout', {
-            refreshToken: state.tokens.refresh.token,
-          })
-        }
-        localStorage.removeItem('tokens')
-        localStorage.removeItem('currentUser')
-        this.$axios.defaults.headers.common.Authorization = ''
+        const { error } = await supabase.auth.signOut()
+        if (error) throw error
       } catch (e) {
         commit('AUTH_ERROR')
       } finally {
         commit('LOGOUT')
       }
     },
-    async verifyEmailToken({ commit }, token) {
+    // async verifyEmailToken({ commit }, token) {
+    //   try {
+    //     await this.$axios.post('/auth/verify-email', token)
+    //     return 'success'
+    //   } catch (e) {
+    //     commit(
+    //       'AUTH_ERROR',
+    //       e.response.data.message || 'There was a problem verifying your email.'
+    //     )
+    //     return 'error'
+    //   }
+    // },
+    async forgotPassword({ commit }, user) {
       try {
-        await this.$axios.post('/auth/verify-email', token)
-        return 'success'
-      } catch (e) {
-        commit(
-          'AUTH_ERROR',
-          e.response.data.message || 'There was a problem verifying your email.'
+        const { error } = await supabase.auth.api.resetPasswordForEmail(
+          user.email
         )
-        return 'error'
-      }
-    },
-    forgotPassword({ commit }, user) {
-      try {
-        this.$axios.post('/auth/forgot-password', user)
+        if (error) throw error
         return 'success'
       } catch (e) {
         commit(
@@ -126,8 +104,8 @@ export default {
     },
   },
   mutations: {
-    AUTH_SUCCESS(state, { tokens, currentUser }) {
-      state.tokens = tokens
+    AUTH_SUCCESS(state, { currentUser }) {
+      // state.tokens = tokens
       state.currentUser = currentUser
     },
     AUTH_ERROR(state, error = 'error') {

@@ -22,23 +22,23 @@ export default {
   created() {
     this.setupApp()
   },
-  mounted() {
-    this.$store.dispatch('auth/attemptLogin')
-    if (
-      this.$store.getters['auth/currentUser'] &&
-      this.$store.getters['auth/currentUser'].profile.theme
-    ) {
-      this.changeThemes({
-        id: this.$store.getters['auth/currentUser'].profile.theme,
-      })
-    } else if (
-      window.localStorage &&
-      localStorage.getItem('activeTheme') &&
-      JSON.parse(localStorage.getItem('activeTheme'))
-    ) {
-      this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
-    }
-  },
+  // mounted() {
+  //   this.$store.dispatch('auth/attemptLogin')
+  //   if (
+  //     this.$store.getters['auth/currentUser'] &&
+  //     this.$store.getters['auth/currentUser'].profile.theme
+  //   ) {
+  //     this.changeThemes({
+  //       id: this.$store.getters['auth/currentUser'].profile.theme,
+  //     })
+  //   } else if (
+  //     window.localStorage &&
+  //     localStorage.getItem('activeTheme') &&
+  //     JSON.parse(localStorage.getItem('activeTheme'))
+  //   ) {
+  //     this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
+  //   }
+  // },
   methods: {
     setupApp() {
       Vue.prototype.$showModal = this.ModalProvider.showModal
@@ -47,12 +47,6 @@ export default {
       Vue.prototype.$showMessage = this.MessageProvider.showMessage
       Vue.prototype.$closeMessage = this.MessageProvider.closeMessage
       Vue.prototype.$getMessages = this.MessageProvider.getMessages.value
-      this.$axios.interceptors.response.use(null, (error) => {
-        if (error.response && error.response.status === 401) {
-          this.$store.dispatch('auth/refreshTokens')
-        }
-        return Promise.reject(error)
-      })
     },
     changeThemes(theme) {
       this.$store.commit('app/SET_ACTIVE_THEME', theme)
