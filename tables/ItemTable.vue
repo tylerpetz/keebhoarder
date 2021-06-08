@@ -7,6 +7,7 @@ export default {
     items: {
       type: Array,
       required: true,
+      default: () => [],
     },
     listId: {
       type: [String, null],

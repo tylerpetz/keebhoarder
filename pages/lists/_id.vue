@@ -10,8 +10,8 @@ export default {
     this.$store.commit('list/SET_CURRENT_LIST', {})
     next()
   },
-  mounted() {
-    this.$store.dispatch('list/getListById', this.$route.params.id)
+  async fetch() {
+    await this.$store.dispatch('list/getListById', this.$route.params.id)
   },
 }
 </script>
