@@ -5,41 +5,41 @@ export default {
     list: {
       type: [Object, null],
       required: false,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
-  data () {
+  data() {
     return {
       currentList: {
         name: '',
         description: '',
-        public: false
-      }
+        public: false,
+      },
     }
   },
-  mounted () {
+  mounted() {
     if (this.list) {
       this.currentList = { ...this.list }
     }
   },
   methods: {
-    createOrUpdateList () {
+    createOrUpdateList() {
       if (this.list) {
-        this.$store.dispatch('list/updateList', { list: this.currentList, updateCurrent: this.$route.name === 'SingleList' })
+        this.$store.dispatch('list/updateList', {
+          list: this.currentList,
+          updateCurrent: this.$route.name === 'SingleList',
+        })
       } else {
         this.$store.dispatch('list/createList', this.currentList)
       }
       this.$closeModal()
-    }
-  }
+    },
+  },
 }
 </script>
 
 <template>
-  <Modal
-    data-test="list-modal"
-    @close="$closeModal"
-  >
+  <Modal data-test="list-modal" @close="$closeModal">
     <form @submit.prevent="createOrUpdateList">
       <div class="flex flex-col p-6">
         <form-input
@@ -60,22 +60,15 @@ export default {
           Description
         </form-input>
         <div class="relative flex items-start justify-start pb-1">
-          <form-toggle
-            v-model="currentList.public"
-            data-test="list-public"
-          >
-            <p class="font-medium text-theme-text text-sm">
-              Public
-            </p>
+          <form-toggle v-model="currentList.public" data-test="list-public">
+            <p class="font-medium text-theme-text text-sm">Public</p>
             <p class="text-theme-text-l text-xs">
               Allow other users to see this list.
             </p>
           </form-toggle>
         </div>
       </div>
-      <footer
-        class="bg-theme-bg-d p-2 flex justify-end"
-      >
+      <footer class="bg-theme-bg-d p-2 flex justify-end">
         <Keycap
           theme="accent"
           cap-style="large"

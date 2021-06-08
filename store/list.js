@@ -1,5 +1,4 @@
-import { queryStringify } from '@/utils/methods.js'
-import pick from 'lodash/pick'
+import supabase from '@/utils/supabase'
 
 export default {
   namespaced: true,
@@ -12,11 +11,11 @@ export default {
         limit: 5, // vgt-table perPage
         page: 1, // vgt-table currentPage
       },
-      sorts: {},
-      meta: {
-        totalResults: 0, // vgt-table totalRows
-        totalPages: 0,
+      sorts: {
+        field: 'id',
+        type: 'desc',
       },
+      total: null,
     }
   },
   getters: {
@@ -24,53 +23,58 @@ export default {
       Object.keys(state.currentList).length ? state.currentList : null,
     lists: (state) => state.lists,
     loading: (state) => state.loading,
-    pagination: (state) => queryStringify(state.pagination),
-    sorts: (state) =>
-      Object.keys(state.sorts).length
-        ? `&sortBy=${state.sorts.field}:${state.sorts.type}`
-        : '',
-    totalResults: (state) => state.meta.totalResults,
+    totalResults: (state) => state.total,
+    rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
+    rangeEnd: (state) => state.pagination.page - 1 + state.pagination.limit - 1,
   },
   actions: {
-    getLists({ commit, getters }) {
-      this.$axios
-        .get(`/lists?${getters.pagination}${getters.sorts}`)
-        .then(({ data }) => {
-          commit('SET_LISTS', data.results)
-          commit('SET_LIST_PAGINATION', pick(data, ['limit', 'page']))
-          commit('SET_LIST_META', pick(data, ['totalPages', 'totalResults']))
+    async getLists({ commit, getters, state }) {
+      const { data: lists, count } = await supabase
+        .from('lists')
+        .select('*', { count: 'exact' })
+        .order(state.sorts.field, {
+          ascending: state.sorts.type === 'asc',
         })
+        .range(getters.rangeStart, getters.rangeEnd)
+
+      commit('SET_LISTS', lists)
+      commit('SET_LIST_TOTAL', count)
     },
-    getListById({ commit }, listId) {
-      this.$axios.get(`/lists/${listId}`).then(({ data }) => {
+    async getListById({ commit }, listId) {
+      const { data: lists } = await supabase
+        .from('lists')
+        .select('*', { count: 'exact' })
+        .eq('id', listId)
+
+      commit('SET_CURRENT_LIST', lists[0])
+    },
+    async createList({ dispatch, rootGetters }, list) {
+      const listToCreate = {
+        ...list,
+        user: rootGetters['auth/currentUser'].id,
+      }
+      await supabase.from('lists').insert([listToCreate])
+      dispatch('getLists')
+    },
+    async updateList({ commit, dispatch }, { list, updateCurrent = false }) {
+      const listToUpdate = { ...list }
+      delete listToUpdate.user
+      delete listToUpdate.id
+      delete listToUpdate.items
+
+      const { data } = await supabase
+        .from('lists')
+        .update(listToUpdate)
+        .eq('id', list.id)
+      if (updateCurrent) {
         commit('SET_CURRENT_LIST', data)
-      })
-    },
-    createList({ dispatch }, list) {
-      this.$axios.post('/lists', list).then(() => {
+      } else {
         dispatch('getLists')
-      })
+      }
     },
-    updateList({ commit, dispatch }, { list, updateCurrent = false }) {
-      const updatedList = { ...list }
-      delete updatedList.user
-      delete updatedList.id
-      delete updatedList.items
-      delete updatedList.vgt_id
-      delete updatedList.originalIndex
-      delete updatedList.createdAt
-      delete updatedList.updatedAt
-      this.$axios.patch(`/lists/${list.id}`, updatedList).then(({ data }) => {
-        if (updateCurrent) {
-          commit('SET_CURRENT_LIST', data)
-        }
-        dispatch('getLists')
-      })
-    },
-    deleteList({ dispatch }, listId) {
-      this.$axios.delete(`/lists/${listId}`).then(() => {
-        dispatch('getLists')
-      })
+    async deleteList({ dispatch }, listId) {
+      await supabase.from('lists').delete().eq('id', listId)
+      dispatch('getLists')
     },
     // table options
     onPagingChange({ commit, dispatch }, params) {
@@ -100,15 +104,18 @@ export default {
     SET_CURRENT_LIST(state, list) {
       state.currentList = { ...list }
     },
+    SET_LIST_TOTAL(state, total) {
+      state.total = total
+    },
     SET_LIST_PAGINATION(state, pagination) {
       state.pagination = { ...pagination }
     },
-    SET_LIST_META(state, meta) {
-      state.meta = { ...meta }
-    },
     SET_LIST_SORTS(state, sorts) {
       if (sorts.type === 'none') {
-        state.sorts = {}
+        state.sorts = {
+          field: 'id',
+          type: 'desc',
+        }
       } else {
         state.sorts = { ...sorts }
       }

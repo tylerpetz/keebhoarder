@@ -8,6 +8,9 @@ export default {
       columns: listColumns,
     }
   },
+  async fetch() {
+    await this.$store.dispatch('list/getLists')
+  },
   computed: {
     isLoading: {
       get() {
@@ -18,12 +21,14 @@ export default {
       },
     },
   },
-  mounted() {
-    this.$store.dispatch('list/getLists')
-  },
   methods: {
-    editList(list) {
-      this.$showModal('ListModal', { props: { list } })
+    editList(listId) {
+      const listToEdit = this.$store.getters['list/lists'].findIndex(
+        (list) => list.id === listId
+      )
+      this.$showModal('ListModal', {
+        props: { list: this.$store.getters['list/lists'][listToEdit] },
+      })
     },
     removeList({ id }) {
       this.$store.dispatch('list/deleteList', id)
@@ -94,7 +99,7 @@ export default {
               type="button"
               class="text-theme-link hover:text-theme-link-hover"
               data-test="edit-list"
-              @click="editList(props.row)"
+              @click="editList(props.row.id)"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
