@@ -86,6 +86,6 @@ export default {
     </transition>
     <site-footer />
     <modal-list />
-    <system-message />
+    <system-messages />
   </main>
 </template>

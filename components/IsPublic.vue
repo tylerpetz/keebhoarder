@@ -10,16 +10,16 @@ export default {
 }
 </script>
 
-<template>
+<template functional>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="h-6 w-6 inline"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    :data-test="`public-${isPublic}`"
+    :data-test="`public-${props.isPublic}`"
   >
-    <template v-if="isPublic">
+    <template v-if="props.isPublic">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
