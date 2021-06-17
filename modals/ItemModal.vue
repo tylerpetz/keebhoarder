@@ -2,6 +2,7 @@
 import { getValue } from 'vue-currency-input'
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
+import supabase from '@/utils/supabase'
 
 const itemModel = {
   category: 'Uncategorized',
@@ -37,7 +38,6 @@ export default {
       currentItem: itemModel,
       formattedPrice: this.item.price || 0,
       originalItem: itemModel,
-      tempImageUrl: null,
     }
   },
   computed: {
@@ -101,13 +101,17 @@ export default {
         }
       }
     },
-    onFileUpload(e) {
+    async onFileUpload(e) {
       const file = e.target.files[0]
       if (this.currentItem.photos == null) {
         this.currentItem.photos = []
       }
-      this.currentItem.photos[0] = file
-      this.tempImageUrl = URL.createObjectURL(file)
+
+      await supabase.storage.from('photos').upload(file.name, file)
+      const { publicURL } = await supabase.storage
+        .from('photos')
+        .getPublicUrl(file.name)
+      this.currentItem.photos.push(publicURL)
     },
     addItemUrl() {
       if (this.currentItem.urls == null) {
@@ -220,6 +224,13 @@ export default {
             Photos (PNG, JPG, GIF up to 10MB)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
+            <img
+              v-for="photo in currentItem.photos"
+              :key="photo"
+              :src="photo"
+              class="h-full w-full inset-0 object-contain z-10"
+              alt="cover image"
+            />
             <div
               class="
                 w-1/3
@@ -233,12 +244,6 @@ export default {
                 relative
               "
             >
-              <img
-                v-if="tempImageUrl"
-                :src="tempImageUrl"
-                class="absolute h-full w-full inset-0 object-contain z-10"
-                alt="cover image"
-              />
               <div class="space-y-1 text-center">
                 <svg
                   class="mx-auto h-10 w-10 text-theme-link"
