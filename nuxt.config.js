@@ -55,9 +55,7 @@ export default {
   modules: [
     // https://axios.nuxtjs.org/
     '@nuxtjs/axios',
-    // https://auth.nuxtjs.org/guide/setup/
-    // '@nuxtjs/auth-next',
-    // // https://vue-currency-input-v1.netlify.app/guide/#installation
+    // https://vue-currency-input-v1.netlify.app/guide/#installation
     [
       'vue-currency-input/nuxt',
       {

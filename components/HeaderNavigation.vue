@@ -54,14 +54,14 @@ export default {
       >
         Items
       </nuxt-link>
-      <nuxt-link
+      <!-- <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
         :to="{ name: 'orders' }"
         :class="$route.name === 'orders' ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Orders
-      </nuxt-link>
+      </nuxt-link> -->
     </nav>
     <section v-if="$store.getters['auth/loggedIn']" class="flex flex-row">
       <Keycap

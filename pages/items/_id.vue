@@ -102,9 +102,9 @@ export default {
               {{ currentItem.description }}
             </p>
             <p class="mt-4 max-w-lg text-sm text-theme-text">
-              Maker: {{ currentItem.details.maker }}<br />Model:
-              {{ currentItem.details.model }}<br />
-              Color: {{ currentItem.details.color }}<br />Color:
+              Maker: {{ currentItem.maker }}<br />Model: {{ currentItem.model
+              }}<br />
+              Color: {{ currentItem.color }}<br />Color:
               {{ currentItem.qty }}
             </p>
           </div>

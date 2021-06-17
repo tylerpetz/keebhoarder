@@ -51,7 +51,7 @@ export default {
     async createItem({ dispatch, rootGetters }, item) {
       const itemToCreate = {
         ...item,
-        user: rootGetters['auth/currentUser'].id,
+        user_id: rootGetters['auth/currentUser'].id,
       }
       await supabase.from('items').insert([itemToCreate])
       dispatch('getItems')

@@ -11,6 +11,10 @@ export default {
       type: String,
       default: '',
     },
+    value: {
+      type: String,
+      required: true,
+    },
   },
 }
 </script>
@@ -20,6 +24,7 @@ export default {
     <span class="text-theme-text text-xs"><slot /></span>
     <select
       v-bind="$attrs"
+      :value="value"
       class="
         bg-alpha-cap
         hover:bg-alpha-cap-hover
@@ -29,6 +34,10 @@ export default {
         rounded
         text-sm
       "
+      v-on="{
+        ...$listeners,
+        input: (event) => $emit('input', event.target.value),
+      }"
     >
       <option v-if="placeholder" selected disabled>{{ placeholder }}</option>
       <option

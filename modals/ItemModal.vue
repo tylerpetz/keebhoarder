@@ -15,7 +15,7 @@ const itemModel = {
   price: 0,
   public: false,
   qty: 0,
-  urls: null,
+  urls: [''],
 }
 
 export default {
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       currentItem: itemModel,
-      formattedPrice: 0,
+      formattedPrice: this.item.price || 0,
       originalItem: itemModel,
       tempImageUrl: null,
     }
@@ -67,13 +67,12 @@ export default {
   },
   created() {
     if (this.item) {
+      this.originalItem = _cloneDeep(this.item)
       this.currentItem = {
         ...itemModel,
         ...this.item,
       }
-      this.originalItem = _cloneDeep(this.item)
     }
-    this.formattedPrice = this.currentItem.price
   },
   methods: {
     createOrUpdateItem() {
@@ -106,6 +105,19 @@ export default {
       const file = e.target.files[0]
       this.currentItem.photos[0] = file
       this.tempImageUrl = URL.createObjectURL(file)
+    },
+    addItemUrl() {
+      if (this.currentItem.urls == null) {
+        this.currentItem.urls = ['']
+      } else {
+        this.currentItem.urls.push('')
+      }
+    },
+    removeItemUrl(index) {
+      this.currentItem.urls.splice(index, 1)
+      if (this.currentItem.urls.length === 0) {
+        this.currentItem.urls = null
+      }
     },
   },
 }
@@ -270,44 +282,40 @@ export default {
           </div>
           <div class="relative flex flex-col mb-2">
             <span class="text-theme-text text-xs">Additional Links</span>
-            <template v-for="(url, index) in currentItem.urls">
-              <form-input
-                :key="index"
-                v-model="currentItem.urls[index]"
-                type="text"
-                :class="{ 'mt-2': index > 0 }"
-              >
-                <template v-if="index > 0" slot="icon">
-                  <button
-                    class="appearance-none"
-                    type="button"
-                    @click="currentItem.urls.splice(index, 1)"
+            <form-input
+              v-for="(url, index) in currentItem.urls"
+              :key="index"
+              ref="urls"
+              v-model="currentItem.urls[index]"
+              type="text"
+              :class="{ 'mt-2': index > 0 }"
+            >
+              <template slot="icon">
+                <button
+                  class="appearance-none"
+                  type="button"
+                  @click="removeItemUrl(index)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </button>
-                </template>
-              </form-input>
-            </template>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </button>
+              </template>
+            </form-input>
           </div>
           <div class="flex justify-end w-full text-right">
-            <Keycap
-              cap-style="large"
-              type="button"
-              @click.native="currentItem.urls.push('')"
-            >
+            <Keycap cap-style="large" type="button" @click.native="addItemUrl">
               Add URL
             </Keycap>
           </div>

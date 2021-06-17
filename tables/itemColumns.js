@@ -1,51 +1,57 @@
+// Create our number formatter.
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
+
 export default [
   {
     label: 'Name',
-    field: 'name'
+    field: 'name',
   },
   {
     label: 'Description',
-    field: 'description'
+    field: 'description',
   },
   {
     label: 'Qty',
     field: 'qty',
     type: 'number',
-    width: '100px'
-
+    width: '100px',
   },
   {
     label: 'Price',
     field: 'price',
     type: 'number',
-    width: '150px'
-
+    width: '150px',
+    formatFn(value) {
+      return formatter.format(value / 100)
+    },
   },
   {
     label: 'Public',
     field: 'public',
     type: 'boolean',
-    width: '100px'
-
+    width: '100px',
   },
   {
     label: 'Created',
-    field: 'createdAt',
+    field: 'created_at',
     type: 'date',
-    dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxx",
+    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
   },
   {
     label: 'Last Updated',
-    field: 'updatedAt',
+    field: 'updated_at',
     type: 'date',
-    dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'',
-    dateOutputFormat: 'MMM d yyyy' // outputs Mar 16th 2018,
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxx",
+    dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
   },
   {
     label: 'Actions',
     field: 'after',
     type: 'boolean',
-    sortable: false
-  }
+    sortable: false,
+  },
 ]
