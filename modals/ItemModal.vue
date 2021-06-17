@@ -103,6 +103,9 @@ export default {
     },
     onFileUpload(e) {
       const file = e.target.files[0]
+      if (this.currentItem.photos == null) {
+        this.currentItem.photos = []
+      }
       this.currentItem.photos[0] = file
       this.tempImageUrl = URL.createObjectURL(file)
     },

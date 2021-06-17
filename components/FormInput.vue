@@ -27,7 +27,10 @@ export default {
           text-sm
           w-full
         "
-        :class="{ 'opacity-50': $attrs.disabled !== undefined }"
+        :class="{
+          'opacity-50': $attrs.disabled !== undefined,
+          'pr-10': $slots.icon,
+        }"
         :value="value"
         @input="$emit('input', $event.target.value)"
       />
