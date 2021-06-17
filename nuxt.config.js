@@ -30,7 +30,7 @@ export default {
   css: ['@/assets/main.css', '@/assets/themes.css', '@/assets/table.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/vue-good-table', ssr: false }],
+  plugins: [{ src: '~/plugins/client-plugins', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -57,6 +57,24 @@ export default {
     '@nuxtjs/axios',
     // https://auth.nuxtjs.org/guide/setup/
     // '@nuxtjs/auth-next',
+    // // https://vue-currency-input-v1.netlify.app/guide/#installation
+    [
+      'vue-currency-input/nuxt',
+      {
+        globalOptions: {
+          currency: 'USD',
+          locale: 'en',
+          valueAsInteger: true,
+          distractionFree: {
+            hideNegligibleDecimalDigits: false,
+            hideCurrencySymbol: true,
+            hideGroupingSymbol: true,
+          },
+          valueRange: { min: 0 },
+          allowNegative: false,
+        },
+      },
+    ],
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

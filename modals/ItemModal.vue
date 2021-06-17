@@ -1,22 +1,21 @@
 <script>
-import { getValue, setValue } from 'vue-currency-input'
+import { getValue } from 'vue-currency-input'
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
 
 const itemModel = {
-  name: '',
-  description: '',
   category: 'Uncategorized',
+  color: null,
+  description: '',
+  maker: null,
+  model: null,
+  name: '',
+  owned: true,
+  photos: null,
   price: 0,
-  qty: 0,
   public: false,
-  photos: [''],
-  urls: [''],
-  details: {
-    maker: '',
-    model: '',
-    color: ''
-  }
+  qty: 0,
+  urls: null,
 }
 
 export default {
@@ -25,25 +24,24 @@ export default {
     item: {
       type: [Object, null],
       required: false,
-      default: () => null
+      default: () => null,
     },
     listId: {
       type: [String, null],
       required: false,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
-  data () {
+  data() {
     return {
       currentItem: itemModel,
       formattedPrice: 0,
-      itemChanged: false,
       originalItem: itemModel,
-      tempImageUrl: null
+      tempImageUrl: null,
     }
   },
   computed: {
-    categories () {
+    categories() {
       const categories = [
         'Uncategorized',
         'Artisan Keycap',
@@ -57,51 +55,59 @@ export default {
         'Springs',
         'Stabilizers',
         'Switches',
-        'Other'
+        'Other',
       ]
-      return categories.map(cat => ({ text: cat, value: cat }))
-    }
+      return categories.map((cat) => ({ text: cat, value: cat }))
+    },
   },
   watch: {
-    formattedPrice () {
+    formattedPrice() {
       this.currentItem.price = getValue(this.$refs.price)
-    }
+    },
   },
-  mounted () {
+  created() {
     if (this.item) {
-      this.formattedPrice = setValue(this.$refs.price, getValue(this.$refs.price) + this.item.price)
       this.currentItem = {
         ...itemModel,
-        ...this.item
+        ...this.item,
       }
       this.originalItem = _cloneDeep(this.item)
     }
+    this.formattedPrice = this.currentItem.price
   },
   methods: {
-    createOrUpdateItem () {
+    createOrUpdateItem() {
       if (this.item) {
-        this.$store.dispatch('item/updateItem', { item: this.currentItem, updateCurrent: this.$route.name === 'SingleItem' })
+        this.$store.dispatch('item/updateItem', {
+          item: this.currentItem,
+          updateCurrent: this.$route.name === 'SingleItem',
+        })
       } else {
-        this.$store.dispatch('item/createItem', { ...this.currentItem, ...this.listId && { lists: [this.listId] } })
+        this.$store.dispatch('item/createItem', {
+          ...this.currentItem,
+          ...(this.listId && { lists: [this.listId] }),
+        })
       }
       this.$closeModal()
     },
-    askToClose () {
+    askToClose() {
       if (_isEqual(this.currentItem, this.originalItem)) {
         this.$closeModal()
       } else {
-        const choice = confirm('Are you sure you stop adding this item? You will lose any unsaved changes.')
+        const choice = confirm(
+          'Are you sure you stop adding this item? You will lose any unsaved changes.'
+        )
         if (choice) {
           this.$closeModal()
         }
       }
     },
-    onFileUpload (e) {
+    onFileUpload(e) {
       const file = e.target.files[0]
       this.currentItem.photos[0] = file
       this.tempImageUrl = URL.createObjectURL(file)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -112,7 +118,16 @@ export default {
     @close="askToClose"
   >
     <form @submit.prevent="createOrUpdateItem">
-      <div class="flex flex-col lg:flex-row w-full space-y-6 lg:space-y-0 lg:space-x-6 p-6">
+      <div
+        class="
+          flex flex-col
+          lg:flex-row
+          w-full
+          space-y-6
+          lg:space-y-0 lg:space-x-6
+          p-6
+        "
+      >
         <div class="w-full lg:w-1/3">
           <form-input
             v-model="currentItem.name"
@@ -149,9 +164,7 @@ export default {
             Qty
           </form-input>
           <form-toggle v-model="currentItem.public">
-            <p class="font-medium text-theme-text text-sm">
-              Public
-            </p>
+            <p class="font-medium text-theme-text text-sm">Public</p>
             <p class="text-theme-text-l text-xs">
               Allow other users to see this item.
             </p>
@@ -166,21 +179,21 @@ export default {
             Category
           </form-select>
           <form-input
-            v-model="currentItem.details.maker"
+            v-model="currentItem.maker"
             class="w-full mb-6"
             type="text"
           >
             Manufacturer
           </form-input>
           <form-input
-            v-model="currentItem.details.model"
+            v-model="currentItem.model"
             class="w-full mb-6"
             type="text"
           >
             Model Name
           </form-input>
           <form-input
-            v-model="currentItem.details.color"
+            v-model="currentItem.color"
             class="w-full mb-6"
             type="text"
           >
@@ -188,22 +201,30 @@ export default {
           </form-input>
         </div>
         <div class="w-full lg:w-1/3">
-          <label
-            class="block text-sm font-medium text-theme-text"
-          >
+          <label class="block text-sm font-medium text-theme-text">
             Photos (PNG, JPG, GIF up to 10MB)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
-            <div class="w-1/3 flex justify-center px-2 pt-4 pb-5 border-2 border-theme-border border-dashed rounded-md relative">
+            <div
+              class="
+                w-1/3
+                flex
+                justify-center
+                px-2
+                pt-4
+                pb-5
+                border-2 border-theme-border border-dashed
+                rounded-md
+                relative
+              "
+            >
               <img
                 v-if="tempImageUrl"
                 :src="tempImageUrl"
                 class="absolute h-full w-full inset-0 object-contain z-10"
                 alt="cover image"
-              >
-              <div
-                class="space-y-1 text-center"
-              >
+              />
+              <div class="space-y-1 text-center">
                 <svg
                   class="mx-auto h-10 w-10 text-theme-link"
                   stroke="currentColor"
@@ -221,7 +242,17 @@ export default {
                 <div class="flex flex-col items-center text-xs text-theme-text">
                   <label
                     for="file-upload"
-                    class="relative cursor-pointer rounded-md font-medium text-theme-link hover:text-theme-link focus-within:outline-none focus-within:ring-2 focus-within:ring-theme-link"
+                    class="
+                      relative
+                      cursor-pointer
+                      rounded-md
+                      font-medium
+                      text-theme-link
+                      hover:text-theme-link
+                      focus-within:outline-none
+                      focus-within:ring-2
+                      focus-within:ring-theme-link
+                    "
                   >
                     <span>Upload a file</span>
                     <input
@@ -230,11 +261,9 @@ export default {
                       type="file"
                       class="sr-only"
                       @change="onFileUpload"
-                    >
+                    />
                   </label>
-                  <p class="pl-1">
-                    or drag and drop
-                  </p>
+                  <p class="pl-1">or drag and drop</p>
                 </div>
               </div>
             </div>
@@ -248,10 +277,7 @@ export default {
                 type="text"
                 :class="{ 'mt-2': index > 0 }"
               >
-                <template
-                  v-if="index > 0"
-                  slot="icon"
-                >
+                <template v-if="index > 0" slot="icon">
                   <button
                     class="appearance-none"
                     type="button"
@@ -287,9 +313,7 @@ export default {
           </div>
         </div>
       </div>
-      <footer
-        class="bg-theme-bg-d p-2 flex justify-end"
-      >
+      <footer class="bg-theme-bg-d p-2 flex justify-end">
         <Keycap
           theme="accent"
           cap-style="large"

@@ -29,6 +29,7 @@
     "@supabase/supabase-js": "^1.13.2",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
+    "vue-currency-input": "^1.22.6",
     "vue-good-table": "^2.21.10"
   },
   "devDependencies": {

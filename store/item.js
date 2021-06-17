@@ -1,5 +1,4 @@
-import { queryStringify, removeEmpty } from '@/utils/methods.js'
-import pick from 'lodash/pick'
+import supabase from '@/utils/supabase'
 
 export default {
   namespaced: true,
@@ -12,11 +11,11 @@ export default {
         limit: 5, // vgt-table perPage
         page: 1, // vgt-table currentPage
       },
-      sorts: {},
-      meta: {
-        totalResults: 0, // vgt-table totalRows
-        totalPages: 0,
+      sorts: {
+        field: 'id',
+        type: 'desc',
       },
+      total: null,
     }
   },
   getters: {
@@ -24,54 +23,61 @@ export default {
       Object.keys(state.currentItem).length ? state.currentItem : null,
     items: (state) => state.items,
     loading: (state) => state.loading,
-    pagination: (state) => queryStringify(state.pagination),
-    sorts: (state) =>
-      Object.keys(state.sorts).length
-        ? `&sortBy=${state.sorts.field}:${state.sorts.type}`
-        : '',
-    totalResults: (state) => state.meta.totalResults,
+    totalResults: (state) => state.total,
+    rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
+    rangeEnd: (state) => state.pagination.page - 1 + state.pagination.limit - 1,
   },
   actions: {
-    getItems({ commit, getters }) {
-      this.$axios
-        .get(`/items?${getters.pagination}${getters.sorts}`)
-        .then(({ data }) => {
-          commit('SET_ITEMS', data.results)
-          commit('SET_ITEM_PAGINATION', pick(data, ['limit', 'page']))
-          commit('SET_ITEM_META', pick(data, ['totalPages', 'totalResults']))
+    async getItems({ commit, getters, state }) {
+      const { data: items, count } = await supabase
+        .from('items')
+        .select('*', { count: 'exact' })
+        .order(state.sorts.field, {
+          ascending: state.sorts.type === 'asc',
         })
+        .range(getters.rangeStart, getters.rangeEnd)
+
+      commit('SET_ITEMS', items)
+      commit('SET_ITEM_TOTAL', count)
     },
-    getItemById({ commit }, itemId) {
-      this.$axios.get(`/items/${itemId}`).then(({ data }) => {
+    async getItemById({ commit }, itemId) {
+      const { data: items } = await supabase
+        .from('items')
+        .select('*', { count: 'exact' })
+        .eq('id', itemId)
+
+      commit('SET_CURRENT_ITEM', items[0])
+    },
+    async createItem({ dispatch, rootGetters }, item) {
+      const itemToCreate = {
+        ...item,
+        user: rootGetters['auth/currentUser'].id,
+      }
+      await supabase.from('items').insert([itemToCreate])
+      dispatch('getItems')
+    },
+    async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
+      const itemToUpdate = { ...item }
+      delete itemToUpdate.user
+      delete itemToUpdate.id
+      delete itemToUpdate.vgt_id
+      delete itemToUpdate.originalIndex
+      delete itemToUpdate.createdAt
+      delete itemToUpdate.updatedAt
+
+      const { data } = await supabase
+        .from('items')
+        .update(itemToUpdate)
+        .eq('id', item.id)
+      if (updateCurrent) {
         commit('SET_CURRENT_ITEM', data)
-      })
-    },
-    createItem({ dispatch }, item) {
-      this.$axios.post('/items', removeEmpty(item)).then(() => {
+      } else {
         dispatch('getItems')
-      })
+      }
     },
-    updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
-      const updatedItem = { ...item }
-      delete updatedItem.user
-      delete updatedItem.id
-      delete updatedItem.vgt_id
-      delete updatedItem.originalIndex
-      delete updatedItem.createdAt
-      delete updatedItem.updatedAt
-      this.$axios
-        .patch(`/items/${item.id}`, removeEmpty(updatedItem))
-        .then(({ data }) => {
-          if (updateCurrent) {
-            commit('SET_CURRENT_ITEM', data)
-          }
-          dispatch('getItems')
-        })
-    },
-    deleteItem({ dispatch }, itemId) {
-      this.$axios.delete(`/items/${itemId}`).then(() => {
-        dispatch('getItems')
-      })
+    async deleteItem({ dispatch }, itemId) {
+      await supabase.from('items').delete().eq('id', itemId)
+      dispatch('getItems')
     },
     // table options
     onPagingChange({ commit, dispatch }, params) {
@@ -101,15 +107,18 @@ export default {
     SET_CURRENT_ITEM(state, item) {
       state.currentItem = { ...item }
     },
+    SET_ITEM_TOTAL(state, total) {
+      state.total = total
+    },
     SET_ITEM_PAGINATION(state, pagination) {
       state.pagination = { ...pagination }
     },
-    SET_ITEM_META(state, meta) {
-      state.meta = { ...meta }
-    },
     SET_ITEM_SORTS(state, sorts) {
       if (sorts.type === 'none') {
-        state.sorts = {}
+        state.sorts = {
+          field: 'id',
+          type: 'desc',
+        }
       } else {
         state.sorts = { ...sorts }
       }
