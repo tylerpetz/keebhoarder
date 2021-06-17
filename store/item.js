@@ -41,12 +41,13 @@ export default {
       commit('SET_ITEM_TOTAL', count)
     },
     async getItemById({ commit }, itemId) {
-      const { data: items } = await supabase
+      const { data: item } = await supabase
         .from('items')
         .select('*', { count: 'exact' })
         .eq('id', itemId)
+        .single()
 
-      commit('SET_CURRENT_ITEM', items[0])
+      commit('SET_CURRENT_ITEM', item)
     },
     async createItem({ dispatch, rootGetters }, item) {
       const itemToCreate = {
