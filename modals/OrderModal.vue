@@ -5,40 +5,41 @@ export default {
     order: {
       type: [Object, null],
       required: false,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
-  data () {
+  data() {
     return {
       currentOrder: {
         name: '',
         description: '',
-        public: false
-      }
+        public: false,
+      },
     }
   },
-  mounted () {
+  mounted() {
     if (this.order) {
       this.currentOrder = { ...this.order }
     }
   },
   methods: {
-    createOrUpdateOrder () {
+    createOrUpdateOrder() {
       if (this.order) {
-        this.$store.dispatch('order/updateOrder', { order: this.currentOrder, updateCurrent: this.$route.name === 'SingleOrder' })
+        this.$store.dispatch('order/updateOrder', {
+          order: this.currentOrder,
+          updateCurrent: this.$route.name === 'SingleOrder',
+        })
       } else {
         this.$store.dispatch('order/createOrder', this.currentOrder)
       }
       this.$closeModal()
-    }
-  }
+    },
+  },
 }
 </script>
 
 <template>
-  <Modal
-    @close="$closeModal"
-  >
+  <Modal @close="$closeModal">
     <form @submit.prevent="createOrUpdateOrder">
       <div class="flex flex-col p-6">
         <form-input
@@ -58,18 +59,14 @@ export default {
         </form-input>
         <div class="relative flex items-start justify-start pb-1">
           <form-toggle v-model="currentOrder.public">
-            <p class="font-medium text-theme-text text-sm">
-              Public
-            </p>
+            <p class="font-medium text-theme-text text-sm">Public</p>
             <p class="text-theme-text-l text-xs">
               Allow other users to see this order.
             </p>
           </form-toggle>
         </div>
       </div>
-      <footer
-        class="bg-theme-bg-d p-2 flex justify-end"
-      >
+      <footer class="bg-theme-bg-d p-2 flex justify-end">
         <Keycap
           theme="accent"
           cap-style="large"

@@ -37,7 +37,10 @@ export default {
       localStorage.getItem('activeTheme') &&
       JSON.parse(localStorage.getItem('activeTheme'))
     ) {
-      this.changeThemes(JSON.parse(localStorage.getItem('activeTheme')))
+      this.$store.dispatch(
+        'app/changeThemes',
+        JSON.parse(localStorage.getItem('activeTheme'))
+      )
     }
   },
   methods: {
@@ -48,12 +51,6 @@ export default {
       Vue.prototype.$showMessage = this.MessageProvider.showMessage
       Vue.prototype.$closeMessage = this.MessageProvider.closeMessage
       Vue.prototype.$getMessages = this.MessageProvider.getMessages.value
-    },
-    changeThemes(theme) {
-      this.$store.commit('app/SET_ACTIVE_THEME', theme)
-
-      const favicon = document.getElementById('favicon')
-      favicon.href = this.themeFavicon
     },
   },
 }

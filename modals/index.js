@@ -2,13 +2,13 @@ import { ModalProvider } from '@/compositions/modal-provider.js'
 
 export default {
   name: 'ModalList',
-  data () {
+  data() {
     return {
       modals: [],
-      ModalProvider
+      ModalProvider,
     }
   },
-  created () {
+  created() {
     const req = require.context('./', true, /\.(vue)$/i)
     req.keys().forEach((key) => {
       const name = key.match(/\w+/)[0]
@@ -17,13 +17,13 @@ export default {
     })
   },
   computed: {
-    currentModal () {
+    currentModal() {
       return this.ModalProvider.getModal.value || {}
-    }
+    },
   },
-  render (h) {
+  render(h) {
     return h(this.currentModal.id, {
-      ...this.currentModal.data
+      ...this.currentModal.data,
     })
-  }
+  },
 }

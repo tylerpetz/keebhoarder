@@ -1,22 +1,25 @@
 <script>
 export default {
   name: 'ForgotPasswordModal',
-  data () {
+  data() {
     return {
       credentials: {
-        email: ''
+        email: '',
       },
-      submitted: false
+      submitted: false,
     }
   },
   methods: {
-    async handleSubmit () {
-      const auth = await this.$store.dispatch('auth/forgotPassword', this.credentials)
+    async handleSubmit() {
+      const auth = await this.$store.dispatch(
+        'auth/forgotPassword',
+        this.credentials
+      )
       if (auth === 'success') {
         this.submitted = true
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -31,10 +34,7 @@ export default {
       @keydown.enter="handleSubmit"
       @submit.prevent="handleSubmit"
     >
-      <div
-        v-if="!submitted"
-        class="flex flex-col p-6 space-y-6"
-      >
+      <div v-if="!submitted" class="flex flex-col p-6 space-y-6">
         <FormInput
           v-model="credentials.email"
           required
@@ -44,9 +44,7 @@ export default {
         >
           Email Address
         </FormInput>
-        <span
-          class="text-xs font-semibold text-theme-text rounded"
-        >
+        <span class="text-xs font-semibold text-theme-text rounded">
           Enter your email and we'll send you a link to reset your password.
         </span>
         <div
@@ -59,13 +57,18 @@ export default {
       </div>
       <p
         v-else
-        class="flex flex-col p-6 space-y-6 text-xs font-semibold text-theme-text"
+        class="
+          flex flex-col
+          p-6
+          space-y-6
+          text-xs
+          font-semibold
+          text-theme-text
+        "
       >
         Thanks, check your email for a link to reset your password.
       </p>
-      <footer
-        class="p-2 flex bg-theme-bg-d justify-end"
-      >
+      <footer class="p-2 flex bg-theme-bg-d justify-end">
         <Keycap
           theme="mod"
           cap-style="large"
