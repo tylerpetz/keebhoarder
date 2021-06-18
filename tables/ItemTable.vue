@@ -39,7 +39,7 @@ export default {
     totalRows() {
       return this.listId
         ? this.items.length
-        : this.$store.getters['list/totalResults']
+        : this.$store.getters['item/totalResults']
     },
   },
   methods: {

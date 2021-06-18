@@ -79,7 +79,7 @@ export default {
         class="ml-2"
         @click.native="subNavOpen = true"
       >
-        {{ $store.getters['auth/currentUser'].username || 'Settings' }}
+        {{ $store.getters['auth/currentUser'].email || 'Settings' }}
       </Keycap>
       <template v-else>
         <nuxt-link :to="{ name: 'profile' }">
@@ -98,14 +98,6 @@ export default {
           @click.native="$showModal('ThemeModal')"
         >
           Swap Keycaps
-        </Keycap>
-        <Keycap
-          cap-style="large"
-          theme="mod"
-          class="ml-2"
-          @click.native="logout"
-        >
-          Log Out
         </Keycap>
         <Keycap theme="accent" class="ml-6" @click.native="subNavOpen = false">
           Esc
