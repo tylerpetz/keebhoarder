@@ -3,7 +3,7 @@ const themeNames = themes.map((theme) => `theme-${theme.id}`)
 
 module.exports = {
   important: true,
-  // mode: 'jit',
+  mode: 'jit',
   purge: {
     content: [
       './components/**/*.vue',

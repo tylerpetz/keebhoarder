@@ -60,6 +60,12 @@ export default {
             type: 'success',
           })
         }
+      } else {
+        this.$showMessage({
+          title: 'Oops...',
+          text: auth,
+          type: 'error',
+        })
       }
     },
   },

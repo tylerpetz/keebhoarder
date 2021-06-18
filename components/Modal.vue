@@ -11,7 +11,7 @@ export default {
       default: 'w-72 sm:w-80 md:w-96',
     },
   },
-  created() {
+  mounted() {
     document.onkeydown = (e) => {
       e = e || window.event
       if (e.keyCode === 27) {
@@ -37,7 +37,7 @@ export default {
     <div
       class="
         absolute
-        z-50
+        z-40
         flex
         h-full
         w-full

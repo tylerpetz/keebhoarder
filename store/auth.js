@@ -44,18 +44,12 @@ export default {
         return 'error'
       }
     },
-    async login({ commit }, credentials) {
-      try {
-        const { error } = await supabase.auth.signIn(credentials)
-        if (error) throw error
-        return 'success'
-      } catch (e) {
-        commit(
-          'AUTH_ERROR',
-          e.response.data.message || 'There was a problem logging you in.'
-        )
-        return 'error'
+    async login(ctx, credentials) {
+      const { error } = await supabase.auth.signIn(credentials)
+      if (error) {
+        return error.message || 'Invalid email or password.'
       }
+      return 'success'
     },
     async logout({ state, commit }) {
       try {
