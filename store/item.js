@@ -81,12 +81,14 @@ export default {
       dispatch('getItems')
     },
     // table options
-    onPagingChange({ commit, dispatch }, params) {
-      const modifiedParams = {
-        ...(params.currentPage && { page: params.currentPage }),
-        ...(params.currentPerPage && { limit: params.currentPerPage }),
-      }
-      commit('SET_ITEM_PAGINATION', modifiedParams)
+    onPagingChange({ state, commit, dispatch }, params) {
+      commit('SET_ITEM_PAGINATION', {
+        limit: params.currentPerPage,
+        page:
+          params.currentPerPage !== state.pagination.limit
+            ? 1
+            : params.currentPage,
+      })
       dispatch('getItems')
     },
     onSortChange({ commit, dispatch }, params) {
