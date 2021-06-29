@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       currentItem: itemModel,
-      formattedPrice: this.item.price || 0,
+      formattedPrice: this.item?.price || 0,
       originalItem: itemModel,
     }
   },

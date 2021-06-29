@@ -14,13 +14,16 @@ export default [
     type: 'boolean',
     width: '100px',
   },
-  // {
-  //   label: 'Item Count',
-  //   field: 'items',
-  //   formatFn: (val) => val.length,
-  //   type: 'number',
-  //   width: '150px',
-  // },
+  {
+    label: 'Item Count',
+    field: 'items',
+    formatFn(val) {
+      return val.length.toString()
+    },
+    type: 'number',
+    width: '150px',
+    sortable: false,
+  },
   {
     label: 'Created',
     field: 'created_at',
