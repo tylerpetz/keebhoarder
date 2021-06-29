@@ -172,14 +172,14 @@ table.vgt-table {
 
       &.disabled,
       &.disabled:hover {
-        @apply opacity-80 text-theme-link cursor-not-allowed;
+        @apply opacity-60 text-theme-link cursor-not-allowed;
 
         .chevron.left:after {
-          @apply opacity-80;
+          @apply opacity-60;
           border-right-color: var(--theme-link);
         }
         .chevron.right:after {
-          @apply opacity-80;
+          @apply opacity-60;
           border-left-color: var(--theme-link);
         }
       }

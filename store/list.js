@@ -25,7 +25,7 @@ export default {
     loading: (state) => state.loading,
     totalResults: (state) => state.total,
     rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
-    rangeEnd: (state) => state.pagination.page - 1 + state.pagination.limit - 1,
+    rangeEnd: (state) => state.pagination.page * state.pagination.limit - 1,
   },
   actions: {
     async getLists({ commit, getters, state }) {
@@ -51,7 +51,15 @@ export default {
     async getListById({ commit }, listId) {
       const { data: lists } = await supabase
         .from('lists')
-        .select('*', { count: 'exact' })
+        .select(
+          `
+          *,
+          items (
+            *
+          )
+        `,
+          { count: 'exact' }
+        )
         .eq('id', listId)
 
       commit('SET_CURRENT_LIST', lists[0])

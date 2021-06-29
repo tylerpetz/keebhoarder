@@ -68,6 +68,7 @@ export default {
         :pagination-options="{
           enabled: true,
           perPageDropdown: [5, 10, 20],
+          perPageDropdownEnabled: $store.getters['list/totalResults'] >= 5,
           dropdownAllowAll: false,
           rowsPerPageLabel: 'Lists per page',
         }"

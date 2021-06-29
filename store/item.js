@@ -25,7 +25,7 @@ export default {
     loading: (state) => state.loading,
     totalResults: (state) => state.total,
     rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
-    rangeEnd: (state) => state.pagination.page - 1 + state.pagination.limit - 1,
+    rangeEnd: (state) => state.pagination.page * state.pagination.limit - 1,
   },
   actions: {
     async getItems({ commit, getters, state }) {
@@ -49,13 +49,36 @@ export default {
 
       commit('SET_CURRENT_ITEM', item)
     },
-    async createItem({ dispatch, rootGetters }, item) {
+    async createItem({ dispatch, rootGetters }, { item, lists = [] }) {
       const itemToCreate = {
         ...item,
         user_id: rootGetters['auth/currentUser'].id,
       }
-      await supabase.from('items').insert([itemToCreate])
-      dispatch('getItems')
+      const { data } = await supabase.from('items').insert([itemToCreate])
+      // console.log(data)
+      if (lists.length) {
+        dispatch('addItemToList', {
+          listId: lists[0],
+          itemId: data[0].id,
+        })
+        dispatch('list/getListById', lists[0], { root: true })
+      } else {
+        dispatch('getItems')
+      }
+    },
+    async addItemToList(ctx, { itemId, listId }) {
+      await supabase.from('list_item').insert([
+        {
+          item_id: itemId,
+          list_id: listId,
+        },
+      ])
+    },
+    async deleteItemFromList(ctx, { itemId, listId }) {
+      await supabase
+        .from('list_item')
+        .delete()
+        .eq([{ item_id: itemId }, { list_id: listId }])
     },
     async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
       const itemToUpdate = { ...item }
@@ -82,6 +105,11 @@ export default {
     },
     // table options
     onPagingChange({ state, commit, dispatch }, params) {
+      console.log(
+        'lkasjd;fkjadf',
+        params.currentPerPage,
+        state.pagination.limit
+      )
       commit('SET_ITEM_PAGINATION', {
         limit: params.currentPerPage,
         page:

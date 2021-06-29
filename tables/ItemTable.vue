@@ -32,6 +32,7 @@ export default {
       return {
         enabled: true,
         perPageDropdown: [5, 10, 20],
+        perPageDropdownEnabled: this.totalRows >= 5,
         dropdownAllowAll: false,
         rowsPerPageLabel: 'Items per page',
       }

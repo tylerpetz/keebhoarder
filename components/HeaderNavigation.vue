@@ -41,7 +41,7 @@ export default {
       <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
         :to="{ name: 'lists' }"
-        :class="$route.name === 'lists' ? 'underline' : ''"
+        :class="$route.name.includes('lists') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Lists
@@ -49,7 +49,7 @@ export default {
       <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
         :to="{ name: 'items' }"
-        :class="$route.name === 'items' ? 'underline' : ''"
+        :class="$route.name.includes('items') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Items
@@ -65,7 +65,7 @@ export default {
       <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
         :to="{ name: 'photos' }"
-        :class="$route.name === 'photos' ? 'underline' : ''"
+        :class="$route.name.includes('photos') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Photos
