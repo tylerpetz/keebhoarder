@@ -5,14 +5,13 @@ export default {
   state() {
     return {
       error: '',
-      currentUser: null,
-      // tokens: {},
       session: null,
     }
   },
   getters: {
     loggedIn: (state) => !!state.session,
-    currentUser: (state) => state.session.user,
+    currentUser: (state) =>
+      state.session && state.session.user ? state.session.user : null,
   },
   actions: {
     initSupabase({ commit }) {

@@ -55,5 +55,6 @@ export default {
         </div>
       </div>
     </div>
+    <div v-if="$store.getters['auth/loggedIn']">yo yo hey</div>
   </Modal>
 </template>
