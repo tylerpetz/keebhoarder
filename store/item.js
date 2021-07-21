@@ -55,7 +55,6 @@ export default {
         user_id: rootGetters['auth/currentUser'].id,
       }
       const { data } = await supabase.from('items').insert([itemToCreate])
-      // console.log(data)
       if (lists.length) {
         dispatch('addItemToList', {
           listId: lists[0],
@@ -105,11 +104,6 @@ export default {
     },
     // table options
     onPagingChange({ state, commit, dispatch }, params) {
-      console.log(
-        'lkasjd;fkjadf',
-        params.currentPerPage,
-        state.pagination.limit
-      )
       commit('SET_ITEM_PAGINATION', {
         limit: params.currentPerPage,
         page:

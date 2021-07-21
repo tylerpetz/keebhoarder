@@ -224,22 +224,15 @@ export default {
             Photos (PNG, JPG, GIF up to 10MB)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
-            <img
-              v-for="photo in currentItem.photos"
-              :key="photo"
-              :src="photo"
-              class="h-full w-full inset-0 object-contain z-10"
-              alt="cover image"
-            />
             <div
               class="
-                w-1/3
+                w-full
                 flex
                 justify-center
                 px-2
                 pt-4
-                pb-5
-                border-2 border-theme-border border-dashed
+                pb-4
+                border border-theme-border border-dashed
                 rounded-md
                 relative
               "
@@ -286,6 +279,18 @@ export default {
                   <p class="pl-1">or drag and drop</p>
                 </div>
               </div>
+            </div>
+            <div
+              v-if="currentItem.photos && currentItem.photos.length"
+              class="grid grid-cols-5 pt-6"
+            >
+              <img
+                v-for="photo in currentItem.photos"
+                :key="photo"
+                :src="photo"
+                class="h-full w-full inset-0 object-contain z-10"
+                alt="cover image"
+              />
             </div>
           </div>
           <div class="relative flex flex-col mb-2">
