@@ -49,7 +49,13 @@ export default {
     async getItemById({ commit }, itemId) {
       const { data: item } = await supabase
         .from('items')
-        .select('*', { count: 'exact' })
+        .select(
+          `
+          *,
+          lists:list_item(list_id)
+        `,
+          { count: 'exact' }
+        )
         .eq('id', itemId)
         .single()
 
