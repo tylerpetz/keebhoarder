@@ -35,7 +35,8 @@ export default {
           `
           *,
           items (
-            id
+            id,
+            lists:list_item(list_id)
           )
         `,
           { count: 'exact' }
@@ -55,7 +56,8 @@ export default {
           `
           *,
           items (
-            *
+            *,
+            lists:list_item(list_id)
           )
         `,
           { count: 'exact' }

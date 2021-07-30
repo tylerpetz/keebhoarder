@@ -31,7 +31,13 @@ export default {
     async getItems({ commit, getters, state }) {
       const { data: items, count } = await supabase
         .from('items')
-        .select('*', { count: 'exact' })
+        .select(
+          `
+          *,
+          lists:list_item(list_id)
+        `,
+          { count: 'exact' }
+        )
         .order(state.sorts.field, {
           ascending: state.sorts.type === 'asc',
         })
