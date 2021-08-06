@@ -73,7 +73,9 @@ export default {
               text-theme-text
               hover:text-theme-text-l
               focus:outline-none
-              focus:ring-2 focus:ring-offset-2 focus:ring-theme-border
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-theme-border
             "
             @click="$closeMessage(message.id)"
           >
