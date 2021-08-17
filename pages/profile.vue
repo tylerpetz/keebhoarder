@@ -7,7 +7,7 @@ export default {
 
 <template>
   <div>
-    <pre>{{ $store.getters['auth/currentUser'] }}</pre>
+    <pre>{{ $store.getters['auth/currentUserProfile'] }}</pre>
     <div class="w-full max-w-2xl mx-auto">
       <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
         <h1 class="text-3xl text-theme-text">Settings</h1>
@@ -15,19 +15,22 @@ export default {
         <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
           <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
             <div class="sm:col-span-6">
-              <form-input
+              <FormInput
                 disabled
-                :value="$store.getters['auth/currentUser'].username"
+                :value="$store.getters['auth/currentUserProfile'].username"
               >
                 Username*
                 <span class="text-xs italic">Usernames cannot be changed</span>
-              </form-input>
+              </FormInput>
             </div>
 
             <div class="sm:col-span-6">
-              <form-input :value="$store.getters['auth/currentUser'].email">
+              <FormInput
+                disabled
+                :value="$store.getters['auth/currentUser'].email"
+              >
                 Email Address
-              </form-input>
+              </FormInput>
             </div>
 
             <div class="sm:col-span-6">
@@ -121,105 +124,17 @@ export default {
             </div>
 
             <div class="sm:col-span-6">
-              <label
-                for="description"
-                class="block text-sm font-medium text-blue-gray-900"
+              <FormInput
+                disabled
+                :value="$store.getters['auth/currentUserProfile'].website"
+                >Website URL</FormInput
               >
-                Description
-              </label>
-              <div class="mt-1">
-                <textarea
-                  id="description"
-                  name="description"
-                  rows="4"
-                  class="
-                    block
-                    w-full
-                    border border-blue-gray-300
-                    rounded-md
-                    shadow-sm
-                    sm:text-sm
-                    focus:ring-blue-500 focus:border-blue-500
-                  "
-                ></textarea>
-              </div>
-              <p class="mt-3 text-sm text-blue-gray-500">
-                Brief description for your profile. URLs are hyperlinked.
-              </p>
-            </div>
-
-            <div class="sm:col-span-6">
-              <label
-                for="url"
-                class="block text-sm font-medium text-blue-gray-900"
-              >
-                URL
-              </label>
-              <input
-                id="url"
-                type="text"
-                name="url"
-                class="
-                  mt-1
-                  block
-                  w-full
-                  border-blue-gray-300
-                  rounded-md
-                  shadow-sm
-                  text-blue-gray-900
-                  sm:text-sm
-                  focus:ring-blue-500 focus:border-blue-500
-                "
-              />
             </div>
           </div>
 
-          <div class="pt-8 flex justify-end">
-            <button
-              type="button"
-              class="
-                bg-white
-                py-2
-                px-4
-                border border-gray-300
-                rounded-md
-                shadow-sm
-                text-sm
-                font-medium
-                text-blue-gray-900
-                hover:bg-blue-gray-50
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-blue-500
-              "
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="
-                ml-3
-                inline-flex
-                justify-center
-                py-2
-                px-4
-                border border-transparent
-                shadow-sm
-                text-sm
-                font-medium
-                rounded-md
-                text-white
-                bg-blue-600
-                hover:bg-blue-700
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-blue-500
-              "
-            >
-              Save
-            </button>
+          <div class="pt-8 flex justify-end space-x-6">
+            <Keycap cap-style="large" disabled>Cancel</Keycap>
+            <Keycap cap-style="large" theme="accent">Save</Keycap>
           </div>
         </form>
       </div>

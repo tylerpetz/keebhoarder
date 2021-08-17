@@ -6,12 +6,14 @@ export default {
     return {
       error: '',
       session: null,
+      profile: {},
     }
   },
   getters: {
     loggedIn: (state) => !!(state.session && state.session.user),
     currentUser: (state) =>
       state.session && state.session.user ? state.session.user : null,
+    currentUserProfile: (state) => state.profile,
   },
   actions: {
     initSupabase({ commit }) {
@@ -20,9 +22,9 @@ export default {
         commit('SET_SB_SESSION', session)
       })
     },
-    async getUserProfile() {
+    async getUserProfile({ commit }) {
       const { data: profiles } = await supabase.from('profiles').select('*')
-      console.log(profiles)
+      commit('SET_USER_PROFILE', profiles[0])
     },
     async register({ commit }, credentials) {
       if (credentials.password !== credentials.passwordRepeat) {
@@ -57,6 +59,7 @@ export default {
         commit('AUTH_ERROR')
       } finally {
         commit('LOGOUT')
+        commit('SET_USER_PROFILE')
       }
     },
     async forgotPassword({ commit }, user) {
@@ -85,6 +88,9 @@ export default {
     },
     SET_SB_SESSION(state, session) {
       state.session = session
+    },
+    SET_USER_PROFILE(state, profile = {}) {
+      state.profile = profile
     },
   },
 }

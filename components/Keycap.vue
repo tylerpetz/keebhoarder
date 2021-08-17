@@ -124,4 +124,12 @@ export default {
 .keycap:focus {
   @apply ring-2 ring-theme-link-press;
 }
+
+.keycap:disabled {
+  @apply cursor-not-allowed opacity-70;
+}
+
+.keycap:disabled .keycap-face {
+  @apply pointer-events-none;
+}
 </style>
