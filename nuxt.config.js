@@ -28,7 +28,10 @@ export default {
   css: ['@/assets/main.css', '@/assets/themes.css', '@/assets/table.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/client-plugins', ssr: false }],
+  plugins: [
+    { src: '~/plugins/tables', ssr: false },
+    { src: '~/plugins/supabase' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

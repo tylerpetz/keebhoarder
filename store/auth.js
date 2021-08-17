@@ -9,7 +9,7 @@ export default {
     }
   },
   getters: {
-    loggedIn: (state) => !!state.session,
+    loggedIn: (state) => !!(state.session && state.session.user),
     currentUser: (state) =>
       state.session && state.session.user ? state.session.user : null,
   },
@@ -20,11 +20,10 @@ export default {
         commit('SET_SB_SESSION', session)
       })
     },
-    // async getUser() {
-    //   const { data: profiles } = await supabase
-    //     .from('profiles')
-    //     .select('username,website,avatar_url')
-    // },
+    async getUserProfile() {
+      const { data: profiles } = await supabase.from('profiles').select('*')
+      console.log(profiles)
+    },
     async register({ commit }, credentials) {
       if (credentials.password !== credentials.passwordRepeat) {
         return commit('AUTH_ERROR', 'Your passwords must match!')

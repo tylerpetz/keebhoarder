@@ -23,6 +23,9 @@ export default {
     this.$store.dispatch('auth/initSupabase')
   },
   mounted() {
+    if (this.$store.getters['auth/loggedIn']) {
+      this.$store.dispatch('auth/getUserProfile')
+    }
     this.setupApp()
     //   if (
     //     this.$store.getters['auth/currentUser'] &&
