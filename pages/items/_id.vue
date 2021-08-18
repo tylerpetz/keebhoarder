@@ -31,6 +31,9 @@ export default {
 
 <template>
   <div v-if="currentItem" class="h-full p-3">
+    <!-- <pre class="p-4 border-theme-border bg-theme-bg-d text-theme-text">{{
+      currentItem
+    }}</pre> -->
     <div class="flex flex-col">
       <div class="p-6 bg-theme-bg-d mb-4 flex flex-col rounded shadow">
         <div class="flex flex-row justify-between items-center">
