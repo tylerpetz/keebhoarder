@@ -16,8 +16,9 @@ export default {
         href="https://github.com/tylerpetz/keebhoarder/issues/new"
         target="_blank"
         rel="noopener"
-        >Issues?</a
       >
+        Issues?
+      </a>
     </p>
   </footer>
 </template>

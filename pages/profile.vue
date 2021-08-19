@@ -78,7 +78,7 @@ export default {
                       "
                     >
                       <span>Change</span>
-                      <span class="sr-only"> user photo</span>
+                      <span class="sr-only">user photo</span>
                     </label>
                     <input
                       id="user_photo"
@@ -127,8 +127,9 @@ export default {
               <FormInput
                 disabled
                 :value="$store.getters['auth/currentUserProfile'].website"
-                >Website URL</FormInput
               >
+                Website URL
+              </FormInput>
             </div>
           </div>
 

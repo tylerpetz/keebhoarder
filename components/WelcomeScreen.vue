@@ -7,7 +7,8 @@ export default {
 <template>
   <div class="flex justify-center items-center flex-col h-full">
     <h1 class="text-theme-text text-xl md:text-3xl font-extrabold">
-      Keebhoarder<span class="blink font-normal">|</span>
+      Keebhoarder
+      <span class="blink font-normal">|</span>
     </h1>
     <h2 class="text-theme-text-l md:text-lg font-semibold">
       securely manage your keyboard habit

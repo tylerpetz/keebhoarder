@@ -42,15 +42,15 @@ export default {
             rounded
           "
         >
-          <span class="pb-2 text-theme-text text-lg font-bold">{{
-            theme.name
-          }}</span>
+          <span class="pb-2 text-theme-text text-lg font-bold">
+            {{ theme.name }}
+          </span>
           <div class="flex flex-row">
-            <Keycap cap-style="large"> Base </Keycap>
+            <Keycap cap-style="large">Base</Keycap>
             <Keycap cap-style="large" theme="mod" type="mod" class="mx-2">
               Mods
             </Keycap>
-            <Keycap cap-style="large" theme="accent"> Accents </Keycap>
+            <Keycap cap-style="large" theme="accent">Accents</Keycap>
           </div>
         </div>
       </div>

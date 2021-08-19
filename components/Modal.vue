@@ -60,7 +60,7 @@ export default {
         :class="modalClass"
       >
         <header class="p-2">
-          <Keycap theme="accent" @click.native="$emit('close')"> Esc </Keycap>
+          <Keycap theme="accent" @click.native="$emit('close')">Esc</Keycap>
           <slot name="header" />
         </header>
         <div

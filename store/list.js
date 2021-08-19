@@ -50,6 +50,16 @@ export default {
       commit('SET_LISTS', lists)
       commit('SET_LIST_TOTAL', count)
     },
+    async getListsForDropdown() {
+      const { data: lists } = await supabase.from('lists').select(
+        `
+          id,
+          name
+        `
+      )
+
+      return lists
+    },
     async getListById({ commit }, listId) {
       const { data: lists } = await supabase
         .from('lists')

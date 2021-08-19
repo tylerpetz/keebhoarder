@@ -10,6 +10,8 @@ export default {
   data() {
     return {
       showData: false,
+      newListId: '',
+      lists: [],
     }
   },
   computed: {
@@ -19,9 +21,18 @@ export default {
     formattedPrice() {
       return formatter.format(this.currentItem.price / 100)
     },
+    dropdownOptions() {
+      return this.lists.map((list) => ({
+        text: list.name,
+        value: list.id,
+      }))
+    },
   },
   mounted() {
     this.$store.dispatch('item/getItemById', this.$route.params.id)
+    this.$store.dispatch('list/getListsForDropdown').then((lists) => {
+      this.lists = lists
+    })
   },
   methods: {
     editItem(item) {
@@ -29,6 +40,14 @@ export default {
     },
     removeItem({ id }) {
       this.$store.dispatch('item/deleteItem', id)
+    },
+    async saveItemToList() {
+      await this.$store.dispatch('item/addItemToList', {
+        itemId: this.currentItem.id,
+        listId: this.newListId,
+      })
+      this.newListId = ''
+      this.$store.dispatch('item/getItemById', this.$route.params.id)
     },
   },
 }
@@ -110,7 +129,11 @@ export default {
             Belongs to Lists
           </h3>
 
-          <ul role="list" class="mt-4 list-none text-sm space-y-2">
+          <ul
+            v-if="currentItem.lists.length"
+            role="list"
+            class="mt-4 list-none text-sm space-y-2"
+          >
             <li
               v-for="list in currentItem.lists"
               :key="list.id"
@@ -129,6 +152,27 @@ export default {
               </nuxt-link>
             </li>
           </ul>
+          <p v-else class="text-sm text-theme-text-l">
+            {{ currentItem.name }} isn't on any lists.
+          </p>
+
+          <FormSelect
+            v-model="newListId"
+            class="mt-8"
+            :options="dropdownOptions"
+          >
+            Add {{ currentItem.name }} to a List
+          </FormSelect>
+          <Keycap v-if="newListId" @click.native="newListId = ''">
+            Cancel
+          </Keycap>
+          <Keycap
+            v-if="newListId"
+            theme="accent"
+            @click.native="saveItemToList"
+          >
+            Save
+          </Keycap>
         </div>
       </div>
       <Keycap

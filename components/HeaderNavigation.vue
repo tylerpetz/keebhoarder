@@ -36,7 +36,8 @@ export default {
         text-size="large"
         @click.native="$router.push('/')"
       >
-        K<span class="hidden">eebhoarder</span>
+        K
+        <span class="hidden">eebhoarder</span>
       </Keycap>
       <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
@@ -83,7 +84,7 @@ export default {
       </Keycap>
       <template v-else>
         <nuxt-link :to="{ name: 'profile' }">
-          <Keycap cap-style="large" class="ml-2"> Profile </Keycap>
+          <Keycap cap-style="large" class="ml-2">Profile</Keycap>
         </nuxt-link>
         <!-- <Keycap
             cap-style="large"

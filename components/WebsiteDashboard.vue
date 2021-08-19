@@ -48,7 +48,8 @@ export default {
               <h3 class="text-sm font-semibold text-theme-text-l">
                 <a href="#" class="focus:outline-none">
                   <span class="absolute inset-0" aria-hidden="true"></span>
-                  Create a List<span aria-hidden="true"> &rarr;</span>
+                  Create a List
+                  <span aria-hidden="true">&rarr;</span>
                 </a>
               </h3>
               <!-- <p class="mt-1 text-sm text-theme-text">
@@ -81,7 +82,8 @@ export default {
               <h3 class="text-sm font-semibold text-theme-text-l">
                 <a href="#" class="focus:outline-none">
                   <span class="absolute inset-0" aria-hidden="true"></span>
-                  Add some Items<span aria-hidden="true"> &rarr;</span>
+                  Add some Items
+                  <span aria-hidden="true">&rarr;</span>
                 </a>
               </h3>
               <!-- <p class="mt-1 text-sm text-theme-text">
