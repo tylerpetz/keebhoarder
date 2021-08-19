@@ -79,7 +79,7 @@ export default {
       if (this.item) {
         this.$store.dispatch('item/updateItem', {
           item: this.currentItem,
-          updateCurrent: this.$route.name === 'SingleItem',
+          updateCurrent: this.$route.name === 'items-id',
         })
       } else {
         this.$store.dispatch('item/createItem', {

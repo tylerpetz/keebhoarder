@@ -12,7 +12,13 @@ module.exports = {
       './pages/**/*.vue',
       './tables/**/*.vue',
     ],
-    safelist: [...themeNames],
+    safelist: [
+      ...themeNames,
+      'scrollbar-thin',
+      'scrollbar-track-accent-legend',
+      'scrollbar-thumb-accent-cap',
+      'hover:scrollbar-thumb-accent-cap-hover',
+    ],
   },
   theme: {
     fontFamily: {

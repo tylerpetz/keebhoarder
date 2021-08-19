@@ -22,10 +22,13 @@ export default {
       return formatter.format(this.currentItem.price / 100)
     },
     dropdownOptions() {
-      return this.lists.map((list) => ({
-        text: list.name,
-        value: list.id,
-      }))
+      return [
+        { text: '', value: '' },
+        ...this.lists.map((list) => ({
+          text: list.name,
+          value: list.id,
+        })),
+      ]
     },
   },
   mounted() {
@@ -81,98 +84,108 @@ export default {
       </div>
 
       <PhotoDisplay :photos="currentItem.photos" />
-      <div class="mt-8 py-10 lg:pt-6 lg:pb-16 flex flex-row space-x-8">
-        <div class="w-1/4">
+      <div
+        class="
+          mt-8
+          py-10
+          lg:pt-6 lg:pb-16
+          grid grid-cols-1
+          md:grid-cols-2
+          lg:grid-cols-3
+          gap-6
+        "
+      >
+        <DataSection title="Price">
           <p class="text-3xl text-theme-link mb-4">{{ formattedPrice }}</p>
           <p class="text-xs text-theme-text">
             {{ (currentItem.price / 100).toFixed(2) }} x {{ currentItem.qty }}
           </p>
           <p class="text-[10px] italic text-theme-text">Price x Qty</p>
-        </div>
+        </DataSection>
 
-        <div v-if="currentItem.description" class="w-1/4">
-          <h3 class="text-sm font-medium text-theme-text-d">Description</h3>
-          <p class="text-base text-theme-text">
-            {{ currentItem.description }}
-          </p>
-        </div>
-
-        <div class="w-1/4">
-          <h3 class="text-sm font-medium text-theme-text-d">Details</h3>
-
-          <ul role="list" class="mt-4 list-none text-sm space-y-2">
-            <li class="text-theme-text">Maker: {{ currentItem.maker }}</li>
-            <li class="text-theme-text">Model: {{ currentItem.model }}</li>
-            <li class="text-theme-text">Color: {{ currentItem.color }}</li>
-          </ul>
-        </div>
-
-        <div class="w-1/4">
-          <h3 class="text-sm font-medium text-theme-text-d">More Info</h3>
-
-          <ul role="list" class="mt-4 list-none text-sm space-y-2">
-            <li
-              v-for="url in currentItem.urls"
-              :key="url"
-              class="
-                text-theme-text
-                whitespace-nowrap
-                overflow-hidden overflow-ellipsis
-                w-[288px]
-              "
-            >
-              <a :href="url" target="_blank" class="underline">{{ url }}</a>
-            </li>
-          </ul>
-
-          <h3 class="text-sm font-medium text-theme-text-d">
-            Belongs to Lists
-          </h3>
-
-          <ul
-            v-if="currentItem.lists.length"
-            role="list"
-            class="mt-4 list-none text-sm space-y-2"
+        <div>
+          <DataSection
+            v-if="currentItem.description"
+            title="Description"
+            class="mb-10"
           >
-            <li
-              v-for="list in currentItem.lists"
-              :key="list.id"
-              class="
-                text-theme-text
-                whitespace-nowrap
-                overflow-hidden overflow-ellipsis
-                w-[288px]
-              "
-            >
-              <nuxt-link
-                :to="{ name: 'lists-id', params: { id: list.id } }"
-                class="underline"
+            <p class="text-sm text-theme-text">
+              {{ currentItem.description }}
+            </p>
+          </DataSection>
+          <DataSection title="Details">
+            <ul role="list" class="list-none text-sm space-y-2">
+              <li class="text-theme-text">Maker: {{ currentItem.maker }}</li>
+              <li class="text-theme-text">Model: {{ currentItem.model }}</li>
+              <li class="text-theme-text">Color: {{ currentItem.color }}</li>
+            </ul>
+          </DataSection>
+        </div>
+
+        <div>
+          <DataSection title="More Info" class="mb-10">
+            <ul role="list" class="list-none text-sm space-y-2">
+              <li
+                v-for="url in currentItem.urls"
+                :key="url"
+                class="
+                  text-theme-text
+                  whitespace-nowrap
+                  overflow-hidden overflow-ellipsis
+                  w-full
+                "
               >
-                {{ list.name }}
-              </nuxt-link>
-            </li>
-          </ul>
-          <p v-else class="text-sm text-theme-text-l">
-            {{ currentItem.name }} isn't on any lists.
-          </p>
+                <a :href="url" target="_blank" class="underline">{{ url }}</a>
+              </li>
+            </ul>
+          </DataSection>
 
-          <FormSelect
-            v-model="newListId"
-            class="mt-8"
-            :options="dropdownOptions"
-          >
-            Add {{ currentItem.name }} to a List
-          </FormSelect>
-          <Keycap v-if="newListId" @click.native="newListId = ''">
-            Cancel
-          </Keycap>
-          <Keycap
-            v-if="newListId"
-            theme="accent"
-            @click.native="saveItemToList"
-          >
-            Save
-          </Keycap>
+          <DataSection title="Belongs to Lists">
+            <ul
+              v-if="currentItem.lists && currentItem.lists.length"
+              role="list"
+              class="mt-4 list-none text-sm space-y-2"
+            >
+              <li
+                v-for="list in currentItem.lists"
+                :key="list.id"
+                class="
+                  text-theme-text
+                  whitespace-nowrap
+                  overflow-hidden overflow-ellipsis
+                  w-[288px]
+                "
+              >
+                <nuxt-link
+                  :to="{ name: 'lists-id', params: { id: list.id } }"
+                  class="underline"
+                >
+                  {{ list.name }}
+                </nuxt-link>
+              </li>
+            </ul>
+            <p v-else class="text-sm text-theme-text-l">
+              {{ currentItem.name }} isn't on any lists.
+            </p>
+
+            <FormSelect
+              v-model="newListId"
+              class="mt-8"
+              :options="dropdownOptions"
+            >
+              Add {{ currentItem.name }} to a List
+            </FormSelect>
+            <Keycap v-if="newListId" @click.native="newListId = ''">
+              Cancel
+            </Keycap>
+            <Keycap
+              v-if="newListId"
+              theme="accent"
+              @click.native="saveItemToList"
+            >
+              Save
+            </Keycap>
+          </DataSection>
         </div>
       </div>
       <Keycap
@@ -185,18 +198,6 @@ export default {
       >
         Edit {{ currentItem.name }}
       </Keycap>
-      <Keycap
-        cap-style="large"
-        type="button"
-        @click.native="showData = !showData"
-      >
-        {{ showData ? 'Hide' : 'View' }} Source Code
-      </Keycap>
-      <pre
-        v-if="showData"
-        class="p-4 border-theme-border bg-theme-bg-d text-theme-text text-xs"
-        >{{ currentItem }}</pre
-      >
     </div>
   </div>
 </template>

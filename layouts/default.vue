@@ -14,6 +14,13 @@ export default {
       ModalProvider,
     }
   },
+  head() {
+    return {
+      bodyAttrs: {
+        class: `scrollbar-thin scrollbar-track-theme-bg-d scrollbar-thumb-theme-link hover:scrollbar-thumb-theme-link-hover theme-${this.$store.state.app.activeTheme.id}`,
+      },
+    }
+  },
   computed: {
     themeFavicon() {
       return `favicon-${this.$store.state.app.activeTheme.id}.svg`
@@ -61,23 +68,20 @@ export default {
 
 <template>
   <main
-    :class="`theme-${$store.state.app.activeTheme.id}`"
     class="
       keebhoarder-theme
       bg-theme-bg
       font-body
       tracking-wider
       w-full
-      h-screen
-      overflow-y-scroll
+      min-h-screen
+      h-full
       bg-caps
       flex flex-col
       pr-1
       justify-between
       items-center
       relative
-      scrollbar-thin scrollbar-track-accent-legend scrollbar-thumb-accent-cap
-      hover:scrollbar-thumb-accent-cap-hover
     "
   >
     <lazy-header-navigation />

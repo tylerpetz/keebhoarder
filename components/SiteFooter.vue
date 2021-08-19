@@ -6,7 +6,7 @@ export default {
 
 <template>
   <footer
-    class="w-full px-3 py-2 flex justify-between"
+    class="left-0 w-full px-3 py-2 flex justify-between"
     :class="{ 'bg-theme-bg-d': $store.getters.loggedIn }"
   >
     <p class="text-theme-text text-xs">&copy; 2021 keebhoarder</p>

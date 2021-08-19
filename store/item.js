@@ -101,12 +101,9 @@ export default {
       delete itemToUpdate.lists
       // handle list add/update/delete
 
-      const { data } = await supabase
-        .from('items')
-        .update(itemToUpdate)
-        .eq('id', item.id)
+      await supabase.from('items').update(itemToUpdate).eq('id', item.id)
       if (updateCurrent) {
-        commit('SET_CURRENT_ITEM', data)
+        dispatch('getItemById', item.id)
       } else {
         dispatch('getItems')
       }
