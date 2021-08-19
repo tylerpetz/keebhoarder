@@ -52,7 +52,10 @@ export default {
         .select(
           `
           *,
-          lists:list_item(list_id)
+          lists (
+            name,
+            id
+          )
         `,
           { count: 'exact' }
         )

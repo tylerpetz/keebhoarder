@@ -7,7 +7,7 @@
 }
 
 .vgt-responsive {
-  @apply w-full overflow-x-auto relative;
+  @apply w-full relative overflow-x-auto overflow-y-hidden;
 }
 
 table.vgt-table {

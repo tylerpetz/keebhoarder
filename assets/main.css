@@ -21,3 +21,16 @@
     transition: none;
   }
 }
+
+.has-tooltip {
+  @apply relative;
+}
+
+.tooltip {
+  @apply invisible absolute mt-1 p-1 rounded border-theme-border bg-theme-bg-d shadow text-theme-text left-1/2 -translate-x-1/2 top-full whitespace-nowrap text-sm;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible;
+  z-index: 100;
+}
