@@ -1,4 +1,4 @@
-import { queryStringify } from '@/utils/methods.js'
+import { cleanTableObject, queryStringify } from '@/utils/methods.js'
 import pick from 'lodash/pick'
 
 export default {
@@ -52,14 +52,9 @@ export default {
       })
     },
     updateOrder({ commit, dispatch }, { order, updateCurrent = false }) {
-      const updatedOrder = { ...order }
-      delete updatedOrder.user
-      delete updatedOrder.id
+      const updatedOrder = cleanTableObject(order)
       delete updatedOrder.items
-      delete updatedOrder.vgt_id
-      delete updatedOrder.originalIndex
-      delete updatedOrder.createdAt
-      delete updatedOrder.updatedAt
+
       this.$axios
         .patch(`/orders/${order.id}`, updatedOrder)
         .then(({ data }) => {

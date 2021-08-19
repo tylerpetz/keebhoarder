@@ -1,4 +1,5 @@
 import supabase from '@/utils/supabase'
+import { cleanTableObject } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
@@ -95,14 +96,10 @@ export default {
         .eq([{ item_id: itemId }, { list_id: listId }])
     },
     async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
-      const itemToUpdate = { ...item }
-      delete itemToUpdate.user
-      delete itemToUpdate.id
-      delete itemToUpdate.vgt_id
-      delete itemToUpdate.originalIndex
-      delete itemToUpdate.createdAt
-      delete itemToUpdate.updatedAt
+      const itemToUpdate = cleanTableObject(item)
+
       delete itemToUpdate.lists
+      // handle list add/update/delete
 
       const { data } = await supabase
         .from('items')
@@ -115,6 +112,7 @@ export default {
       }
     },
     async deleteItem({ dispatch }, itemId) {
+      // handle pivot table list_items
       await supabase.from('items').delete().eq('id', itemId)
       dispatch('getItems')
     },

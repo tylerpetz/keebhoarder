@@ -35,3 +35,20 @@ export const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 })
+
+export const cleanTableObject = (obj) => {
+  const newObj = Object.assign({}, obj)
+
+  Array.from([
+    'user',
+    'id',
+    'vgt_id',
+    'originalIndex',
+    'createdAt',
+    'updatedAt',
+  ]).forEach((type) => {
+    delete newObj[type]
+  })
+
+  return newObj
+}
