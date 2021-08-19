@@ -99,6 +99,7 @@ export default {
       delete itemToUpdate.originalIndex
       delete itemToUpdate.createdAt
       delete itemToUpdate.updatedAt
+      delete itemToUpdate.lists
 
       const { data } = await supabase
         .from('items')
