@@ -37,25 +37,29 @@ export default {
 <template>
   <div v-if="currentItem" class="h-full p-3 flex flex-col items-center">
     <div class="pt-8 w-full max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1
+      <div
         class="
-          text-2xl text-theme-text
-          sm:text-3xl
           mb-8
           flex flex-row
           items-center
           justify-between
           space-x-8
+          text-theme-text
         "
       >
-        {{ currentItem.name }}
+        <div>
+          <h1 class="text-2xl sm:text-3xl">
+            {{ currentItem.name }}
+          </h1>
+          <p class="text-sm">{{ currentItem.category }}</p>
+        </div>
         <div class="flex flex-row items-center space-x-8">
           <is-public :is-public="currentItem.public" />
-          <span class="text-xs font-medium text-theme-link">
+          <span class="text-xs font-medium">
             {{ currentItem.owned ? 'Owned' : 'I Want This' }}
           </span>
         </div>
-      </h1>
+      </div>
 
       <PhotoDisplay :photos="currentItem.photos" />
       <div class="mt-8 py-10 lg:pt-6 lg:pb-16 flex flex-row space-x-8">
@@ -63,9 +67,9 @@ export default {
           <div class="mb-10">
             <p class="text-3xl text-theme-link mb-4">{{ formattedPrice }}</p>
             <p class="text-xs text-theme-text">
-              {{ currentItem.qty }} x {{ currentItem.price }}
+              {{ (currentItem.price / 100).toFixed(2) }} x {{ currentItem.qty }}
             </p>
-            <p class="text-[10px] italic text-theme-text">Qty x Price</p>
+            <p class="text-[10px] italic text-theme-text">Price x Qty</p>
           </div>
           <template v-if="currentItem.description">
             <h3 class="text-sm font-medium text-theme-text-d">Description</h3>
