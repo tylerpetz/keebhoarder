@@ -93,7 +93,7 @@ export default {
       await supabase
         .from('list_item')
         .delete()
-        .eq([{ item_id: itemId }, { list_id: listId }])
+        .match({ item_id: itemId, list_id: listId })
     },
     async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
       const itemToUpdate = cleanTableObject(item)

@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex justify-center items-center flex-col h-full">
+  <div class="flex justify-center items-center flex-col h-[600px]">
     <h1 class="text-theme-text text-xl md:text-3xl font-extrabold">
       Keebhoarder
       <span class="blink font-normal">|</span>
