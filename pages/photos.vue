@@ -43,8 +43,8 @@ export default {
         gap-x-4 gap-y-8
         sm:grid-cols-3 sm:gap-x-6
         md:grid-cols-4
-        lg:grid-cols-3
-        xl:grid-cols-4 xl:gap-x-8delete
+        lg:grid-cols-4
+        xl:grid-cols-6 xl:gap-x-8
       "
     >
       <li v-for="photo in photos" :key="photo.id" class="relative">
