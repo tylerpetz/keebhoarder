@@ -26,14 +26,13 @@ export default {
       return `favicon-${this.$store.state.app.activeTheme.id}.svg`
     },
   },
-  created() {
-    this.$store.dispatch('auth/initSupabase')
-  },
   mounted() {
+    this.$store.dispatch('auth/initSupabase')
     if (this.$store.getters['auth/loggedIn']) {
       this.$store.dispatch('auth/getUserProfile')
     }
     this.setupApp()
+
     //   if (
     //     this.$store.getters['auth/currentUser'] &&
     //     this.$store.getters['auth/currentUser'].profile.theme
@@ -42,16 +41,17 @@ export default {
     //       id: this.$store.getters['auth/currentUser'].profile.theme,
     //     })
     //   } else
-    if (
-      window.localStorage &&
-      localStorage.getItem('activeTheme') &&
-      JSON.parse(localStorage.getItem('activeTheme'))
-    ) {
-      this.$store.dispatch(
-        'app/changeThemes',
-        JSON.parse(localStorage.getItem('activeTheme'))
-      )
-    }
+
+    // if (
+    //   window.localStorage &&
+    //   localStorage.getItem('activeTheme') &&
+    //   JSON.parse(localStorage.getItem('activeTheme'))
+    // ) {
+    //   this.$store.dispatch(
+    //     'app/changeThemes',
+    //     JSON.parse(localStorage.getItem('activeTheme'))
+    //   )
+    // }
   },
   methods: {
     setupApp() {

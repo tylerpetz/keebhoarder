@@ -1,5 +1,5 @@
-export default ({ $supabase, redirect }) => {
-  if (!$supabase.auth.session()) {
+export default ({ store, redirect }) => {
+  if (!store.getters['auth/loggedIn']) {
     return redirect('/')
   }
 }

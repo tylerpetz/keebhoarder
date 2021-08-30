@@ -7,8 +7,8 @@ export default {
     }
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch('auth/logout')
+    logout() {
+      this.$store.dispatch('auth/logout')
       if (this.$route.path !== '/') {
         this.$router.push({ name: 'index' })
       }
@@ -86,12 +86,9 @@ export default {
         <nuxt-link :to="{ name: 'profile' }">
           <Keycap cap-style="large" class="ml-2">Profile</Keycap>
         </nuxt-link>
-        <!-- <Keycap
-            cap-style="large"
-            class="ml-2"
-          >
-            Settings
-          </Keycap> -->
+        <Keycap cap-style="large" class="ml-2" @click.native="logout">
+          Log Out
+        </Keycap>
         <Keycap
           theme="mod"
           cap-style="large"

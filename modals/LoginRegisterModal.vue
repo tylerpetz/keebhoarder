@@ -86,7 +86,6 @@ export default {
           required
           type="text"
           placeholder="keeblord"
-          autocomplete="new-password"
           data-test="username"
         >
           Username
@@ -97,7 +96,6 @@ export default {
           required
           type="email"
           placeholder="fam@keebhoarder.com"
-          autocomplete="new-password"
           data-test="email"
         >
           Email Address
