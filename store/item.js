@@ -1,4 +1,3 @@
-import supabase from '@/utils/supabase'
 import { cleanTableObject } from '@/utils/methods.js'
 
 export default {
@@ -30,7 +29,7 @@ export default {
   },
   actions: {
     async getItems({ commit, getters, state }) {
-      const { data: items, count } = await supabase
+      const { data: items, count } = await this.$supabase
         .from('items')
         .select(
           `
@@ -48,7 +47,7 @@ export default {
       commit('SET_ITEM_TOTAL', count)
     },
     async getItemById({ commit }, itemId) {
-      const { data: item } = await supabase
+      const { data: item } = await this.$supabase
         .from('items')
         .select(
           `
@@ -70,7 +69,7 @@ export default {
         ...item,
         user_id: rootGetters['auth/currentUser'].id,
       }
-      const { data } = await supabase.from('items').insert([itemToCreate])
+      const { data } = await this.$supabase.from('items').insert([itemToCreate])
       if (lists.length) {
         dispatch('addItemToList', {
           listId: lists[0],
@@ -82,7 +81,7 @@ export default {
       }
     },
     async addItemToList(ctx, { itemId, listId }) {
-      await supabase.from('list_item').insert([
+      await this.$supabase.from('list_item').insert([
         {
           item_id: itemId,
           list_id: listId,
@@ -90,7 +89,7 @@ export default {
       ])
     },
     async deleteItemFromList(ctx, { itemId, listId }) {
-      await supabase
+      await this.$supabase
         .from('list_item')
         .delete()
         .match({ item_id: itemId, list_id: listId })
@@ -101,7 +100,7 @@ export default {
       delete itemToUpdate.lists
       // handle list add/update/delete
 
-      await supabase.from('items').update(itemToUpdate).eq('id', item.id)
+      await this.$supabase.from('items').update(itemToUpdate).eq('id', item.id)
       if (updateCurrent) {
         dispatch('getItemById', item.id)
       } else {
@@ -110,7 +109,7 @@ export default {
     },
     async deleteItem({ dispatch }, itemId) {
       // handle pivot table list_items
-      await supabase.from('items').delete().eq('id', itemId)
+      await this.$supabase.from('items').delete().eq('id', itemId)
       dispatch('getItems')
     },
     // table options

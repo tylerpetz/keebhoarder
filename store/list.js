@@ -1,4 +1,3 @@
-import supabase from '@/utils/supabase'
 import { cleanTableObject } from '@/utils/methods.js'
 
 export default {
@@ -30,7 +29,7 @@ export default {
   },
   actions: {
     async getLists({ commit, getters, state }) {
-      const { data: lists, count } = await supabase
+      const { data: lists, count } = await this.$supabase
         .from('lists')
         .select(
           `
@@ -51,7 +50,7 @@ export default {
       commit('SET_LIST_TOTAL', count)
     },
     async getListsForDropdown() {
-      const { data: lists } = await supabase.from('lists').select(
+      const { data: lists } = await this.$supabase.from('lists').select(
         `
           id,
           name
@@ -61,7 +60,7 @@ export default {
       return lists
     },
     async getListById({ commit }, listId) {
-      const { data: lists } = await supabase
+      const { data: lists } = await this.$supabase
         .from('lists')
         .select(
           `
@@ -82,13 +81,13 @@ export default {
         ...list,
         user: rootGetters['auth/currentUser'].id,
       }
-      await supabase.from('lists').insert([listToCreate])
+      await this.$supabase.from('lists').insert([listToCreate])
       dispatch('getLists')
     },
     async updateList({ commit, dispatch }, { list, updateCurrent = false }) {
       const listToUpdate = cleanTableObject(list)
 
-      const { data } = await supabase
+      const { data } = await this.$supabase
         .from('lists')
         .update(listToUpdate)
         .eq('id', list.id)
@@ -100,7 +99,7 @@ export default {
     },
     async deleteList({ dispatch }, listId) {
       // handle pivot table
-      await supabase.from('lists').delete().eq('id', listId)
+      await this.$supabase.from('lists').delete().eq('id', listId)
       dispatch('getLists')
     },
     // table options

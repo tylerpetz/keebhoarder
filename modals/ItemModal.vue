@@ -2,7 +2,6 @@
 import { getValue } from 'vue-currency-input'
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
-import supabase from '@/utils/supabase'
 
 const itemModel = {
   category: 'Uncategorized',
@@ -107,8 +106,8 @@ export default {
         this.currentItem.photos = []
       }
 
-      await supabase.storage.from('photos').upload(file.name, file)
-      const { publicURL } = await supabase.storage
+      await this.$supabase.storage.from('photos').upload(file.name, file)
+      const { publicURL } = await this.$supabase.storage
         .from('photos')
         .getPublicUrl(file.name)
       this.currentItem.photos.push(publicURL)

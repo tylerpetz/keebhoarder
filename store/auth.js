@@ -1,5 +1,3 @@
-import supabase from '@/utils/supabase'
-
 export default {
   namespaced: true,
   state() {
@@ -17,13 +15,15 @@ export default {
   },
   actions: {
     initSupabase({ commit }) {
-      commit('SET_SB_SESSION', supabase.auth.session())
-      supabase.auth.onAuthStateChange((_event, session) => {
+      commit('SET_SB_SESSION', this.$supabase.auth.session())
+      this.$supabase.auth.onAuthStateChange((_event, session) => {
         commit('SET_SB_SESSION', session)
       })
     },
     async getUserProfile({ commit }) {
-      const { data: profiles } = await supabase.from('profiles').select('*')
+      const { data: profiles } = await this.$supabase
+        .from('profiles')
+        .select('*')
       commit('SET_USER_PROFILE', profiles[0])
     },
     async register({ commit }, credentials) {
@@ -33,7 +33,7 @@ export default {
         delete credentials.passwordRepeat
       }
       try {
-        const { error } = await supabase.auth.signUp(credentials)
+        const { error } = await this.$supabase.auth.signUp(credentials)
         if (error) throw error
         return 'success'
       } catch (e) {
@@ -45,7 +45,7 @@ export default {
       }
     },
     async login(ctx, credentials) {
-      const { error } = await supabase.auth.signIn(credentials)
+      const { error } = await this.$supabase.auth.signIn(credentials)
       if (error) {
         return error.message || 'Invalid email or password.'
       }
@@ -53,7 +53,7 @@ export default {
     },
     async logout({ state, commit }) {
       try {
-        const { error } = await supabase.auth.signOut()
+        const { error } = await this.$supabase.auth.signOut()
         if (error) throw error
       } catch (e) {
         commit('AUTH_ERROR')
@@ -64,7 +64,7 @@ export default {
     },
     async forgotPassword({ commit }, user) {
       try {
-        const { error } = await supabase.auth.api.resetPasswordForEmail(
+        const { error } = await this.$supabase.auth.api.resetPasswordForEmail(
           user.email
         )
         if (error) throw error

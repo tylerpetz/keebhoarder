@@ -1,5 +1,4 @@
 <script>
-import supabase from '@/utils/supabase'
 import { bytesToSize } from '@/utils/methods'
 
 export default {
@@ -10,9 +9,9 @@ export default {
     }
   },
   async mounted() {
-    const { data: photos } = await supabase.storage.from('photos').list()
+    const { data: photos } = await this.$supabase.storage.from('photos').list()
     this.photos = photos.map((photo) => {
-      const { publicURL } = supabase.storage
+      const { publicURL } = this.$supabase.storage
         .from('photos')
         .getPublicUrl(photo.name)
       return {
