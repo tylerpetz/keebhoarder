@@ -6,8 +6,8 @@ export default {
   components: {
     ItemTable,
   },
-  mounted() {
-    this.$store.dispatch('item/getItems')
+  async fetch() {
+    await this.$store.dispatch('item/getItems')
   },
 }
 </script>

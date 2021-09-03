@@ -10,8 +10,8 @@ export default {
     this.$store.commit('order/SET_CURRENT_ORDER', {})
     next()
   },
-  mounted() {
-    this.$store.dispatch('order/getOrderById', this.$route.params.id)
+  async fetch() {
+    await this.$store.dispatch('order/getOrderById', this.$route.params.id)
   },
 }
 </script>

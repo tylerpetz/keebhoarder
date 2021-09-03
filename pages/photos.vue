@@ -8,7 +8,7 @@ export default {
       photos: [],
     }
   },
-  async mounted() {
+  async fetch() {
     const { data: photos } = await this.$supabase.storage.from('photos').list()
     this.photos = photos.map((photo) => {
       const { publicURL } = this.$supabase.storage

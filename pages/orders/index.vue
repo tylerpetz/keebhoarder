@@ -8,6 +8,9 @@ export default {
       columns: orderColumns,
     }
   },
+  async fetch() {
+    await this.$store.dispatch('order/getOrders')
+  },
   computed: {
     isLoading: {
       get() {
@@ -17,9 +20,6 @@ export default {
         this.$store.commit('order/SET_LOADING', value)
       },
     },
-  },
-  mounted() {
-    this.$store.dispatch('order/getOrders')
   },
   methods: {
     editOrder(order) {

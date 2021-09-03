@@ -14,6 +14,9 @@ export default {
       lists: [],
     }
   },
+  async fetch() {
+    await this.$store.dispatch('item/getItemById', this.$route.params.id)
+  },
   computed: {
     currentItem() {
       return this.$store.getters['item/currentItem']
@@ -36,7 +39,6 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('item/getItemById', this.$route.params.id)
     this.$store.dispatch('list/getListsForDropdown').then((lists) => {
       this.lists = lists
     })
