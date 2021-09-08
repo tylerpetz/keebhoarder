@@ -1,7 +1,10 @@
 <script>
 const PROFILE_FORM_INPUT = {
+  avatar_url: null,
   website: '',
+  theme: null,
 }
+
 export default {
   name: 'Profile',
   middleware: 'authenticated',
@@ -53,7 +56,7 @@ export default {
       >
         <h1 class="text-2xl sm:text-3xl">Settings</h1>
         <form
-          class="mt-6 space-y-8 divide-y divide-y-blue-gray-200"
+          class="mt-6 space-y-8"
           @keydown.enter="handleSubmit"
           @submit.prevent="handleSubmit"
         >
@@ -161,7 +164,7 @@ export default {
           </div>
 
           <div class="pt-8 flex justify-end space-x-6">
-            <Keycap cap-style="large" disabled>Cancel</Keycap>
+            <Keycap cap-style="large">Cancel</Keycap>
             <Keycap cap-style="large" theme="accent" type="submit">Save</Keycap>
           </div>
 

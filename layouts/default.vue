@@ -26,32 +26,30 @@ export default {
       return `favicon-${this.$store.state.app.activeTheme.id}.svg`
     },
   },
-  mounted() {
+  async mounted() {
     this.$store.dispatch('auth/initSupabase')
-    if (this.$store.getters['auth/loggedIn']) {
-      this.$store.dispatch('auth/getUserProfile')
-    }
     this.setupApp()
 
-    //   if (
-    //     this.$store.getters['auth/currentUser'] &&
-    //     this.$store.getters['auth/currentUser'].profile.theme
-    //   ) {
-    //     this.changeThemes({
-    //       id: this.$store.getters['auth/currentUser'].profile.theme,
-    //     })
-    //   } else
-
-    // if (
-    //   window.localStorage &&
-    //   localStorage.getItem('activeTheme') &&
-    //   JSON.parse(localStorage.getItem('activeTheme'))
-    // ) {
-    //   this.$store.dispatch(
-    //     'app/changeThemes',
-    //     JSON.parse(localStorage.getItem('activeTheme'))
-    //   )
-    // }
+    if (this.$store.getters['auth/loggedIn']) {
+      await this.$store.dispatch('auth/getUserProfile')
+    }
+    if (
+      this.$store.getters['auth/currentUserProfile'] &&
+      this.$store.getters['auth/currentUserProfile'].theme
+    ) {
+      this.$store.dispatch('app/changeThemes', {
+        id: this.$store.getters['auth/currentUserProfile'].theme,
+      })
+    } else if (
+      window.localStorage &&
+      localStorage.getItem('activeTheme') &&
+      JSON.parse(localStorage.getItem('activeTheme'))
+    ) {
+      this.$store.dispatch(
+        'app/changeThemes',
+        JSON.parse(localStorage.getItem('activeTheme'))
+      )
+    }
   },
   methods: {
     setupApp() {

@@ -6,7 +6,20 @@ export default {
   data() {
     return {
       themes,
+      setDefaultTheme: false,
     }
+  },
+  methods: {
+    async updateDefaultTheme() {
+      await this.$store.dispatch('auth/updateUserProfile', {
+        theme: this.$store.state.app.activeTheme.id,
+      })
+      this.$showMessage({
+        title: 'Default theme updated',
+        text: 'Nice job.',
+        type: 'success',
+      })
+    },
   },
 }
 </script>
@@ -44,6 +57,11 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">
             {{ theme.name }}
+            {{
+              $store.getters['auth/currentUserProfile'].theme === theme.id
+                ? '(Default)'
+                : ''
+            }}
           </span>
           <div class="flex flex-row">
             <Keycap cap-style="large">Base</Keycap>
@@ -55,6 +73,15 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="$store.getters['auth/loggedIn']">yo yo hey</div>
+    <div v-if="$store.getters['auth/loggedIn']">
+      <label>
+        <input
+          v-model="selectedTheme"
+          type="checkbox"
+          @change="updateDefaultTheme"
+        />
+        Set as default theme
+      </label>
+    </div>
   </Modal>
 </template>
