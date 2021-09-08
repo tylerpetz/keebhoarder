@@ -1,39 +1,71 @@
 <script>
+const PROFILE_FORM_INPUT = {
+  website: '',
+}
 export default {
   name: 'Profile',
   middleware: 'authenticated',
+  data() {
+    return {
+      form: PROFILE_FORM_INPUT,
+      message: '',
+    }
+  },
+  computed: {
+    website: {
+      get() {
+        return this.$store.getters['auth/currentUserProfile'].website
+      },
+      set(newVal) {
+        this.form.website = newVal
+      },
+    },
+  },
+  methods: {
+    async handleSubmit() {
+      await this.$store.dispatch('auth/updateUserProfile', this.form)
+      this.form = PROFILE_FORM_INPUT
+      this.$showMessage({
+        title: 'Profile Saved',
+        text: 'Nice job.',
+        type: 'success',
+      })
+    },
+  },
 }
 </script>
 
 <template>
   <div>
+    <pre>{{ $store.getters['auth/currentUser'] }}</pre>
     <pre>{{ $store.getters['auth/currentUserProfile'] }}</pre>
     <div class="w-full max-w-2xl mx-auto">
-      <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
-        <h1 class="text-3xl text-theme-text">Settings</h1>
-
-        <form class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+      <div
+        class="
+          max-w-3xl
+          mx-auto
+          py-10
+          px-4
+          sm:px-6
+          lg:py-12 lg:px-8
+          text-theme-text
+        "
+      >
+        <h1 class="text-2xl sm:text-3xl">Settings</h1>
+        <form
+          class="mt-6 space-y-8 divide-y divide-y-blue-gray-200"
+          @keydown.enter="handleSubmit"
+          @submit.prevent="handleSubmit"
+        >
           <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
             <div class="sm:col-span-6">
-              <FormInput
-                disabled
-                :value="$store.getters['auth/currentUserProfile'].username"
-              >
-                Username*
-                <span class="text-xs italic">Usernames cannot be changed</span>
-              </FormInput>
+              <h2 class="text-2xl sm:text-2xl">
+                {{ $store.getters['auth/currentUserProfile'].username }}
+              </h2>
+              <h3>{{ $store.getters['auth/currentUser'].email }}</h3>
             </div>
 
-            <div class="sm:col-span-6">
-              <FormInput
-                disabled
-                :value="$store.getters['auth/currentUser'].email"
-              >
-                Email Address
-              </FormInput>
-            </div>
-
-            <div class="sm:col-span-6">
+            <!-- <div class="sm:col-span-6">
               <label
                 for="photo"
                 class="block text-sm font-medium text-blue-gray-900"
@@ -121,22 +153,19 @@ export default {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="sm:col-span-6">
-              <FormInput
-                disabled
-                :value="$store.getters['auth/currentUserProfile'].website"
-              >
-                Website URL
-              </FormInput>
+              <FormInput v-model.lazy="website">Website URL</FormInput>
             </div>
           </div>
 
           <div class="pt-8 flex justify-end space-x-6">
             <Keycap cap-style="large" disabled>Cancel</Keycap>
-            <Keycap cap-style="large" theme="accent">Save</Keycap>
+            <Keycap cap-style="large" theme="accent" type="submit">Save</Keycap>
           </div>
+
+          <div v-if="message"></div>
         </form>
       </div>
     </div>

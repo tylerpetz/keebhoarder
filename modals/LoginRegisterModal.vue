@@ -106,7 +106,7 @@ export default {
           required
           type="password"
           placeholder="8+ characters, must include numbers or symbols"
-          autocomplete="new-password"
+          :autocomplete="authType === 'register' ? 'new-password' : null"
           data-test="password"
         >
           Password

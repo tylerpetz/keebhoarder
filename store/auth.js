@@ -1,3 +1,5 @@
+import { removeEmpty } from '@/utils/methods.js'
+
 export default {
   namespaced: true,
   state() {
@@ -24,6 +26,13 @@ export default {
       const { data: profiles } = await this.$supabase
         .from('profiles')
         .select('*')
+      commit('SET_USER_PROFILE', profiles[0])
+    },
+    async updateUserProfile({ commit, getters }, updatedProfile) {
+      const { data: profiles } = await this.$supabase
+        .from('profiles')
+        .update(removeEmpty(updatedProfile))
+        .eq('id', getters.currentUser.id)
       commit('SET_USER_PROFILE', profiles[0])
     },
     async register({ commit }, credentials) {
