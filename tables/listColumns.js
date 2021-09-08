@@ -17,9 +17,6 @@ export default [
   {
     label: 'Item Count',
     field: 'items',
-    formatFn(val) {
-      return val.length.toString()
-    },
     type: 'number',
     width: '150px',
     sortable: false,

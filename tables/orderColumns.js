@@ -17,7 +17,6 @@ export default [
   {
     label: 'Item Count',
     field: 'items',
-    formatFn: (val) => val.length,
     type: 'number',
     width: '150px',
   },
