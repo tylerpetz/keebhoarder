@@ -73,7 +73,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="$store.getters['auth/loggedIn']">
+    <!-- <div v-if="$store.getters['auth/loggedIn']">
       <label>
         <input
           v-model="selectedTheme"
@@ -82,6 +82,6 @@ export default {
         />
         Set as default theme
       </label>
-    </div>
+    </div> -->
   </Modal>
 </template>

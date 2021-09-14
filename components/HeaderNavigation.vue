@@ -63,14 +63,14 @@ export default {
       >
         Orders
       </nuxt-link> -->
-      <nuxt-link
+      <!-- <nuxt-link
         v-show="$store.getters['auth/loggedIn']"
         :to="{ name: 'photos' }"
         :class="$route.name.includes('photos') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Photos
-      </nuxt-link>
+      </nuxt-link> -->
     </nav>
     <section v-if="$store.getters['auth/loggedIn']" class="flex flex-row">
       <Keycap
