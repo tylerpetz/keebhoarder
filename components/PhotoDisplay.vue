@@ -12,8 +12,8 @@ export default {
 
 <template>
   <div
-    class="w-full grid grid-rows-4 grid-cols-4 gap-4 h-96"
-    :class="`display-${photos.length}`"
+    class="w-full grid grid-rows-4 grid-cols-4 gap-4"
+    :class="(`display-${photos.length}`, photos.length ? 'h-96' : 'h-12')"
   >
     <div
       v-for="(photo, index) in photos"
