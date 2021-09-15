@@ -16,15 +16,19 @@ export default {
   },
   head() {
     return {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: this.$store.getters['app/themeFavicon'],
+          id: 'favicon',
+          hid: 'favicon',
+        },
+      ],
       bodyAttrs: {
         class: `scrollbar-thin scrollbar-track-theme-bg-d scrollbar-thumb-theme-link hover:scrollbar-thumb-theme-link-hover theme-${this.$store.state.app.activeTheme.id}`,
       },
     }
-  },
-  computed: {
-    themeFavicon() {
-      return `favicon-${this.$store.state.app.activeTheme.id}.svg`
-    },
   },
   async mounted() {
     this.$store.dispatch('auth/initSupabase')

@@ -8,9 +8,6 @@ export default {
       columns: listColumns,
     }
   },
-  async fetch() {
-    await this.$store.dispatch('list/getLists')
-  },
   computed: {
     isLoading: {
       get() {
@@ -20,6 +17,9 @@ export default {
         this.$store.commit('list/SET_LOADING', value)
       },
     },
+  },
+  async mounted() {
+    await this.$store.dispatch('list/getLists')
   },
   methods: {
     editList(listId) {

@@ -8,12 +8,11 @@ export default {
     }
   },
   getters: {
-    themeFavicon: (state) => `favicon-${state.activeTheme.id}.svg`,
+    themeFavicon: (state) => `/favicon-${state.activeTheme.id}.svg`,
   },
   actions: {
-    changeThemes({ commit, getters }, theme) {
+    changeThemes({ commit }, theme) {
       commit('SET_ACTIVE_THEME', theme)
-      document.querySelector('#favicon').href = getters.themeFavicon
     },
   },
   mutations: {

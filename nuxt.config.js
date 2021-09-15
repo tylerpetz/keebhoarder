@@ -15,14 +15,6 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        href: '/favicon-wavez.svg',
-        id: 'favicon',
-      },
-    ],
   },
 
   publicRuntimeConfig: {
