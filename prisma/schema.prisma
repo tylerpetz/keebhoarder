@@ -1,0 +1,68 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Photo {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  public      Boolean @default(true)
+  item        Item?   @relation(fields: [itemId], references: [id])
+  itemId      String?
+  list        List?   @relation(fields: [listId], references: [id])
+  listId      String? @unique
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String  @unique
+}
+
+model List {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  public      Boolean @default(true)
+  items       Item[]
+  photo       Photo?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String
+}
+
+model Item {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Int      @default(0)
+  qty         Int      @default(0)
+  public      Boolean  @default(true)
+  owned       Boolean  @default(true)
+  maker       String?
+  model       String?
+  color       String?
+  urls        String[]
+  category    String[]
+  photos      Photo[]
+  list        List?    @relation(fields: [listId], references: [id])
+  listId      String?
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+}
+
+model Profile {
+  id     String  @id @default(uuid())
+  name   String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique
+}
+
+model User {
+  id      String   @id @default(uuid())
+  email   String   @unique
+  profile Profile?
+  photo   Photo?
+  lists   List[]
+  items   Item[]
+}

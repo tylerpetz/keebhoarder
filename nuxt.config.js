@@ -36,6 +36,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://typescript.nuxtjs.org/
+    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
@@ -76,6 +78,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  serverMiddleware: ['~/prisma/index.ts'],
 
   googleFonts: {
     display: 'swap',
