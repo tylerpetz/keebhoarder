@@ -59,10 +59,11 @@ model Profile {
 }
 
 model User {
-  id      String   @id @default(uuid())
-  email   String   @unique
-  profile Profile?
-  photo   Photo?
-  lists   List[]
-  items   Item[]
+  id       String   @id @default(uuid())
+  password String
+  email    String   @unique
+  profile  Profile?
+  photo    Photo?
+  lists    List[]
+  items    Item[]
 }

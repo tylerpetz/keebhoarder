@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    es2021: true,
   },
   parserOptions: {
     parser: 'babel-eslint',
@@ -14,8 +15,19 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   plugins: ['prettier'],
-  // add your custom rules here
   rules: {
     'prettier/prettier': 'warn',
   },
+  overrides: [
+    {
+      files: ['*.ts'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 12,
+        sourceType: 'module',
+      },
+      plugins: ['@babel/plugin-proposal-optional-chaining'],
+      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+    },
+  ],
 }
