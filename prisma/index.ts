@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
-import auth from '~/store/auth'
 dotenv.config()
 
 const prisma = new PrismaClient()
@@ -39,7 +38,20 @@ const authMiddleware = (
     res.status(400).send('Invalid Token')
   }
 }
+const getFirstRecordFromUser = (req: IUserRequest, model: any) => model.findFirst({
+    where: {
+      AND: {
+        userId: {
+          equals: req.user.id,
+        },
+        id: {
+          equals: req.params.id,
+        },
+      },
+    },
+  })
 
+// Auth
 app.post('/register', async (req, res) => {
   const salt = await bcrypt.genSalt(10)
   const password = await bcrypt.hash(req.body.password, salt)
@@ -90,7 +102,6 @@ app.post('/login', async (req, res) => {
     return res.status(401).send('No user with these credentials exists.')
   }
 })
-// forgot-password flow
 app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -106,6 +117,7 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
   })
 })
 
+// Items
 app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
   const items = await prisma.item.findMany({
     where: {
@@ -130,23 +142,36 @@ app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
   res.json(item)
 })
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const item = await prisma.item.findFirst({
-    where: {
-      AND: {
-        userId: {
-          equals: req.user.id
-        },
-        id: {
-          equals: req.params.id
-        }
-      }
-    },
-  })
+  const item = await getFirstRecordFromUser(req, prisma.item)
   res.json(item)
 })
-// app.put('/items/:id')
-// app.delete('/items/:id')
+app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const item = await getFirstRecordFromUser(req, prisma.item)
+  if (item) {
+    const updatedItem = await prisma.item.update({
+      where: {
+        id: req.params.id
+      },
+      data: {
+        ...req.body
+      }
+    })
+    res.json(updatedItem)
+  }
+})
+app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const item = await getFirstRecordFromUser(req, prisma.item)
+  if (item) {
+    await prisma.item.delete({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(200).json({ deleted: true })
+  }
+})
 
+// Lists
 app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
   const lists = await prisma.list.findMany({
     where: {
@@ -171,22 +196,36 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
   res.json(list)
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const list = await prisma.list.findFirst({
-    where: {
-      AND: {
-        userId: {
-          equals: req.user.id
-        },
-        id: {
-          equals: req.params.id
-        }
-      }
-    },
-  })
-  res.json(list)
+  const list = await getFirstRecordFromUser(req, prisma.list)
+  if (list) {
+    res.json(list)
+  }
 })
-// app.put('/lists/:id')
-// app.delete('/lists/:id')
+app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const list = await getFirstRecordFromUser(req, prisma.list)
+  if (list) {
+    const updatedList = await prisma.list.update({
+      where: {
+        id: req.params.id
+      },
+      data: {
+        ...req.body
+      }
+    })
+    res.json(updatedList)
+  }
+})
+app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const list = await getFirstRecordFromUser(req, prisma.list)
+  if (list) {
+    await prisma.list.delete({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(200).json({ deleted: true })
+  }
+})
 
 export default {
   path: '/api',
