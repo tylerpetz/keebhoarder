@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
+import auth from '~/store/auth'
 dotenv.config()
 
 const prisma = new PrismaClient()
@@ -66,7 +67,6 @@ app.post('/register', async (req, res) => {
 
   res.status(200).header('auth-token', token).send({ token })
 })
-
 app.post('/login', async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -90,7 +90,7 @@ app.post('/login', async (req, res) => {
     return res.status(401).send('No user with these credentials exists.')
   }
 })
-
+// forgot-password flow
 app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -106,35 +106,87 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
   })
 })
 
+app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
+  const items = await prisma.item.findMany({
+    where: {
+      userId: req.user.id,
+    },
+  })
+
+  res.json(items)
+})
 app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
   const item = await prisma.item.create({
     data: {
       ...req.body,
       user: {
         connect: {
-          id: req.user.id
-        }
-      }
-    }
+          id: req.user.id,
+        },
+      },
+    },
   })
 
   res.json(item)
 })
+app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const item = await prisma.item.findFirst({
+    where: {
+      AND: {
+        userId: {
+          equals: req.user.id
+        },
+        id: {
+          equals: req.params.id
+        }
+      }
+    },
+  })
+  res.json(item)
+})
+// app.put('/items/:id')
+// app.delete('/items/:id')
 
+app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
+  const lists = await prisma.list.findMany({
+    where: {
+      userId: req.user.id,
+    },
+  })
+
+  res.json(lists)
+})
 app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
   const list = await prisma.list.create({
     data: {
       ...req.body,
       user: {
         connect: {
-          id: req.user.id
-        }
-      }
-    }
+          id: req.user.id,
+        },
+      },
+    },
   })
 
   res.json(list)
 })
+app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
+  const list = await prisma.list.findFirst({
+    where: {
+      AND: {
+        userId: {
+          equals: req.user.id
+        },
+        id: {
+          equals: req.params.id
+        }
+      }
+    },
+  })
+  res.json(list)
+})
+// app.put('/lists/:id')
+// app.delete('/lists/:id')
 
 export default {
   path: '/api',
