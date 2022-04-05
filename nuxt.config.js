@@ -104,9 +104,9 @@ export default {
           property: false,
         },
         endpoints: {
-          login: { url: '/api/login', method: 'post' },
-          logout: { url: '/api/logout', method: 'post' },
-          user: { url: '/api/me', method: 'get' },
+          login: { url: '/login', method: 'post' },
+          logout: false,
+          user: { url: '/me', method: 'get' },
         },
       },
     },

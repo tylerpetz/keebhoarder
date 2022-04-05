@@ -54,6 +54,7 @@ model Item {
 model Profile {
   id     String  @id @default(uuid())
   name   String?
+  theme  String?
   user   User    @relation(fields: [userId], references: [id])
   userId String  @unique
 }

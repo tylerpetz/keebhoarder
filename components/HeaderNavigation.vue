@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('auth/logout')
+      this.$auth.logout()
       if (this.$route.path !== '/') {
         this.$router.push({ name: 'index' })
       }
@@ -20,11 +20,7 @@ export default {
 <template>
   <header
     class="w-full p-3 flex flex-row items-start justify-between"
-    :class="
-      $store.getters['auth/loggedIn']
-        ? 'border-theme-border'
-        : 'border-transparent'
-    "
+    :class="$auth.loggedIn ? 'border-theme-border' : 'border-transparent'"
   >
     <nav class="flex flex-row items-center space-x-4">
       <Keycap
@@ -40,7 +36,7 @@ export default {
         <span class="hidden">eebhoarder</span>
       </Keycap>
       <!-- <nuxt-link
-        v-show="$store.getters['auth/loggedIn']"
+        v-show="$auth.loggedIn"
         :to="{ name: 'lists' }"
         :class="$route.name.includes('lists') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
@@ -48,7 +44,7 @@ export default {
         Lists
       </nuxt-link>
       <nuxt-link
-        v-show="$store.getters['auth/loggedIn']"
+        v-show="$auth.loggedIn"
         :to="{ name: 'items' }"
         :class="$route.name.includes('items') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
@@ -56,7 +52,7 @@ export default {
         Items
       </nuxt-link> -->
       <!-- <nuxt-link
-        v-show="$store.getters['auth/loggedIn']"
+        v-show="$auth.loggedIn"
         :to="{ name: 'orders' }"
         :class="$route.name === 'orders' ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
@@ -64,7 +60,7 @@ export default {
         Orders
       </nuxt-link> -->
       <!-- <nuxt-link
-        v-show="$store.getters['auth/loggedIn']"
+        v-show="$auth.loggedIn"
         :to="{ name: 'photos' }"
         :class="$route.name.includes('photos') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
@@ -72,7 +68,7 @@ export default {
         Photos
       </nuxt-link> -->
     </nav>
-    <section v-if="$store.getters['auth/loggedIn']" class="flex flex-row">
+    <section v-if="$auth.loggedIn" class="flex flex-row">
       <Keycap
         v-if="!subNavOpen"
         cap-style="large"
@@ -80,7 +76,7 @@ export default {
         class="ml-2"
         @click.native="subNavOpen = true"
       >
-        {{ $store.getters['auth/currentUser'].email || 'Settings' }}
+        {{ $auth.user.profile.name || $auth.user.email || 'Settings' }}
       </Keycap>
       <template v-else>
         <nuxt-link :to="{ name: 'profile' }">
