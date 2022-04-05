@@ -90,6 +90,9 @@ export default {
       },
     },
   },
+  axios: {
+    baseURL: 'http://localhost:8080/api', // Used as fallback if no runtime config is provided
+  },
   auth: {
     strategies: {
       local: {

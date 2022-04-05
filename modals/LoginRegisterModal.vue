@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       credentials: {
-        username: '',
+        name: '',
         email: '',
         password: '',
         passwordRepeat: '',
@@ -37,11 +37,12 @@ export default {
       return this.formFields[this.authType].includes(field)
     },
     async register(params) {
-      const auth = await this.$auth.loginWith('local', { data: params })
-      if (auth.statusText === 'OK') {
+      const auth = await this.$axios.$post('/register', params)
+      if (auth.token) {
+        this.$auth.setUserToken(auth.token)
         this.$closeModal()
         this.$showMessage({
-          title: `Welcome ${this.credentials.username}!`,
+          title: `Welcome ${this.credentials.name}!`,
           text: 'You addiction has been enabled',
           type: 'success',
         })
@@ -94,7 +95,7 @@ export default {
       <div class="flex flex-col p-6 space-y-6">
         <FormInput
           v-if="displayFormField('username')"
-          v-model="credentials.username"
+          v-model="credentials.name"
           required
           type="text"
           placeholder="keeblord"
