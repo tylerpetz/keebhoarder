@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
     "@nuxtjs/axios": "^5.13.5",
     "@nuxtjs/composition-api": "^0.24.2",
     "@prisma/client": "^3.11.1",

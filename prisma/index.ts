@@ -38,7 +38,8 @@ const authMiddleware = (
     res.status(400).send('Invalid Token')
   }
 }
-const getFirstRecordFromUser = (req: IUserRequest, model: any) => model.findFirst({
+const getFirstRecordFromUser = (req: IUserRequest, model: any) =>
+  model.findFirst({
     where: {
       AND: {
         userId: {
@@ -150,11 +151,11 @@ app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   if (item) {
     const updatedItem = await prisma.item.update({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
       data: {
-        ...req.body
-      }
+        ...req.body,
+      },
     })
     res.json(updatedItem)
   }
@@ -164,8 +165,8 @@ app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   if (item) {
     await prisma.item.delete({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
     res.status(200).json({ deleted: true })
   }
@@ -206,11 +207,11 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
   if (list) {
     const updatedList = await prisma.list.update({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
       data: {
-        ...req.body
-      }
+        ...req.body,
+      },
     })
     res.json(updatedList)
   }
@@ -220,8 +221,8 @@ app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
   if (list) {
     await prisma.list.delete({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
     res.status(200).json({ deleted: true })
   }

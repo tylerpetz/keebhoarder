@@ -36,7 +36,41 @@ export default {
     displayFormField(field) {
       return this.formFields[this.authType].includes(field)
     },
-    async handleSubmit() {
+    async register(params) {
+      const auth = await this.$auth.loginWith('local', { data: params })
+      if (auth.statusText === 'OK') {
+        this.$closeModal()
+        this.$showMessage({
+          title: `Welcome ${this.credentials.username}!`,
+          text: 'You addiction has been enabled',
+          type: 'success',
+        })
+      } else {
+        this.$showMessage({
+          title: 'Oops...',
+          text: auth.statusText,
+          type: 'error',
+        })
+      }
+    },
+    async login(params) {
+      const auth = await this.$auth.loginWith('local', { data: params })
+      if (auth.statusText === 'OK') {
+        this.$closeModal()
+        this.$showMessage({
+          title: 'Welcome back!',
+          text: 'The keebs are waiting.',
+          type: 'success',
+        })
+      } else {
+        this.$showMessage({
+          title: 'Oops...',
+          text: auth.statusText,
+          type: 'error',
+        })
+      }
+    },
+    handleSubmit() {
       const params =
         this.authType === 'register'
           ? this.credentials
@@ -44,29 +78,7 @@ export default {
               email: this.credentials.email,
               password: this.credentials.password,
             }
-      const auth = await this.$store.dispatch(`auth/${this.authType}`, params)
-      if (auth === 'success') {
-        this.$closeModal()
-        if (this.authType === 'login') {
-          this.$showMessage({
-            title: 'Welcome back!',
-            text: 'The keebs are waiting.',
-            type: 'success',
-          })
-        } else {
-          this.$showMessage({
-            title: `Welcome ${this.credentials.username}!`,
-            text: 'You addiction has been enabled',
-            type: 'success',
-          })
-        }
-      } else {
-        this.$showMessage({
-          title: 'Oops...',
-          text: auth,
-          type: 'error',
-        })
-      }
+      this[this.authType](params)
     },
   },
 }

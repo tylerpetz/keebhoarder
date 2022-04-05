@@ -56,6 +56,8 @@ export default {
   modules: [
     // https://axios.nuxtjs.org/
     '@nuxtjs/axios',
+    // https://auth.nuxtjs.org/guide/setup
+    '@nuxtjs/auth-next',
     // https://vue-currency-input-v1.netlify.app/guide/#installation
     [
       'vue-currency-input/nuxt',
@@ -85,6 +87,24 @@ export default {
     families: {
       Nunito: {
         wght: [400, 600, 700, 800],
+      },
+    },
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+        },
+        user: {
+          property: false,
+        },
+        endpoints: {
+          login: { url: '/api/login', method: 'post' },
+          logout: { url: '/api/logout', method: 'post' },
+          user: { url: '/api/me', method: 'get' },
+        },
       },
     },
   },

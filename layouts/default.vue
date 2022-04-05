@@ -31,7 +31,6 @@ export default {
     }
   },
   async mounted() {
-    this.$store.dispatch('auth/initSupabase')
     this.setupApp()
 
     if (this.$store.getters['auth/loggedIn']) {
