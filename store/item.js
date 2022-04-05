@@ -1,4 +1,4 @@
-import { cleanTableObject } from '@/utils/methods.js'
+import { cleanTableObject, queryStringify } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
@@ -24,45 +24,22 @@ export default {
     items: (state) => state.items,
     loading: (state) => state.loading,
     totalResults: (state) => state.total,
-    rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
-    rangeEnd: (state) => state.pagination.page * state.pagination.limit - 1,
+    pagination: (state) => queryStringify(state.pagination),
   },
   actions: {
     async getItems({ commit, getters, state }) {
-      const { data: items, count } = await this.$supabase
-        .from('items')
-        .select(
-          `
-          *,
-          lists:list_item(list_id)
-        `,
-          { count: 'exact' }
-        )
-        .order(state.sorts.field, {
-          ascending: state.sorts.type === 'asc',
-        })
-        .range(getters.rangeStart, getters.rangeEnd)
+      commit('SET_LOADING', true)
 
-      commit('SET_ITEMS', items)
-      commit('SET_ITEM_TOTAL', count)
+      const { lists, count } = await this.$axios.$get(
+        `/items?${getters.pagination}`
+      )
+      commit('SET_LISTS', lists)
+      commit('SET_LIST_TOTAL', count)
+      commit('SET_LOADING', false)
     },
     async getItemById({ commit }, itemId) {
-      const { data: item } = await this.$supabase
-        .from('items')
-        .select(
-          `
-          *,
-          lists (
-            name,
-            id
-          )
-        `,
-          { count: 'exact' }
-        )
-        .eq('id', itemId)
-        .single()
-
-      commit('SET_CURRENT_ITEM', item)
+      const item = await this.$axios.$get(`/items/${itemId}`)
+      commit('SET_CURRENT_LIST', item)
     },
     async createItem({ dispatch, rootGetters }, { item, lists = [] }) {
       const itemToCreate = {

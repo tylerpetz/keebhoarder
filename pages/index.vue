@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div>
-    <welcome-screen v-if="!$store.getters['auth/loggedIn']" />
+    <welcome-screen v-if="!$auth.loggedIn" />
     <lazy-website-dashboard v-else />
   </div>
 </template>

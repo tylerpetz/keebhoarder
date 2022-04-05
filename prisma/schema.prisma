@@ -17,7 +17,7 @@ model Photo {
   list        List?   @relation(fields: [listId], references: [id])
   listId      String? @unique
   user        User    @relation(fields: [userId], references: [id])
-  userId      String  @unique
+  userId      String
 }
 
 model List {
@@ -28,7 +28,7 @@ model List {
   items       Item[]
   photo       Photo?
   user        User    @relation(fields: [userId], references: [id])
-  userId      String  @unique
+  userId      String
 }
 
 model Item {
@@ -48,7 +48,7 @@ model Item {
   list        List?    @relation(fields: [listId], references: [id])
   listId      String?
   user        User     @relation(fields: [userId], references: [id])
-  userId      String   @unique
+  userId      String 
 }
 
 model Profile {

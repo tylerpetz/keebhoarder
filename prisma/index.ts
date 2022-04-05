@@ -120,7 +120,7 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
         profile: true,
       },
     })
-    res.json({
+    res.status(200).json({
       email: user?.email,
       profile: user?.profile,
     })
@@ -133,12 +133,19 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
 app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const items = await prisma.item.findMany({
+      skip: Number(req.query.limit) * (Number(req.query.page) - 1),
+      take: Number(req.query.limit),
       where: {
         userId: req.user.id,
       },
     })
+    const count = await prisma.item.count({
+      where: {
+        userId: req.user.id,
+      }
+    })
 
-    res.json(items)
+    res.status(200).json({ items, count })
   } catch (err) {
     res.status(500).json({ errors: ['Could not get items'] })
   }
@@ -156,7 +163,7 @@ app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
       },
     })
 
-    res.json(item)
+    res.status(200).json(item)
   } catch (err) {
     res.status(500).json({ errors: ['Could not create item'] })
   }
@@ -164,7 +171,7 @@ app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const item = await getFirstRecordFromUser(req, prisma.item)
-    res.json(item)
+    res.status(200).json(item)
   } catch (err) {
     res.status(500).json({ errors: ['Could not find item'] })
   }
@@ -181,7 +188,7 @@ app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
           ...req.body,
         },
       })
-      res.json(updatedItem)
+      res.status(200).json(updatedItem)
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not update item'] })
@@ -207,12 +214,22 @@ app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
 app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const lists = await prisma.list.findMany({
+      skip: Number(req.query.limit) * (Number(req.query.page) - 1),
+      take: Number(req.query.limit),
       where: {
         userId: req.user.id,
       },
+      include: {
+        items: true,
+      }
+    })
+    const count = await prisma.list.count({
+      where: {
+        userId: req.user.id,
+      }
     })
 
-    res.json(lists)
+    res.status(200).json({ lists, count })
   } catch (err) {
     res.status(500).json({ errors: ['Could not get lists'] })
   }
@@ -224,13 +241,13 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
         ...req.body,
         user: {
           connect: {
-            id: req.user.id,
+            id: req.user.id
           },
         },
       },
     })
 
-    res.json(list)
+    res.status(200).json(list)
   } catch (err) {
     res.status(500).json({ errors: ['Could not create list'] })
   }
@@ -239,7 +256,7 @@ app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const list = await getFirstRecordFromUser(req, prisma.list)
     if (list) {
-      res.json(list)
+      res.status(200).json(list)
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not get list'] })
@@ -257,7 +274,7 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
           ...req.body,
         },
       })
-      res.json(updatedList)
+      res.status(200).json(updatedList)
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not update list'] })

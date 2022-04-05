@@ -35,7 +35,7 @@ export default {
         K
         <span class="hidden">eebhoarder</span>
       </Keycap>
-      <!-- <nuxt-link
+      <nuxt-link
         v-show="$auth.loggedIn"
         :to="{ name: 'lists' }"
         :class="$route.name.includes('lists') ? 'underline' : ''"
@@ -50,7 +50,7 @@ export default {
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Items
-      </nuxt-link> -->
+      </nuxt-link>
       <!-- <nuxt-link
         v-show="$auth.loggedIn"
         :to="{ name: 'orders' }"

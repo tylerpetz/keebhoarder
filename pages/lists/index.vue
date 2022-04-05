@@ -8,16 +8,6 @@ export default {
       columns: listColumns,
     }
   },
-  computed: {
-    isLoading: {
-      get() {
-        return this.$store.getters['list/loading']
-      },
-      set(value) {
-        this.$store.commit('list/SET_LOADING', value)
-      },
-    },
-  },
   async mounted() {
     await this.$store.dispatch('list/getLists')
   },
@@ -65,7 +55,7 @@ export default {
       <client-only>
         <vue-good-table
           :columns="columns"
-          :is-loading.sync="isLoading"
+          :is-loading="$store.getters['list/loading']"
           :pagination-options="{
             enabled: true,
             perPageDropdown: [5, 10, 20],

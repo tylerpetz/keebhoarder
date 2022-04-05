@@ -20,14 +20,6 @@ export default {
     }
   },
   computed: {
-    isLoading: {
-      get() {
-        return this.$store.getters['item/loading']
-      },
-      set(value) {
-        this.$store.commit('item/SET_LOADING', value)
-      },
-    },
     paginationOptions() {
       return {
         enabled: true,
@@ -70,7 +62,7 @@ export default {
   <client-only>
     <vue-good-table
       :columns="columns"
-      :is-loading.sync="isLoading"
+      :is-loading="$store.getters['item/loading']"
       :pagination-options="paginationOptions"
       :rows="items"
       :total-rows="totalRows"

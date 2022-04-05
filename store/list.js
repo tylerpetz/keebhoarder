@@ -1,4 +1,4 @@
-import { cleanTableObject } from '@/utils/methods.js'
+import { queryStringify } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
@@ -24,82 +24,42 @@ export default {
     lists: (state) => state.lists,
     loading: (state) => state.loading,
     totalResults: (state) => state.total,
-    rangeStart: (state) => (state.pagination.page - 1) * state.pagination.limit,
-    rangeEnd: (state) => state.pagination.page * state.pagination.limit - 1,
+    pagination: (state) => queryStringify(state.pagination),
   },
   actions: {
     async getLists({ commit, getters, state }) {
-      const { data: lists, count } = await this.$supabase
-        .from('lists')
-        .select(
-          `
-          *,
-          items (
-            id,
-            lists:list_item(list_id)
-          )
-        `,
-          { count: 'exact' }
-        )
-        .order(state.sorts.field, {
-          ascending: state.sorts.type === 'asc',
-        })
-        .range(getters.rangeStart, getters.rangeEnd)
-
+      //   .order(state.sorts.field, {
+      //     ascending: state.sorts.type === 'asc',
+      //   })
+      commit('SET_LOADING', true)
+      const { lists, count } = await this.$axios.$get(
+        `/lists?${getters.pagination}`
+      )
       commit('SET_LISTS', lists)
       commit('SET_LIST_TOTAL', count)
+      commit('SET_LOADING', false)
     },
-    async getListsForDropdown() {
-      const { data: lists } = await this.$supabase.from('lists').select(
-        `
-          id,
-          name
-        `
-      )
-
-      return lists
+    getListsForDropdown() {
+      return this.$axios.$get('/lists')
     },
     async getListById({ commit }, listId) {
-      const { data: lists } = await this.$supabase
-        .from('lists')
-        .select(
-          `
-          *,
-          items (
-            *,
-            lists:list_item(list_id)
-          )
-        `,
-          { count: 'exact' }
-        )
-        .eq('id', listId)
-
-      commit('SET_CURRENT_LIST', lists[0])
+      const list = await this.$axios.$get(`/lists/${listId}`)
+      commit('SET_CURRENT_LIST', list)
     },
-    async createList({ dispatch, rootGetters }, list) {
-      const listToCreate = {
-        ...list,
-        user: rootGetters['auth/currentUser'].id,
-      }
-      await this.$supabase.from('lists').insert([listToCreate])
+    async createList({ dispatch }, list) {
+      await this.$axios.$post('/lists', list)
       dispatch('getLists')
     },
     async updateList({ commit, dispatch }, { list, updateCurrent = false }) {
-      const listToUpdate = cleanTableObject(list)
-
-      const { data } = await this.$supabase
-        .from('lists')
-        .update(listToUpdate)
-        .eq('id', list.id)
+      const updatedList = await this.$axios.$put(`/lists/${list.id}`, list)
       if (updateCurrent) {
-        commit('SET_CURRENT_LIST', data)
+        commit('SET_CURRENT_LIST', updatedList)
       } else {
         dispatch('getLists')
       }
     },
     async deleteList({ dispatch }, listId) {
-      // handle pivot table
-      await this.$supabase.from('lists').delete().eq('id', listId)
+      await this.$axios.$delete(`/lists/${listId}`)
       dispatch('getLists')
     },
     // table options
