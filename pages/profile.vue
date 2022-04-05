@@ -7,7 +7,7 @@ const PROFILE_FORM_INPUT = {
 
 export default {
   name: 'Profile',
-  middleware: 'authenticated',
+  middleware: 'auth',
   data() {
     return {
       form: PROFILE_FORM_INPUT,
@@ -17,7 +17,7 @@ export default {
   computed: {
     website: {
       get() {
-        return this.$store.getters['auth/currentUserProfile'].website
+        return this.$auth.user.profile.website
       },
       set(newVal) {
         this.form.website = newVal
@@ -40,8 +40,8 @@ export default {
 
 <template>
   <div>
-    <pre>{{ $store.getters['auth/currentUser'] }}</pre>
-    <pre>{{ $store.getters['auth/currentUserProfile'] }}</pre>
+    <pre>{{ $auth.user }}</pre>
+    <pre>{{ $auth.user.profile }}</pre>
     <div class="w-full max-w-2xl mx-auto">
       <div
         class="
@@ -63,9 +63,9 @@ export default {
           <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
             <div class="sm:col-span-6">
               <h2 class="text-2xl sm:text-2xl">
-                {{ $store.getters['auth/currentUserProfile'].username }}
+                {{ $auth.user.profile.name }}
               </h2>
-              <h3>{{ $store.getters['auth/currentUser'].email }}</h3>
+              <h3>{{ $auth.user.email }}</h3>
             </div>
 
             <!-- <div class="sm:col-span-6">
