@@ -54,177 +54,228 @@ const getFirstRecordFromUser = (req: IUserRequest, model: any) =>
 
 // Auth
 app.post('/register', async (req, res) => {
-  const salt = await bcrypt.genSalt(10)
-  const password = await bcrypt.hash(req.body.password, salt)
-
-  const user = await prisma.user.create({
-    data: {
-      email: req.body.email,
-      password,
-      ...(req.body.name
-        ? {
-            profile: {
-              create: {
-                name: req.body.name,
+  try {
+    const salt = await bcrypt.genSalt(10)
+    const password = await bcrypt.hash(req.body.password, salt)
+    const user = await prisma.user.create({
+      data: {
+        email: req.body.email,
+        password,
+        ...(req.body.name
+          ? {
+              profile: {
+                create: {
+                  name: req.body.name,
+                },
               },
-            },
-          }
-        : {}),
-    },
-  })
+            }
+          : {}),
+      },
+    })
 
-  const token = jwt.sign(
-    { id: user.id, role_id: 0 },
-    process.env.TOKEN_SECRET || ''
-  )
+    const token = jwt.sign(
+      { id: user.id, role_id: 0 },
+      process.env.TOKEN_SECRET || ''
+    )
 
-  res.status(200).header('auth-token', token).send({ token })
+    res.status(200).header('auth-token', token).send({ token })
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not register'] })
+  }
 })
 app.post('/login', async (req, res) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      email: req.body.email,
-    },
-  })
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    })
 
-  if (user) {
-    const validPass = await bcrypt.compare(
-      req.body.password,
-      user.password || ''
-    )
-    if (!validPass) {
+    if (user) {
+      const validPass = await bcrypt.compare(
+        req.body.password,
+        user.password || ''
+      )
+      if (!validPass) {
+        return res.status(401).send('No user with these credentials exists.')
+      }
+      let payload = { id: user.id, role_id: 0 }
+      const token = jwt.sign(payload, process.env.TOKEN_SECRET || '')
+
+      return res.status(200).header('auth-token', token).send({ token })
+    } else {
       return res.status(401).send('No user with these credentials exists.')
     }
-    let payload = { id: user.id, role_id: 0 }
-    const token = jwt.sign(payload, process.env.TOKEN_SECRET || '')
-
-    return res.status(200).header('auth-token', token).send({ token })
-  } else {
-    return res.status(401).send('No user with these credentials exists.')
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not log in'] })
   }
 })
 app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: req.user.id,
-    },
-    include: {
-      profile: true,
-    },
-  })
-  return res.json({
-    email: user?.email,
-    profile: user?.profile,
-  })
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.user.id,
+      },
+      include: {
+        profile: true,
+      },
+    })
+    res.json({
+      email: user?.email,
+      profile: user?.profile,
+    })
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not find user profile'] })
+  }
 })
 
 // Items
 app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
-  const items = await prisma.item.findMany({
-    where: {
-      userId: req.user.id,
-    },
-  })
-
-  res.json(items)
-})
-app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
-  const item = await prisma.item.create({
-    data: {
-      ...req.body,
-      user: {
-        connect: {
-          id: req.user.id,
-        },
-      },
-    },
-  })
-
-  res.json(item)
-})
-app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const item = await getFirstRecordFromUser(req, prisma.item)
-  res.json(item)
-})
-app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const item = await getFirstRecordFromUser(req, prisma.item)
-  if (item) {
-    const updatedItem = await prisma.item.update({
+  try {
+    const items = await prisma.item.findMany({
       where: {
-        id: req.params.id,
-      },
-      data: {
-        ...req.body,
+        userId: req.user.id,
       },
     })
-    res.json(updatedItem)
+
+    res.json(items)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not get items'] })
+  }
+})
+app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const item = await prisma.item.create({
+      data: {
+        ...req.body,
+        user: {
+          connect: {
+            id: req.user.id,
+          },
+        },
+      },
+    })
+
+    res.json(item)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not create item'] })
+  }
+})
+app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const item = await getFirstRecordFromUser(req, prisma.item)
+    res.json(item)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not find item'] })
+  }
+})
+app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const item = await getFirstRecordFromUser(req, prisma.item)
+    if (item) {
+      const updatedItem = await prisma.item.update({
+        where: {
+          id: req.params.id,
+        },
+        data: {
+          ...req.body,
+        },
+      })
+      res.json(updatedItem)
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not update item'] })
   }
 })
 app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const item = await getFirstRecordFromUser(req, prisma.item)
-  if (item) {
-    await prisma.item.delete({
-      where: {
-        id: req.params.id,
-      },
-    })
-    res.status(200).json({ deleted: true })
+  try {
+    const item = await getFirstRecordFromUser(req, prisma.item)
+    if (item) {
+      await prisma.item.delete({
+        where: {
+          id: req.params.id,
+        },
+      })
+      res.status(200).json({ deleted: true })
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not delete item'] })
   }
 })
 
 // Lists
 app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
-  const lists = await prisma.list.findMany({
-    where: {
-      userId: req.user.id,
-    },
-  })
+  try {
+    const lists = await prisma.list.findMany({
+      where: {
+        userId: req.user.id,
+      },
+    })
 
-  res.json(lists)
+    res.json(lists)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not get lists'] })
+  }
 })
 app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
-  const list = await prisma.list.create({
-    data: {
-      ...req.body,
-      user: {
-        connect: {
-          id: req.user.id,
+  try {
+    const list = await prisma.list.create({
+      data: {
+        ...req.body,
+        user: {
+          connect: {
+            id: req.user.id,
+          },
         },
       },
-    },
-  })
+    })
 
-  res.json(list)
+    res.json(list)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not create list'] })
+  }
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const list = await getFirstRecordFromUser(req, prisma.list)
-  if (list) {
-    res.json(list)
+  try {
+    const list = await getFirstRecordFromUser(req, prisma.list)
+    if (list) {
+      res.json(list)
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not get list'] })
   }
 })
 app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const list = await getFirstRecordFromUser(req, prisma.list)
-  if (list) {
-    const updatedList = await prisma.list.update({
-      where: {
-        id: req.params.id,
-      },
-      data: {
-        ...req.body,
-      },
-    })
-    res.json(updatedList)
+  try {
+    const list = await getFirstRecordFromUser(req, prisma.list)
+    if (list) {
+      const updatedList = await prisma.list.update({
+        where: {
+          id: req.params.id,
+        },
+        data: {
+          ...req.body,
+        },
+      })
+      res.json(updatedList)
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not update list'] })
   }
 })
 app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
-  const list = await getFirstRecordFromUser(req, prisma.list)
-  if (list) {
-    await prisma.list.delete({
-      where: {
-        id: req.params.id,
-      },
-    })
-    res.status(200).json({ deleted: true })
+  try {
+    const list = await getFirstRecordFromUser(req, prisma.list)
+    if (list) {
+      await prisma.list.delete({
+        where: {
+          id: req.params.id,
+        },
+      })
+      res.status(200).json({ deleted: true })
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not delete list'] })
   }
 })
 
