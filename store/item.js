@@ -30,28 +30,29 @@ export default {
     async getItems({ commit, getters, state }) {
       commit('SET_LOADING', true)
 
-      const { lists, count } = await this.$axios.$get(
+      const { items, count } = await this.$axios.$get(
         `/items?${getters.pagination}`
       )
-      commit('SET_LISTS', lists)
-      commit('SET_LIST_TOTAL', count)
+      commit('SET_ITEMS', items)
+      commit('SET_ITEM_TOTAL', count)
       commit('SET_LOADING', false)
     },
     async getItemById({ commit }, itemId) {
       const item = await this.$axios.$get(`/items/${itemId}`)
-      commit('SET_CURRENT_LIST', item)
+      commit('SET_CURRENT_ITEM', item)
     },
-    async createItem({ dispatch, rootGetters }, { item, lists = [] }) {
-      const itemToCreate = {
+    async createItem({ dispatch }, { item, lists = [] }) {
+      await this.$axios.$post('/items', {
         ...item,
-        user_id: rootGetters['auth/currentUser'].id,
-      }
-      const { data } = await this.$supabase.from('items').insert([itemToCreate])
+        ...(lists.length
+          ? {
+              list: {
+                connect: { id: lists[0] },
+              },
+            }
+          : {}),
+      })
       if (lists.length) {
-        dispatch('addItemToList', {
-          listId: lists[0],
-          itemId: data[0].id,
-        })
         dispatch('list/getListById', lists[0], { root: true })
       } else {
         dispatch('getItems')
@@ -77,16 +78,18 @@ export default {
       delete itemToUpdate.lists
       // handle list add/update/delete
 
-      await this.$supabase.from('items').update(itemToUpdate).eq('id', item.id)
+      const updatedItem = await this.$axios.$put(
+        `/lists/${item.id}`,
+        itemToUpdate
+      )
       if (updateCurrent) {
-        dispatch('getItemById', item.id)
+        commit('SET_CURRENT_ITEM', updatedItem)
       } else {
         dispatch('getItems')
       }
     },
     async deleteItem({ dispatch }, itemId) {
-      // handle pivot table list_items
-      await this.$supabase.from('items').delete().eq('id', itemId)
+      await this.$axios.$delete(`/items/${itemId}`)
       dispatch('getItems')
     },
     // table options

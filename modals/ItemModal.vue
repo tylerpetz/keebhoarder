@@ -11,7 +11,7 @@ const itemModel = {
   model: null,
   name: '',
   owned: true,
-  photos: null,
+  photos: undefined,
   price: 0,
   public: false,
   qty: 0,

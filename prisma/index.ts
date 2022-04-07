@@ -38,7 +38,7 @@ const authMiddleware = (
     res.status(400).send('Invalid Token')
   }
 }
-const getFirstRecordFromUser = (req: IUserRequest, model: any) =>
+const getFirstRecordFromUser = (req: IUserRequest, model: any, args: any = {}) =>
   model.findFirst({
     where: {
       AND: {
@@ -50,6 +50,7 @@ const getFirstRecordFromUser = (req: IUserRequest, model: any) =>
         },
       },
     },
+    ...args
   })
 
 // Auth
@@ -151,7 +152,7 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
   }
 })
 app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
-  try {
+  // try {
     const item = await prisma.item.create({
       data: {
         ...req.body,
@@ -164,13 +165,15 @@ app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
     })
 
     res.status(200).json(item)
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not create item'] })
-  }
+  // } catch (err) {
+  //   res.status(500).json({ errors: ['Could not create item', err] })
+  // }
 })
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
-    const item = await getFirstRecordFromUser(req, prisma.item)
+    const item = await getFirstRecordFromUser(req, prisma.item, { include: {
+      lists: true
+    }})
     res.status(200).json(item)
   } catch (err) {
     res.status(500).json({ errors: ['Could not find item'] })
@@ -254,7 +257,9 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
-    const list = await getFirstRecordFromUser(req, prisma.list)
+    const list = await getFirstRecordFromUser(req, prisma.list, { include: {
+      items: true
+    }})
     if (list) {
       res.status(200).json(list)
     }
