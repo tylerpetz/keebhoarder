@@ -9,7 +9,6 @@ const prisma = new PrismaClient()
 
 const app: Express = express()
 app.use(express.json())
-
 interface IUserRequest extends Request {
   user?: any
 }
@@ -137,8 +136,7 @@ app.put('/me', authMiddleware, async (req: IUserRequest, res, next: NextFunction
         userId: req.user.id,
       },
       data: {
-        ...req.body,
-        // theme: req.body?.theme,
+        theme: req.body?.theme,
       }
     })
     res.status(200).json({
