@@ -1,4 +1,4 @@
-import express, { Application, Express, Request, Response, NextFunction } from 'express'
+import express, { Express, Request, Response, NextFunction } from 'express'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
@@ -38,6 +38,7 @@ const authMiddleware = (
     res.status(400).send('Invalid Token')
   }
 }
+
 const getFirstRecordFromUser = (req: IUserRequest, model: any, args: any = {}) =>
   model.findFirst({
     where: {
@@ -129,22 +130,22 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
     res.status(500).json({ errors: ['Could not find user profile'] })
   }
 })
-app.put('/me', authMiddleware, async (req: IUserRequest, res) => {
+app.put('/me', authMiddleware, async (req: IUserRequest, res, next: NextFunction) => {
   try {
-    const user = await prisma.profile.update({
+    const profile = await prisma.profile.update({
       where: {
         userId: req.user.id,
       },
       data: {
-        ...req.body
+        ...req.body,
+        // theme: req.body?.theme,
       }
     })
     res.status(200).json({
-      email: user?.email,
-      profile: user?.profile,
+      profile
     })
   } catch (err) {
-    res.status(500).json({ errors: ['Could not find user profile'] })
+    next(err)
   }
 })
 
@@ -304,7 +305,7 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
       res.status(200).json(updatedList)
     }
   } catch (err) {
-    res.status(500).json({ errors: ['Could not update list'] })
+    res.status(500).json({ errors: ['Could not update list', err] })
   }
 })
 app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {

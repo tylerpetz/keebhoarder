@@ -28,6 +28,9 @@ export default [
     label: 'Category',
     field: 'category',
     width: '100px',
+    formatFn(value) {
+      return value.join(', ')
+    },
   },
   {
     label: 'Public',

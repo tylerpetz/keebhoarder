@@ -74,12 +74,11 @@ export default {
     },
     async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
       const itemToUpdate = cleanTableObject(item)
-
       delete itemToUpdate.lists
       // handle list add/update/delete
 
       const updatedItem = await this.$axios.$put(
-        `/lists/${item.id}`,
+        `/items/${item.id}`,
         itemToUpdate
       )
       if (updateCurrent) {

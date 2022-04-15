@@ -1,4 +1,4 @@
-import { queryStringify } from '@/utils/methods.js'
+import { cleanTableObject, queryStringify } from '@/utils/methods.js'
 
 export default {
   namespaced: true,
@@ -51,7 +51,14 @@ export default {
       dispatch('getLists')
     },
     async updateList({ commit, dispatch }, { list, updateCurrent = false }) {
-      const updatedList = await this.$axios.$put(`/lists/${list.id}`, list)
+      const listToUpdate = cleanTableObject(list)
+      delete listToUpdate.items
+      // handle list add/update/delete
+
+      const updatedList = await this.$axios.$put(
+        `/lists/${list.id}`,
+        listToUpdate
+      )
       if (updateCurrent) {
         commit('SET_CURRENT_LIST', updatedList)
       } else {
