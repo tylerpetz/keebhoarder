@@ -1,13 +1,13 @@
-import express, { Request, Response, NextFunction } from 'express'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+import express, { Application, Express, Request, Response, NextFunction } from 'express'
+import * as bcrypt from 'bcryptjs'
+import * as jwt from 'jsonwebtoken'
+import * as dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
 dotenv.config()
 
 const prisma = new PrismaClient()
 
-const app = express()
+const app: Express = express()
 app.use(express.json())
 
 interface IUserRequest extends Request {
@@ -64,12 +64,12 @@ app.post('/register', async (req, res) => {
         password,
         ...(req.body.name
           ? {
-              profile: {
-                create: {
-                  name: req.body.name,
-                },
+            profile: {
+              create: {
+                name: req.body.name,
               },
-            }
+            },
+          }
           : {}),
       },
     })
@@ -129,6 +129,24 @@ app.get('/me', authMiddleware, async (req: IUserRequest, res) => {
     res.status(500).json({ errors: ['Could not find user profile'] })
   }
 })
+app.put('/me', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const user = await prisma.profile.update({
+      where: {
+        userId: req.user.id,
+      },
+      data: {
+        ...req.body
+      }
+    })
+    res.status(200).json({
+      email: user?.email,
+      profile: user?.profile,
+    })
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not find user profile'] })
+  }
+})
 
 // Items
 app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
@@ -153,27 +171,29 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
 })
 app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
   // try {
-    const item = await prisma.item.create({
-      data: {
-        ...req.body,
-        user: {
-          connect: {
-            id: req.user.id,
-          },
+  const item = await prisma.item.create({
+    data: {
+      ...req.body,
+      user: {
+        connect: {
+          id: req.user.id,
         },
       },
-    })
+    },
+  })
 
-    res.status(200).json(item)
+  res.status(200).json(item)
   // } catch (err) {
   //   res.status(500).json({ errors: ['Could not create item', err] })
   // }
 })
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
-    const item = await getFirstRecordFromUser(req, prisma.item, { include: {
-      lists: true
-    }})
+    const item = await getFirstRecordFromUser(req, prisma.item, {
+      include: {
+        lists: true
+      }
+    })
     res.status(200).json(item)
   } catch (err) {
     res.status(500).json({ errors: ['Could not find item'] })
@@ -257,9 +277,11 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
-    const list = await getFirstRecordFromUser(req, prisma.list, { include: {
-      items: true
-    }})
+    const list = await getFirstRecordFromUser(req, prisma.list, {
+      include: {
+        items: true
+      }
+    })
     if (list) {
       res.status(200).json(list)
     }

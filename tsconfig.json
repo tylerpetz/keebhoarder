@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2018",
+    "allowSyntheticDefaultImports": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "lib": [
@@ -22,10 +23,6 @@
         "./*"
       ]
     },
-    "types": [
-      "@types/node",
-      "@nuxt/types"
-    ]
   },
   "exclude": [
     "node_modules"
