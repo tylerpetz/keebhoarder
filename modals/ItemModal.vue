@@ -174,7 +174,7 @@ export default {
             Price
           </form-input>
           <form-input
-            v-model="currentItem.qty"
+            v-model.number="currentItem.qty"
             class="w-full mb-6"
             type="number"
             required

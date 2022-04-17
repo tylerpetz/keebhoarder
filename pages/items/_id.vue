@@ -86,7 +86,7 @@ export default {
           <h1 class="text-2xl sm:text-3xl">
             {{ currentItem.name }}
           </h1>
-          <p class="text-sm">{{ currentItem.category }}</p>
+          <p class="text-sm">{{ currentItem.category.join(", ") }}</p>
         </div>
         <div class="flex flex-row items-center space-x-8">
           <is-public :is-public="currentItem.public" />

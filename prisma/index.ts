@@ -190,16 +190,17 @@ app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const item = await getFirstRecordFromUser(req, prisma.item, {
       include: {
-        lists: true
+        list: true
       }
     })
     res.status(200).json(item)
   } catch (err) {
-    res.status(500).json({ errors: ['Could not find item'] })
+    res.status(500).json({ errors: ['Could not find item', err.toString()] })
   }
 })
 app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
+    delete req.body.list
     const item = await getFirstRecordFromUser(req, prisma.item)
     if (item) {
       const updatedItem = await prisma.item.update({

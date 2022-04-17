@@ -6,6 +6,11 @@ export default {
       subNavOpen: false,
     }
   },
+  computed: {
+    auth() {
+      return this.$auth
+    }
+  },
   methods: {
     logout() {
       this.$auth.logout()
@@ -53,14 +58,6 @@ export default {
       </nuxt-link>
       <!-- <nuxt-link
         v-show="$auth.loggedIn"
-        :to="{ name: 'orders' }"
-        :class="$route.name === 'orders' ? 'underline' : ''"
-        class="p-3 text-theme-text hover:text-theme-text-d"
-      >
-        Orders
-      </nuxt-link> -->
-      <!-- <nuxt-link
-        v-show="$auth.loggedIn"
         :to="{ name: 'photos' }"
         :class="$route.name.includes('photos') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
@@ -76,7 +73,7 @@ export default {
         class="ml-2"
         @click.native="subNavOpen = true"
       >
-        {{ $auth.user.profile.name || $auth.user.email || 'Settings' }}
+        {{ $auth.user?.profile?.name || $auth.user?.email || 'Settings' }}
       </Keycap>
       <template v-else>
         <nuxt-link :to="{ name: 'profile' }">
