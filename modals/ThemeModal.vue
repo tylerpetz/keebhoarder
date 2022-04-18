@@ -57,11 +57,7 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">
             {{ theme.name }}
-            {{
-              $store.getters['auth/currentUserProfile'].theme === theme.id
-                ? '(Default)'
-                : ''
-            }}
+            {{ $auth.user.profile?.theme === theme.id ? '(Default)' : '' }}
           </span>
           <div class="flex flex-row">
             <Keycap cap-style="large">Base</Keycap>

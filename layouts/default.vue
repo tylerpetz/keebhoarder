@@ -36,12 +36,9 @@ export default {
     if (this.$store.getters['auth/loggedIn']) {
       await this.$store.dispatch('auth/getUserProfile')
     }
-    if (
-      this.$store.getters['auth/currentUserProfile'] &&
-      this.$store.getters['auth/currentUserProfile'].theme
-    ) {
+    if (this.$auth.user.profile?.theme) {
       this.$store.dispatch('app/changeThemes', {
-        id: this.$store.getters['auth/currentUserProfile'].theme,
+        id: this.$auth.user.profile.theme,
       })
     } else if (
       window.localStorage &&

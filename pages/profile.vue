@@ -41,7 +41,6 @@ export default {
 <template>
   <div>
     <pre>{{ $auth.user }}</pre>
-    <pre>{{ $auth.user.profile }}</pre>
     <div class="w-full max-w-2xl mx-auto">
       <div
         class="
@@ -160,6 +159,19 @@ export default {
 
             <div class="sm:col-span-6">
               <FormInput v-model.lazy="website">Website URL</FormInput>
+            </div>
+            <div class="sm:col-span-6">
+              <Keycap
+                theme="mod"
+                cap-style="large"
+                @click.native="$showModal('ThemeModal')"
+              >
+                Swap Keycaps
+              </Keycap>
+              Current theme:
+              {{
+                $auth.user.profile.theme || $store.state.app.activeTheme.name
+              }}
             </div>
           </div>
 
