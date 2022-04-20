@@ -11,7 +11,7 @@ export default {
       <span class="blink font-normal">|</span>
     </h1>
     <h2 class="text-theme-text-l md:text-lg font-semibold">
-      securely manage your keyboard habit
+      manage and share your mechanical keyboard collection
     </h2>
     <div class="flex my-6 space-x-6">
       <Keycap
