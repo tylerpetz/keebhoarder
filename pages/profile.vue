@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      await this.$store.dispatch('auth/updateUserProfile', this.form)
+      await await this.$axios.$put('/me', this.form)
       this.form = PROFILE_FORM_INPUT
       this.$showMessage({
         title: 'Profile Saved',

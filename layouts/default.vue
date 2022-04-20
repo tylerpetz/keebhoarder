@@ -36,7 +36,7 @@ export default {
     if (this.$store.getters['auth/loggedIn']) {
       await this.$store.dispatch('auth/getUserProfile')
     }
-    if (this.$auth.user.profile?.theme) {
+    if (this.$auth.user?.profile?.theme) {
       this.$store.dispatch('app/changeThemes', {
         id: this.$auth.user.profile.theme,
       })

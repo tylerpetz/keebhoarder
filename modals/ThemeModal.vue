@@ -1,8 +1,10 @@
 <script>
 import { themes } from '@/utils/themes'
+import Keycap from '~/components/Keycap.vue'
 
 export default {
   name: 'ThemeModal',
+  components: { Keycap },
   data() {
     return {
       themes,
@@ -11,7 +13,11 @@ export default {
   },
   methods: {
     async updateDefaultTheme() {
-      await this.$store.dispatch('auth/updateUserProfile', {
+      this.$closeModal()
+      // await this.$store.dispatch('auth/updateUserProfile', {
+      //   theme: this.$store.state.app.activeTheme.id,
+      // })
+      await this.$axios.$put('/me', {
         theme: this.$store.state.app.activeTheme.id,
       })
       this.$showMessage({
@@ -26,7 +32,7 @@ export default {
 
 <template>
   <Modal
-    modal-class="w-10/12 md:w-2/3 max-h-full overflow-y-scroll"
+    modal-class="w-10/12 md:w-3/4 max-h-full"
     data-test="theme-modal"
     @close="$closeModal"
   >
@@ -57,7 +63,7 @@ export default {
         >
           <span class="pb-2 text-theme-text text-lg font-bold">
             {{ theme.name }}
-            {{ $auth.user.profile?.theme === theme.id ? '(Default)' : '' }}
+            {{ $auth.user?.profile?.theme === theme.id ? '(Default)' : '' }}
           </span>
           <div class="flex flex-row">
             <Keycap cap-style="large">Base</Keycap>
@@ -69,15 +75,15 @@ export default {
         </div>
       </div>
     </div>
-    <!-- <div v-if="$store.getters['auth/loggedIn']">
-      <label>
-        <input
-          v-model="selectedTheme"
-          type="checkbox"
-          @change="updateDefaultTheme"
-        />
-        Set as default theme
-      </label>
-    </div> -->
+    <template slot="footer">
+      <div class="p-2 flex justify-end" v-if="$auth.loggedIn">
+        <Keycap
+          theme="mod"
+          @click.native="updateDefaultTheme"
+        >
+          Use {{ $store.state.app.activeTheme.id }}
+        </Keycap>
+      </div>
+    </template>
   </Modal>
 </template>

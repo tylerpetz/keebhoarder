@@ -70,6 +70,7 @@ export default {
           <slot />
         </div>
         <slot name="msg" />
+        <slot name="footer" />
       </div>
       <div
         class="absolute h-full w-full inset-0 bg-theme-bg-d z-20 opacity-70"
