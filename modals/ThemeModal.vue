@@ -14,9 +14,6 @@ export default {
   methods: {
     async updateDefaultTheme() {
       this.$closeModal()
-      // await this.$store.dispatch('auth/updateUserProfile', {
-      //   theme: this.$store.state.app.activeTheme.id,
-      // })
       await this.$axios.$put('/me', {
         theme: this.$store.state.app.activeTheme.id,
       })

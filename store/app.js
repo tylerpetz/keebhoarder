@@ -19,7 +19,7 @@ export default {
     SET_ACTIVE_THEME(state, { id }) {
       const themeIndex = themes.findIndex((theme) => theme.id === id)
       state.activeTheme = themes[themeIndex]
-      if (window.localStorage) {
+      if (process.client) {
         localStorage.setItem('activeTheme', JSON.stringify(themes[themeIndex]))
       }
     },

@@ -30,12 +30,8 @@ export default {
       },
     }
   },
-  async mounted() {
+  mounted() {
     this.setupApp()
-
-    if (this.$store.getters['auth/loggedIn']) {
-      await this.$store.dispatch('auth/getUserProfile')
-    }
     if (this.$auth.user?.profile?.theme) {
       this.$store.dispatch('app/changeThemes', {
         id: this.$auth.user.profile.theme,
