@@ -57,6 +57,9 @@ export default {
     async login(params) {
       const auth = await this.$auth.loginWith('local', { data: params })
       if (auth.statusText === 'OK') {
+        if (this.$auth.user?.profile?.theme) {
+          this.$store.commit('app/SET_ACTIVE_THEME', { id: this.$auth.user.profile.theme })
+        }
         this.$closeModal()
         this.$showMessage({
           title: 'Welcome back!',
