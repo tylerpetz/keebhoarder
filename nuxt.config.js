@@ -13,7 +13,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'manage and share your mechanical keyboard collection' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'manage and share your mechanical keyboard collection',
+      },
     ],
   },
 
@@ -82,9 +86,9 @@ export default {
   build: {
     loaders: {
       vue: {
-        compiler: require('vue-template-babel-compiler')
-      }
-    }
+        compiler: require('vue-template-babel-compiler'),
+      },
+    },
   },
   serverMiddleware: ['~/prisma/index.ts'],
 

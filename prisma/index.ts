@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
@@ -7,7 +7,7 @@ dotenv.config()
 
 const prisma = new PrismaClient()
 
-const app: Express = express()
+const app = express()
 app.use(express.json())
 interface IUserRequest extends Request {
   user?: any
@@ -322,6 +322,13 @@ app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
     res.status(500).json({ errors: ['Could not delete list'] })
   }
 })
+
+process.on('SIGINT', shutdown);
+
+async function shutdown() {
+  await prisma.$disconnect()
+  process.exit(0)
+}
 
 export default {
   path: '/api',
