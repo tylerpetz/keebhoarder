@@ -156,6 +156,9 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
       where: {
         userId: req.user.id,
       },
+      include: {
+        list: true
+      }
     })
     const count = await prisma.item.count({
       where: {
@@ -210,6 +213,9 @@ app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
         data: {
           ...req.body,
         },
+        include: {
+          list: true
+        }
       })
       res.status(200).json(updatedItem)
     }
@@ -245,6 +251,24 @@ app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
       include: {
         items: true,
       }
+    })
+    const count = await prisma.list.count({
+      where: {
+        userId: req.user.id,
+      }
+    })
+
+    res.status(200).json({ lists, count })
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not get lists'] })
+  }
+})
+app.get('/listnames', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const lists = await prisma.list.findMany({
+      where: {
+        userId: req.user.id,
+      },
     })
     const count = await prisma.list.count({
       where: {
@@ -300,6 +324,9 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
         data: {
           ...req.body,
         },
+        include: {
+          items: true
+        }
       })
       res.status(200).json(updatedList)
     }

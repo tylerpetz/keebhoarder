@@ -27,7 +27,7 @@ export default {
       if (this.list) {
         this.$store.dispatch('list/updateList', {
           list: this.currentList,
-          updateCurrent: this.$route.name === 'SingleList',
+          updateCurrent: this.$route.name === 'lists-id',
         })
       } else {
         this.$store.dispatch('list/createList', this.currentList)

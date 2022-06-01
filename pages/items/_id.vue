@@ -28,9 +28,7 @@ export default {
       return [
         { text: '', value: '' },
         ...this.lists
-          .filter(
-            (list) => !this.currentItem.lists.some((ls) => ls.id === list.id)
-          )
+          .filter((list) => list.id !== this.currentItem.list.id)
           .map((list) => ({
             text: list.name,
             value: list.id,
@@ -73,20 +71,13 @@ export default {
   <div v-if="currentItem" class="h-full p-3 flex flex-col items-center">
     <div class="pt-8 w-full max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <div
-        class="
-          mb-8
-          flex flex-row
-          items-center
-          justify-between
-          space-x-8
-          text-theme-text
-        "
+        class="mb-8 flex flex-row items-center justify-between space-x-8 text-theme-text"
       >
         <div>
           <h1 class="text-2xl sm:text-3xl">
             {{ currentItem.name }}
           </h1>
-          <p class="text-sm">{{ currentItem.category.join(", ") }}</p>
+          <p class="text-sm">{{ currentItem.category.join(', ') }}</p>
         </div>
         <div class="flex flex-row items-center space-x-8">
           <is-public :is-public="currentItem.public" />
@@ -98,15 +89,7 @@ export default {
 
       <PhotoDisplay :photos="currentItem.photos || []" />
       <div
-        class="
-          mt-8
-          py-10
-          lg:pt-6 lg:pb-16
-          grid grid-cols-1
-          md:grid-cols-2
-          lg:grid-cols-3
-          gap-6
-        "
+        class="mt-8 py-10 lg:pt-6 lg:pb-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         <DataSection title="Price">
           <p class="text-3xl text-theme-link mb-4">{{ formattedPrice }}</p>
@@ -141,12 +124,7 @@ export default {
               <li
                 v-for="url in currentItem.urls"
                 :key="url"
-                class="
-                  text-theme-text
-                  whitespace-nowrap
-                  overflow-hidden overflow-ellipsis
-                  w-full
-                "
+                class="text-theme-text whitespace-nowrap overflow-hidden overflow-ellipsis w-full"
               >
                 <a :href="url" target="_blank" class="underline">{{ url }}</a>
               </li>
@@ -154,49 +132,38 @@ export default {
           </DataSection>
 
           <DataSection title="Belongs to Lists">
-            <ul
-              v-if="currentItem.lists && currentItem.lists.length"
+            <div
+              v-if="currentItem.list"
               role="list"
               class="mt-4 list-none text-sm space-y-2"
             >
-              <li
-                v-for="list in currentItem.lists"
-                :key="list.id"
-                class="
-                  text-theme-text
-                  whitespace-nowrap
-                  overflow-hidden overflow-ellipsis
-                  w-[288px]
-                "
+              <nuxt-link
+                :to="{ name: 'lists-id', params: { id: currentItem.list.id } }"
+                class="underline text-theme-text whitespace-nowrap overflow-hidden overflow-ellipsis w-[288px]"
               >
-                <nuxt-link
-                  :to="{ name: 'lists-id', params: { id: list.id } }"
-                  class="underline"
+                {{ currentItem.list.name }}
+              </nuxt-link>
+              <button
+                type="button"
+                class="text-theme-link hover:text-theme-link-hover"
+                @click="removeItemFromList(currentItem.list.id)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {{ list.name }}
-                </nuxt-link>
-                <button
-                  type="button"
-                  class="text-theme-link hover:text-theme-link-hover"
-                  @click="removeItemFromList(list.id)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    />
-                  </svg>
-                </button>
-              </li>
-            </ul>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
             <p v-else class="text-sm text-theme-text-l">
               {{ currentItem.name }} isn't on any lists.
             </p>

@@ -39,8 +39,9 @@ export default {
       commit('SET_LIST_TOTAL', count)
       commit('SET_LOADING', false)
     },
-    getListsForDropdown() {
-      return this.$axios.$get('/lists')
+    async getListsForDropdown() {
+      const { lists } = await this.$axios.$get('/listnames')
+      return lists
     },
     async getListById({ commit }, listId) {
       const list = await this.$axios.$get(`/lists/${listId}`)
