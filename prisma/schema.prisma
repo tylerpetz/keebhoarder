@@ -10,6 +10,7 @@ generator client {
 model Photo {
   id          String  @id @default(uuid())
   name        String
+  uri         String
   description String?
   public      Boolean @default(true)
   item        Item?   @relation(fields: [itemId], references: [id])

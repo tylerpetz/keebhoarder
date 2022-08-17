@@ -1,57 +1,16 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, { NextFunction } from 'express'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
+import { authMiddleware, getFirstRecordFromUser, IUserRequest } from './utils'
+
 dotenv.config()
 
 const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json())
-interface IUserRequest extends Request {
-  user?: any
-}
-
-const authMiddleware = (
-  req: IUserRequest,
-  res: Response,
-  next: NextFunction
-) => {
-  let token = req.headers.authorization
-  if (!token)
-    return res.status(401).send('Access Denied / Unauthorized request')
-
-  try {
-    token = token.split(' ')[1]
-
-    if (token === 'null' || !token)
-      return res.status(401).send('Unauthorized request')
-
-    const verifiedUser = jwt.verify(token, process.env.TOKEN_SECRET || '')
-    if (!verifiedUser) return res.status(401).send('Unauthorized request')
-
-    req.user = verifiedUser
-    next()
-  } catch (error) {
-    res.status(400).send('Invalid Token')
-  }
-}
-
-const getFirstRecordFromUser = (req: IUserRequest, model: any, args: any = {}) =>
-  model.findFirst({
-    where: {
-      AND: {
-        userId: {
-          equals: req.user.id,
-        },
-        id: {
-          equals: req.params.id,
-        },
-      },
-    },
-    ...args
-  })
 
 // Auth
 app.post('/register', async (req, res) => {
@@ -144,6 +103,38 @@ app.put('/me', authMiddleware, async (req: IUserRequest, res, next: NextFunction
     })
   } catch (err) {
     next(err)
+  }
+})
+
+app.post('/upload', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    // upload photo to bucket and THEN
+
+    const photo = await prisma.photo.create({
+      data: {
+        ...req.body,
+        // pass photo props
+        user: {
+          connect: {
+            id: req.user.id,
+          },
+        },
+        list: {
+          connect: {
+            id: req.body.list?.id,
+          },
+        },
+        item: {
+          connect: {
+            id: req.body.item?.id,
+          },
+        },
+      },
+    })
+  
+    res.status(200).json(photo)
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not upload photo'] })
   }
 })
 
