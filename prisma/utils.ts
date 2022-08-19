@@ -1,9 +1,14 @@
-import express, { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import * as jwt from 'jsonwebtoken'
-
+import AWS from 'aws-sdk'
 
 export interface IUserRequest extends Request {
   user?: any
+}
+
+export interface IUploadRequest extends Request {
+  user?: any
+  files?: any
 }
 
 export const authMiddleware = (
@@ -45,3 +50,17 @@ export const getFirstRecordFromUser = (req: IUserRequest, model: any, args: any 
     },
     ...args
   })
+
+export const uploadToS3 = async (req: IUploadRequest): Promise<string> => {
+  const s3 = new AWS.S3({
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_ACESSS_SECRET,
+    region: 'us-east-2'
+  })
+  const uploadedImage = await s3.upload({
+    Bucket: 'keebhoarder-user-images',
+    Key: req.files.file.name,
+    Body: req.files.file.data,
+  }).promise()
+  return uploadedImage.Location
+}

@@ -1,9 +1,10 @@
 import express, { NextFunction } from 'express'
+import upload from 'express-fileupload'
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
-import { authMiddleware, getFirstRecordFromUser, IUserRequest } from './utils'
+import { authMiddleware, getFirstRecordFromUser, uploadToS3, IUserRequest, IUploadRequest } from './utils'
 
 dotenv.config()
 
@@ -11,6 +12,7 @@ const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json())
+app.use(upload())
 
 // Auth
 app.post('/register', async (req, res) => {
@@ -106,14 +108,13 @@ app.put('/me', authMiddleware, async (req: IUserRequest, res, next: NextFunction
   }
 })
 
-app.post('/upload', authMiddleware, async (req: IUserRequest, res) => {
+app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
   try {
-    // upload photo to bucket and THEN
-
+    const photoUrl = await uploadToS3(req)
     const photo = await prisma.photo.create({
       data: {
         ...req.body,
-        // pass photo props
+        uri: photoUrl,
         user: {
           connect: {
             id: req.user.id,
