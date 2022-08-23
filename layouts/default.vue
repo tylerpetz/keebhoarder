@@ -62,26 +62,10 @@ export default {
 
 <template>
   <main
-    class="
-      keebhoarder-theme
-      bg-theme-bg
-      font-body
-      tracking-wider
-      w-full
-      min-h-screen
-      h-full
-      bg-caps
-      flex flex-col
-      pr-1
-      justify-between
-      items-center
-      relative
-    "
+    class="keebhoarder-theme bg-theme-bg font-body tracking-wider w-full min-h-screen h-full bg-caps flex flex-col pr-1 justify-between items-center relative"
   >
     <lazy-header-navigation />
-    <transition name="fade" mode="out-in">
-      <Nuxt class="w-full flex-grow" />
-    </transition>
+    <Nuxt class="w-full flex-grow" />
     <site-footer />
     <modal-list />
     <system-messages />

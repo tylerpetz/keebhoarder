@@ -28,7 +28,7 @@ export default {
       return [
         { text: '', value: '' },
         ...this.lists
-          .filter((list) => list.id !== this.currentItem.list.id)
+          .filter((list) => list.id !== this.currentItem.list?.id)
           .map((list) => ({
             text: list.name,
             value: list.id,
