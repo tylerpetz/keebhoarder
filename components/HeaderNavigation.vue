@@ -9,7 +9,7 @@ export default {
   computed: {
     auth() {
       return this.$auth
-    }
+    },
   },
   methods: {
     logout() {
@@ -35,7 +35,9 @@ export default {
             : 'alpha'
         "
         text-size="large"
-        @click.native="$router.push('/')"
+        @click.native="
+          $auth.loggedIn ? $router.push('/dashboard') : $router.push('/')
+        "
       >
         K
         <span class="hidden">eebhoarder</span>
