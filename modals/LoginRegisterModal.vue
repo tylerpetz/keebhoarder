@@ -40,6 +40,7 @@ export default {
       const auth = await this.$axios.$post('/register', params)
       if (auth.token) {
         this.$auth.setUserToken(auth.token)
+        this.$router.push('/dashboard')
         this.$closeModal()
         this.$showMessage({
           title: `Welcome ${this.credentials.name}!`,
@@ -58,8 +59,11 @@ export default {
       const auth = await this.$auth.loginWith('local', { data: params })
       if (auth.statusText === 'OK') {
         if (this.$auth.user?.profile?.theme) {
-          this.$store.commit('app/SET_ACTIVE_THEME', { id: this.$auth.user.profile.theme })
+          this.$store.commit('app/SET_ACTIVE_THEME', {
+            id: this.$auth.user.profile.theme,
+          })
         }
+        this.$router.push('/dashboard')
         this.$closeModal()
         this.$showMessage({
           title: 'Welcome back!',

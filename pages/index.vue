@@ -2,6 +2,7 @@
 export default {
   name: 'Index',
   created() {
+    // todo: replace w middleware
     if (this.$auth.loggedIn) {
       this.$router.replace('/dashboard')
     }
