@@ -140,12 +140,14 @@ export default {
               <nuxt-link
                 :to="{ name: 'lists-id', params: { id: currentItem.list.id } }"
                 class="underline text-theme-text whitespace-nowrap overflow-hidden overflow-ellipsis w-[288px]"
+                role="listitem"
               >
                 {{ currentItem.list.name }}
               </nuxt-link>
               <button
                 type="button"
                 class="text-theme-link hover:text-theme-link-hover"
+                aria-label="remove item from list"
                 @click="removeItemFromList(currentItem.list.id)"
               >
                 <svg
