@@ -16,7 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 import '@cypress/code-coverage/support'
-import 'cypress-mailslurp'
+// import 'cypress-mailslurp'
 
 before(() => {
   // cy.mailslurp()
