@@ -37,6 +37,7 @@ export default {
       currentItem: itemModel,
       formattedPrice: this.item?.price || 0,
       originalItem: itemModel,
+      tempImage: '',
     }
   },
   computed: {
@@ -100,17 +101,26 @@ export default {
         }
       }
     },
-    async onFileUpload(e) {
+    onFileUpload(e) {
       const file = e.target.files[0]
       if (this.currentItem.photos == null) {
         this.currentItem.photos = []
       }
 
-      await this.$supabase.storage.from('photos').upload(file.name, file)
-      const { publicURL } = await this.$supabase.storage
-        .from('photos')
-        .getPublicUrl(file.name)
-      this.currentItem.photos.push(publicURL)
+      // await this.$supabase.storage.from('photos').upload(file.name, file)
+      // const { publicURL } = await this.$supabase.storage
+      //   .from('photos')
+      //   .getPublicUrl(file.name)
+      // this.currentItem.photos.push(publicURL)
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        console.log(e)
+      }
+      reader.readAsDataURL(file)
+      reader.onload = (e) => {
+        console.log(e)
+      }
     },
     addItemUrl() {
       if (this.currentItem.urls == null) {
@@ -137,14 +147,7 @@ export default {
   >
     <form @submit.prevent="createOrUpdateItem">
       <div
-        class="
-          flex flex-col
-          lg:flex-row
-          w-full
-          space-y-6
-          lg:space-y-0 lg:space-x-6
-          p-6
-        "
+        class="flex flex-col lg:flex-row w-full space-y-6 lg:space-y-0 lg:space-x-6 p-6"
       >
         <div class="w-full lg:w-1/3">
           <form-input
@@ -224,17 +227,7 @@ export default {
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
             <div
-              class="
-                w-full
-                flex
-                justify-center
-                px-2
-                pt-4
-                pb-4
-                border border-theme-border border-dashed
-                rounded-md
-                relative
-              "
+              class="w-full flex justify-center px-2 pt-4 pb-4 border border-theme-border border-dashed rounded-md relative"
             >
               <div class="space-y-1 text-center">
                 <svg
@@ -254,17 +247,7 @@ export default {
                 <div class="flex flex-col items-center text-xs text-theme-text">
                   <label
                     for="file-upload"
-                    class="
-                      relative
-                      cursor-pointer
-                      rounded-md
-                      font-medium
-                      text-theme-link
-                      hover:text-theme-link
-                      focus-within:outline-none
-                      focus-within:ring-2
-                      focus-within:ring-theme-link
-                    "
+                    class="relative cursor-pointer rounded-md font-medium text-theme-link hover:text-theme-link focus-within:outline-none focus-within:ring-2 focus-within:ring-theme-link"
                   >
                     <span>Upload a file</span>
                     <input
