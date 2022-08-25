@@ -5,7 +5,7 @@ describe('List functionality', () => {
     cy.login()
   })
 
-  it('navigates to lists', () => {
+  it.skip('navigates to lists', () => {
     cy.contains('header nav a', 'Lists').click()
     cy.url().should('include', '/lists')
     cy.contains('h3', 'Lists')

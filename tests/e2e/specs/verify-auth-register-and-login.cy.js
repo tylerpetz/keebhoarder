@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe('Home page auth modal - register', () => {
-  it('create an account button shows register modal', () => {
+  it.only('create an account button shows register modal', () => {
     cy.visit('/')
     cy.contains('button', 'Create an Account').click()
     cy.get('[data-test=register-modal]').should('be.visible')

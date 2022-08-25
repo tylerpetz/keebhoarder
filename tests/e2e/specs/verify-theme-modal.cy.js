@@ -3,9 +3,12 @@
 import { themes } from '../../../utils/themes'
 
 describe('Theme modal - homepage', () => {
-  it('swap caps modal opens', () => {
+  beforeEach(() => {
     cy.visit('/')
     cy.get('[data-test=welcome-swap-keycaps]').click()
+  })
+
+  it('swap caps modal opens', () => {
     cy.get('[data-test=theme-modal]').should('be.visible')
   })
 
@@ -22,7 +25,6 @@ describe('Theme modal - homepage', () => {
   })
 
   it('bg click closes theme modal', () => {
-    cy.get('[data-test=welcome-swap-keycaps]').click()
     cy.get('[data-test=theme-modal]').should('be.visible')
     cy.get('[data-test=theme-modal] [data-test=modal-bg]').click({
       force: true,

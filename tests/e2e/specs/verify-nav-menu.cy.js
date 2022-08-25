@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe('Nav Menu - logged in user', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login()
     cy.visit('/')
   })
@@ -19,7 +19,7 @@ describe('Nav Menu - logged in user', () => {
     cy.contains('header section button', 'Esc')
   })
 
-  it('logs out', () => {
+  it.skip('logs out', () => {
     cy.contains('header section button', 'Log Out').click()
     cy.contains('h1', 'Keebhoarder')
   })
