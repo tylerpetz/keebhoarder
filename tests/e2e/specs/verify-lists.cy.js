@@ -1,8 +1,9 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('List functionality', () => {
+describe.skip('List functionality', () => {
   before(() => {
     cy.login()
+    cy.visit('/')
   })
 
   it.skip('navigates to lists', () => {
