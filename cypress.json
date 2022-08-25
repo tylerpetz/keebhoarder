@@ -1,8 +1,0 @@
-{
-  "baseUrl": "http://localhost:8080",
-  "pluginsFile": "tests/e2e/plugins/index.js",
-  "env": {
-    "email": "fake@example.com",
-    "password": "password1"
-  }
-}

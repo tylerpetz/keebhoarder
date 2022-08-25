@@ -12,7 +12,7 @@ describe('Theme modal - homepage', () => {
   it('all themes work correctly', () => {
     cy.wrap(themes).each((theme, i) => {
       cy.contains('span', theme.name).click()
-      cy.get('main.keebhoarder-theme').should('have.class', `theme-${theme.id}`)
+      cy.get('body').should('have.class', `theme-${theme.id}`)
     })
   })
 
