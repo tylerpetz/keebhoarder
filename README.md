@@ -6,23 +6,21 @@
 
 ## Welcome keeblord
 
-If you are here you r weird. Type `yarn` after cloning the repository. Then start coding stuff.
+frontend is at localhost:8080
+backend is at localhost:8080/api (api in prisma/index.ts)
 
 ## Build Setup
 
 ```bash
 # install dependencies
-$ yarn install
+$ npm install
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+# serve with hot reload at localhost:8080
+$ npm run dev
 
 # build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+$ npm run build
+$ npm run start
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

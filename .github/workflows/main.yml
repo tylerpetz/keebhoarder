@@ -1,9 +1,6 @@
 name: Cypress Tests
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     # Sequence of patterns matched against refs/heads
     branches:    
