@@ -61,6 +61,8 @@ export const uploadToS3 = async (req: IUploadRequest): Promise<string> => {
     Bucket: 'keebhoarder-user-images',
     Key: req.files.file.name,
     Body: req.files.file.data,
+    ACL: 'public-read',
+    ContentType: 'image/jpeg'
   }).promise()
   return uploadedImage.Location
 }
