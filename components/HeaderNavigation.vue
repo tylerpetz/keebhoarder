@@ -58,14 +58,14 @@ export default {
       >
         Items
       </nuxt-link>
-      <!-- <nuxt-link
+      <nuxt-link
         v-show="$auth.loggedIn"
         :to="{ name: 'photos' }"
         :class="$route.name.includes('photos') ? 'underline' : ''"
         class="p-3 text-theme-text hover:text-theme-text-d"
       >
         Photos
-      </nuxt-link> -->
+      </nuxt-link>
     </nav>
     <section v-if="$auth.loggedIn" class="flex flex-row">
       <Keycap
