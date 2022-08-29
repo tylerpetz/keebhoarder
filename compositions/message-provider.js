@@ -1,4 +1,4 @@
-import { reactive, computed, readonly } from '@vue/composition-api'
+import { reactive, computed, readonly } from '@nuxtjs/composition-api'
 
 const state = reactive({
   messages: [],

@@ -1,18 +1,10 @@
 <script>
-import Vue from 'vue'
 import ModalList from '@/modals/index.js'
-import { MessageProvider, ModalProvider } from '@/compositions'
 
 export default {
   name: 'App',
   components: {
     ModalList,
-  },
-  data() {
-    return {
-      MessageProvider,
-      ModalProvider,
-    }
   },
   head() {
     return {
@@ -31,7 +23,6 @@ export default {
     }
   },
   mounted() {
-    this.setupApp()
     if (this.$auth.user?.profile?.theme) {
       this.$store.dispatch('app/changeThemes', {
         id: this.$auth.user.profile.theme,
@@ -46,16 +37,6 @@ export default {
         JSON.parse(localStorage.getItem('activeTheme'))
       )
     }
-  },
-  methods: {
-    setupApp() {
-      Vue.prototype.$showModal = this.ModalProvider.showModal
-      Vue.prototype.$closeModal = this.ModalProvider.closeModal
-      Vue.prototype.$currentModal = this.ModalProvider.getModal.value
-      Vue.prototype.$showMessage = this.MessageProvider.showMessage
-      Vue.prototype.$closeMessage = this.MessageProvider.closeMessage
-      Vue.prototype.$getMessages = this.MessageProvider.getMessages.value
-    },
   },
 }
 </script>

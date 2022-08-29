@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     currentMessages() {
-      return this.MessageProvider.getMessages.value || []
+      return this.MessageProvider.getMessages || []
     },
   },
 }
@@ -18,18 +18,9 @@ export default {
 
 <template>
   <div
+    v-if="currentMessages.length"
     aria-live="assertive"
-    class="
-      fixed
-      inset-0
-      flex
-      px-4
-      py-6
-      pointer-events-none
-      sm:p-6
-      items-end
-      z-50
-    "
+    class="fixed inset-0 flex px-4 py-6 pointer-events-none sm:p-6 items-end z-50"
   >
     <transition-group
       enter-active-class="transform ease-out duration-300 transition"
