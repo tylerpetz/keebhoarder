@@ -19,3 +19,19 @@ jobs:
         with:
           build: npm run build
           start: npm start
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+          if: always()
+          with:
+            name: cypress-coverage
+            path: coverage
+        uses: actions/upload-artifact@v2
+          if: failure()
+          with:
+            name: cypress-screenshots
+            path: cypress/screenshots
+        uses: actions/upload-artifact@v2
+          if: failure()
+          with:
+            name: cypress-videos
+            path: cypress/videos
