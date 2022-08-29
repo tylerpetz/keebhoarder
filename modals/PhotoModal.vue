@@ -68,25 +68,18 @@ export default {
       }
     },
     onFileUpload(e) {
-      const file = e.target.files[0]
-      if (this.currentPhoto.photos == null) {
-        this.currentPhoto.photos = []
-      }
-
-      // await this.$supabase.storage.from('photos').upload(file.name, file)
-      // const { publicURL } = await this.$supabase.storage
-      //   .from('photos')
-      //   .getPublicUrl(file.name)
-      // this.currentPhoto.photos.push(publicURL)
-
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        console.log(e)
-      }
-      reader.readAsDataURL(file)
-      reader.onload = (e) => {
-        console.log(e)
-      }
+      // const file = e.target.files[0]
+      // if (this.currentPhoto.photos == null) {
+      //   this.currentPhoto.photos = []
+      // }
+      // const reader = new FileReader()
+      // reader.onload = (e) => {
+      //   console.log(e)
+      // }
+      // reader.readAsDataURL(file)
+      // reader.onload = (e) => {
+      //   console.log(e)
+      // }
     },
   },
 }

@@ -21,11 +21,6 @@ export default {
     ],
   },
 
-  // publicRuntimeConfig: {
-  //   supabaseUrl: process.env.SUPABASE_URL,
-  //   supabaseKey: process.env.SUPABASE_KEY,
-  // },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/main.css', '@/assets/themes.css', '@/assets/table.scss'],
 

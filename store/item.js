@@ -58,20 +58,8 @@ export default {
         dispatch('getItems')
       }
     },
-    // async addItemToList(ctx, { itemId, listId }) {
-    //   await this.$supabase.from('list_item').insert([
-    //     {
-    //       item_id: itemId,
-    //       list_id: listId,
-    //     },
-    //   ])
-    // },
-    // async deleteItemFromList(ctx, { itemId, listId }) {
-    //   await this.$supabase
-    //     .from('list_item')
-    //     .delete()
-    //     .match({ item_id: itemId, list_id: listId })
-    // },
+    async addItemToList(ctx, { itemId, listId }) {},
+    async deleteItemFromList(ctx, { itemId, listId }) {},
     async updateItem({ commit, dispatch }, { item, updateCurrent = false }) {
       const itemToUpdate = cleanTableObject(item)
       delete itemToUpdate.lists

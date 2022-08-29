@@ -58,20 +58,8 @@ export default {
         dispatch('getPhotos')
       }
     },
-    // async addPhotoToList(ctx, { photoId, listId }) {
-    //   await this.$supabase.from('list_photo').insert([
-    //     {
-    //       photo_id: photoId,
-    //       list_id: listId,
-    //     },
-    //   ])
-    // },
-    // async deletePhotoFromList(ctx, { photoId, listId }) {
-    //   await this.$supabase
-    //     .from('list_photo')
-    //     .delete()
-    //     .match({ photo_id: photoId, list_id: listId })
-    // },
+    async addPhotoToList(ctx, { photoId, listId }) {},
+    async deletePhotoFromList(ctx, { photoId, listId }) {},
     async updatePhoto({ commit, dispatch }, { photo, updateCurrent = false }) {
       const photoToUpdate = cleanTableObject(photo)
       delete photoToUpdate.lists
