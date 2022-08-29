@@ -9,6 +9,7 @@ export default {
     }
   },
   created() {
+    console.log('created')
     const req = require.context('./', true, /\.(vue)$/i)
     req.keys().forEach((key) => {
       const name = key.match(/\w+/)[0]
@@ -18,7 +19,7 @@ export default {
   },
   computed: {
     currentModal() {
-      return this.ModalProvider.getModal.value || {}
+      return this.ModalProvider.getModal || {}
     },
   },
   render(h) {
