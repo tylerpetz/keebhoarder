@@ -34,10 +34,9 @@ export default {
   },
   data() {
     return {
-      currentItem: itemModel,
+      currentItem: { ...itemModel },
       formattedPrice: this.item?.price || 0,
-      originalItem: itemModel,
-      tempImage: '',
+      originalItem: { ...itemModel },
     }
   },
   computed: {

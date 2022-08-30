@@ -22,13 +22,16 @@ export default {
       required: false,
       default: () => null,
     },
+    itemId: {
+      type: [String, null],
+      required: false,
+      default: () => null,
+    },
   },
   data() {
     return {
-      currentPhoto: photoModel,
-      formattedPrice: this.photo?.price || 0,
-      originalPhoto: photoModel,
-      tempImage: '',
+      currentPhoto: { ...photoModel },
+      originalPhoto: { ...photoModel },
     }
   },
   created() {
@@ -50,7 +53,6 @@ export default {
       } else {
         this.$store.dispatch('photo/createPhoto', {
           photo: this.currentPhoto,
-          lists: [this.listId],
         })
       }
       this.$closeModal()
@@ -176,13 +178,11 @@ export default {
           </div>
         </div>
       </div>
-      <footer class="bg-theme-bg-d p-2 flex justify-end">
-        <Keycap
-          theme="accent"
-          cap-style="large"
-          class="capitalize"
-          type="submit"
-        >
+      <footer class="bg-theme-bg-d p-2 flex justify-end space-x-4">
+        <Keycap theme="mod" cap-style="large" type="submit">
+          &#10229; Save &amp; Add Another
+        </Keycap>
+        <Keycap theme="accent" cap-style="large" type="submit">
           &#10229; Save Photo
         </Keycap>
       </footer>
