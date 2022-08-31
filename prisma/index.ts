@@ -139,8 +139,8 @@ app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
     })
   
     res.status(200).json(photo)
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not upload photo'] })
+  } catch (err: any) {
+    res.status(500).json({ errors: [err.toString(), 'Could not upload photo'] })
   }
 })
 // Lists
@@ -223,8 +223,8 @@ app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
       }
     })
     res.status(200).json(item)
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not find item', err.toString()] })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not find item', err] })
   }
 })
 app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {

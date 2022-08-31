@@ -59,8 +59,8 @@ export const uploadToS3 = async (req: IUploadRequest): Promise<string> => {
   })
   const uploadedImage = await s3.upload({
     Bucket: 'keebhoarder-user-images',
-    Key: req.files.file.name,
-    Body: req.files.file.data,
+    Key: req.body.name || req.files.files.name,
+    Body: req.files.files.data,
     ACL: 'public-read',
     ContentType: 'image/jpeg'
   }).promise()
