@@ -9,11 +9,13 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
-    "lint": "yarn lint:js && yarn lint:style",
+    "lint": "npm run lint:js && npm run lint:style",
     "test:unit": "jest",
     "test:e2e": "cypress",
     "migrate": "prisma migrate dev --name",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "favicons": "node write-favicons.js",
+    "postinstall": "node sup-keeblord.js"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
