@@ -143,7 +143,6 @@ app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
     res.status(500).json({ errors: [err.toString(), 'Could not upload photo'] })
   }
 })
-// Lists
 app.get('/photos', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const photos = await prisma.photo.findMany({
@@ -173,6 +172,21 @@ app.get('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not get photo'] })
+  }
+})
+app.delete('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const photo = await getFirstRecordFromUser(req, prisma.photo)
+    if (photo) {
+      await prisma.photo.delete({
+        where: {
+          id: req.params.id,
+        },
+      })
+      res.status(200).json({ deleted: true })
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not delete photo'] })
   }
 })
 
