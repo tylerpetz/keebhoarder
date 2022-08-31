@@ -5,7 +5,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 const photoModel = {
   name: '',
   description: '',
-  public: false,
+  public: true,
   uri: '',
 }
 
@@ -69,7 +69,8 @@ export default {
         }
       }
     },
-    onFileUpload(e) {
+    onFileUpload(files) {
+      console.log(files)
       // const file = e.target.files[0]
       // if (this.currentPhoto.photos == null) {
       //   this.currentPhoto.photos = []
@@ -121,61 +122,7 @@ export default {
           </form-toggle>
         </div>
         <div class="w-full lg:w-1/2">
-          <label class="block text-sm font-medium text-theme-text">
-            File (PNG, JPG, GIF up to 10MB)
-          </label>
-          <div class="mt-1 sm:mt-0 sm:col-span-2 mb-6">
-            <div
-              class="w-full flex justify-center px-2 pt-4 pb-4 border border-theme-border border-dashed rounded-md relative"
-            >
-              <div class="space-y-1 text-center">
-                <svg
-                  class="mx-auto h-10 w-10 text-theme-link"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <div
-                  class="flex flex-col photos-center text-xs text-theme-text"
-                >
-                  <label
-                    for="file-upload"
-                    class="relative cursor-pointer rounded-md font-medium text-theme-link hover:text-theme-link focus-within:outline-none focus-within:ring-2 focus-within:ring-theme-link"
-                  >
-                    <span>Upload a file</span>
-                    <input
-                      id="file-upload"
-                      accept="image/*"
-                      type="file"
-                      class="sr-only"
-                      @change="onFileUpload"
-                    />
-                  </label>
-                  <p class="pl-1">or drag and drop</p>
-                </div>
-              </div>
-            </div>
-            <!-- <div
-              v-if="currentPhoto.photos && currentPhoto.photos.length"
-              class="grid grid-cols-5 pt-6"
-            >
-              <img
-                v-for="photo in currentPhoto.photos"
-                :key="photo"
-                :src="photo"
-                class="h-full w-full inset-0 object-contain z-10"
-                alt="cover image"
-              />
-            </div> -->
-          </div>
+          <file-drag-and-drop @input="onFileUpload" />
         </div>
       </div>
       <footer class="bg-theme-bg-d p-2 flex justify-end space-x-4">

@@ -35,28 +35,10 @@ export default {
 <template>
   <transition name="modal">
     <div
-      class="
-        absolute
-        z-40
-        flex
-        h-full
-        w-full
-        inset-0
-        items-center
-        justify-center
-        py-10
-      "
+      class="absolute z-40 flex h-screen w-full inset-0 items-center justify-center py-10"
     >
       <div
-        class="
-          rounded
-          relative
-          bg-theme-bg-d
-          flex flex-col
-          z-30
-          shadow-md
-          overflow-hidden
-        "
+        class="rounded relative bg-theme-bg-d flex flex-col z-30 shadow-md overflow-hidden"
         :class="modalClass"
       >
         <header class="p-2">
