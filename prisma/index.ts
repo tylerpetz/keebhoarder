@@ -147,10 +147,13 @@ app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
 app.get('/photos', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const photos = await prisma.photo.findMany({
+      skip: Number(req.query.limit) * (Number(req.query.page) - 1),
+      take: Number(req.query.limit),
       where: {
         userId: req.user.id,
       }
     })
+
     const count = await prisma.photo.count({
       where: {
         userId: req.user.id,
