@@ -23,6 +23,7 @@ app.post('/register', async (req, res) => {
       data: {
         email: req.body.email,
         password,
+        membership: 'standard',
         ...(req.body.name
           ? {
             profile: {
@@ -338,8 +339,8 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
     })
 
     res.status(200).json(list)
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not create list'] })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not create list', err.message] })
   }
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
@@ -373,7 +374,7 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
       })
       res.status(200).json(updatedList)
     }
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ errors: ['Could not update list', err] })
   }
 })

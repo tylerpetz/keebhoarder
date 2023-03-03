@@ -2,8 +2,8 @@ const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   env: {
-    email: 'fake@example.com',
-    password: 'password1',
+    email: 'testguy@gmail.com',
+    password: 'tofu60',
   },
   fixturesFolder: 'tests/e2e/fixtures',
   screenshotsFolder: 'tests/e2e/screenshots',

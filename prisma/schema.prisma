@@ -34,7 +34,7 @@ model List {
   items       Item[]
   photo       Photo?
   user        User     @relation(fields: [userId], references: [id])
-  userId      String   @unique
+  userId      String
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 }
@@ -67,7 +67,7 @@ model Profile {
   theme  String?
   user   User    @relation(fields: [userId], references: [id])
   userId String  @unique
-  photo  String
+  photo  String?
 }
 
 model User {
