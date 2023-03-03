@@ -83,7 +83,7 @@ export default {
       } else {
         this.$store.dispatch('item/createItem', {
           item: this.currentItem,
-          lists: [this.listId],
+          ...(this.listId ? { lists: [this.listId] } : {}),
         })
       }
       this.$closeModal()

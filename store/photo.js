@@ -42,7 +42,7 @@ export default {
       commit('SET_CURRENT_PHOTO', photo)
     },
     async createPhoto({ dispatch }, { photo, lists = [] }) {
-      await this.$axios.$post('/photos', {
+      await this.$axios.$post('/upload', {
         ...photo,
         ...(lists.length
           ? {

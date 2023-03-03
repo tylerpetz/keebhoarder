@@ -33,8 +33,6 @@ export default {
       currentPhoto: { ...photoModel },
       originalPhoto: { ...photoModel },
       files: [],
-      filesData: [],
-      uploadMore: false,
     }
   },
   computed: {
@@ -44,11 +42,6 @@ export default {
         : []
     },
   },
-  // watch: {
-  //   files(newFiles) {
-  //     this.filesData = new Array(newFiles.length).fill({})
-  //   },
-  // },
   created() {
     if (this.photo) {
       this.originalPhoto = _cloneDeep(this.photo)
@@ -86,8 +79,6 @@ export default {
     },
     onFileUpload(files) {
       this.files = files
-      this.filesData = new Array(files.length).fill({})
-      this.$set(this.filesData)
     },
   },
 }
@@ -101,37 +92,41 @@ export default {
   >
     <form @submit.prevent="createOrUpdatePhoto">
       <div class="flex flex-col w-full space-y-6 p-6">
-        <file-drag-and-drop
-          v-if="files.length === 0 || uploadMore"
-          multiple
-          @input="onFileUpload"
-        />
-        <div v-if="files.length" class="grid grid-cols-5 gap-x-6">
-          <template v-for="(uploadPreview, index) in uploadPreviews">
-            <div :key="index">
-              <img :src="uploadPreview" />
-              <form-input
-                :value="filesData[index].name"
-                class="w-full my-4"
-                type="text"
-                @input="(e) => $set(filesData[index], 'name', e)"
-              >
-                Name {{ index }}
-              </form-input>
-              <form-input
-                v-model="filesData[index].description"
-                class="w-full mb-4"
-                type="text"
-              >
-                Description
-              </form-input>
-            </div>
-          </template>
+        <!-- <div class="w-full lg:w-1/2">
+          <form-input
+            v-model="currentPhoto.name"
+            class="w-full mb-6"
+            type="text"
+          >
+            Name
+          </form-input>
+
+          <form-input
+            v-model="currentPhoto.description"
+            class="w-full mb-6"
+            type="text"
+          >
+            Description
+          </form-input>
+          <form-toggle v-model="currentPhoto.public">
+            <p class="font-medium text-theme-text text-sm">Public</p>
+            <p class="text-theme-text-l text-xs">
+              Allow other users to see this photo.
+            </p>
+          </form-toggle>
+        </div> -->
+        <file-drag-and-drop multiple @input="onFileUpload" />
+        <div v-if="files.length" class="grid grid-cols-5 gap-x-4">
+          <img
+            v-for="(uploadPreview, index) in uploadPreviews"
+            :key="index"
+            :src="uploadPreview"
+          />
         </div>
       </div>
       <footer class="bg-theme-bg-d p-2 flex justify-end space-x-4">
         <Keycap theme="accent" cap-style="large" type="submit">
-          &#10229; Save Photo{{ files.length > 1 ? 's' : '' }}
+          &#10229; Save Photo
         </Keycap>
       </footer>
     </form>

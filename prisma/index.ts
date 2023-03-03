@@ -214,23 +214,23 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
     res.status(500).json({ errors: ['Could not get items'] })
   }
 })
-app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
-  // try {
-  const item = await prisma.item.create({
-    data: {
-      ...req.body,
-      user: {
-        connect: {
-          id: req.user.id,
+app.post('/items', authMiddleware, async (req: IUserRequest, res, next: NextFunction) => {
+  try {
+    const item = await prisma.item.create({
+      data: {
+        ...req.body,
+        user: {
+          connect: {
+            id: req.user.id,
+          },
         },
       },
-    },
-  })
+    })
 
-  res.status(200).json(item)
-  // } catch (err) {
-  //   res.status(500).json({ errors: ['Could not create item', err] })
-  // }
+    res.status(200).json(item)
+  } catch (err: any) {
+    res.status(500).json({ message: err.message })
+  }
 })
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
@@ -277,7 +277,7 @@ app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
       })
       res.status(200).json({ deleted: true })
     }
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ errors: ['Could not delete item'] })
   }
 })
