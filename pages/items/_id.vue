@@ -74,7 +74,7 @@ export default {
         class="mb-8 flex flex-row items-center justify-between space-x-8 text-theme-text"
       >
         <div>
-          <h1 class="text-2xl sm:text-3xl">
+          <h1 class="text-2xl sm:text-3xl" data-test="item-name">
             {{ currentItem.name }}
           </h1>
           <p class="text-sm">{{ currentItem.category.join(', ') }}</p>

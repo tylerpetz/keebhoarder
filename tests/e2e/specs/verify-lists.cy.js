@@ -74,11 +74,22 @@ describe('List functionality', () => {
       })
   })
 
+  it.skip('can cancel deleting a list', () => {
+    cy.get('#vgt-table tbody tr')
+      .first()
+      .within(() => {
+        cy.get('[data-test=delete-list]').click()
+      })
+    // todo: create confirmation modal
+  })
+
   it('can delete a list', () => {
     cy.get('#vgt-table tbody tr')
       .first()
       .within(() => {
         cy.get('[data-test=delete-list]').click()
       })
+    // todo: create confirmation modal
+    // todo: test that the list is gone
   })
 })
