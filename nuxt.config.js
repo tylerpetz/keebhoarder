@@ -78,11 +78,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
-      plugins: ['istanbul'],
+      plugins: ['babel-plugin-istanbul'],
     },
   },
   serverMiddleware: ['~/prisma/index.ts'],
-
+  ignore: ['~/coverage/**/*'],
   googleFonts: {
     display: 'swap',
     families: {

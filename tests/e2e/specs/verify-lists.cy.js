@@ -3,9 +3,7 @@
 describe('List functionality', () => {
   beforeEach(() => {
     cy.login()
-    cy.intercept('GET', '/api/lists*').as('getLists')
-    cy.visit('/lists')
-    cy.wait('@getLists')
+    cy.visitLists()
   })
 
   it('can navigate to lists', () => {
@@ -16,23 +14,7 @@ describe('List functionality', () => {
   })
 
   it('can create a list', () => {
-    cy.contains('button', 'Create New List').click()
-    cy.get('[data-test="list-modal"] [data-test="list-name"]').type(
-      'my wishlist'
-    )
-    cy.get('[data-test="list-modal"] [data-test="list-description"]').type(
-      'all the stuff i want'
-    )
-    cy.get('[data-test="list-modal"] [data-test="list-public"]').click()
-    cy.get('[data-test="list-modal"] [data-test="list-save-button"]').click()
-    cy.wait(1000)
-    cy.get('#vgt-table tbody tr')
-      .first()
-      .within(() => {
-        cy.contains('a', 'my wishlist')
-        cy.contains('span', 'all the stuff i want')
-        cy.get('[data-test=public-true]').should('be.visible')
-      })
+    cy.createList('my wishlist', 'please buy 4 me')
   })
 
   it('can view a list', () => {

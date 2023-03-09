@@ -42,7 +42,6 @@ export default {
       commit('SET_CURRENT_ITEM', item)
     },
     async createItem({ dispatch }, { item, lists = [] }) {
-      console.log('createItem', item, lists)
       await this.$axios.$post('/items', {
         ...item,
         ...(lists.length

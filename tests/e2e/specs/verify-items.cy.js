@@ -3,9 +3,7 @@
 describe('Item functionality', () => {
   beforeEach(() => {
     cy.login()
-    cy.intercept('GET', '/api/items*').as('getItems')
-    cy.visit('/items')
-    cy.wait('@getItems')
+    cy.visitItems()
   })
 
   it('can navigate to items', () => {
@@ -16,21 +14,7 @@ describe('Item functionality', () => {
   })
 
   it('can create an item', () => {
-    cy.contains('button', 'Create New Item').click()
-    cy.get('[data-test="item-modal"] [data-test="item-name"]').type('tofu60')
-    cy.get('[data-test="item-modal"] [data-test="item-description"]').type(
-      'all the keeb i need'
-    )
-    cy.get('[data-test="item-modal"] [data-test="item-public"]').click()
-    cy.get('[data-test="item-modal"] [data-test="item-save-button"]').click()
-    cy.wait(1000)
-    cy.get('#vgt-table tbody tr')
-      .first()
-      .within(() => {
-        cy.contains('a', 'tofu60')
-        cy.contains('span', 'all the keeb i need')
-        cy.get('[data-test=public-true]').should('be.visible')
-      })
+    cy.createItem('tofu60', 'the og')
   })
 
   it('can view an item', () => {

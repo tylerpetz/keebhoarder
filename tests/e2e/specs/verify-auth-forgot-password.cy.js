@@ -1,7 +1,6 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 describe('Home page auth modal - forgot password', () => {
-  it('create an account button shows register modal', function () {
+  it('create an account button shows register modal', () => {
+    cy.visit('/')
     cy.contains('button', 'Log In').click()
     cy.get('[data-test=login-modal]').should('be.visible')
     cy.contains('[data-test=login-modal] button', 'Forgot Password?').click()
