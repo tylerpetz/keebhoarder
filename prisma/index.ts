@@ -202,7 +202,10 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
       },
       include: {
         list: true
-      }
+      },
+      orderBy: [{
+        [`${req.query.field}`]: req.query.type 
+      }],
     })
     const count = await prisma.item.count({
       where: {
@@ -294,7 +297,10 @@ app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
       },
       include: {
         items: true,
-      }
+      },
+      orderBy: [{
+        [`${req.query.field}`]: req.query.type 
+      }],
     })
     const count = await prisma.list.count({
       where: {

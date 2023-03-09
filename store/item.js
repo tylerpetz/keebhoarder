@@ -25,13 +25,13 @@ export default {
     loading: (state) => state.loading,
     totalResults: (state) => state.total,
     pagination: (state) => queryStringify(state.pagination),
+    sorts: (state) => queryStringify(state.sorts),
   },
   actions: {
-    async getItems({ commit, getters, state }) {
+    async getItems({ commit, getters }) {
       commit('SET_LOADING', true)
-
       const { items, count } = await this.$axios.$get(
-        `/items?${getters.pagination}`
+        `/items?${getters.pagination}&${getters.sorts}`
       )
       commit('SET_ITEMS', items)
       commit('SET_ITEM_TOTAL', count)
