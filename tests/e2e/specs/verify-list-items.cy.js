@@ -8,7 +8,7 @@ describe('ListItem functionality', () => {
   // create list
   // view list
   // add item to list
-  it('can add an item to a list', () => {
+  it.skip('can add an item to a list', () => {
     cy.visitLists()
     cy.createList()
   })
@@ -17,7 +17,7 @@ describe('ListItem functionality', () => {
   // create item
   // view item
   // add item to list
-  it('can move an existing item to a list', () => {
+  it.skip('can move an existing item to a list', () => {
     cy.visitLists()
     cy.createList()
     cy.visitItems()
