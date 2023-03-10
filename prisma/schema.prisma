@@ -7,6 +7,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output = "../docs"
+}
+
 model Photo {
   id          String  @id @default(uuid())
   uri         String
@@ -29,7 +34,7 @@ model List {
   items       Item[]
   photo       Photo?
   user        User     @relation(fields: [userId], references: [id])
-  userId      String   @unique
+  userId      String
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 }
@@ -62,14 +67,16 @@ model Profile {
   theme  String?
   user   User    @relation(fields: [userId], references: [id])
   userId String  @unique
+  photo  String?
 }
 
 model User {
-  id       String   @id @default(uuid())
-  password String
-  email    String   @unique
-  profile  Profile?
-  photo    Photo[]
-  lists    List[]
-  items    Item[]
+  id         String   @id @default(uuid())
+  password   String
+  email      String   @unique
+  profile    Profile?
+  photo      Photo[]
+  lists      List[]
+  items      Item[]
+  membership String
 }

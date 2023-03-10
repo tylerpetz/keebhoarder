@@ -23,6 +23,7 @@ app.post('/register', async (req, res) => {
       data: {
         email: req.body.email,
         password,
+        membership: 'standard',
         ...(req.body.name
           ? {
             profile: {
@@ -201,7 +202,10 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
       },
       include: {
         list: true
-      }
+      },
+      orderBy: [{
+        [`${req.query.field}`]: req.query.type 
+      }],
     })
     const count = await prisma.item.count({
       where: {
@@ -214,23 +218,23 @@ app.get('/items', authMiddleware, async (req: IUserRequest, res) => {
     res.status(500).json({ errors: ['Could not get items'] })
   }
 })
-app.post('/items', authMiddleware, async (req: IUserRequest, res) => {
-  // try {
-  const item = await prisma.item.create({
-    data: {
-      ...req.body,
-      user: {
-        connect: {
-          id: req.user.id,
+app.post('/items', authMiddleware, async (req: IUserRequest, res, next: NextFunction) => {
+  try {
+    const item = await prisma.item.create({
+      data: {
+        ...req.body,
+        user: {
+          connect: {
+            id: req.user.id,
+          },
         },
       },
-    },
-  })
+    })
 
-  res.status(200).json(item)
-  // } catch (err) {
-  //   res.status(500).json({ errors: ['Could not create item', err] })
-  // }
+    res.status(200).json(item)
+  } catch (err: any) {
+    res.status(500).json({ message: err.message })
+  }
 })
 app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
@@ -277,7 +281,7 @@ app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
       })
       res.status(200).json({ deleted: true })
     }
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ errors: ['Could not delete item'] })
   }
 })
@@ -293,7 +297,10 @@ app.get('/lists', authMiddleware, async (req: IUserRequest, res) => {
       },
       include: {
         items: true,
-      }
+      },
+      orderBy: [{
+        [`${req.query.field}`]: req.query.type 
+      }],
     })
     const count = await prisma.list.count({
       where: {
@@ -338,8 +345,8 @@ app.post('/lists', authMiddleware, async (req: IUserRequest, res) => {
     })
 
     res.status(200).json(list)
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not create list'] })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not create list', err.message] })
   }
 })
 app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
@@ -373,7 +380,7 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
       })
       res.status(200).json(updatedList)
     }
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ errors: ['Could not update list', err] })
   }
 })

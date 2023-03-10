@@ -91,6 +91,7 @@ export default {
           <button
             type="button"
             class="text-theme-link hover:text-theme-link-hover"
+            data-test="edit-item"
             @click="editItem(props.row)"
           >
             <svg
@@ -112,6 +113,7 @@ export default {
           <button
             type="button"
             class="text-theme-link hover:text-theme-link-hover"
+            data-test="delete-item"
             @click="removeItem(props.row)"
           >
             <svg

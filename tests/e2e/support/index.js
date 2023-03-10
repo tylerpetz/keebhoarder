@@ -18,15 +18,15 @@ import './commands'
 import '@cypress/code-coverage/support'
 // import 'cypress-mailslurp'
 
-before(() => {
-  // cy.mailslurp()
-  //   .then((mailslurp) => mailslurp.createInbox())
-  //   .then((inbox) => {
-  //     cy.log(inbox)
-  //     // save inbox id and email address to this (make sure you use function and not arrow syntax)
-  //     cy.wrap(inbox.id).as('inboxId')
-  //     cy.wrap(inbox.id).as('username')
-  //     cy.wrap(inbox.emailAddress).as('email')
-  //   })
-  cy.visit('/')
-})
+// before(() => {
+//   // cy.mailslurp()
+//   //   .then((mailslurp) => mailslurp.createInbox())
+//   //   .then((inbox) => {
+//   //     cy.log(inbox)
+//   //     // save inbox id and email address to this (make sure you use function and not arrow syntax)
+//   //     cy.wrap(inbox.id).as('inboxId')
+//   //     cy.wrap(inbox.id).as('username')
+//   //     cy.wrap(inbox.emailAddress).as('email')
+//   //   })
+//   cy.visit('/')
+// })

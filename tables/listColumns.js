@@ -23,14 +23,14 @@ export default [
   },
   {
     label: 'Created',
-    field: 'created_at',
+    field: 'createdAt',
     type: 'date',
     dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxx",
     dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,
   },
   {
     label: 'Last Updated',
-    field: 'updated_at',
+    field: 'updatedAt',
     type: 'date',
     dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxx",
     dateOutputFormat: 'MMM d yyyy', // outputs Mar 16th 2018,

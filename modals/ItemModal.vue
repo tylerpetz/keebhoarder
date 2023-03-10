@@ -83,7 +83,7 @@ export default {
       } else {
         this.$store.dispatch('item/createItem', {
           item: this.currentItem,
-          lists: [this.listId],
+          ...(this.listId ? { lists: [this.listId] } : {}),
         })
       }
       this.$closeModal()
@@ -135,6 +135,7 @@ export default {
   <Modal
     modal-class="w-11/12 max-w-2xl lg:max-w-none xl:w-10/12 max-h-full"
     :click-bg-to-close="false"
+    data-test="item-modal"
     @close="askToClose"
   >
     <form @submit.prevent="createOrUpdateItem">
@@ -146,6 +147,7 @@ export default {
             v-model="currentItem.name"
             class="w-full mb-6"
             type="text"
+            data-test="item-name"
             required
           >
             Name *
@@ -155,6 +157,7 @@ export default {
             v-model="currentItem.description"
             class="w-full mb-6"
             type="text"
+            data-test="item-description"
           >
             Description
           </form-input>
@@ -176,7 +179,7 @@ export default {
           >
             Qty
           </form-input>
-          <form-toggle v-model="currentItem.public">
+          <form-toggle v-model="currentItem.public" data-test="item-public">
             <p class="font-medium text-theme-text text-sm">Public</p>
             <p class="text-theme-text-l text-xs">
               Allow other users to see this item.
@@ -314,6 +317,7 @@ export default {
           cap-style="large"
           class="capitalize"
           type="submit"
+          data-test="item-save-button"
         >
           &#10229; Save Item
         </Keycap>

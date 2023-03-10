@@ -9,15 +9,8 @@
     <span
       class="absolute top-0 left-0 right-0 bottom-0 w-full bg-theme-bg-l border-theme-border border-2 border-dashed text-theme-text pointer-events-none flex-col flex justify-center items-center text-center"
     >
-      <div v-if="files.length" class="grid grid-cols-5 gap-x-4">
-        <img
-          v-for="(uploadPreview, index) in uploadPreviews"
-          :key="index"
-          :src="uploadPreview"
-        />
-      </div>
-      <slot v-else>
-        <strong>Upload File</strong>
+      <slot>
+        <strong>Upload Photo(s)</strong>
       </slot>
     </span>
   </label>
@@ -35,13 +28,6 @@ export default {
     return {
       files: [],
     }
-  },
-  computed: {
-    uploadPreviews() {
-      return this.files.length
-        ? this.files.map((file) => URL.createObjectURL(file))
-        : []
-    },
   },
   methods: {
     handleUpload(e) {

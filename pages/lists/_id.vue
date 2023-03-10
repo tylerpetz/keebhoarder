@@ -20,43 +20,17 @@ export default {
   <div v-if="$store.getters['list/currentList']" class="h-full p-3">
     <div class="flex flex-col">
       <div
-        class="
-          p-6
-          bg-theme-bg-d
-          mb-8
-          flex flex-row
-          justify-between
-          items-center
-          rounded
-          shadow
-        "
+        class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-center rounded shadow"
       >
         <div>
           <h3
-            class="
-              text-xl
-              leading-6
-              font-medium
-              text-theme-text
-              flex
-              items-center
-            "
+            class="text-xl leading-6 font-medium text-theme-text flex items-center"
+            data-test="list-name"
           >
             {{ $store.getters['list/currentList'].name }}
 
             <span
-              class="
-                ml-2
-                inline-flex
-                items-center
-                px-2.5
-                py-0.5
-                rounded-full
-                text-xs
-                font-medium
-                bg-gray-100
-                text-gray-800
-              "
+              class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
             >
               {{
                 $store.getters['list/currentList'].public ? 'Public' : 'Private'
