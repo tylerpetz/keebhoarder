@@ -28,6 +28,9 @@
       "pre-commit": "lint-staged"
     }
   },
+  "engines": {
+    "node": "16.16.x"
+  },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
