@@ -836,3 +836,50 @@
   --theme-link-s: 75%;
   --theme-link-l: 58%;
 }
+
+.theme-zooted {
+  /* alpha caps */
+  --alpha-cap-h: 109;
+  --alpha-cap-s: 22%;
+  --alpha-cap-l: 71%;
+
+  /* alpha legends */
+  --alpha-legend-h: 112;
+  --alpha-legend-s: 38%;
+  --alpha-legend-l: 15%;
+
+  /* mod caps */
+  --mod-cap-h: 109;
+  --mod-cap-s: 13%;
+  --mod-cap-l: 52%;
+
+  /* mod legends */
+  --mod-legend-h: 112;
+  --mod-legend-s: 38%;
+  --mod-legend-l: 15%;
+
+  /* accent caps */
+  --accent-cap-h: 237;
+  --accent-cap-s: 9%;
+  --accent-cap-l: 52%;
+
+  /* accent legends */
+  --accent-legend-h: 222;
+  --accent-legend-s: 17%;
+  --accent-legend-l: 19%;
+
+  /* theme backgrounds */
+  --theme-bg-h: 273;
+  --theme-bg-s: 16%;
+  --theme-bg-l: 51%;
+
+  /* theme text */
+  --theme-text-h: 0;
+  --theme-text-s: 0%;
+  --theme-text-l: 95%;
+
+  /* theme links/borders */
+  --theme-link-h: 106;
+  --theme-link-s: 33%;
+  --theme-link-l: 80%;
+}

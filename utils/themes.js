@@ -68,5 +68,9 @@ module.exports = {
       id: 'wavez',
       name: 'wavez',
     },
+    {
+      id: 'zooted',
+      name: 'zooted',
+    },
   ],
 }
