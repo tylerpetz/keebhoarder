@@ -3,8 +3,7 @@ const printMessage = require('print-message')
 printMessage(
   [
     "welcome keeblord, don't just sit there, start typing",
-    'type this to run everything dev styles: npm run dev',
-    'type this to run everything build styles: npm run build && npm run start',
+    'type `npm run dev` to run the project',
   ],
   {
     border: true, // Enable border

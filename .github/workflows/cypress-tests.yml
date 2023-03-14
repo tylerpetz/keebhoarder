@@ -19,6 +19,8 @@ jobs:
       S3_ACESSS_SECRET: ${{ secrets.S3_ACESSS_SECRET }}
       S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
       CYPRESS_MAILSLURP_API_KEY: ${{ secrets.CYPRESS_MAILSLURP_API_KEY }}
+      CYPRESS_TEST_EMAIL: ${{ secrets.CYPRESS_TEST_EMAIL }}
+      CYPRESS_TEST_PASS: ${{ secrets.CYPRESS_TEST_PASS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

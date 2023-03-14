@@ -1,9 +1,10 @@
 const { defineConfig } = require('cypress')
+require('dotenv').config()
 
 module.exports = defineConfig({
   env: {
-    email: 'testguy@gmail.com',
-    password: 'tofu60',
+    email: process.env.CYPRESS_TEST_EMAIL,
+    password: process.env.CYPRESS_TEST_PASS,
   },
   fixturesFolder: 'tests/e2e/fixtures',
   screenshotsFolder: 'tests/e2e/screenshots',
