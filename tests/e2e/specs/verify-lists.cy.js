@@ -7,6 +7,7 @@ describe('List functionality', () => {
   })
 
   beforeEach(() => {
+    cy.login()
     cy.visitLists()
   })
 

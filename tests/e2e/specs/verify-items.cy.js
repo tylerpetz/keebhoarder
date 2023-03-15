@@ -7,6 +7,7 @@ describe('Item functionality', () => {
   })
 
   beforeEach(() => {
+    cy.login()
     cy.visitItems()
   })
 
