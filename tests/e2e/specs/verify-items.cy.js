@@ -1,9 +1,12 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe('Item functionality', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login()
     cy.clearItems()
+  })
+
+  beforeEach(() => {
     cy.visitItems()
   })
 

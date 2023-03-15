@@ -1,9 +1,12 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe('List functionality', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login()
     cy.clearLists()
+  })
+
+  beforeEach(() => {
     cy.visitLists()
   })
 
