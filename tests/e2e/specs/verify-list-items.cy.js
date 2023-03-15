@@ -3,12 +3,14 @@
 describe('ListItem functionality', () => {
   beforeEach(() => {
     cy.login()
+    cy.clearLists()
+    cy.clearItems()
   })
 
   // create list
   // view list
   // add item to list
-  it.skip('can add an item to a list', () => {
+  it('can add an item to a list', () => {
     cy.visitLists()
     cy.createList()
   })

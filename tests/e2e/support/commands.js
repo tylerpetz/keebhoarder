@@ -16,6 +16,7 @@ Cypress.Commands.add(
           window.localStorage.setItem('auth.strategy', 'local')
         })
     })
+    cy.visit('/')
   }
 )
 
@@ -60,6 +61,26 @@ Cypress.Commands.add(
       })
   }
 )
+
+Cypress.Commands.add('clearLists', () => {
+  cy.request({
+    method: 'GET',
+    url: '/api/clear/lists',
+    headers: {
+      authorization: window.localStorage.getItem('auth._token.local'),
+    },
+  })
+})
+
+Cypress.Commands.add('clearItems', () => {
+  cy.request({
+    method: 'GET',
+    url: '/api/clear/items',
+    headers: {
+      authorization: window.localStorage.getItem('auth._token.local'),
+    },
+  })
+})
 
 Cypress.Commands.add('visitItems', () => {
   cy.intercept('GET', '/api/items*').as('getItems')

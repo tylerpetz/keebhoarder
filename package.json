@@ -12,6 +12,7 @@
     "lint": "npm run lint:js && npm run lint:style",
     "test:unit": "jest",
     "test:e2e": "cypress",
+    "test:e2e:open": "cypress open --e2e --browser chrome",
     "migrate": "prisma migrate dev --name",
     "studio": "prisma studio",
     "favicons": "node write-favicons.js",

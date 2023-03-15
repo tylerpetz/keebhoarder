@@ -82,7 +82,7 @@ export default {
     },
   },
   serverMiddleware: ['~/prisma/index.ts'],
-  ignore: ['~/coverage/**/*'],
+  ignore: ['/coverage/**/*', '/tests/**/*'],
   googleFonts: {
     display: 'swap',
     families: {

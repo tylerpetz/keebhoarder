@@ -5,6 +5,7 @@ import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
 import { authMiddleware, getFirstRecordFromUser, uploadToS3, IUserRequest, IUploadRequest } from './utils'
+import { Exception } from 'sass'
 
 dotenv.config()
 
@@ -170,6 +171,8 @@ app.get('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
     const photo = await getFirstRecordFromUser(req, prisma.photo)
     if (photo) {
       res.status(200).json(photo)
+    } else {
+      throw new Error('Could not find photo')
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not get photo'] })
@@ -185,6 +188,8 @@ app.delete('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
         },
       })
       res.status(200).json({ deleted: true })
+    } else {
+      throw new Error('Could not find photo to delete')
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not delete photo'] })
@@ -243,7 +248,12 @@ app.get('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
         list: true
       }
     })
-    res.status(200).json(item)
+    if (item) {
+      res.status(200).json(item)
+    } else {
+      throw new Error('Could not find item')
+    }
+    
   } catch (err: any) {
     res.status(500).json({ errors: ['Could not find item', err] })
   }
@@ -265,6 +275,8 @@ app.put('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
         }
       })
       res.status(200).json(updatedItem)
+    } else {
+      throw new Error('Could not find item to update')
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not update item'] })
@@ -280,9 +292,23 @@ app.delete('/items/:id', authMiddleware, async (req: IUserRequest, res) => {
         },
       })
       res.status(200).json({ deleted: true })
+    } else {
+      throw new Error('Could not find item to delete')
     }
   } catch (err: any) {
     res.status(500).json({ errors: ['Could not delete item'] })
+  }
+})
+app.get('/clear/items', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    await prisma.item.deleteMany({
+      where: {
+        userId: req.user.id
+      },
+    })
+    res.status(200).json({ deleted: true })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not delete items'] })
   }
 })
 
@@ -358,6 +384,8 @@ app.get('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
     })
     if (list) {
       res.status(200).json(list)
+    } else {
+      throw new Error('Could not find list')
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not get list'] })
@@ -379,6 +407,8 @@ app.put('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
         }
       })
       res.status(200).json(updatedList)
+    } else {
+      throw new Error('Could not find list to update')
     }
   } catch (err: any) {
     res.status(500).json({ errors: ['Could not update list', err] })
@@ -394,9 +424,23 @@ app.delete('/lists/:id', authMiddleware, async (req: IUserRequest, res) => {
         },
       })
       res.status(200).json({ deleted: true })
+    } else {
+      throw new Error('Could not find list to delete')
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not delete list'] })
+  }
+})
+app.get('/clear/lists', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    await prisma.list.deleteMany({
+      where: {
+        userId: req.user.id
+      }
+    })
+    res.status(200).json({ deleted: true })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not delete lists', err.toString()] })
   }
 })
 

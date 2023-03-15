@@ -18,7 +18,7 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('PhotoModal')"
+          @click.native="$showModal('PhotoModal2')"
         >
           Upload New Photo
         </Keycap>
