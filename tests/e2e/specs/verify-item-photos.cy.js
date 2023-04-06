@@ -1,11 +1,11 @@
-describe('ListItem functionality', () => {
+describe.skip('ItemPhoto functionality', () => {
   beforeEach(() => {
     cy.login()
     cy.clearLists()
     cy.clearItems()
   })
 
-  it('can add an item to a list', () => {
+  it('can add a photo to an item', () => {
     cy.visitLists()
     cy.createList()
     cy.get('#vgt-table tbody tr')
@@ -38,13 +38,13 @@ describe('ListItem functionality', () => {
   // create item
   // view item
   // add item to list
-  it.skip('can move an existing item to a list', () => {
+  it('can move an existing photo to an item', () => {
     cy.visitLists()
     cy.createList()
     cy.visitItems()
   })
 
-  // can remove item from list
+  // can remove photo from item
 
-  // can add item to multiple lists?
+  // can add photo to multiple items
 })

@@ -44,7 +44,7 @@ app.post('/register', async (req, res) => {
 
     res.status(200).header('auth-token', token).send({ token })
   } catch (err) {
-    res.status(500).json({ errors: ['Could not register'] })
+    res.status(500).json({ errors: ['Could not register', err.toString()] })
   }
 })
 app.post('/login', async (req, res) => {
@@ -107,6 +107,23 @@ app.put('/me', authMiddleware, async (req: IUserRequest, res, next: NextFunction
     })
   } catch (err) {
     next(err)
+  }
+})
+app.get('/clear/user', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    await prisma.profile.delete({
+      where: {
+        userId: req.user.id
+      }
+    })
+    await prisma.user.delete({
+      where: {
+        id: req.user.id
+      }
+    })
+    res.status(200).json({ deleted: true })
+  } catch (err: any) {
+    res.status(500).json({ errors: ['Could not delete lists', err.toString()] })
   }
 })
 

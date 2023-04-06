@@ -1,6 +1,4 @@
-// https://docs.cypress.io/api/introduction/api.html
-
-describe('Nav Menu - logged in user', () => {
+describe('Nav Menu functionality', () => {
   beforeEach(() => {
     cy.login()
     cy.visit('/')

@@ -1,24 +1,27 @@
 // programatic login, logs in user, sets localstorage
-Cypress.Commands.add(
-  'login',
-  (email = Cypress.env('email'), password = Cypress.env('password')) => {
-    cy.session(email, () => {
-      cy.request('POST', '/api/login', {
-        email,
-        password,
-      })
-        .its('body')
-        .then((res) => {
-          window.localStorage.setItem(
-            'auth._token.local',
-            `Bearer ${res.token}`
-          )
-          window.localStorage.setItem('auth.strategy', 'local')
-        })
+Cypress.Commands.add('login', function () {
+  cy.request('POST', '/api/login', {
+    email: this.email,
+    password: this.password,
+  })
+    .its('body')
+    .then((res) => {
+      window.localStorage.setItem('auth._token.local', `Bearer ${res.token}`)
+      window.localStorage.setItem('auth.strategy', 'local')
     })
-    cy.visit('/')
-  }
-)
+  cy.visit('/')
+})
+
+Cypress.Commands.add('register', (username, email, password) => {
+  cy.session(email, () => {
+    cy.request('POST', '/api/register', {
+      name: username,
+      email,
+      password,
+    })
+  })
+  cy.visit('/')
+})
 
 Cypress.Commands.add(
   'createList',
@@ -61,6 +64,16 @@ Cypress.Commands.add(
       })
   }
 )
+
+Cypress.Commands.add('clearUser', () => {
+  cy.request({
+    method: 'GET',
+    url: '/api/clear/user',
+    headers: {
+      authorization: window.localStorage.getItem('auth._token.local'),
+    },
+  })
+})
 
 Cypress.Commands.add('clearLists', () => {
   cy.request({

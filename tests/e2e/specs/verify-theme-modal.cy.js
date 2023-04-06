@@ -1,5 +1,3 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 import { themes } from '../../../utils/themes'
 
 describe('Theme modal - homepage', () => {

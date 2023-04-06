@@ -3,8 +3,7 @@ require('dotenv').config()
 
 module.exports = defineConfig({
   env: {
-    email: process.env.CYPRESS_TEST_EMAIL,
-    password: process.env.CYPRESS_TEST_PASS,
+    MAILSLURP_API_KEY: process.env.CYPRESS_MAILSLURP_API_KEY,
   },
   fixturesFolder: 'tests/e2e/fixtures',
   screenshotsFolder: 'tests/e2e/screenshots',

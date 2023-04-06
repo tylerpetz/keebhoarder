@@ -1,5 +1,3 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 describe('Home page auth modal - register', () => {
   it.only('create an account button shows register modal', () => {
     cy.visit('/')

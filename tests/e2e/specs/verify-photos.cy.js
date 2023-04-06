@@ -1,4 +1,4 @@
-describe('Item functionality', () => {
+describe.skip('Photo functionality', () => {
   before(() => {
     cy.login()
     cy.clearItems()

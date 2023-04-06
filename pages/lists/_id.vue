@@ -57,6 +57,7 @@ export default {
             theme="mod"
             cap-style="large"
             type="button"
+            data-test="add-item-to-list"
             @click.native="
               $showModal('ItemModal', {
                 props: { listId: $store.getters['list/currentList'].id },
