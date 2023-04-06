@@ -1,16 +1,19 @@
 // programatic login, logs in user, sets localstorage
-Cypress.Commands.add('login', function () {
-  cy.request('POST', '/api/login', {
-    email: this.email,
-    password: this.password,
-  })
-    .its('body')
-    .then((res) => {
-      window.localStorage.setItem('auth._token.local', `Bearer ${res.token}`)
-      window.localStorage.setItem('auth.strategy', 'local')
+Cypress.Commands.add(
+  'login',
+  function (email = Cypress.env('email'), password = Cypress.env('password')) {
+    cy.request('POST', '/api/login', {
+      email,
+      password,
     })
-  cy.visit('/')
-})
+      .its('body')
+      .then((res) => {
+        window.localStorage.setItem('auth._token.local', `Bearer ${res.token}`)
+        window.localStorage.setItem('auth.strategy', 'local')
+      })
+    cy.visit('/')
+  }
+)
 
 Cypress.Commands.add('register', (username, email, password) => {
   cy.session(email, () => {
