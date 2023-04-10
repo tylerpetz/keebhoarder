@@ -37,7 +37,7 @@
     "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
     "@nuxtjs/axios": "^5.13.5",
     "@nuxtjs/composition-api": "^0.33.1",
-    "aws-sdk": "^2.1198.0",
+    "aws-sdk": "^2.1354.0",
     "bcryptjs": "^2.4.3",
     "core-js": "^3.9.1",
     "dotenv": "^16.0.0",
