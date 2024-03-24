@@ -41,8 +41,15 @@ export default {
       const photo = await this.$axios.$get(`/photos/${photoId}`)
       commit('SET_CURRENT_PHOTO', photo)
     },
+    uploadPhotos({ dispatch }, photos) {
+      return this.$axios.$post('/upload', photos, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+    },
     async createPhoto({ dispatch }, { photo, lists = [] }) {
-      await this.$axios.$post('/upload', {
+      await this.$axios.$post('/photos', {
         ...photo,
         ...(lists.length
           ? {
@@ -52,11 +59,11 @@ export default {
             }
           : {}),
       })
-      if (lists.length) {
-        dispatch('list/getListById', lists[0], { root: true })
-      } else {
-        dispatch('getPhotos')
-      }
+      // if (lists.length) {
+      //   dispatch('list/getListById', lists[0], { root: true })
+      // } else {
+      dispatch('getPhotos')
+      // }
     },
     async addPhotoToList(ctx, { photoId, listId }) {},
     async deletePhotoFromList(ctx, { photoId, listId }) {},

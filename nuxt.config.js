@@ -95,6 +95,7 @@ export default {
     baseURL: 'http://localhost:8080/api', // Used as fallback if no runtime config is provided
   },
   auth: {
+    redirect: false,
     strategies: {
       local: {
         token: {

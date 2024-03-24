@@ -2,15 +2,8 @@
 import _isEqual from 'lodash/isEqual'
 import _cloneDeep from 'lodash/cloneDeep'
 
-const photoModel = {
-  name: '',
-  description: '',
-  public: true,
-  uri: '',
-}
-
 export default {
-  name: 'PhotoModal',
+  name: 'PhotoEditModal',
   props: {
     photo: {
       type: [Object, null],
@@ -30,39 +23,24 @@ export default {
   },
   data() {
     return {
-      currentPhoto: { ...photoModel },
-      originalPhoto: { ...photoModel },
-      files: [],
+      currentPhoto: {},
+      originalPhoto: {},
     }
-  },
-  computed: {
-    uploadPreviews() {
-      return this.files.length
-        ? this.files.map((file) => URL.createObjectURL(file))
-        : []
-    },
   },
   created() {
     if (this.photo) {
       this.originalPhoto = _cloneDeep(this.photo)
       this.currentPhoto = {
-        ...photoModel,
         ...this.photo,
       }
     }
   },
   methods: {
-    createOrUpdatePhoto() {
-      if (this.photo) {
-        this.$store.dispatch('photo/updatePhoto', {
-          photo: this.currentPhoto,
-          updateCurrent: this.$route.name === 'photos-id',
-        })
-      } else {
-        this.$store.dispatch('photo/createPhoto', {
-          photo: this.currentPhoto,
-        })
-      }
+    updatePhoto() {
+      this.$store.dispatch('photo/updatePhoto', {
+        photo: this.currentPhoto,
+        updateCurrent: this.$route.name === 'photos-id',
+      })
       this.$closeModal()
     },
     askToClose() {
@@ -77,9 +55,6 @@ export default {
         }
       }
     },
-    onFileUpload(files) {
-      this.files = files
-    },
   },
 }
 </script>
@@ -90,9 +65,10 @@ export default {
     :click-bg-to-close="false"
     @close="askToClose"
   >
-    <form @submit.prevent="createOrUpdatePhoto">
+    <form @submit.prevent="updatePhoto">
       <div class="flex flex-col w-full space-y-6 p-6">
-        <!-- <div class="w-full lg:w-1/2">
+        <div class="w-full lg:w-1/2">
+          <img :src="photo.uri" class="mb-6" />
           <form-input
             v-model="currentPhoto.name"
             class="w-full mb-6"
@@ -114,14 +90,6 @@ export default {
               Allow other users to see this photo.
             </p>
           </form-toggle>
-        </div> -->
-        <file-drag-and-drop multiple @input="onFileUpload" />
-        <div v-if="files.length" class="grid grid-cols-5 gap-x-4">
-          <img
-            v-for="(uploadPreview, index) in uploadPreviews"
-            :key="index"
-            :src="uploadPreview"
-          />
         </div>
       </div>
       <footer class="bg-theme-bg-d p-2 flex justify-end space-x-4">

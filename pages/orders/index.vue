@@ -3,6 +3,7 @@ import orderColumns from '@/tables/orderColumns.js'
 
 export default {
   name: 'Orders',
+  middleware: ['loggedIn'],
   data() {
     return {
       columns: orderColumns,
@@ -36,16 +37,7 @@ export default {
   <div class="h-full p-3">
     <div class="flex flex-col">
       <div
-        class="
-          p-6
-          bg-theme-bg-d
-          mb-8
-          flex flex-row
-          justify-between
-          items-center
-          rounded
-          shadow
-        "
+        class="p-6 bg-theme-bg-d mb-8 flex flex-row justify-between items-center rounded shadow"
       >
         <h3 class="text-xl leading-6 font-medium text-theme-text">Orders</h3>
         <Keycap

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import * as jwt from 'jsonwebtoken'
 import AWS from 'aws-sdk'
+import { FileArray, UploadedFile } from 'express-fileupload'
 
 export interface IUserRequest extends Request {
   user?: any
@@ -8,7 +9,7 @@ export interface IUserRequest extends Request {
 
 export interface IUploadRequest extends Request {
   user?: any
-  files?: any
+  files?: FileArray | undefined | null;
 }
 
 export const authMiddleware = (
@@ -51,18 +52,27 @@ export const getFirstRecordFromUser = (req: IUserRequest, model: any, args: any 
     ...args
   })
 
-export const uploadToS3 = async (req: IUploadRequest): Promise<string> => {
+export const uploadToS3 = async (req: IUploadRequest): Promise<string[]> => {
   const s3 = new AWS.S3({
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_ACESSS_SECRET,
     region: 'us-east-2'
   })
-  const uploadedImage = await s3.upload({
-    Bucket: 'keebhoarder-user-images',
-    Key: req.body.name || req.files.files.name,
-    Body: req.files.files.data,
-    ACL: 'public-read',
-    ContentType: 'image/jpeg'
-  }).promise()
-  return uploadedImage.Location
+
+  const uploadedImages = []
+  if (req.files !== undefined) {
+    for (const key in req.files) {
+      const file = req.files[key] as UploadedFile
+      const uploadedImage = await s3.upload({
+        Bucket: 'keebhoarder-user-images',
+        Key: file?.name,
+        Body: file?.data,
+        ACL: 'public-read',
+        ContentType: 'image/jpeg'
+      }).promise()
+      uploadedImages.push(uploadedImage.Location)
+    }
+  }
+
+  return uploadedImages
 }

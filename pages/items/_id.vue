@@ -7,6 +7,7 @@ export default {
     this.$store.commit('item/SET_CURRENT_ITEM', {})
     next()
   },
+  middleware: ['loggedIn'],
   data() {
     return {
       showData: false,

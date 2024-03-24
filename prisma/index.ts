@@ -5,7 +5,6 @@ import * as jwt from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
 import { authMiddleware, getFirstRecordFromUser, uploadToS3, IUserRequest, IUploadRequest } from './utils'
-import { Exception } from 'sass'
 
 dotenv.config()
 
@@ -127,14 +126,43 @@ app.get('/clear/user', authMiddleware, async (req: IUserRequest, res) => {
   }
 })
 
-// Photos
+// File Upload
 app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
   try {
-    const photoUrl = await uploadToS3(req)
+    const photoUrls = await uploadToS3(req)  
+    res.status(200).json(photoUrls)
+  } catch (err: any) {
+    res.status(500).json({ errors: [err.toString(), 'Could not upload photo'] })
+  }
+})
+
+// Photos
+app.get('/photos', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const photos = await prisma.photo.findMany({
+      skip: Number(req.query.limit) * (Number(req.query.page) - 1),
+      take: Number(req.query.limit),
+      where: {
+        userId: req.user.id,
+      }
+    })
+
+    const count = await prisma.photo.count({
+      where: {
+        userId: req.user.id,
+      }
+    })
+
+    res.status(200).json({ photos, count })
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not get photos'] })
+  }
+})
+app.post('/photos', authMiddleware, async (req: IUserRequest, res) => {
+  try {
     const photo = await prisma.photo.create({
       data: {
         ...req.body,
-        uri: photoUrl,
         user: {
           connect: {
             id: req.user.id,
@@ -162,27 +190,6 @@ app.post('/upload', authMiddleware, async (req: IUploadRequest, res) => {
     res.status(500).json({ errors: [err.toString(), 'Could not upload photo'] })
   }
 })
-app.get('/photos', authMiddleware, async (req: IUserRequest, res) => {
-  try {
-    const photos = await prisma.photo.findMany({
-      skip: Number(req.query.limit) * (Number(req.query.page) - 1),
-      take: Number(req.query.limit),
-      where: {
-        userId: req.user.id,
-      }
-    })
-
-    const count = await prisma.photo.count({
-      where: {
-        userId: req.user.id,
-      }
-    })
-
-    res.status(200).json({ photos, count })
-  } catch (err) {
-    res.status(500).json({ errors: ['Could not get photos'] })
-  }
-})
 app.get('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
   try {
     const photo = await getFirstRecordFromUser(req, prisma.photo)
@@ -193,6 +200,26 @@ app.get('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
     }
   } catch (err) {
     res.status(500).json({ errors: ['Could not get photo'] })
+  }
+})
+app.put('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {
+  try {
+    const photo = await getFirstRecordFromUser(req, prisma.photo)
+    if (photo) {
+      const updatedPhoto = await prisma.photo.update({
+        where: {
+          id: req.params.id,
+        },
+        data: {
+          ...req.body,
+        },
+      })
+      res.status(200).json(updatedPhoto)
+    } else {
+      throw new Error('Could not find photo to update')
+    }
+  } catch (err) {
+    res.status(500).json({ errors: ['Could not update photo'] })
   }
 })
 app.delete('/photos/:id', authMiddleware, async (req: IUserRequest, res) => {

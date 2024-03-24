@@ -12,7 +12,7 @@ export default {
       default: '',
     },
     value: {
-      type: String,
+      type: [Array, String],
       required: true,
     },
   },
@@ -25,15 +25,7 @@ export default {
     <select
       v-bind="$attrs"
       :value="value"
-      class="
-        bg-alpha-cap
-        hover:bg-alpha-cap-hover
-        text-alpha-legend-press
-        placeholder-alpha-legend-hover
-        p-2
-        rounded
-        text-sm
-      "
+      class="bg-alpha-cap hover:bg-alpha-cap-hover text-alpha-legend-press placeholder-alpha-legend-hover p-2 rounded text-sm"
       v-on="{
         ...$listeners,
         input: (event) => $emit('input', event.target.value),

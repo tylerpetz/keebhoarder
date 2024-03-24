@@ -10,6 +10,7 @@ export default {
     this.$store.commit('list/SET_CURRENT_LIST', {})
     next()
   },
+  middleware: ['loggedIn'],
   async mounted() {
     await this.$store.dispatch('list/getListById', this.$route.params.id)
   },

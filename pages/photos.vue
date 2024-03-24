@@ -1,6 +1,7 @@
 <script>
 export default {
   name: 'Photos',
+  middleware: ['loggedIn'],
   async mounted() {
     await this.$store.dispatch('photo/getPhotos')
   },
@@ -18,13 +19,12 @@ export default {
           theme="mod"
           cap-style="large"
           type="button"
-          @click.native="$showModal('PhotoModal2')"
+          @click.native="$showModal('PhotoModal')"
         >
           Upload New Photo
         </Keycap>
       </div>
       <section class="mt-8 pb-16" aria-labelledby="gallery-heading">
-        <h2 id="gallery-heading" class="sr-only">Recently viewed</h2>
         <ul
           role="list"
           class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
@@ -41,6 +41,7 @@ export default {
                   : 'focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500',
                 'group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden',
               ]"
+              @click="$showModal('PhotoEditModal', { props: { photo: file } })"
             >
               <img
                 :src="file.uri"

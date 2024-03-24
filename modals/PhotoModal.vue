@@ -1,40 +1,9 @@
 <script>
-import _isEqual from 'lodash/isEqual'
-import _cloneDeep from 'lodash/cloneDeep'
-
-const photoModel = {
-  name: '',
-  description: '',
-  public: true,
-  uri: '',
-}
-
 export default {
   name: 'PhotoModal',
-  props: {
-    photo: {
-      type: [Object, null],
-      required: false,
-      default: () => null,
-    },
-    listId: {
-      type: [String, null],
-      required: false,
-      default: () => null,
-    },
-    itemId: {
-      type: [String, null],
-      required: false,
-      default: () => null,
-    },
-  },
   data() {
     return {
-      currentPhoto: { ...photoModel },
-      originalPhoto: { ...photoModel },
       files: [],
-      filesData: [],
-      uploadMore: false,
     }
   },
   computed: {
@@ -44,36 +13,30 @@ export default {
         : []
     },
   },
-  // watch: {
-  //   files(newFiles) {
-  //     this.filesData = new Array(newFiles.length).fill({})
-  //   },
-  // },
-  created() {
-    if (this.photo) {
-      this.originalPhoto = _cloneDeep(this.photo)
-      this.currentPhoto = {
-        ...photoModel,
-        ...this.photo,
-      }
-    }
-  },
   methods: {
-    createOrUpdatePhoto() {
-      if (this.photo) {
-        this.$store.dispatch('photo/updatePhoto', {
-          photo: this.currentPhoto,
-          updateCurrent: this.$route.name === 'photos-id',
-        })
-      } else {
-        this.$store.dispatch('photo/createPhoto', {
-          photo: this.currentPhoto,
-        })
+    async uploadPhotos() {
+      const photosData = new FormData()
+      for (const i in this.files) {
+        photosData.append(this.files[i].name, this.files[i])
       }
+      const photos = await this.$store.dispatch(
+        'photo/uploadPhotos',
+        photosData
+      )
+      this.createPhotos(photos)
+    },
+    createPhotos(photos) {
+      photos.forEach(async (photo) => {
+        await this.$store.dispatch('photo/createPhoto', {
+          photo: {
+            uri: photo,
+          },
+        })
+      })
       this.$closeModal()
     },
     askToClose() {
-      if (_isEqual(this.currentPhoto, this.originalPhoto)) {
+      if (this.files.length) {
         this.$closeModal()
       } else {
         const choice = confirm(
@@ -85,9 +48,7 @@ export default {
       }
     },
     onFileUpload(files) {
-      this.files = files
-      this.filesData = new Array(files.length).fill({})
-      this.$set(this.filesData)
+      this.files = [...this.files, ...files]
     },
   },
 }
@@ -99,39 +60,20 @@ export default {
     :click-bg-to-close="false"
     @close="askToClose"
   >
-    <form @submit.prevent="createOrUpdatePhoto">
+    <form @submit.prevent="uploadPhotos">
       <div class="flex flex-col w-full space-y-6 p-6">
-        <file-drag-and-drop
-          v-if="files.length === 0 || uploadMore"
-          multiple
-          @input="onFileUpload"
-        />
-        <div v-if="files.length" class="grid grid-cols-5 gap-x-6">
-          <template v-for="(uploadPreview, index) in uploadPreviews">
-            <div :key="index">
-              <img :src="uploadPreview" />
-              <form-input
-                :value="filesData[index].name"
-                class="w-full my-4"
-                type="text"
-                @input="(e) => $set(filesData[index], 'name', e)"
-              >
-                Name {{ index }}
-              </form-input>
-              <form-input
-                v-model="filesData[index].description"
-                class="w-full mb-4"
-                type="text"
-              >
-                Description
-              </form-input>
-            </div>
-          </template>
+        <file-drag-and-drop multiple @input="onFileUpload" />
+        <div v-if="files.length" class="grid grid-cols-5 gap-x-4">
+          <img
+            v-for="(uploadPreview, index) in uploadPreviews"
+            :key="index"
+            :src="uploadPreview"
+          />
         </div>
       </div>
       <footer class="bg-theme-bg-d p-2 flex justify-end space-x-4">
         <Keycap theme="accent" cap-style="large" type="submit">
-          &#10229; Save Photo{{ files.length > 1 ? 's' : '' }}
+          &#10229; Save Photo
         </Keycap>
       </footer>
     </form>

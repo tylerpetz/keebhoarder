@@ -7,7 +7,7 @@ const PROFILE_FORM_INPUT = {
 
 export default {
   name: 'Profile',
-  middleware: 'auth',
+  middleware: ['loggedIn'],
   data() {
     return {
       form: PROFILE_FORM_INPUT,
@@ -43,15 +43,7 @@ export default {
     <pre>{{ $auth.user }}</pre>
     <div class="w-full max-w-2xl mx-auto">
       <div
-        class="
-          max-w-3xl
-          mx-auto
-          py-10
-          px-4
-          sm:px-6
-          lg:py-12 lg:px-8
-          text-theme-text
-        "
+        class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8 text-theme-text"
       >
         <h1 class="text-2xl sm:text-3xl">Settings</h1>
         <form
